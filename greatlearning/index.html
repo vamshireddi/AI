@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreatLearning — PGP in AI &amp; ML: Business Applications</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            color: #e0e0e0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .breadcrumb {
+            padding: 20px 24px 0;
+            font-size: 0.9rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .breadcrumb a { color: #7b8aff; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { color: #666; margin: 0 6px; }
+        header {
+            text-align: center;
+            padding: 40px 20px 10px;
+        }
+        header .source-badge {
+            display: inline-block;
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: rgba(46,204,113,0.15);
+            color: #2ecc71;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        header .subtitle {
+            font-size: 1.05rem;
+            color: #c0c0d0;
+            max-width: 680px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .meta {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin: 20px auto 0;
+            font-size: 0.82rem;
+            color: #9090a8;
+        }
+        .meta span { display: flex; align-items: center; gap: 6px; }
+        .progress-bar-container {
+            max-width: 500px;
+            margin: 20px auto 0;
+            text-align: left;
+        }
+        .progress-label {
+            font-size: 0.85rem;
+            color: #b0b0c0;
+            margin-bottom: 6px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #7b2ff7, #00d2ff);
+            border-radius: 4px;
+        }
+        .section-title {
+            max-width: 800px;
+            margin: 36px auto 16px;
+            padding: 0 24px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #9a9aff;
+        }
+        .modules {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .modules:last-of-type { padding-bottom: 60px; }
+        .module {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            padding: 20px 22px;
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        a.module:hover {
+            transform: translateX(4px);
+            border-color: rgba(123,47,247,0.4);
+        }
+        .module .num {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        .num.done { background: rgba(46,204,113,0.15); color: #2ecc71; }
+        .num.active { background: rgba(123,47,247,0.25); color: #c49aff; }
+        .num.upcoming { background: rgba(255,255,255,0.1); color: #9090a8; }
+        .num.self-paced { background: rgba(0,210,255,0.1); color: #60c8e0; font-size: 0.7rem; font-weight: 600; }
+        .module .info { flex: 1; }
+        .module .info h3 { font-size: 1.05rem; color: #fff; margin-bottom: 5px; font-weight: 600; }
+        .module .info .topics { font-size: 0.85rem; color: #a8a8be; line-height: 1.5; }
+        .module .info .weeks { font-size: 0.75rem; color: #7878a0; margin-top: 6px; }
+        .module .status {
+            flex-shrink: 0;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            align-self: center;
+            white-space: nowrap;
+        }
+        .status.completed { background: rgba(46,204,113,0.15); color: #2ecc71; }
+        .status.in-progress { background: rgba(123,47,247,0.2); color: #c49aff; }
+        .status.upcoming { background: rgba(255,255,255,0.08); color: #8888a0; }
+        .status.backfill { background: rgba(255,180,50,0.15); color: #e0a840; }
+        .status.self-paced-tag { background: rgba(0,210,255,0.1); color: #60c8e0; }
+        .module.dim { opacity: 0.7; }
+        footer { text-align: center; padding: 20px; color: #6a6a80; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="../../">Home</a><span>/</span><a href="../">AI Journey</a><span>/</span>GreatLearning
+    </nav>
+
+    <header>
+        <div class="source-badge">GreatLearning &times; UT Austin McCombs</div>
+        <h1>Post Graduate Program in AI &amp; ML:<br>Business Applications</h1>
+        <p class="subtitle">A comprehensive AI program spanning AI fundamentals to advanced AI agent applications. Designed by UT Austin McCombs faculty and industry experts.</p>
+        <div class="meta">
+            <span>7 Months</span>
+            <span>7 Core Modules + 5 Self-Paced</span>
+            <span>29 Weeks</span>
+            <span>7 Projects</span>
+            <span>9.5 CEUs</span>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-label">Progress: Module 3 of 7 in progress (Week 10-13)</div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 35%"></div></div>
+        </div>
+    </header>
+
+    <div class="section-title">Pre-Work</div>
+    <section class="modules">
+        <div class="module dim">
+            <div class="num done">PW</div>
+            <div class="info">
+                <h3>Introduction to AI Landscape &amp; Python Programming</h3>
+                <p class="topics">Key AI terminology (AI, ML, Deep Learning, GenAI, LLMs), history &amp; evolution of AI, business problems across industries, Google Colab setup, Python variables, data types, data structures, conditional statements.</p>
+            </div>
+            <span class="status completed">Done</span>
+        </div>
+    </section>
+
+    <div class="section-title">Core Modules</div>
+    <section class="modules">
+        <div class="module dim">
+            <div class="num done">01</div>
+            <div class="info">
+                <h3>Python Foundations</h3>
+                <p class="topics">Read, explore, manipulate, and visualize data. Exploratory data analysis using Python packages to solve business problems and deliver actionable insights.</p>
+                <p class="weeks">Weeks 1-4 &middot; Intro to Python &rarr; Data Manipulation &rarr; EDA &rarr; Project</p>
+            </div>
+            <span class="status backfill">Backfill</span>
+        </div>
+
+        <div class="module dim">
+            <div class="num done">02</div>
+            <div class="info">
+                <h3>Machine Learning</h3>
+                <p class="topics">Learning from data, linear &amp; non-linear models to capture relationships between attributes and outcomes, discovering patterns in unlabeled data through segmentation.</p>
+                <p class="weeks">Weeks 5-9 &middot; Linear Regression &rarr; Decision Trees &rarr; K-means Clustering &rarr; Project &rarr; Break</p>
+            </div>
+            <span class="status backfill">Backfill</span>
+        </div>
+
+        <a class="module" href="module-03-advanced-ml/">
+            <div class="num active">03</div>
+            <div class="info">
+                <h3>Advanced Machine Learning</h3>
+                <p class="topics">Combining decisions from multiple models using ensemble techniques to improve performance. Feature engineering and hyperparameter tuning to build generalized, robust models that optimize business costs.</p>
+                <p class="weeks">Weeks 10-13 &middot; Bagging &rarr; Boosting &rarr; Model Tuning &rarr; Project</p>
+            </div>
+            <span class="status in-progress">In Progress</span>
+        </a>
+
+        <div class="module dim">
+            <div class="num upcoming">04</div>
+            <div class="info">
+                <h3>Introduction to Neural Networks</h3>
+                <p class="topics">Implement neural networks, optimization algorithms, regularization techniques, and evaluate factors that improve performance to build generalized and robust models.</p>
+                <p class="weeks">Weeks 14-16 &middot; Intro to Neural Networks &rarr; Optimizing NNs &rarr; Project</p>
+            </div>
+            <span class="status upcoming">Upcoming</span>
+        </div>
+
+        <div class="module dim">
+            <div class="num upcoming">05</div>
+            <div class="info">
+                <h3>Natural Language Processing with Generative AI</h3>
+                <p class="topics">NLP fundamentals, text embedding methods, transformer architectures powering LLMs, Retrieval-Augmented Generation (RAG), prompt engineering with open-source LLMs.</p>
+                <p class="weeks">Weeks 17-22 &middot; Word Embeddings &rarr; Attention &amp; Transformers &rarr; LLMs &amp; Prompt Engineering &rarr; RAG &rarr; Project &rarr; Break</p>
+            </div>
+            <span class="status upcoming">Upcoming</span>
+        </div>
+
+        <div class="module dim">
+            <div class="num upcoming">06</div>
+            <div class="info">
+                <h3>AI Agents for Automation</h3>
+                <p class="topics">Build intelligent agents using LangChain, tool-use capabilities, memory integration, planning, multi-step reasoning, ReAct framework, and agent evaluation with human oversight.</p>
+                <p class="weeks">Weeks 23-26 &middot; AI Agent Workflows &rarr; Planning &amp; Reasoning &rarr; Evaluating Agents &rarr; Project</p>
+            </div>
+            <span class="status upcoming">Upcoming</span>
+        </div>
+
+        <div class="module dim">
+            <div class="num upcoming">07</div>
+            <div class="info">
+                <h3>Model Deployment</h3>
+                <p class="topics">Understand the role of deployment in realizing ML value. Build and deploy applications using Python and containerization.</p>
+                <p class="weeks">Weeks 27-29 &middot; Intro to Deployment &rarr; Containerization &rarr; Project</p>
+            </div>
+            <span class="status upcoming">Upcoming</span>
+        </div>
+    </section>
+
+    <div class="section-title">Self-Paced Modules</div>
+    <section class="modules">
+        <div class="module dim">
+            <div class="num self-paced">SP</div>
+            <div class="info">
+                <h3>Multimodal Generative AI Masterclass</h3>
+                <p class="topics">Code generation, text-to-image &amp; image-to-text with DALL-E, speech recognition with Whisper, and practical GenAI business applications.</p>
+            </div>
+            <span class="status self-paced-tag">Self-Paced</span>
+        </div>
+
+        <div class="module dim">
+            <div class="num self-paced">SP</div>
+            <div class="info">
+                <h3>Neural Networks for Computer Vision</h3>
+                <p class="topics">Image processing, extracting features from images, building CNNs to uncover hidden patterns and solve image classification problems.</p>
+            </div>
+            <span class="status self-paced-tag">Self-Paced</span>
+        </div>
+
+        <div class="module dim">
+            <div class="num self-paced">SP</div>
+            <div class="info">
+                <h3>Statistical Learning</h3>
+                <p class="topics">Statistical analysis with Python — confidence intervals, hypothesis testing, data distributions, sampling, central limit theorem, estimation theory.</p>
+            </div>
+            <span class="status self-paced-tag">Self-Paced</span>
+        </div>
+
+        <div class="module dim">
+            <div class="num self-paced">SP</div>
+            <div class="info">
+                <h3>Recommendation Systems</h3>
+                <p class="topics">Popularity-based models, collaborative filtering, content-based systems, and hybrid recommendation approaches.</p>
+            </div>
+            <span class="status self-paced-tag">Self-Paced</span>
+        </div>
+
+        <div class="module dim">
+            <div class="num self-paced">SP</div>
+            <div class="info">
+                <h3>Introduction to SQL</h3>
+                <p class="topics">DBMS fundamentals, normalization, joins, sorting, set operations, grouping, and filtering.</p>
+            </div>
+            <span class="status self-paced-tag">Self-Paced</span>
+        </div>
+    </section>
+
+    <footer>&copy; 2026 Vamshi's AI Learning Journey</footer>
+</body>
+</html>
