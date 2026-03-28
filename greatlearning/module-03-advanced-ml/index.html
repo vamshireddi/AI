@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced ML - Complete Visual Study Guide</title>
+<style>
+  /* CSS Custom Properties - Dark Mode (default) */
+  :root {
+    --bg: #0f172a;
+    --bg-surface: #1e293b;
+    --bg-surface2: #1e293b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #60a5fa;
+    --accent2: #fbbf24;
+    --accent3: #f87171;
+    --border: #334155;
+    --success: #34d399;
+  }
+  body.light {
+    --bg: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-surface2: #f1f5f9;
+    --text: #1e293b;
+    --text-muted: #475569;
+    --accent: #2563eb;
+    --accent2: #d97706;
+    --accent3: #dc2626;
+    --border: #cbd5e1;
+    --success: #059669;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.7; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+  h1 { text-align: center; font-size: 2em; margin: 30px 0 5px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .subtitle { text-align:center; color:#94a3b8; margin-bottom:25px; }
+  h2 { font-size: 1.6em; margin: 40px 0 15px; color: #60a5fa; border-bottom: 2px solid #1e40af; padding-bottom: 10px; }
+  h3 { font-size: 1.2em; margin: 20px 0 10px; color: #93c5fd; }
+  .week-badge { display: inline-block; padding: 4px 16px; border-radius: 20px; font-size: 0.8em; font-weight: 700; margin-bottom: 8px; }
+  .week1 { background: #1e40af; color: #bfdbfe; }
+  .week2 { background: #7c3aed; color: #ddd6fe; }
+
+  /* Nav */
+  .nav-tabs { display: flex; justify-content: center; gap: 8px; margin: 20px 0 30px; flex-wrap: wrap; }
+  .nav-tab { padding: 10px 20px; border-radius: 8px; background: #1e293b; color: #94a3b8; cursor: pointer; border: 1px solid #334155; font-size: 0.9em; transition: all 0.3s; }
+  .nav-tab:hover, .nav-tab.active { background: #3b82f6; color: white; border-color: #3b82f6; }
+
+  /* Theme Toggle - Top Right */
+  .theme-toggle { position: fixed; top: 16px; right: 20px; z-index: 1000; width: 44px; height: 44px; border-radius: 50%; border: 2px solid #3b82f6; background: #1e293b; color: #fbbf24; font-size: 1.3em; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* Cards */
+  .card { background: #1e293b; border-radius: 12px; padding: 22px; margin: 18px 0; border: 1px solid #334155; }
+  .card-blue { border-left: 4px solid #3b82f6; }
+  .card-yellow { border-left: 4px solid #f59e0b; }
+  .card-green { border-left: 4px solid #10b981; }
+  .card-purple { border-left: 4px solid #8b5cf6; }
+  .card-red { border-left: 4px solid #ef4444; }
+
+  /* Definitions */
+  .def { background: #172554; border-radius: 8px; padding: 12px 16px; margin: 10px 0; border: 1px solid #1e40af; }
+  .def-term { color: #fbbf24; font-weight: 700; font-size: 1em; }
+  .def-meaning { color: #e2e8f0; margin-top: 4px; }
+  .def-example { color: #94a3b8; font-style: italic; margin-top: 6px; font-size: 0.9em; }
+  .def-example::before { content: "Real-life example: "; color: #34d399; font-style: normal; font-weight: 600; }
+
+  /* Analogy box */
+  .analogy { background: #1a2e05; border: 1px solid #365314; border-radius: 10px; padding: 16px; margin: 14px 0; }
+  .analogy::before { content: "Real-World Analogy"; display: block; color: #84cc16; font-weight: 700; margin-bottom: 6px; font-size: 0.95em; }
+
+  /* Diagrams */
+  .diagram { background: #0f172a; border-radius: 12px; padding: 25px; margin: 18px 0; border: 1px solid #334155; overflow-x: auto; }
+  .diagram-title { text-align: center; font-weight: 700; color: #60a5fa; margin-bottom: 18px; font-size: 1.05em; }
+  .flow { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .flow-row { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .flow-box { padding: 10px 16px; border-radius: 8px; font-weight: 600; text-align: center; min-width: 110px; font-size: 0.88em; }
+  .flow-box.data { background: #1e40af; color: #bfdbfe; border: 2px solid #3b82f6; }
+  .flow-box.model { background: #065f46; color: #a7f3d0; border: 2px solid #10b981; }
+  .flow-box.result { background: #7c2d12; color: #fed7aa; border: 2px solid #f59e0b; }
+  .flow-box.combine { background: #581c87; color: #e9d5ff; border: 2px solid #a855f7; }
+  .flow-box.error { background: #991b1b; color: #fecaca; border: 2px solid #ef4444; }
+  .arrow-down { text-align: center; color: #64748b; font-size: 1.4em; }
+
+  /* Formula */
+  .formula { background: #0c4a6e; border-radius: 8px; padding: 14px 18px; margin: 10px 0; font-family: 'Courier New', monospace; text-align: center; font-size: 1.05em; color: #7dd3fc; border: 1px solid #0369a1; }
+  .formula-explain { text-align: center; color: #94a3b8; font-size: 0.85em; margin-top: 4px; }
+
+  /* Key point */
+  .key-point { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; background: #172554; border-radius: 8px; margin: 10px 0; }
+  .key-point .icon { font-size: 1.2em; flex-shrink: 0; }
+
+  /* Steps */
+  .step { display: flex; gap: 14px; margin: 12px 0; align-items: flex-start; }
+  .step-num { width: 30px; height: 30px; border-radius: 50%; background: #3b82f6; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85em; flex-shrink: 0; }
+  .step-content { flex: 1; }
+
+  /* Comparison table */
+  .comp-table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  .comp-table th { background: #1e40af; color: white; padding: 10px 14px; text-align: left; font-size: 0.88em; }
+  .comp-table td { padding: 10px 14px; border-bottom: 1px solid #334155; font-size: 0.88em; }
+  .comp-table tr:hover td { background: rgba(59,130,246,0.1); }
+
+  /* Colors */
+  .highlight { color: #fbbf24; font-weight: 600; }
+  .blue { color: #60a5fa; }
+  .green { color: #34d399; }
+  .purple { color: #a78bfa; }
+  .red { color: #f87171; }
+  p { margin: 8px 0; }
+  ul { margin: 8px 0 8px 20px; }
+  li { margin: 5px 0; }
+  code { background: #334155; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+
+  /* Data cells for bootstrap visual */
+  .data-cell { width: 30px; height: 30px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.7em; font-weight: 700; margin: 1px; }
+  .cell-blue { background: #3b82f6; color: white; }
+  .cell-yellow { background: #f59e0b; color: #1e293b; }
+  .cell-red { background: #ef4444; color: white; }
+  .cell-gray { background: #1e293b; color: #475569; border: 1px dashed #475569; }
+
+  @media (max-width: 768px) {
+    .flow-row { flex-direction: column; }
+    h1 { font-size: 1.4em; }
+    .nav-tab { padding: 8px 12px; font-size: 0.8em; }
+  }
+
+  /* V5 NEW COMPONENTS */
+  .course-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-surface2);
+            border: 2px solid var(--accent);
+            padding: 0.8rem 1.2rem;
+            border-radius: 6px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+  .course-link:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+  .course-link::before {
+            font-size: 1.2rem;
+        }
+  .course-link.video::before {
+            content: "🎬";
+        }
+  .course-link.quiz::before {
+            content: "📝";
+        }
+  .course-link.faq::before {
+            content: "❓";
+        }
+  .quiz {
+            background: var(--bg-surface2);
+            border: 2px solid var(--accent2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+  .quiz-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent2);
+            margin-bottom: 1rem;
+        }
+  .quiz-q {
+            margin: 1rem 0;
+        }
+  .quiz-q-text {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.8rem;
+        }
+  .quiz-option {
+            background: var(--bg-surface);
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: block;
+            width: 100%;
+            text-align: left;
+            color: var(--text);
+            font-size: 0.95rem;
+            font-family: inherit;
+            line-height: 1.5;
+        }
+  .quiz-option:hover {
+            border-color: var(--accent);
+            background: rgba(108, 99, 255, 0.1);
+        }
+  .quiz-option.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+  .quiz-option.correct {
+            background: rgba(63, 185, 80, 0.2);
+            border-color: var(--success);
+            color: var(--success);
+        }
+  .quiz-option.wrong {
+            background: rgba(255, 107, 107, 0.2);
+            border-color: var(--accent3);
+            color: var(--accent3);
+        }
+  .quiz-feedback {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 4px;
+            font-weight: 600;
+            display: none;
+        }
+  .quiz-feedback.show {
+            display: block;
+        }
+  .quiz-feedback.correct {
+            background: rgba(63, 185, 80, 0.2);
+            color: var(--success);
+        }
+  .quiz-feedback.wrong {
+            background: rgba(255, 107, 107, 0.2);
+            color: var(--accent3);
+        }
+  .quiz::before {
+            content: "📝";
+        }
+  .numerical {
+            background: var(--bg-surface2);
+            border-left: 4px solid var(--accent2);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+  .mistake {
+            background: rgba(255, 107, 107, 0.05);
+            border-left: 4px solid var(--accent3);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+  .mistake-title {
+            font-weight: 700;
+            color: var(--accent3);
+            font-size: 1.05rem;
+            margin-bottom: 0.8rem;
+        }
+  .mistake-problem {
+            color: var(--text);
+            margin-bottom: 0.8rem;
+        }
+  .mistake-fix {
+            color: var(--success);
+            font-weight: 600;
+            padding-top: 0.8rem;
+            border-top: 1px solid var(--border);
+            margin-top: 0.8rem;
+        }
+  .cheat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+  .cheat-item {
+            background: var(--bg-surface2);
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+  .cheat-item-title {
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem;
+        }
+  .cheat-item-content {
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+  .side-by-side {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+  /* LIGHT MODE */
+  body.light {
+    background: #f8fafc;
+    color: #1e293b;
+  }
+  body.light .container { color: #1e293b; }
+  body.light h1 { -webkit-text-fill-color: #0c4a6e; color: #0c4a6e; background: none; }
+  body.light h2 { color: #1e40af; border-bottom-color: #93c5fd; }
+  body.light h3 { color: #1e3a5f; }
+  body.light .subtitle { color: #475569; }
+  body.light .subtitle small { color: #475569; }
+  body.light .subtitle a { color: #2563eb !important; }
+  body.light .card { background: #ffffff; border-color: #cbd5e1; color: #1e293b; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  body.light .def { background: #eff6ff; border-color: #93c5fd; color: #1e293b; }
+  body.light .def-term { color: #b45309; }
+  body.light .def-meaning { color: #1e293b; }
+  body.light .def-example { color: #475569; }
+  body.light .def-example::before { color: #059669; }
+  body.light .analogy { background: #f0fdf4; border-color: #86efac; color: #1e293b; }
+  body.light .analogy::before { color: #15803d; }
+  body.light .diagram { background: #f1f5f9; border-color: #cbd5e1; color: #1e293b; }
+  body.light .diagram-title { color: #1e40af; }
+  body.light .arrow-down { color: #94a3b8; }
+  body.light .flow-box { color: #1e293b; }
+  body.light .flow-box.data { background: #dbeafe; color: #1e3a8a; border-color: #60a5fa; }
+  body.light .flow-box.model { background: #d1fae5; color: #064e3b; border-color: #34d399; }
+  body.light .flow-box.result { background: #ffedd5; color: #7c2d12; border-color: #fb923c; }
+  body.light .flow-box.combine { background: #ede9fe; color: #4c1d95; border-color: #a78bfa; }
+  body.light .flow-box.error { background: #fee2e2; color: #7f1d1d; border-color: #f87171; }
+  body.light .formula { background: #ecfeff; color: #0e7490; border-color: #67e8f9; }
+  body.light .formula-explain { color: #475569; }
+  body.light .key-point { background: #eff6ff; border-color: #93c5fd; color: #1e293b; }
+  body.light .step-content { color: #1e293b; }
+  body.light .quiz { background: #ffffff; border-color: #d97706; color: #1e293b; }
+  body.light .quiz-title { color: #b45309; }
+  body.light .quiz-q-text { color: #1e293b; }
+  body.light .quiz-option { background: #f8fafc; border-color: #cbd5e1; color: #1e293b; }
+  body.light .quiz-option:hover { border-color: #3b82f6; background: rgba(59,130,246,0.1); }
+  body.light .nav-tab { background: #ffffff; color: #475569; border-color: #cbd5e1; }
+  body.light .nav-tab:hover { background: #eff6ff; color: #1e40af; border-color: #93c5fd; }
+  body.light .nav-tab.active { background: #2563eb; color: white; }
+  body.light code { background: #e2e8f0; color: #0f172a; }
+  body.light .comp-table th { background: #2563eb; color: white; }
+  body.light .comp-table td { border-color: #cbd5e1; color: #1e293b; background: #ffffff; }
+  body.light .comp-table tr:hover td { background: #eff6ff; }
+  body.light .numerical { background: #ecfdf5; border-color: #34d399; color: #1e293b; }
+  body.light .mistake { background: #fef2f2; border-color: #f87171; color: #1e293b; }
+  body.light .mistake-title { color: #dc2626; }
+  body.light .mistake-problem { color: #1e293b; }
+  body.light .mistake-fix { color: #059669; border-top-color: #e2e8f0; }
+  body.light .cheat-item { background: #ffffff; border-color: #2563eb; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  body.light .cheat-item-title { color: #1e40af; }
+  body.light .cheat-item-content { color: #1e293b; }
+  body.light .course-link { background: #eff6ff; border-color: #2563eb; color: #2563eb; }
+  body.light .course-link:hover { background: #2563eb; color: #ffffff; }
+  body.light .highlight { color: #b45309; }
+  body.light .blue { color: #2563eb; }
+  body.light .green { color: #059669; }
+  body.light .purple { color: #7c3aed; }
+  body.light .red { color: #dc2626; }
+  body.light .cell-gray { background: #e2e8f0; color: #475569; border-color: #94a3b8; }
+  body.light .week-badge.week1 { background: #dbeafe; color: #1e3a8a; }
+  body.light .week-badge.week2 { background: #ede9fe; color: #4c1d95; }
+  body.light .theme-toggle { background: #ffffff; border-color: #3b82f6; color: #1e293b; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+  body.light strong { color: #0f172a; }
+  body.light p, body.light li { color: #334155; }
+  body.light ul { color: #334155; }
+  body.light a { color: #2563eb; }
+  body.light .side-by-side > div { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 1rem; }
+  /* Fix inline dark backgrounds → light backgrounds */
+  body.light [style*="background:#172554"] { background: #eff6ff !important; border-color: #93c5fd !important; }
+  body.light [style*="background:#2e1065"] { background: #f3e8ff !important; border-color: #c084fc !important; }
+  body.light [style*="background:#0f766e"] { background: #ccfbf1 !important; border-color: #2dd4bf !important; }
+  body.light [style*="background:#0f172a"] { background: #f1f5f9 !important; border-color: #cbd5e1 !important; }
+  body.light [style*="background:#1e293b"] { background: #f1f5f9 !important; border-color: #cbd5e1 !important; }
+  body.light [style*="background:#581c87"] { background: #f3e8ff !important; border-color: #c084fc !important; }
+  body.light [style*="background:#1e40af"] { background: #dbeafe !important; border-color: #60a5fa !important; }
+  body.light [style*="background:#065f46"] { background: #d1fae5 !important; border-color: #34d399 !important; }
+  body.light [style*="background:#7c2d12"] { background: #ffedd5 !important; border-color: #fb923c !important; }
+  body.light [style*="background:#991b1b"] { background: #fee2e2 !important; border-color: #f87171 !important; }
+  /* Fix inline styles that use dark-mode colors */
+  body.light [style*="color:#94a3b8"] { color: #475569 !important; }
+  body.light [style*="color:#fbbf24"] { color: #b45309 !important; }
+  body.light [style*="color:#60a5fa"] { color: #2563eb !important; }
+  body.light [style*="color:#a78bfa"] { color: #7c3aed !important; }
+  body.light [style*="color:#34d399"] { color: #059669 !important; }
+  body.light [style*="color:#f87171"] { color: #dc2626 !important; }
+  body.light [style*="color:#e2e8f0"] { color: #1e293b !important; }
+  body.light [style*="color:#7dd3fc"] { color: #0e7490 !important; }
+  body.light [style*="color:#84cc16"] { color: #4d7c0f !important; }
+  body.light [style*="color: var(--text-muted)"] { color: #475569 !important; }
+  /* Code blocks: keep dark backgrounds with light text in both modes */
+  body.light pre { background: #1e293b !important; color: #e2e8f0 !important; border-color: #475569 !important; }
+  body.light pre code { color: #e2e8f0 !important; background: transparent !important; }
+  body.light pre [style*="color:#94a3b8"] { color: #94a3b8 !important; }
+  body.light pre [style*="color:#fbbf24"] { color: #fbbf24 !important; }
+  body.light pre [style*="color:#60a5fa"] { color: #60a5fa !important; }
+  body.light pre [style*="color:#a78bfa"] { color: #a78bfa !important; }
+  body.light pre [style*="color:#34d399"] { color: #34d399 !important; }
+  body.light pre [style*="color:#f87171"] { color: #f87171 !important; }
+  body.light pre [style*="color:#e2e8f0"] { color: #e2e8f0 !important; }
+  body.light pre [style*="color:#7dd3fc"] { color: #7dd3fc !important; }
+  body.light pre span { color: inherit; }
+</style>
+</head>
+<body>
+<button class="theme-toggle" onclick="toggleTheme(event)" type="button">🌙</button>
+<div class="container">
+  <h1>Advanced Machine Learning: Complete Visual Guide</h1>
+  <p class="subtitle">Dr. Kumar Muthuraman, University of Texas | Great Learning | Mentor: Shlok<br>
+  <small>Every concept explained from scratch. No assumptions. Real-life examples for everything.</small><br>
+  <small>Notes prepared by: <a href="https://www.linkedin.com/in/vamshireddi/" target="_blank" style="color:#60a5fa; text-decoration:none;">Vamshi Krishan Reddy Bandaru</a></small></p>
+
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="showSection('cheat')">⚡ Cheat Sheet</div>
+    <div class="nav-tab" onclick="showSection('concept')">🗺️ Concept Map</div>
+    <div class="nav-tab" onclick="showSection('prereqs')">📚 Prerequisites</div>
+    <div class="nav-tab" onclick="showSection('ensemble')">🧩 1.1 Ensemble</div>
+    <div class="nav-tab" onclick="showSection('bagging')">🎒 1.2 Bagging</div>
+    <div class="nav-tab" onclick="showSection('bootstrap')">🎲 1.3 Bootstrap</div>
+    <div class="nav-tab" onclick="showSection('rf')">🌲 1.4 Random Forest</div>
+    <div class="nav-tab" onclick="showSection('handson1')">💻 1.5 Hands-On</div>
+    <div class="nav-tab" onclick="showSection('boosting')">🚀 2.1-2.2 Boosting</div>
+    <div class="nav-tab" onclick="showSection('adaboost')">🎯 2.3 AdaBoost</div>
+    <div class="nav-tab" onclick="showSection('gbm')">📈 2.4 GBM</div>
+    <div class="nav-tab" onclick="showSection('xgboost')">⚡ 2.5 XGBoost</div>
+    <div class="nav-tab" onclick="showSection('handson2')">💻 2.6 Hands-On</div>
+    <div class="nav-tab" onclick="showSection('stacking')">🏗️ 2.7 Stacking</div>
+    <div class="nav-tab" onclick="showSection('mistakes')">⚠️ Mistakes</div>
+  </div>
+
+  <!-- ==================== CHEAT SHEET ==================== -->
+  <div class="section active" id="cheat">
+<h2>⚡ Cheat Sheet</h2>
+
+            <div class="card card-purple">
+                <h3>Big Picture</h3>
+                <p>Ensemble methods combine multiple weak learners to create a strong predictor. Two main families:</p>
+                <ul style="margin: 1rem 0 0 2rem;">
+                    <li><strong>Bagging:</strong> Parallel models on bootstrap samples → average/vote</li>
+                    <li><strong>Boosting:</strong> Sequential models correcting previous errors → weighted sum</li>
+                    <li><strong>Stacking:</strong> Multiple diverse base models → meta-learner combines them</li>
+                </ul>
+            </div>
+
+            <h3>Vocabulary Quick Reference</h3>
+            <table class="comp-table">
+                <thead>
+                    <tr><th>Term</th><th>Definition</th><th>Key Use</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Bootstrap</strong></td><td>Sample WITH replacement (63.2% unique rows)</td><td>Bagging, Random Forest</td></tr>
+                    <tr><td><strong>OOB (Out-of-Bag)</strong></td><td>Rows NOT in bootstrap sample (36.8%)</td><td>Free validation set</td></tr>
+                    <tr><td><strong>Base Learner</strong></td><td>Simple model (decision tree, stump)</td><td>Building block</td></tr>
+                    <tr><td><strong>Weak Learner</strong></td><td>Model barely better than random</td><td>Boosting input</td></tr>
+                    <tr><td><strong>Alpha (α)</strong></td><td>Vote weight = 0.5 × ln((1-error)/error)</td><td>AdaBoost formula</td></tr>
+                    <tr><td><strong>Shrinkage</strong></td><td>Multiply each tree's contribution by η (0.01-0.1)</td><td>GBM regularization</td></tr>
+                    <tr><td><strong>Residual</strong></td><td>Actual value - Predicted value</td><td>GBM target in each round</td></tr>
+                    <tr><td><strong>Meta-Learner</strong></td><td>Final model trained on base model outputs</td><td>Stacking Level 1</td></tr>
+                </tbody>
+            </table>
+
+            <h3>When to Use What?</h3>
+            <div class="side-by-side">
+                <div class="side-left">
+                    <strong style="color: var(--success);">Use Bagging / Random Forest when:</strong>
+                    <ul style="margin: 1rem 0 0 1.5rem;">
+                        <li>Training data is large</li>
+                        <li>You have high variance (overfitting)</li>
+                        <li>Speed matters (parallel)</li>
+                        <li>Interpretability needed (feature importance)</li>
+                    </ul>
+                </div>
+                <div class="side-right">
+                    <strong style="color: var(--accent2);">Use Boosting when:</strong>
+                    <ul style="margin: 1rem 0 0 1.5rem;">
+                        <li>Training data is moderate</li>
+                        <li>You have high bias (underfitting)</li>
+                        <li>You can wait longer (sequential)</li>
+                        <li>You want maximum accuracy</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Formula Reminders</h3>
+            <div class="formula">
+                Bootstrap: ~63.2% unique rows
+                <div class="formula-explain">N = 1000 rows → ~632 unique in each sample. Why? (1 - 1/N)^N ≈ 0.368 missing</div>
+            </div>
+
+            <div class="formula">
+                AdaBoost Alpha: α = 0.5 × ln((1 - error) / error)
+                <div class="formula-explain">
+                    error = 0.01 → α = 2.30 (big vote)<br>
+                    error = 0.3 → α = 0.42 (moderate)<br>
+                    error = 0.5 → α = 0 (coin flip)<br>
+                    error > 0.5 → α < 0 (flipped)
+                </div>
+            </div>
+
+            <a href="https://olympus.mygreatlearning.com/courses/139893/modules/items/7571545?pb_id=19727" class="course-link video">Watch Week 1 Overview</a>
+        </section>
+
+        <!-- CONCEPT MAP -->
+        <section id="conceptmap">
+</div>
+
+<div class="section" id="concept">
+<h2>🗺️ Concept Map</h2>
+
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">How all ensemble methods relate to each other:</p>
+
+            <div class="diagram">
+                <div class="flow">
+                    <div class="flow-row">
+                        <div class="flow-box" style="min-width: 150px;">Supervised Learning Problem</div>
+                    </div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-row">
+                        <div class="flow-box" style="min-width: 150px;">Ensemble Methods</div>
+                    </div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-row">
+                        <div class="flow-box data" style="min-width: 140px;">Bagging Family</div>
+                        <span style="color: var(--accent); font-weight: 700; align-self: center; margin: 0 1rem;">vs</span>
+                        <div class="flow-box model" style="min-width: 140px;">Boosting Family</div>
+                        <span style="color: var(--accent); font-weight: 700; align-self: center; margin: 0 1rem;">vs</span>
+                        <div class="flow-box result" style="min-width: 140px;">Stacking</div>
+                    </div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-row">
+                        <div style="text-align: left; color: var(--text); flex: 1;">
+                            <strong style="color: var(--accent);">Bagging Branch:</strong><br>
+                            • Bootstrap Aggregating<br>
+                            • Random Forest (add feature randomness)<br>
+                            • Extra Trees
+                        </div>
+                        <div style="text-align: left; color: var(--text); flex: 1;">
+                            <strong style="color: var(--accent);">Boosting Branch:</strong><br>
+                            • AdaBoost (reweight samples)<br>
+                            • Gradient Boosting (fit residuals)<br>
+                            • XGBoost, LightGBM (production)
+                        </div>
+                        <div style="text-align: left; color: var(--text); flex: 1;">
+                            <strong style="color: var(--success);">Stacking:</strong><br>
+                            • Level 0: diverse models<br>
+                            • Level 1: meta-learner<br>
+                            • Avoid data leakage
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://olympus.mygreatlearning.com/courses/139893/modules/items/7571545?pb_id=19727" class="course-link video">Watch Overview</a>
+        </section>
+
+        <!-- PREREQUISITES -->
+        <section id="prereq">
+</div>
+
+<div class="section" id="prereqs">
+    <h2>Key Terms You Must Know First</h2>
+    <p>Before we dive in, here is every technical term that will be used throughout this guide, explained simply:</p>
+
+    <div class="def">
+      <div class="def-term">Model (in Machine Learning)</div>
+      <div class="def-meaning">A model is a mathematical formula or algorithm that has "learned" patterns from data. You feed it data, it learns relationships, and then it can make predictions on new, unseen data.</div>
+      <div class="def-example">You show a model 10,000 photos of cats and dogs with labels. After training, when you show it a new photo, it predicts "cat" or "dog."</div>
+    </div>
+
+    <div class="def">
+      <div class="def-term">Training Data</div>
+      <div class="def-meaning">The dataset used to teach the model. It contains <strong>input features</strong> (the information) and a <strong>target/label</strong> (the answer you want to predict). Think of it as a textbook the model studies from.</div>
+      <div class="def-example">A spreadsheet where each row is a house, columns are features (square feet, bedrooms, location), and the last column is the price (the target). The model learns: "houses with more bedrooms in good locations cost more."</div>
+    </div>
+
+    <div class="def">
+      <div class="def-term">Test Data</div>
+      <div class="def-meaning">A separate dataset the model has NEVER seen during training. We use this to check if the model actually learned useful patterns or just memorized the training data. Like a surprise exam.</div>
+      <div class="def-example">After training on 8,000 house records, you test on 2,000 houses the model never saw. If it predicts prices well on these unseen houses, it has truly learned.</div>
+    </div>
+
+    <div class="def">
+      <div class="def-term">Features (also called Variables, Columns, Predictors)</div>
+      <div class="def-meaning">The individual pieces of information about each data point that the model uses to make predictions. Each column in your data (except the target) is a feature.</div>
+      <div class="def-example">For predicting if an email is spam: features might include "number of exclamation marks", "contains word FREE", "sender in contacts list", "email length".</div>
+    </div>
+
+    <div class="def">
+      <div class="def-term">Target / Label (also called Response Variable, Dependent Variable)</div>
+      <div class="def-meaning">The thing you are trying to predict. It's the "answer" column in your training data.</div>
+      <div class="def-example">In spam detection, the target is "spam" or "not spam". In house pricing, the target is the dollar price.</div>
+    </div>
+
+    <div class="def">
+      <div class="def-term">Classification vs Regression</div>
+      <div class="def-meaning"><strong>Classification</strong> = predicting a category (yes/no, cat/dog, spam/not-spam). <strong>Regression</strong> = predicting a continuous number (price, temperature, salary).</div>
+      <div class="def-example">Classification: "Will this customer churn? Yes/No." Regression: "How much will this customer spend next month? $142.50."</div>
+    </div>
+
+    <div class="def">
+      <div class="def-term">Decision Tree</div>
+      <div class="def-meaning">A model that makes predictions by asking a series of yes/no questions about the features, like a flowchart. At each step, it splits the data based on one feature. At the bottom (leaves), it gives a prediction.</div>
+      <div class="def-example">To predict if someone will buy a product: "Is age > 30?" → Yes → "Is income > $50K?" → Yes → "Prediction: Will Buy". It's like playing 20 Questions with data.</div>
+    </div>
+
+    <div class="def">
+      <div class="def-term">Overfitting</div>
+      <div class="def-meaning">When a model memorizes the training data too well, including the noise and random quirks, so it performs great on training data but <strong>poorly on new data</strong>. It's like a student who memorizes test answers but can't solve new problems.</div>
+      <div class="def-example">A decision tree that grows so deep it has a separate rule for every single training example. It gets 100% on training data but fails on new customers because it memorized individuals, not general patterns.</div>
+    </div>
+
+    <div class="def">
+      <div class="def-term">Underfitting</div>
+      <div class="def-meaning">When a model is too simple to capture the real patterns in the data. It performs poorly on BOTH training and test data. Like a student who barely studied.</div>
+      <div class="def-example">Using a straight line to predict house prices when the real relationship is curved. The model is too simple to capture reality.</div>
+    </div>
+
+    <div class="def">
+      <div class="def-term">Bias (model bias)</div>
+      <div class="def-meaning">Error caused by the model being too simple. High bias = underfitting. The model makes strong assumptions and misses important patterns.</div>
+      <div class="def-example">Assuming all house prices depend only on square footage, ignoring location entirely. That assumption (bias) causes errors.</div>
+    </div>
+
+    <div class="def">
+      <div class="def-term">Variance (model variance)</div>
+      <div class="def-meaning">Error caused by the model being too sensitive to the specific training data. High variance = overfitting. Small changes in training data cause wildly different predictions.</div>
+      <div class="def-example">Train a deep decision tree on slightly different subsets of data — you get completely different trees each time. The model is unstable (high variance).</div>
+    </div>
+
+    <div class="def">
+      <div class="def-term">Bias-Variance Tradeoff</div>
+      <div class="def-meaning">The fundamental tension in ML: <strong>simple models have high bias, low variance</strong> (consistently wrong). <strong>Complex models have low bias, high variance</strong> (right on average but unstable). The goal is to find the sweet spot.</div>
+      <div class="def-example">A simple model says every house costs $300K (high bias, low variance — always the same wrong answer). A complex model gives wildly different prices depending on which data it trained on (low bias, high variance — right on average but unreliable).</div>
+    </div>
+
+    <div class="def">
+      <div class="def-term">Hyperparameters</div>
+      <div class="def-meaning">Settings you choose BEFORE training the model. They control the model's behavior but are not learned from data. You tune them to get better performance.</div>
+      <div class="def-example">In a decision tree: "how deep should the tree grow?" (max_depth=5) or "how many data points needed to make a split?" (min_samples_split=10). These are choices YOU make, not something the model learns.</div>
+    </div>
+
+    <div class="def">
+      <div class="def-term">Weak Learner</div>
+      <div class="def-meaning">A model that is only slightly better than random guessing. For classification, it gets just over 50% accuracy. Typically a very shallow decision tree (a "stump" with just 1 split).</div>
+      <div class="def-example">A decision stump that just asks "Is income > $40K?" to predict loan default. It's better than a coin flip, but not by much. Boosting turns many weak learners into one strong learner.</div>
+    </div>
+
+    <div class="def">
+      <div class="def-term">Impurity / Gini Impurity</div>
+      <div class="def-meaning">A measure of how "mixed" the classes are at a node in a decision tree. Pure node = all same class (Gini = 0). Maximally impure = perfectly mixed classes (Gini = 0.5 for binary). Decision trees try to reduce impurity with each split.</div>
+      <div class="def-example">A box with 100 red balls = pure (Gini = 0). A box with 50 red and 50 blue = maximally impure (Gini = 0.5). A decision tree split aims to create purer groups.</div>
+    </div>
+
+    <div class="key-point">
+      <div class="icon">&#128161;</div>
+      <p>With these definitions understood, you're ready for the course content. Click the tabs above to navigate through each topic.</p>
+    </div>
+  </div>
+
+  <!-- ==================== 1.1 ENSEMBLE ==================== -->
+  <div class="section" id="ensemble">
+    <span class="week-badge week1">WEEK 1</span>
+    <h2>1.1 Ensemble Techniques — Combining Multiple Models</h2>
+
+    <div class="card card-blue">
+      <h3>What is an Ensemble?</h3>
+      <p>An <span class="highlight">ensemble</span> is a group of multiple machine learning models whose predictions are combined to produce one final prediction. Instead of relying on one model, you build many and let them "vote" or "average" their answers.</p>
+      <p>The central idea: <span class="highlight">a committee of experts working together performs better than any single expert</span>.</p>
+    </div>
+
+    <div class="analogy">
+      <p><strong>The Doctor Analogy:</strong> If you're diagnosed with a serious illness, you don't rely on just one doctor's opinion. You get a second opinion, maybe a third. Each doctor might have slightly different expertise and perspective. By combining their opinions, you get a more reliable diagnosis. That's exactly what ensemble methods do — combine multiple "expert" models.</p>
+    </div>
+
+    <div class="analogy">
+      <p><strong>The "Who Wants to Be a Millionaire" Analogy:</strong> On the game show, the "Ask the Audience" lifeline (where hundreds of people vote) is correct ~91% of the time. The "Phone a Friend" lifeline (one expert) is correct only ~65% of the time. A crowd of decent-but-imperfect opinions beats a single expert. This is the mathematical foundation of ensembles.</p>
+    </div>
+
+    <!-- Main Diagram -->
+    <div class="diagram">
+      <div class="diagram-title">How an Ensemble Works (General Architecture)</div>
+      <div class="flow">
+        <div class="flow-box data" style="min-width:220px;">TRAINING DATA<br><small>Your spreadsheet with rows (samples) and columns (features)</small></div>
+        <div class="arrow-down">&#9660; &#9660; &#9660; &#9660;</div>
+        <div style="color:#94a3b8; font-size:0.85em; text-align:center;">Build multiple models from this data (HOW we do this differs by method)</div>
+        <div class="flow-row">
+          <div class="flow-box model">Model 1</div>
+          <div class="flow-box model">Model 2</div>
+          <div class="flow-box model">Model 3</div>
+          <div class="flow-box model" style="opacity:0.6;">... Model N</div>
+        </div>
+        <div class="arrow-down">&#9660;</div>
+        <div style="color:#94a3b8; font-size:0.85em; text-align:center;">When new data comes in, each model makes its own prediction</div>
+        <div class="flow-row">
+          <div class="flow-box result">Pred: Cat</div>
+          <div class="flow-box result">Pred: Dog</div>
+          <div class="flow-box result">Pred: Cat</div>
+          <div class="flow-box result" style="opacity:0.6;">Pred: Cat</div>
+        </div>
+        <div class="arrow-down">&#9660;</div>
+        <div class="flow-box combine" style="min-width:300px;">
+          COMBINE THE VOTES<br>
+          <small>Classification: Majority vote (3 said Cat, 1 said Dog → Cat wins)<br>
+          Regression: Average all the numbers</small>
+        </div>
+        <div class="arrow-down">&#9660;</div>
+        <div class="flow-box data" style="background:#0f766e; border-color:#14b8a6; min-width:200px;">Final Answer: <strong>Cat</strong></div>
+      </div>
+    </div>
+
+    <div class="card card-yellow">
+      <h3>Why does combining models work?</h3>
+      <p>Individual models make errors. But if the models are <strong>diverse</strong> (they make different types of errors), their mistakes tend to cancel out when you combine them.</p>
+
+      <div class="analogy">
+        <p><strong>Weather Forecast Analogy:</strong> Five different weather models might predict tomorrow's temperature as 72°F, 68°F, 74°F, 70°F, and 71°F. Some overestimate, some underestimate. But the average (71°F) is likely closer to the actual temperature than any single model. The errors in different directions cancel out.</p>
+      </div>
+
+      <p>Mathematically, if each model has an error (variance) of &sigma;&sup2;, and the models are independent:</p>
+      <div class="formula">Variance of the average = &sigma;&sup2; / n</div>
+      <div class="formula-explain">Where n = number of models. More models → lower variance → more stable predictions.</div>
+    </div>
+
+    <div class="card card-blue">
+      <h3>Two Families of Ensemble Methods</h3>
+      <p>There are two main strategies for building ensembles. This entire course is about these two approaches:</p>
+
+      <div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:15px;">
+        <div style="flex:1; min-width:280px; background:#172554; padding:18px; border-radius:10px; border:2px solid #3b82f6;">
+          <h3 style="color:#60a5fa; margin-top:0;">1. BAGGING (Parallel)</h3>
+          <p>Build models <strong>independently</strong>, at the same time. Then average their predictions.</p>
+          <p style="font-size:0.9em; color:#94a3b8;">Each model is trained on a slightly different version of the data. No model knows about the others.</p>
+          <p style="color:#fbbf24; font-weight:600; margin-top:8px;">Reduces VARIANCE (overfitting)</p>
+          <p style="font-size:0.85em; color:#94a3b8;">Covered in: Week 1</p>
+        </div>
+        <div style="flex:1; min-width:280px; background:#2e1065; padding:18px; border-radius:10px; border:2px solid #a855f7;">
+          <h3 style="color:#a78bfa; margin-top:0;">2. BOOSTING (Sequential)</h3>
+          <p>Build models <strong>one after another</strong>. Each new model specifically fixes the mistakes of all previous models.</p>
+          <p style="font-size:0.9em; color:#94a3b8;">Model 2 learns from Model 1's errors. Model 3 learns from errors 1+2 still make. And so on.</p>
+          <p style="color:#fbbf24; font-weight:600; margin-top:8px;">Reduces BIAS (underfitting)</p>
+          <p style="font-size:0.85em; color:#94a3b8;">Covered in: Week 2</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="key-point">
+      <div class="icon">&#128270;</div>
+      <p><strong>Course-specific note (from FAQ):</strong> In Bagging, all models must be the <strong>same type</strong> of algorithm. This is called "homogeneous." If you pick Decision Trees, ALL models must be Decision Trees. You cannot mix Decision Trees and Logistic Regression in the same Bagging ensemble.</p>
+    </div>
+  </div>
+
+  <!-- ==================== 1.2 BAGGING ==================== -->
+  <div class="section" id="bagging">
+    <span class="week-badge week1">WEEK 1</span>
+    <h2>1.2 Bagging — Bootstrap Aggregating</h2>
+
+    <div class="card card-blue">
+      <h3>What does "Bagging" mean?</h3>
+      <p>The name comes from: <span class="blue"><strong>B</strong></span>ootstrap <span class="blue"><strong>Agg</strong></span>regat<span class="blue"><strong>ing</strong></span> = <span class="blue"><strong>B-AGG-ING</strong></span></p>
+      <p>It was invented by Leo Breiman in 1996. Let's break down both words:</p>
+
+      <div class="def">
+        <div class="def-term">Bootstrap (in statistics)</div>
+        <div class="def-meaning">A technique where you create a new dataset by randomly picking rows from the original dataset <strong>with replacement</strong>. "With replacement" means after you pick a row, you put it back, so the same row can be picked again.</div>
+        <div class="def-example">You have a bag with 10 numbered balls (1-10). You draw a ball, write down the number, put it back, draw again. After 10 draws you might get: [3, 7, 3, 1, 9, 7, 5, 2, 9, 3]. Notice ball #3 appeared 3 times, while balls #4, #6, #8, #10 never appeared.</div>
+      </div>
+
+      <div class="def">
+        <div class="def-term">Aggregating</div>
+        <div class="def-meaning">Combining multiple results into one. For classification (predicting categories), this means <strong>majority voting</strong> — whichever class gets the most votes wins. For regression (predicting numbers), this means taking the <strong>average</strong>.</div>
+        <div class="def-example">Three models predict a patient's condition: Model A says "Healthy", Model B says "Sick", Model C says "Healthy". Majority vote: 2 vs 1 → Final answer: "Healthy".</div>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-title">Bagging: Complete Step-by-Step Process</div>
+      <div class="flow">
+        <div class="step" style="justify-content:center;">
+          <div class="step-num">1</div>
+          <div class="step-content" style="max-width:500px;">
+            <strong>Start with your original training data</strong><br>
+            Say you have 1000 rows of customer data with 20 features each.
+          </div>
+        </div>
+
+        <div class="flow-box data" style="min-width:320px;">Original Data: 1000 rows &times; 20 features</div>
+        <div style="text-align:center; color:#f59e0b; font-size:0.85em; padding:8px;">Create multiple "bootstrap samples" — each is 1000 rows drawn WITH REPLACEMENT</div>
+        <div class="arrow-down">&#9660; &#9660; &#9660;</div>
+
+        <div class="flow-row">
+          <div style="text-align:center;">
+            <div class="flow-box data" style="font-size:0.8em;">Sample 1<br><small>1000 rows</small><br><small style="color:#fbbf24;">~632 unique rows</small><br><small style="color:#f87171;">~368 missing</small></div>
+            <div class="arrow-down">&#9660;</div>
+            <div class="flow-box model" style="font-size:0.8em;">Train<br>Tree 1</div>
+          </div>
+          <div style="text-align:center;">
+            <div class="flow-box data" style="font-size:0.8em;">Sample 2<br><small>1000 rows</small><br><small style="color:#fbbf24;">~632 unique rows</small><br><small style="color:#f87171;">~368 missing</small></div>
+            <div class="arrow-down">&#9660;</div>
+            <div class="flow-box model" style="font-size:0.8em;">Train<br>Tree 2</div>
+          </div>
+          <div style="text-align:center;">
+            <div class="flow-box data" style="font-size:0.8em;">Sample 3<br><small>1000 rows</small><br><small style="color:#fbbf24;">~632 unique rows</small><br><small style="color:#f87171;">~368 missing</small></div>
+            <div class="arrow-down">&#9660;</div>
+            <div class="flow-box model" style="font-size:0.8em;">Train<br>Tree 3</div>
+          </div>
+          <div style="text-align:center; opacity:0.6;">
+            <div class="flow-box data" style="font-size:0.8em; border-style:dashed;">...<br>Sample N</div>
+            <div class="arrow-down">&#9660;</div>
+            <div class="flow-box model" style="font-size:0.8em; border-style:dashed;">...<br>Tree N</div>
+          </div>
+        </div>
+
+        <div style="text-align:center; color:#94a3b8; font-size:0.85em; padding:8px;">Each tree sees slightly different data → each tree learns slightly different patterns</div>
+        <div class="arrow-down">&#9660;</div>
+
+        <div class="step" style="justify-content:center;">
+          <div class="step-num">2</div>
+          <div class="step-content" style="max-width:500px;">
+            <strong>When you need to predict for new data:</strong> pass it through ALL trees, collect all predictions, then combine.
+          </div>
+        </div>
+
+        <div class="flow-box combine" style="min-width:400px;">
+          <strong>Classification:</strong> Each tree votes → majority wins<br>
+          <strong>Regression:</strong> Each tree predicts a number → take the average<br>
+          <small style="color:#c4b5fd;">All trees have equal voting weight (unlike Boosting)</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="analogy">
+      <p><strong>The Textbook Analogy:</strong> Imagine 100 students all studying from the same textbook but each student randomly skips a few chapters and re-reads others. Each student develops a slightly different understanding. On exam day, if you average all 100 students' answers, the group answer is more reliable than any single student's answer. That's Bagging.</p>
+    </div>
+
+    <div class="card card-green">
+      <h3>Why does Bagging reduce overfitting?</h3>
+      <p>A single deep decision tree is like an over-eager student who memorizes every tiny detail, including typos and noise. It <span class="red">overfits</span> — performs great on training data but poorly on new data.</p>
+      <p>When you build 100 trees on different bootstrap samples, each tree memorizes different noise. When you average them, <span class="green">the noise cancels out, but the real patterns remain</span>, because the real patterns appear consistently across all samples.</p>
+    </div>
+  </div>
+
+  <!-- ==================== 1.3 BOOTSTRAP & OOB ==================== -->
+  <div class="section" id="bootstrap">
+    <span class="week-badge week1">WEEK 1</span>
+    <h2>1.3 Why Sampling WITH Replacement & the 63% Rule</h2>
+
+    <div class="card card-blue">
+      <h3>What does "with replacement" actually mean?</h3>
+      <p>Imagine you have a bag with 10 colored balls. There are two ways to draw 10 balls:</p>
+
+      <div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:10px;">
+        <div style="flex:1; min-width:240px; background:#172554; padding:15px; border-radius:8px;">
+          <div style="color:#ef4444; font-weight:700;">WITHOUT Replacement</div>
+          <p style="font-size:0.9em;">Draw a ball, set it aside, draw another. You can never draw the same ball twice. After 10 draws, you have all 10 original balls. This is just shuffling — you get the exact same data back.</p>
+          <p style="font-size:0.85em; color:#94a3b8;">This would NOT be useful for Bagging — all samples would be identical.</p>
+        </div>
+        <div style="flex:1; min-width:240px; background:#172554; padding:15px; border-radius:8px;">
+          <div style="color:#10b981; font-weight:700;">WITH Replacement &#10004;</div>
+          <p style="font-size:0.9em;">Draw a ball, write down its number, <strong>put it back in the bag</strong>, draw again. The same ball CAN be drawn multiple times. Some balls will be drawn 2-3 times, others won't be drawn at all.</p>
+          <p style="font-size:0.85em; color:#94a3b8;">This creates a DIFFERENT version of the data each time. Exactly what Bagging needs!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-title">Visual: What a Bootstrap Sample Actually Looks Like</div>
+      <div style="display:flex; gap:30px; justify-content:center; flex-wrap:wrap; align-items:flex-start;">
+        <div style="text-align:center;">
+          <h3 style="color:#60a5fa; font-size:0.95em;">Original (10 rows)</h3>
+          <div><div class="data-cell cell-blue">1</div></div>
+          <div><div class="data-cell cell-blue">2</div></div>
+          <div><div class="data-cell cell-blue">3</div></div>
+          <div><div class="data-cell cell-blue">4</div></div>
+          <div><div class="data-cell cell-blue">5</div></div>
+          <div><div class="data-cell cell-blue">6</div></div>
+          <div><div class="data-cell cell-blue">7</div></div>
+          <div><div class="data-cell cell-blue">8</div></div>
+          <div><div class="data-cell cell-blue">9</div></div>
+          <div><div class="data-cell cell-blue">10</div></div>
+        </div>
+        <div style="font-size:2em; color:#64748b; align-self:center;">&#8594;</div>
+        <div style="text-align:center;">
+          <h3 style="color:#f59e0b; font-size:0.95em;">Bootstrap Sample</h3>
+          <div><div class="data-cell cell-blue">1</div></div>
+          <div><div class="data-cell cell-yellow">3</div> <span style="font-size:0.7em; color:#f59e0b;">&#8592; appears twice!</span></div>
+          <div><div class="data-cell cell-blue">3</div></div>
+          <div><div class="data-cell cell-blue">5</div></div>
+          <div><div class="data-cell cell-yellow">5</div> <span style="font-size:0.7em; color:#f59e0b;">&#8592; appears twice!</span></div>
+          <div><div class="data-cell cell-blue">6</div></div>
+          <div><div class="data-cell cell-blue">7</div></div>
+          <div><div class="data-cell cell-yellow">1</div> <span style="font-size:0.7em; color:#f59e0b;">&#8592; row 1 again!</span></div>
+          <div><div class="data-cell cell-blue">9</div></div>
+          <div><div class="data-cell cell-blue">10</div></div>
+          <p style="font-size:0.75em; color:#34d399; margin-top:4px;">Still 10 rows total<br>but only 7 unique</p>
+        </div>
+        <div style="font-size:2em; color:#64748b; align-self:center;">|</div>
+        <div style="text-align:center;">
+          <h3 style="color:#ef4444; font-size:0.95em;">Left Out (OOB)</h3>
+          <div style="margin-top:34px;"><div class="data-cell cell-red">2</div> <span style="font-size:0.7em; color:#ef4444;">never picked</span></div>
+          <div style="margin-top:12px;"><div class="data-cell cell-red">4</div> <span style="font-size:0.7em; color:#ef4444;">never picked</span></div>
+          <div style="margin-top:40px;"><div class="data-cell cell-red">8</div> <span style="font-size:0.7em; color:#ef4444;">never picked</span></div>
+          <p style="font-size:0.75em; color:#f87171; margin-top:4px;">These 3 rows can be<br>used to TEST this tree!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-yellow">
+      <h3>The 63.2% Rule — Why Exactly This Number?</h3>
+      <p>On average, each bootstrap sample contains about <span class="highlight">63.2%</span> of the unique original rows. The remaining <span class="red">36.8%</span> are left out. Here's why:</p>
+
+      <p>For a dataset with N rows, the probability that ONE specific row is NOT picked in a single draw is:</p>
+      <div class="formula">P(not picked once) = (N-1)/N = 1 - 1/N</div>
+      <div class="formula-explain">Example: With 1000 rows, probability of NOT picking row #42 in one draw = 999/1000 = 0.999</div>
+
+      <p>Since we draw N times (with replacement), the probability that a specific row is NEVER picked in all N draws:</p>
+      <div class="formula">P(never picked) = (1 - 1/N)<sup>N</sup></div>
+      <div class="formula-explain">We multiply the probability N times because each draw is independent</div>
+
+      <p>As N gets large, there's a mathematical fact that:</p>
+      <div class="formula">(1 - 1/N)<sup>N</sup> approaches 1/e &asymp; 0.368</div>
+      <div class="formula-explain">e &asymp; 2.718 (Euler's number, a mathematical constant like pi)</div>
+
+      <p>Therefore, the probability a row IS picked at least once:</p>
+      <div class="formula">P(in the sample) = 1 - 0.368 = <span style="color:#fbbf24; font-size:1.2em;">0.632 = 63.2%</span></div>
+    </div>
+
+    <div class="card card-green">
+      <h3>Out-of-Bag (OOB) Samples — Free Validation!</h3>
+
+      <div class="def">
+        <div class="def-term">Out-of-Bag (OOB) Samples</div>
+        <div class="def-meaning">The ~37% of rows that were NOT included in a particular bootstrap sample. These rows were never seen by that tree during training, so they can be used to test that tree's accuracy — for free, without needing a separate test set.</div>
+        <div class="def-example">If Tree #5 was trained on a bootstrap sample that didn't include Customer #42, then Tree #5's prediction for Customer #42 is an honest test — it never saw this customer before. By collecting these "honest" predictions across all trees for all customers, you get a reliable estimate of accuracy.</div>
+      </div>
+
+      <p><strong>How OOB error is calculated:</strong></p>
+      <div class="step"><div class="step-num">1</div><div class="step-content">For each row in the original data, find all trees where that row was NOT used for training (it was "out of bag" for those trees)</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content">Get predictions from ONLY those trees for this row</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content">Combine these predictions (majority vote for classification, average for regression)</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content">Compare the OOB prediction against the actual value. Do this for every row.</div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-content">The overall error rate = <span class="highlight">OOB Error</span>. This is nearly as good as cross-validation but completely free!</div></div>
+    </div>
+  </div>
+
+  <!-- ==================== 1.4 RANDOM FOREST ==================== -->
+  <div class="section" id="rf">
+    <span class="week-badge week1">WEEK 1</span>
+    <h2>1.4 Random Forests — Bagging on Steroids</h2>
+
+    <div class="card card-blue">
+      <h3>The Problem with Plain Bagging</h3>
+      <p>Regular Bagging builds many trees on different bootstrap samples. But there's a problem:</p>
+      <p>If your dataset has one very powerful feature (say "income" for predicting loan default), then <span class="red">every single tree will use "income" as the first split</span>. All your trees end up looking very similar. When you average similar trees, you don't gain much.</p>
+
+      <div class="analogy">
+        <p><strong>Think of it this way:</strong> If you ask 100 people "What's the capital of France?" they all say "Paris." Averaging 100 identical answers doesn't give you anything better than asking one person. You need <strong>diverse</strong> opinions to benefit from combining them.</p>
+      </div>
+    </div>
+
+    <div class="card card-green">
+      <h3>Random Forest's Solution: Add Feature Randomness</h3>
+
+      <div class="def">
+        <div class="def-term">Random Forest</div>
+        <div class="def-meaning">An ensemble of decision trees where each tree is built using: (1) a bootstrap sample of rows (same as Bagging), AND (2) at each split point in the tree, only a random subset of features is considered. This double randomness makes the trees very different from each other.</div>
+        <div class="def-example">Imagine 100 medical experts diagnosing patients. Each expert only sees a random selection of test results (one sees blood pressure + cholesterol, another sees X-ray + blood sugar, etc.). They each make their best diagnosis with limited info. When you combine all 100 opinions, the collective answer is very robust because each expert brings a different perspective.</div>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-title">Random Forest: TWO Types of Randomness</div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
+        <div style="flex:1; min-width:280px; background:#172554; padding:18px; border-radius:10px; border:2px solid #3b82f6; text-align:center;">
+          <h3 style="color:#60a5fa; margin-top:0;">Randomness #1: Row Sampling</h3>
+          <p style="font-size:0.9em;">(Same as Bagging)</p>
+          <p>Each tree gets a different bootstrap sample of rows (~63% unique rows).</p>
+          <p style="font-size:0.85em; color:#94a3b8;">This is done ONCE per tree, before training starts.</p>
+          <div style="display:flex; gap:3px; justify-content:center; margin:8px 0;">
+            <div class="data-cell cell-blue">R1</div>
+            <div class="data-cell cell-yellow">R3</div>
+            <div class="data-cell cell-blue">R3</div>
+            <div class="data-cell cell-blue">R5</div>
+            <div class="data-cell cell-blue">R7</div>
+          </div>
+          <p style="font-size:0.8em; color:#fbbf24;">Different rows per tree</p>
+        </div>
+        <div style="font-size:2em; color:#fbbf24; align-self:center; font-weight:700;">+</div>
+        <div style="flex:1; min-width:280px; background:#2e1065; padding:18px; border-radius:10px; border:2px solid #a855f7; text-align:center;">
+          <h3 style="color:#a78bfa; margin-top:0;">Randomness #2: Feature Sampling</h3>
+          <p style="font-size:0.9em;">(NEW in Random Forest)</p>
+          <p>At <strong>every single split</strong> in every tree, randomly pick a subset of features. Only consider those features for this split.</p>
+          <p style="font-size:0.85em; color:#94a3b8;">This happens at EVERY node, not just once per tree!</p>
+          <div style="display:flex; gap:3px; justify-content:center; margin:8px 0;">
+            <div class="data-cell cell-blue">F2</div>
+            <div class="data-cell cell-gray">-</div>
+            <div class="data-cell cell-blue">F7</div>
+            <div class="data-cell cell-gray">-</div>
+            <div class="data-cell cell-blue">F9</div>
+          </div>
+          <p style="font-size:0.8em; color:#fbbf24;">Only 3 of 5 features visible at this split</p>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:15px;">
+        <div style="display:inline-block; background:#0f766e; padding:12px 20px; border-radius:8px; border:2px solid #14b8a6;">
+          Result: Trees are very DIFFERENT from each other = <span class="highlight">"decorrelated"</span><br>
+          <small>Averaging decorrelated trees dramatically reduces variance (overfitting)</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-yellow">
+      <h3>How many features to sample at each split?</h3>
+      <p>If your dataset has <strong>p</strong> total features:</p>
+      <table class="comp-table">
+        <tr><th>Task</th><th>Features per split</th><th>Example</th></tr>
+        <tr><td><strong>Classification</strong></td><td>&radic;p (square root of p)</td><td>If you have 100 features, each split considers &radic;100 = 10 random features</td></tr>
+        <tr><td><strong>Regression</strong></td><td>p/3 (one-third of p)</td><td>If you have 90 features, each split considers 90/3 = 30 random features</td></tr>
+      </table>
+      <p style="font-size:0.9em; color:#94a3b8; margin-top:8px;">These are defaults. You can tune this with the <code>max_features</code> hyperparameter.</p>
+    </div>
+
+    <div class="card card-purple">
+      <h3>All Key Hyperparameters Explained</h3>
+      <table class="comp-table">
+        <tr><th>Parameter</th><th>What it means (plain English)</th><th>Typical values</th></tr>
+        <tr><td><code>n_estimators</code></td><td>How many trees to build. More trees = better predictions but slower training. There's diminishing returns (going from 10→100 trees helps a lot; 1000→2000 helps very little).</td><td>100 to 500</td></tr>
+        <tr><td><code>max_features</code></td><td>How many features to consider at each split. Lower = more randomness = trees are more different. Higher = less randomness = trees are more similar.</td><td>'sqrt' or 'log2'</td></tr>
+        <tr><td><code>max_depth</code></td><td>Maximum number of levels in each tree. Deeper trees memorize more (risk overfitting). Shallower trees are simpler (risk underfitting). <code>None</code> means grow until leaves are pure.</td><td>None (unlimited) or 10-30</td></tr>
+        <tr><td><code>min_samples_split</code></td><td>A node must have at least this many samples to be split further. Higher values prevent the tree from making very specific rules for tiny groups of data.</td><td>2 (default), 5-20 for regularization</td></tr>
+        <tr><td><code>min_samples_leaf</code></td><td>Every leaf (final decision node) must have at least this many samples. Prevents leaves that represent just 1-2 data points (which is memorization).</td><td>1 (default), 5-20 for regularization</td></tr>
+        <tr><td><code>oob_score</code></td><td>If True, automatically calculates Out-of-Bag error (free validation score). Always set this to True — there's no downside.</td><td>True</td></tr>
+      </table>
+    </div>
+
+    <div class="card card-green">
+      <h3>Feature Importance — Which features matter most?</h3>
+      <p>Random Forest can rank features by how useful they are for prediction:</p>
+
+      <div class="def">
+        <div class="def-term">Gini Importance (Mean Decrease in Impurity)</div>
+        <div class="def-meaning">For each feature, add up how much it reduced impurity (mixing of classes) across all splits across all trees. Features that consistently create cleaner splits score higher.</div>
+        <div class="def-example">If "income" is used in 80% of trees' first splits and always creates groups that are mostly one class, it gets a high importance score.</div>
+      </div>
+
+      <div class="def">
+        <div class="def-term">Permutation Importance</div>
+        <div class="def-meaning">Randomly shuffle one feature's values (breaking its relationship with the target). If accuracy drops a lot, that feature was important. If accuracy barely changes, that feature wasn't useful.</div>
+        <div class="def-example">Shuffle the "income" column so each customer gets a random income. If the model's accuracy crashes from 95% to 60%, then income was crucial. If it stays at 93%, income wasn't that important.</div>
+      </div>
+
+      <div class="key-point">
+        <div class="icon">&#9888;&#65039;</div>
+        <p><strong>Warning:</strong> Gini importance is biased toward features with many unique values (like "customer ID" which has a unique value for every row). Permutation importance is more reliable but slower to compute.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 1.5 HANDS-ON ==================== -->
+  <div class="section" id="handson1">
+    <span class="week-badge week1">WEEK 1</span>
+    <h2>1.5 Hands-On: Python Code for Bagging & Random Forest</h2>
+
+    <div class="card card-blue">
+      <h3>Python Libraries Used</h3>
+      <div class="def">
+        <div class="def-term">sklearn (scikit-learn)</div>
+        <div class="def-meaning">The most popular Python library for machine learning. It provides pre-built implementations of algorithms. You don't write the math — you just call functions like <code>RandomForestClassifier()</code>.</div>
+      </div>
+    </div>
+
+    <div class="card card-green">
+      <h3>Key Code Patterns</h3>
+      <pre style="background:#0f172a; padding:15px; border-radius:8px; overflow-x:auto; font-size:0.85em; line-height:1.6; color:#e2e8f0; border:1px solid #334155;"><code><span style="color:#94a3b8;"># Step 1: Import the algorithms</span>
+<span style="color:#c084fc;">from</span> sklearn.ensemble <span style="color:#c084fc;">import</span> BaggingClassifier, RandomForestClassifier
+<span style="color:#c084fc;">from</span> sklearn.tree <span style="color:#c084fc;">import</span> DecisionTreeClassifier
+
+<span style="color:#94a3b8;"># Step 2: Create a Bagging model</span>
+<span style="color:#94a3b8;"># base_estimator = what type of model to use (must be same for all)</span>
+<span style="color:#94a3b8;"># n_estimators = how many models to build</span>
+bag_model = BaggingClassifier(
+    estimator=DecisionTreeClassifier(),  <span style="color:#94a3b8;"># Each model is a decision tree</span>
+    n_estimators=100,                     <span style="color:#94a3b8;"># Build 100 trees</span>
+    max_samples=1.0,                      <span style="color:#94a3b8;"># Each sample = 100% of N rows</span>
+    oob_score=True,                       <span style="color:#94a3b8;"># Calculate free OOB error</span>
+    random_state=42                       <span style="color:#94a3b8;"># For reproducibility</span>
+)
+
+<span style="color:#94a3b8;"># Step 3: Train the model</span>
+bag_model.fit(X_train, y_train)  <span style="color:#94a3b8;"># X_train=features, y_train=labels</span>
+
+<span style="color:#94a3b8;"># Step 4: Check OOB accuracy</span>
+print(bag_model.oob_score_)  <span style="color:#94a3b8;"># e.g., 0.85 = 85% accuracy</span>
+
+<span style="color:#94a3b8;"># Step 5: Random Forest (Bagging + feature randomness)</span>
+rf_model = RandomForestClassifier(
+    n_estimators=100,        <span style="color:#94a3b8;"># 100 trees</span>
+    max_features='sqrt',     <span style="color:#94a3b8;"># sqrt(p) features per split</span>
+    max_depth=None,          <span style="color:#94a3b8;"># Grow trees fully</span>
+    oob_score=True,          <span style="color:#94a3b8;"># Free validation</span>
+    random_state=42
+)
+rf_model.fit(X_train, y_train)
+
+<span style="color:#94a3b8;"># Step 6: Make predictions</span>
+predictions = rf_model.predict(X_test)
+
+<span style="color:#94a3b8;"># Step 7: Get feature importance</span>
+importances = rf_model.feature_importances_</code></pre>
+    </div>
+  </div>
+
+  <!-- ==================== 2.1-2.2 BOOSTING ==================== -->
+  <div class="section" id="boosting">
+    <span class="week-badge week2">WEEK 2</span>
+    <h2>2.1-2.2 Introduction to Boosting</h2>
+
+    <div class="card card-purple">
+      <h3>What is Boosting?</h3>
+
+      <div class="def">
+        <div class="def-term">Boosting</div>
+        <div class="def-meaning">An ensemble technique where models are built <strong>one after another in sequence</strong>. Each new model specifically focuses on correcting the mistakes made by all the previous models combined. The final prediction is a weighted combination of all models.</div>
+        <div class="def-example">A student takes a math test and gets 70%. The teacher identifies the specific problems they got wrong (fractions and algebra). The student studies those topics specifically and retakes the test, now getting 85%. The teacher identifies the remaining mistakes (word problems). The student focuses on those. After several rounds, the student masters the entire subject. Each round of study "boosts" their knowledge by targeting weaknesses.</div>
+      </div>
+    </div>
+
+    <div class="analogy">
+      <p><strong>The Hiring Committee Analogy:</strong> Imagine you're hiring someone. First interviewer evaluates technical skills — catches most strong candidates but misses some who are nervous. Second interviewer specifically re-evaluates the candidates the first one was uncertain about. Third interviewer focuses on the candidates that still don't have a clear yes/no. Each interviewer <em>specializes in the hard cases left by previous interviewers</em>. Together, they make a much better decision than any single interviewer.</p>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-title">Boosting: Sequential Error Correction</div>
+      <div class="flow">
+        <div class="flow-row" style="gap:5px;">
+          <div style="text-align:center; min-width:150px;">
+            <div class="flow-box data" style="font-size:0.8em;">All Data<br><small>equal weights</small></div>
+            <div class="arrow-down">&#9660;</div>
+            <div class="flow-box model" style="font-size:0.8em;">Weak<br>Learner 1</div>
+            <div class="arrow-down">&#9660;</div>
+            <div class="flow-box error" style="font-size:0.75em;">Some<br>errors</div>
+          </div>
+          <div style="align-self:center; color:#f59e0b; font-size:1.5em;">&#8594;</div>
+          <div style="text-align:center; min-width:150px;">
+            <div class="flow-box data" style="font-size:0.8em;">Reweighted<br><small style="color:#fbbf24;">errors &#8593; weight</small></div>
+            <div class="arrow-down">&#9660;</div>
+            <div class="flow-box model" style="font-size:0.8em;">Weak<br>Learner 2</div>
+            <div class="arrow-down">&#9660;</div>
+            <div class="flow-box error" style="font-size:0.75em;">Fewer<br>errors</div>
+          </div>
+          <div style="align-self:center; color:#f59e0b; font-size:1.5em;">&#8594;</div>
+          <div style="text-align:center; min-width:150px;">
+            <div class="flow-box data" style="font-size:0.8em;">Reweighted<br><small style="color:#fbbf24;">errors &#8593;&#8593; weight</small></div>
+            <div class="arrow-down">&#9660;</div>
+            <div class="flow-box model" style="font-size:0.8em;">Weak<br>Learner 3</div>
+            <div class="arrow-down">&#9660;</div>
+            <div class="flow-box error" style="font-size:0.75em;">Even<br>fewer</div>
+          </div>
+          <div style="align-self:center; color:#94a3b8; font-size:1.2em;">&#8594; ...</div>
+        </div>
+        <div class="arrow-down" style="margin-top:10px;">&#9660;</div>
+        <div class="flow-box combine" style="min-width:350px;">
+          <strong>WEIGHTED VOTE</strong><br>
+          <small>Models that performed better get a bigger say in the final answer</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-blue">
+      <h3>Bagging vs Boosting — Complete Comparison</h3>
+      <table class="comp-table">
+        <tr><th>Aspect</th><th style="color:#93c5fd;">Bagging (Week 1)</th><th style="color:#c4b5fd;">Boosting (Week 2)</th></tr>
+        <tr><td><strong>How models are built</strong></td><td>All at once, independently (parallel)</td><td>One after another (sequential)</td></tr>
+        <tr><td><strong>Does each model know about the others?</strong></td><td>No — each model is built in isolation</td><td>Yes — each model is specifically built to fix previous errors</td></tr>
+        <tr><td><strong>What data does each model see?</strong></td><td>Random bootstrap sample (rows)</td><td>Same data but with different weights on each row</td></tr>
+        <tr><td><strong>Type of base model</strong></td><td>Full-grown decision trees (complex)</td><td>Shallow trees / stumps (simple, "weak" learners)</td></tr>
+        <tr><td><strong>How are models combined?</strong></td><td>Equal vote / simple average</td><td>Weighted vote (better models get more say)</td></tr>
+        <tr><td><strong>Main benefit</strong></td><td>Reduces VARIANCE (overfitting)</td><td>Reduces BIAS (underfitting), also reduces variance</td></tr>
+        <tr><td><strong>Risk</strong></td><td>Low risk of overfitting</td><td>Can overfit if you run too many rounds</td></tr>
+        <tr><td><strong>Sensitivity to noisy data</strong></td><td>Robust — noise gets averaged out</td><td>Sensitive — noisy/mislabeled points get high weight and distort learning</td></tr>
+        <tr><td><strong>Can you parallelize?</strong></td><td>Yes (big speed advantage)</td><td>No (each step depends on the previous)</td></tr>
+        <tr><td><strong>Examples</strong></td><td>Random Forest</td><td>AdaBoost, Gradient Boosting, XGBoost</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ==================== 2.3 ADABOOST ==================== -->
+  <div class="section" id="adaboost">
+    <span class="week-badge week2">WEEK 2</span>
+    <h2>2.3 AdaBoost (Adaptive Boosting)</h2>
+
+    <div class="card card-purple">
+      <div class="def">
+        <div class="def-term">AdaBoost (Adaptive Boosting)</div>
+        <div class="def-meaning">The original boosting algorithm (Freund & Schapire, 1997). "Adaptive" because it <strong>adapts</strong> — it increases the weight (importance) of misclassified samples so the next model pays more attention to them. Each model also gets a "confidence score" based on how accurate it is.</div>
+        <div class="def-example">In a spelling bee: after each round, the words you got wrong are asked again more frequently. The judges who got more words right get more authority in the final scoring. Over many rounds, even average spellers collectively become excellent.</div>
+      </div>
+
+      <div class="def">
+        <div class="def-term">Decision Stump</div>
+        <div class="def-meaning">A decision tree with only ONE split (one question). It's the simplest possible tree. This is the typical "weak learner" used in AdaBoost.</div>
+        <div class="def-example">A stump might just ask: "Is age > 30?" and classify everyone above 30 as "will buy" and everyone else as "won't buy." It's crude but slightly better than random.</div>
+      </div>
+    </div>
+
+    <div class="card card-blue">
+      <h3>AdaBoost Algorithm: Every Step Explained</h3>
+
+      <div class="step"><div class="step-num">1</div><div class="step-content">
+        <strong>Give every training sample equal weight</strong><br>
+        If you have 1000 samples, each starts with weight = 1/1000 = 0.001. This means "every sample is equally important right now."
+      </div></div>
+
+      <div class="step"><div class="step-num">2</div><div class="step-content">
+        <strong>Train a weak learner (decision stump)</strong><br>
+        Build a simple model using the weighted data. Samples with higher weights influence the model more — the model tries harder to get those right.
+      </div></div>
+
+      <div class="step"><div class="step-num">3</div><div class="step-content">
+        <strong>Calculate the weighted error rate (&epsilon;)</strong><br>
+        <div class="formula">&epsilon; = sum of weights of incorrectly classified samples</div>
+        <div class="formula-explain">If the stump misclassifies samples with total weight 0.3, then &epsilon; = 0.3 (30% weighted error)</div>
+        <p style="font-size:0.9em;">Note: this is NOT just "percent wrong." Samples with higher weights contribute more to the error.</p>
+      </div></div>
+
+      <div class="step"><div class="step-num">4</div><div class="step-content">
+        <strong>Calculate this model's "say" (alpha, &alpha;)</strong><br>
+        <div class="formula">&alpha; = &frac12; &times; ln((1 - &epsilon;) / &epsilon;)</div>
+        <div class="formula-explain">ln = natural logarithm. Don't worry about the math — just understand the pattern:</div>
+        <table class="comp-table" style="max-width:500px;">
+          <tr><th>If error (&epsilon;) is...</th><th>Then alpha (&alpha;) is...</th><th>Meaning</th></tr>
+          <tr><td>Very low (0.01)</td><td>Very high (2.3)</td><td>This model was very accurate → it gets a BIG vote</td></tr>
+          <tr><td>Medium (0.3)</td><td>Moderate (0.42)</td><td>This model was okay → it gets a moderate vote</td></tr>
+          <tr><td>Close to 0.5 (random)</td><td>Close to 0</td><td>No better than coin flip → barely any vote</td></tr>
+          <tr><td>Above 0.5</td><td>Negative</td><td>Worse than random → vote gets flipped!</td></tr>
+        </table>
+      </div></div>
+
+      <div class="step"><div class="step-num">5</div><div class="step-content">
+        <strong>Update sample weights</strong><br>
+        <p><span class="red">Misclassified samples:</span> Weight INCREASES by multiplying by e<sup>&alpha;</sup></p>
+        <p><span class="green">Correctly classified samples:</span> Weight DECREASES by multiplying by e<sup>-&alpha;</sup></p>
+        <p>Then normalize all weights so they sum to 1.</p>
+        <p style="font-size:0.9em; color:#94a3b8;">Effect: The next learner will "see" the misclassified samples as more important and try harder to get them right.</p>
+      </div></div>
+
+      <div class="step"><div class="step-num">6</div><div class="step-content">
+        <strong>Repeat</strong> steps 2-5 for T rounds (T is a hyperparameter you choose, e.g., 50 rounds)
+      </div></div>
+
+      <div class="step"><div class="step-num">7</div><div class="step-content">
+        <strong>Final prediction: Weighted vote of all models</strong><br>
+        <div class="formula">Final(x) = sign(&alpha;₁&times;h₁(x) + &alpha;₂&times;h₂(x) + ... + &alpha;ₜ&times;hₜ(x))</div>
+        <div class="formula-explain">Each model h votes (+1 or -1), weighted by its alpha. Sum them up. Positive sum → class +1, negative → class -1.</div>
+        <p style="font-size:0.9em;">Models with higher &alpha; (better accuracy) get more influence on the final decision.</p>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- ==================== 2.4 GRADIENT BOOSTING ==================== -->
+  <div class="section" id="gbm">
+    <span class="week-badge week2">WEEK 2</span>
+    <h2>2.4 Gradient Boosting</h2>
+
+    <div class="card card-purple">
+      <div class="def">
+        <div class="def-term">Gradient Boosting</div>
+        <div class="def-meaning">A boosting technique where instead of reweighting samples (like AdaBoost), each new tree is trained to predict the <strong>residuals</strong> (errors/mistakes) of the current model. It's called "gradient" boosting because the residuals are mathematically the negative gradient of the loss function — meaning each tree takes a step toward reducing the error.</div>
+        <div class="def-example">You estimate a house costs $300K. The actual price is $350K. The residual (error) is +$50K. The next tree is trained to predict this $50K gap. If it predicts $40K, your updated estimate is $300K + $40K = $340K. Closer! The next tree predicts the remaining $10K gap. Each tree patches the previous prediction's errors.</div>
+      </div>
+
+      <div class="def">
+        <div class="def-term">Residual</div>
+        <div class="def-meaning">The difference between the actual value and the predicted value. Residual = Actual - Predicted. A positive residual means you predicted too low. A negative residual means you predicted too high.</div>
+        <div class="def-example">Actual house price: $350K. Your prediction: $300K. Residual = $350K - $300K = +$50K. You were $50K too low.</div>
+      </div>
+
+      <div class="def">
+        <div class="def-term">Learning Rate (also called Shrinkage, &eta;)</div>
+        <div class="def-meaning">A number between 0 and 1 that controls how much each tree's correction is "trusted." Instead of adding the full correction, you add only a fraction. Lower learning rate = more cautious learning = needs more trees but generalizes better.</div>
+        <div class="def-example">If a tree says "add $50K to the price," a learning rate of 0.1 means you only add $50K &times; 0.1 = $5K. This prevents over-correcting. It's like a student who double-checks each answer before committing — slower but more careful.</div>
+      </div>
+
+      <div class="def">
+        <div class="def-term">Gradient Descent</div>
+        <div class="def-meaning">An optimization technique where you repeatedly take small steps in the direction that most reduces an error. Imagine you're blindfolded on a hillside trying to reach the lowest point — you feel which direction is downhill and take a small step that way. Repeat. Each tree in Gradient Boosting is one "step" downhill toward lower error.</div>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-title">Gradient Boosting: Step-by-Step Visual</div>
+      <div style="max-width:700px; margin:0 auto;">
+        <div class="step"><div class="step-num">1</div><div class="step-content">
+          <strong>Start with a simple prediction</strong><br>
+          For regression: predict the average of all target values.<br>
+          <div class="formula">F₀(x) = mean(y) = average target value</div>
+          <div class="formula-explain">E.g., if house prices range from $200K-$500K, start by predicting $350K for every house.</div>
+        </div></div>
+
+        <div class="step"><div class="step-num">2</div><div class="step-content">
+          <strong>Calculate residuals (errors)</strong><br>
+          <div class="formula">residual = actual value - current prediction</div>
+          <div class="formula-explain">House A: actual $400K, predicted $350K → residual = +$50K<br>House B: actual $250K, predicted $350K → residual = -$100K</div>
+        </div></div>
+
+        <div class="step"><div class="step-num">3</div><div class="step-content">
+          <strong>Train a new tree to predict the RESIDUALS</strong><br>
+          <p>NOT the original prices — the errors! This tree learns "which features indicate the current model is too high or too low."</p>
+        </div></div>
+
+        <div class="step"><div class="step-num">4</div><div class="step-content">
+          <strong>Update predictions</strong><br>
+          <div class="formula">New prediction = Old prediction + learning_rate &times; tree's prediction</div>
+          <div class="formula-explain">If learning_rate=0.1 and tree says residual is +$50K:<br>New prediction = $350K + 0.1 &times; $50K = $350K + $5K = $355K (getting closer!)</div>
+        </div></div>
+
+        <div class="step"><div class="step-num">5</div><div class="step-content">
+          <strong>Repeat steps 2-4 for T rounds</strong><br>
+          Each round, residuals get smaller. Each new tree has less to correct. Predictions converge toward the true values.
+        </div></div>
+
+        <div style="background:#172554; padding:15px; border-radius:8px; margin-top:15px;">
+          <strong>Final model = sum of all corrections:</strong>
+          <div class="formula">F(x) = F₀ + &eta;&times;Tree₁(x) + &eta;&times;Tree₂(x) + ... + &eta;&times;Treeₜ(x)</div>
+          <div class="formula-explain">Initial guess + all the small corrections added up = final prediction</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-yellow">
+      <h3>Key Hyperparameters for Gradient Boosting</h3>
+      <table class="comp-table">
+        <tr><th>Parameter</th><th>Plain English</th><th>Typical values</th></tr>
+        <tr><td><code>n_estimators</code></td><td>Number of trees (rounds of boosting). More = better predictions up to a point, then overfitting starts.</td><td>100-1000</td></tr>
+        <tr><td><code>learning_rate</code></td><td>How much each tree's correction counts. Lower = more cautious, needs more trees but generalizes better. <span class="highlight">Always tune this with n_estimators together.</span></td><td>0.01-0.3</td></tr>
+        <tr><td><code>max_depth</code></td><td>Depth of each tree. Keep shallow! (Unlike Random Forest where trees grow fully). Boosting uses many weak trees, not a few strong ones.</td><td>3-8</td></tr>
+        <tr><td><code>subsample</code></td><td>Fraction of rows used per tree. Less than 1.0 adds randomness, which can reduce overfitting (called "Stochastic Gradient Boosting").</td><td>0.5-1.0</td></tr>
+      </table>
+
+      <div class="key-point">
+        <div class="icon">&#127919;</div>
+        <p><strong>Golden rule:</strong> Lower learning_rate + higher n_estimators = better performance (but slower training). Use <strong>early stopping</strong> to find the right number of trees automatically.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 2.5 XGBOOST ==================== -->
+  <div class="section" id="xgboost">
+    <span class="week-badge week2">WEEK 2</span>
+    <h2>2.5 XGBoost — eXtreme Gradient Boosting</h2>
+
+    <div class="card card-purple">
+      <div class="def">
+        <div class="def-term">XGBoost</div>
+        <div class="def-meaning">An optimized, industrial-strength version of Gradient Boosting created by Tianqi Chen in 2016. It adds regularization (to prevent overfitting), uses smarter math (second-order gradients), and is engineered for speed. It's the most popular algorithm for structured (tabular/spreadsheet) data in both competitions and industry.</div>
+        <div class="def-example">If Gradient Boosting is a reliable sedan, XGBoost is a sports car — same fundamental engine but tuned, optimized, and turbocharged for maximum performance.</div>
+      </div>
+    </div>
+
+    <div class="card card-blue">
+      <h3>What XGBoost Adds Over Standard Gradient Boosting</h3>
+
+      <div class="def" style="margin:12px 0;">
+        <div class="def-term">1. Regularization (L1 and L2)</div>
+        <div class="def-meaning"><strong>Regularization</strong> = adding a penalty for complexity. XGBoost penalizes trees that have too many leaves or leaves with extreme values. This prevents overfitting — the model can't just memorize the training data because being too complex is punished.
+        <br><br><strong>L1 regularization</strong> = penalty proportional to the absolute size of leaf weights (encourages some leaves to have zero weight, effectively pruning them).
+        <br><strong>L2 regularization</strong> = penalty proportional to the squared size of leaf weights (discourages extreme values).</div>
+        <div class="def-example">Like a student being graded not just on getting the right answer, but also penalized for overly complex explanations. Forces the model to find simple, general solutions rather than overly specific ones.</div>
+      </div>
+
+      <div class="def" style="margin:12px 0;">
+        <div class="def-term">2. Second-Order Gradients (Newton's Method)</div>
+        <div class="def-meaning">Standard Gradient Boosting uses only the first derivative (gradient) of the loss function — which tells you "which direction to go." XGBoost also uses the second derivative (Hessian) — which tells you "how much to move." This is like Newton's method in optimization: it converges faster because it has more information.</div>
+        <div class="def-example">Standard GBM is like navigating with just a compass (direction only). XGBoost has both a compass AND a distance estimate — so each step is more accurately sized.</div>
+      </div>
+
+      <div class="def" style="margin:12px 0;">
+        <div class="def-term">3. Handles Missing Values Automatically</div>
+        <div class="def-meaning">When data is missing (empty cells in your spreadsheet), XGBoost automatically learns whether to send missing values left or right at each split, based on which direction reduces error more. No imputation needed.</div>
+        <div class="def-example">If "income" is missing for some customers, XGBoost learns: "when income is unknown, these customers tend to default on loans, so send them to the 'high risk' branch."</div>
+      </div>
+
+      <div class="def" style="margin:12px 0;">
+        <div class="def-term">4. Early Stopping</div>
+        <div class="def-meaning">You monitor performance on a validation set as you add trees. If performance hasn't improved for X rounds (e.g., 10 rounds), stop adding trees automatically. This prevents overfitting without you having to guess the perfect number of trees.</div>
+        <div class="def-example">Like a chef tasting food while cooking — if adding more salt doesn't improve the taste for several attempts, stop adding salt instead of ruining the dish.</div>
+      </div>
+
+      <div class="def" style="margin:12px 0;">
+        <div class="def-term">5. Parallel Split Finding</div>
+        <div class="def-meaning">Although trees are built sequentially (tree 2 depends on tree 1's results), XGBoost parallelizes the <em>within-tree</em> computation. When deciding the best split for a node, it evaluates all features simultaneously across multiple CPU cores.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 2.7 STACKING ==================== -->
+  <div class="section" id="handson2">
+<h2>2.6 Hands-On: Implementing Boosting Models</h2>
+
+<div class="course-link">
+  <a href="https://olympus.mygreatlearning.com/courses/139893/modules/items/7571588?pb_id=19727" target="_blank">Watch Video</a>
+  <div class="desc">Implementation walkthrough of AdaBoost, Gradient Boosting, and XGBoost</div>
+</div>
+
+<h3>Complete Boosting Pipeline in Python</h3>
+<div class="card card-blue">
+  <pre><code style="color: #e2e8f0; font-family: 'Courier New', monospace; font-size: 0.9em;"><span style="color: #fbbf24;">import</span> numpy <span style="color: #fbbf24;">as</span> np
+<span style="color: #fbbf24;">from</span> sklearn.ensemble <span style="color: #fbbf24;">import</span> AdaBoostClassifier, GradientBoostingClassifier
+<span style="color: #fbbf24;">import</span> xgboost <span style="color: #fbbf24;">as</span> xgb
+<span style="color: #fbbf24;">from</span> sklearn.datasets <span style="color: #fbbf24;">import</span> load_iris
+<span style="color: #fbbf24;">from</span> sklearn.model_selection <span style="color: #fbbf24;">import</span> train_test_split
+<span style="color: #fbbf24;">from</span> sklearn.metrics <span style="color: #fbbf24;">import</span> accuracy_score
+
+<span style="color: #94a3b8;"># Load data</span>
+X, y = load_iris(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+<span style="color: #94a3b8;"># 1. AdaBoost</span>
+ada = AdaBoostClassifier(n_estimators=50, learning_rate=1.0)
+ada.fit(X_train, y_train)
+ada_pred = ada.predict(X_test)
+print(f"AdaBoost Accuracy: {accuracy_score(y_test, ada_pred):.3f}")
+
+<span style="color: #94a3b8;"># 2. Gradient Boosting</span>
+gbm = GradientBoostingClassifier(n_estimators=50, learning_rate=0.1, max_depth=3)
+gbm.fit(X_train, y_train)
+gbm_pred = gbm.predict(X_test)
+print(f"GBM Accuracy: {accuracy_score(y_test, gbm_pred):.3f}")
+
+<span style="color: #94a3b8;"># 3. XGBoost (with early stopping)</span>
+xgb_model = xgb.XGBClassifier(n_estimators=1000, max_depth=3, learning_rate=0.1)
+xgb_model.fit(X_train, y_train, eval_set=[(X_test, y_test)], early_stopping_rounds=10, verbose=False)
+xgb_pred = xgb_model.predict(X_test)
+print(f"XGBoost Accuracy: {accuracy_score(y_test, xgb_pred):.3f}")</code></pre>
+</div>
+
+<div class="key-point">
+  <div class="icon">💡</div>
+  <div>When to use each: AdaBoost for simple problems and small data. GBM for balanced accuracy. XGBoost when you need production-grade speed and performance.</div>
+</div>
+
+<div class="course-link">
+  <a href="https://olympus.mygreatlearning.com/courses/139893/modules/items/7571589?pb_id=19727" target="_blank">Take Quiz</a>
+  <div class="desc">Test your understanding of boosting implementation</div>
+</div>
+
+</div>
+
+<div class="section" id="stacking">
+    <span class="week-badge week2">WEEK 2</span>
+    <h2>2.7 Stacking — Stacked Generalization</h2>
+
+    <div class="card card-purple">
+      <div class="def">
+        <div class="def-term">Stacking</div>
+        <div class="def-meaning">An ensemble method that combines <strong>different types</strong> of models (unlike Bagging/Boosting which use the same type). First, train several diverse models (Random Forest, SVM, Neural Network, etc.). Then, train a simple "meta-learner" model that learns the best way to combine their predictions. It's a two-level system.</div>
+        <div class="def-example">A hospital uses three specialists: a radiologist (reads scans), a blood specialist (reads lab results), and a general practitioner (looks at symptoms). Each specialist gives their diagnosis. A senior doctor (the meta-learner) reviews all three opinions and makes the final diagnosis, knowing from experience when to trust the radiologist vs the blood specialist.</div>
+      </div>
+
+      <div class="def">
+        <div class="def-term">Meta-Learner (also called Blender or Level-1 Model)</div>
+        <div class="def-meaning">A simple model (often Logistic Regression) that takes the predictions from all base models as its input features and learns how to best combine them. It learns things like "when Model A and Model B disagree, Model A is usually right."</div>
+      </div>
+
+      <div class="def">
+        <div class="def-term">Data Leakage (in the context of Stacking)</div>
+        <div class="def-meaning">If base models make predictions on data they were trained on, those predictions will be overly accurate (they've "seen the answers"). The meta-learner would learn to trust these inflated predictions and fail on real new data. To avoid this, we use <strong>cross-validation</strong> to generate the base model predictions.</div>
+        <div class="def-example">If a student writes and grades their own exam, they'll score 100%. The teacher (meta-learner) would think this student is perfect. But on a real exam by someone else, the student might score 60%. To prevent this, each model must be tested on data it hasn't seen.</div>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-title">Stacking Architecture</div>
+      <div class="flow">
+        <div class="flow-box data" style="min-width:250px;">TRAINING DATA</div>
+        <div style="text-align:center; color:#f59e0b; font-size:0.85em;">Use K-Fold Cross-Validation to get "honest" predictions from each base model<br>(each model predicts on data it wasn't trained on)</div>
+        <div class="arrow-down">&#9660;</div>
+        <div style="background:#1e293b; border-radius:10px; padding:20px; border:1px solid #334155; width:100%;">
+          <div style="text-align:center; color:#60a5fa; font-weight:700; margin-bottom:10px;">LEVEL 0: Different Base Models</div>
+          <div class="flow-row">
+            <div class="flow-box model" style="background:#1e40af; border-color:#3b82f6;">Random<br>Forest</div>
+            <div class="flow-box model" style="background:#581c87; border-color:#a855f7;">Gradient<br>Boosting</div>
+            <div class="flow-box model" style="background:#7c2d12; border-color:#f59e0b;">SVM</div>
+            <div class="flow-box model" style="background:#065f46; border-color:#10b981;">KNN</div>
+          </div>
+          <p style="text-align:center; font-size:0.85em; color:#94a3b8; margin-top:8px;">Each model uses different algorithm → brings different "expertise"</p>
+        </div>
+        <div class="arrow-down">&#9660;</div>
+        <div style="text-align:center; color:#94a3b8; font-size:0.85em;">Each model's predictions become FEATURES (columns) for the next level</div>
+        <div class="flow-row">
+          <div class="flow-box result">RF says: 0.8</div>
+          <div class="flow-box result">GBM says: 0.7</div>
+          <div class="flow-box result">SVM says: 0.9</div>
+          <div class="flow-box result">KNN says: 0.6</div>
+        </div>
+        <div class="arrow-down">&#9660;</div>
+        <div style="background:#172554; border-radius:10px; padding:20px; border:2px solid #3b82f6; width:100%; text-align:center;">
+          <div style="color:#60a5fa; font-weight:700; margin-bottom:10px;">LEVEL 1: Meta-Learner</div>
+          <div class="flow-box combine" style="display:inline-block;">Logistic Regression<br><small>(learns: "weight RF prediction by 0.4, GBM by 0.3, SVM by 0.2, KNN by 0.1")</small></div>
+        </div>
+        <div class="arrow-down">&#9660;</div>
+        <div class="flow-box data" style="background:#0f766e; border-color:#14b8a6; min-width:200px;">FINAL PREDICTION: 0.76</div>
+      </div>
+    </div>
+
+    <div class="key-point">
+      <div class="icon">&#128161;</div>
+      <p><strong>Key difference from Bagging/Boosting:</strong> Stacking uses <em>different algorithms</em> as base models (heterogeneous). Bagging/Boosting use the <em>same algorithm</em> multiple times (homogeneous). Stacking exploits the fact that different algorithms have different strengths and weaknesses.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+  document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function checkQuiz(qId, el, isCorrect) {
+  var feedback = document.getElementById(qId + '-feedback');
+  if (isCorrect) {
+    el.classList.add('correct');
+    feedback.classList.add('correct', 'show');
+    feedback.textContent = '✅ Correct! ' + getExplanation(qId);
+  } else {
+    el.classList.add('wrong');
+    feedback.classList.add('wrong', 'show');
+    feedback.textContent = '❌ Incorrect. Try again or review the concept.';
+  }
+}
+
+function getExplanation(qId) {
+  var explanations = {
+    'q1b': 'Independent errors cancel out, reducing variance.',
+    'q2b': 'Bootstrap samples create diversity; OOB samples test independently.',
+    'q3c': 'Each tree sees different data and features, creating decorrelated predictions.',
+  };
+  return explanations[qId] || '';
+}
+
+function toggleTheme(e) {
+  if (e) { e.preventDefault(); e.stopPropagation(); }
+  var scrollPos = window.scrollY || window.pageYOffset;
+  var body = document.body;
+  var btn = document.querySelector('.theme-toggle');
+  if (body.classList.contains('light')) {
+    body.classList.remove('light');
+    btn.textContent = '🌙';
+  } else {
+    body.classList.add('light');
+    btn.textContent = '☀️';
+  }
+  // Restore scroll position after theme switch
+  requestAnimationFrame(function() {
+    window.scrollTo(0, scrollPos);
+  });
+}
+
+// Always start in dark mode - user can switch if they want
+window.addEventListener('load', function() {
+  document.body.classList.remove('light');
+  document.querySelector('.theme-toggle').textContent = '🌙';
+  localStorage.removeItem('theme');
+});
+</script>
+
+<div class="section" id="mistakes">
+<h2>⚠️ Common Mistakes & Misconceptions</h2>
+
+            <h3>Week 1: Bagging & Random Forest</h3>
+
+            <div class="mistake">
+                <div class="mistake-title">1. "More bootstrap samples = better model"</div>
+                <div class="mistake-problem">Thinking 10,000 bootstrap samples will give much better accuracy than 100.</div>
+                <div class="mistake-fix">✓ Diminishing returns after ~100-200 trees. More trees add training time, not accuracy. Error reduction follows √n law: 10x more trees = only 3.16x better variance reduction.</div>
+            </div>
+
+            <div class="mistake">
+                <div class="mistake-title">2. "Random Forest needs feature scaling"</div>
+                <div class="mistake-problem">Preprocessing features (normalize, standardize) before Random Forest.</div>
+                <div class="mistake-fix">✓ Tree-based models are scale-invariant. They only care about feature order, not magnitude. Skip scaling for trees. (But DO scale for SVM, neural networks, KNN)</div>
+            </div>
+
+            <div class="mistake">
+                <div class="mistake-title">3. "Bootstrap samples are size N, so they have all rows"</div>
+                <div class="mistake-problem">Assuming each bootstrap sample has no duplicates/missing rows.</div>
+                <div class="mistake-fix">✓ Bootstrap WITH replacement: ~63.2% unique rows, ~36.8% missing per sample. This is intentional! Variety reduces overfitting.</div>
+            </div>
+
+            <div class="mistake">
+                <div class="mistake-title">4. "OOB error is always as good as test error"</div>
+                <div class="mistake-problem">Using only OOB error without holding out a test set.</div>
+                <div class="mistake-fix">✓ OOB is a good proxy but not perfect (slight upward bias). Always use a separate test set for final evaluation on real-world data.</div>
+            </div>
+
+            <div class="mistake">
+                <div class="mistake-title">5. "Larger max_depth trees = better ensemble"</div>
+                <div class="mistake-problem">Growing deep trees in Random Forest for high accuracy on training data.</div>
+                <div class="mistake-fix">✓ Deep trees overfit individually. Bagging helps, but shallow-moderate trees often generalize better. Tune max_depth via cross-validation.</div>
+            </div>
+
+            <h3>Week 2: Boosting Algorithms</h3>
+
+            <div class="mistake">
+                <div class="mistake-title">6. "Boosting always beats Bagging"</div>
+                <div class="mistake-problem">Assuming boosting is universally better.</div>
+                <div class="mistake-fix">✓ Boosting reduces bias; Bagging reduces variance. Use Bagging for overfitting problems. Use Boosting for underfitting. Context matters!</div>
+            </div>
+
+            <div class="mistake">
+                <div class="mistake-title">7. "AdaBoost alpha is a learning rate"</div>
+                <div class="mistake-problem">Confusing α (voting power) with learning_rate.</div>
+                <div class="mistake-fix">✓ Alpha = ln((1-error)/error) / 2. It's NOT adjustable; it's calculated. Actual tunable learning_rate in sklearn AdaBoost is 'learning_rate' (default 1.0).</div>
+            </div>
+
+            <div class="mistake">
+                <div class="mistake-title">8. "Gradient Boosting trains trees on original target every round"</div>
+                <div class="mistake-problem">Not understanding that GBM fits residuals, not the target.</div>
+                <div class="mistake-fix">✓ Round 1: predict y. Round 2: predict (y - pred1). Round 3: predict (y - pred1 - pred2). Each tree fits what previous trees missed.</div>
+            </div>
+
+            <div class="mistake">
+                <div class="mistake-title">9. "Larger learning_rate in GBM = faster convergence"</div>
+                <div class="mistake-problem">Setting learning_rate=0.5 for quick training.</div>
+                <div class="mistake-fix">✓ Large learning_rate (0.1-1.0) → fast training, poor generalization. Small learning_rate (0.01-0.05) + more trees → slow training, excellent accuracy. Trade speed for accuracy.</div>
+            </div>
+
+            <div class="mistake">
+                <div class="mistake-title">10. "XGBoost doesn't overfit because it's advanced"</div>
+                <div class="mistake-problem">Assuming XGBoost is immune to overfitting.</div>
+                <div class="mistake-fix">✓ XGBoost can overfit! Use max_depth=3-5 (shallow), early_stopping, and subsample=0.8. Regularization helps but requires tuning.</div>
+            </div>
+
+            <div class="mistake">
+                <div class="mistake-title">11. "Stacking always improves accuracy by 5-10%"</div>
+                <div class="mistake-problem">Expecting guaranteed accuracy boost from stacking.</div>
+                <div class="mistake-fix">✓ Stacking helps only if base models are diverse and reasonably strong. If all base models make same mistakes, meta-learner can't fix them. Typical gain: 0.5-2%, only worth it if accuracy critical.</div>
+            </div>
+
+            <div class="key-point">
+                <strong>Golden Rule:</strong> Start simple (single model), then add complexity (ensemble, boosting, stacking) only if needed. Most real-world problems are solved by Random Forest or XGBoost + tuning. Fancy ensembles often add code complexity without proportional accuracy gains.
+            </div>
+</div>
+</body>
+</html>
