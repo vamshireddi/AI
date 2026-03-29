@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Machine Learning: Complete Visual Guide - Module 02</title>
+<meta property="og:title" content="Machine Learning — Complete Visual Guide | Module 02">
+<meta property="og:description" content="A comprehensive visual guide to Machine Learning: linear regression, decision trees, K-means clustering, and model evaluation. Part of the PGP AI&ML program.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://vamshireddi.com/AI/greatlearning/module-02-machine-learning/">
+<meta property="og:image" content="https://vamshireddi.com/og-image.jpg?v=4">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Machine Learning — Complete Visual Guide | Module 02">
+<meta name="twitter:description" content="A comprehensive visual guide to Machine Learning: linear regression, decision trees, K-means clustering, and model evaluation.">
+<meta name="twitter:image" content="https://vamshireddi.com/og-image.jpg?v=4">
+<link rel="canonical" href="https://vamshireddi.com/AI/greatlearning/module-02-machine-learning/">
+<style>
+:root {
+  --bg: #0f172a; --bg-surface: #1e293b; --bg-surface2: #1e293b; --text: #e2e8f0; --text-muted: #94a3b8;
+  --accent: #60a5fa; --accent2: #fbbf24; --accent3: #f87171; --border: #334155; --success: #34d399;
+}
+body.light {
+  --bg: #f8fafc; --bg-surface: #ffffff; --bg-surface2: #f1f5f9; --text: #1e293b; --text-muted: #475569;
+  --accent: #2563eb; --accent2: #d97706; --accent3: #dc2626; --border: #cbd5e1; --success: #059669;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.7; }
+.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+h1 { text-align: center; font-size: 2em; margin: 30px 0 5px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.subtitle { text-align:center; color:#94a3b8; margin-bottom:25px; font-size: 0.95em; }
+h2 { font-size: 1.6em; margin: 40px 0 15px; color: #60a5fa; border-bottom: 2px solid #1e40af; padding-bottom: 10px; }
+h3 { font-size: 1.2em; margin: 20px 0 10px; color: #93c5fd; }
+.week-badge { display: inline-block; padding: 4px 16px; border-radius: 20px; font-size: 0.8em; font-weight: 700; margin-bottom: 8px; }
+.week1 { background: #1e40af; color: #bfdbfe; }
+.week2 { background: #7c3aed; color: #ddd6fe; }
+.week3 { background: #065f46; color: #a7f3d0; }
+.nav-tabs { display: flex; justify-content: center; gap: 8px; margin: 20px 0 30px; flex-wrap: wrap; }
+.nav-tab { padding: 10px 20px; border-radius: 8px; background: #1e293b; color: #94a3b8; cursor: pointer; border: 1px solid #334155; font-size: 0.9em; transition: all 0.3s; }
+.nav-tab:hover, .nav-tab.active { background: #3b82f6; color: white; border-color: #3b82f6; }
+.theme-toggle { position: fixed; top: 16px; right: 20px; z-index: 1000; width: 44px; height: 44px; border-radius: 50%; border: 2px solid #3b82f6; background: #1e293b; color: #fbbf24; font-size: 1.3em; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+.section { display: none; }
+.section.active { display: block; }
+.card { background: #1e293b; border-radius: 12px; padding: 22px; margin: 18px 0; border: 1px solid #334155; }
+.card-blue { border-left: 4px solid #3b82f6; }
+.card-yellow { border-left: 4px solid #f59e0b; }
+.card-green { border-left: 4px solid #10b981; }
+.card-purple { border-left: 4px solid #8b5cf6; }
+.card-red { border-left: 4px solid #ef4444; }
+.def { background: #172554; border-radius: 8px; padding: 12px 16px; margin: 10px 0; border: 1px solid #1e40af; }
+.def-term { color: #fbbf24; font-weight: 700; font-size: 1em; }
+.def-meaning { color: #e2e8f0; margin-top: 4px; }
+.def-example { color: #94a3b8; font-style: italic; margin-top: 6px; font-size: 0.9em; }
+.def-example::before { content: "Real-life example: "; color: #34d399; font-style: normal; font-weight: 600; }
+.analogy { background: #1a2e05; border: 1px solid #365314; border-radius: 10px; padding: 16px; margin: 14px 0; }
+.analogy::before { content: "Real-World Analogy"; display: block; color: #84cc16; font-weight: 700; margin-bottom: 6px; font-size: 0.95em; }
+.diagram { background: #0f172a; border-radius: 12px; padding: 25px; margin: 18px 0; border: 1px solid #334155; overflow-x: auto; }
+.diagram-title { text-align: center; font-weight: 700; color: #60a5fa; margin-bottom: 18px; font-size: 1.05em; }
+.flow { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.flow-row { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.flow-box { padding: 10px 16px; border-radius: 8px; font-weight: 600; text-align: center; min-width: 110px; font-size: 0.88em; }
+.flow-box.data { background: #1e40af; color: #bfdbfe; border: 2px solid #3b82f6; }
+.flow-box.model { background: #065f46; color: #a7f3d0; border: 2px solid #10b981; }
+.flow-box.result { background: #7c2d12; color: #fed7aa; border: 2px solid #f59e0b; }
+.flow-box.combine { background: #581c87; color: #e9d5ff; border: 2px solid #a855f7; }
+.flow-box.error { background: #991b1b; color: #fecaca; border: 2px solid #ef4444; }
+.arrow-down { text-align: center; color: #64748b; font-size: 1.4em; }
+.formula { background: #0c4a6e; border-radius: 8px; padding: 14px 18px; margin: 10px 0; font-family: 'Courier New', monospace; text-align: center; font-size: 1.05em; color: #7dd3fc; border: 1px solid #0369a1; }
+.formula-explain { text-align: center; color: #94a3b8; font-size: 0.85em; margin-top: 4px; }
+.key-point { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; background: #172554; border-radius: 8px; margin: 10px 0; }
+.key-point .icon { font-size: 1.2em; flex-shrink: 0; }
+.step { display: flex; gap: 14px; margin: 12px 0; align-items: flex-start; }
+.step-num { width: 30px; height: 30px; border-radius: 50%; background: #3b82f6; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85em; flex-shrink: 0; }
+.step-content { flex: 1; }
+.comp-table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+.comp-table th { background: #1e40af; color: white; padding: 10px 14px; text-align: left; font-size: 0.88em; }
+.comp-table td { padding: 10px 14px; border-bottom: 1px solid #334155; font-size: 0.88em; }
+.comp-table tr:hover td { background: rgba(59,130,246,0.1); }
+.highlight { color: #fbbf24; font-weight: 600; }
+.blue { color: #60a5fa; }
+.green { color: #34d399; }
+.purple { color: #a78bfa; }
+.red { color: #f87171; }
+p { margin: 8px 0; }
+ul { margin: 8px 0 8px 20px; }
+li { margin: 5px 0; }
+code { background: #334155; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+pre { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 16px; margin: 12px 0; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.9em; line-height: 1.5; }
+.quiz { background: var(--bg-surface2); border: 2px solid var(--accent2); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+.quiz-title { font-size: 1.1rem; font-weight: 700; color: var(--accent2); margin-bottom: 1rem; }
+.quiz-q { margin: 1rem 0; }
+.quiz-q-text { font-weight: 600; color: var(--text); margin-bottom: 0.8rem; }
+.quiz-option { background: var(--bg-surface); border: 2px solid var(--border); border-radius: 4px; padding: 0.8rem; margin: 0.5rem 0; cursor: pointer; transition: all 0.2s; display: block; width: 100%; text-align: left; color: var(--text); font-size: 0.95rem; font-family: inherit; line-height: 1.5; }
+.quiz-option:hover { border-color: var(--accent); background: rgba(108, 99, 255, 0.1); }
+.quiz-option.disabled { cursor: not-allowed; opacity: 0.6; }
+.quiz-option.correct { background: rgba(63, 185, 80, 0.2); border-color: var(--success); color: var(--success); }
+.quiz-option.wrong { background: rgba(255, 107, 107, 0.2); border-color: var(--accent3); color: var(--accent3); }
+.quiz-feedback { margin-top: 1rem; padding: 0.8rem; border-radius: 4px; font-weight: 600; display: none; }
+.quiz-feedback.show { display: block; }
+.quiz-feedback.correct { background: rgba(63, 185, 80, 0.2); color: var(--success); }
+.quiz-feedback.wrong { background: rgba(255, 107, 107, 0.2); color: var(--accent3); }
+.cheat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
+.cheat-item { background: var(--bg-surface2); border: 2px solid var(--accent); border-radius: 8px; padding: 1.5rem; }
+.cheat-item-title { font-weight: 700; color: var(--accent); margin-bottom: 0.8rem; font-size: 1.05rem; }
+.cheat-item-content { color: var(--text); font-size: 0.95rem; line-height: 1.7; }
+.mistake { background: rgba(255, 107, 107, 0.05); border-left: 4px solid var(--accent3); padding: 1.5rem; margin: 1.5rem 0; border-radius: 4px; }
+.mistake-title { font-weight: 700; color: var(--accent3); font-size: 1.05rem; margin-bottom: 0.8rem; }
+.mistake-problem { color: var(--text); margin-bottom: 0.8rem; }
+.mistake-fix { color: var(--success); font-weight: 600; padding-top: 0.8rem; border-top: 1px solid var(--border); margin-top: 0.8rem; }
+body.light { background: #f8fafc; color: #1e293b; }
+  body.light .container { color: #1e293b; }
+  body.light h1 { -webkit-text-fill-color: #0c4a6e; color: #0c4a6e; background: none; }
+  body.light h2 { color: #1e40af; border-bottom-color: #93c5fd; }
+  body.light h3 { color: #1e3a5f; }
+  body.light .subtitle { color: #475569; }
+  body.light .subtitle small { color: #475569; }
+  body.light .subtitle a { color: #2563eb !important; }
+  body.light .card { background: #ffffff; border-color: #cbd5e1; color: #1e293b; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  body.light .def { background: #eff6ff; border-color: #93c5fd; color: #1e293b; }
+  body.light .def-term { color: #b45309; }
+  body.light .def-meaning { color: #1e293b; }
+  body.light .def-example { color: #475569; }
+  body.light .def-example::before { color: #059669; }
+  body.light .analogy { background: #f0fdf4; border-color: #86efac; color: #1e293b; }
+  body.light .analogy::before { color: #15803d; }
+  body.light .diagram { background: #f1f5f9; border-color: #cbd5e1; color: #1e293b; }
+  body.light .diagram-title { color: #1e40af; }
+  body.light .arrow-down { color: #94a3b8; }
+  body.light .flow-box { color: #1e293b; }
+  body.light .flow-box.data { background: #dbeafe; color: #1e3a8a; border-color: #60a5fa; }
+  body.light .flow-box.model { background: #d1fae5; color: #064e3b; border-color: #34d399; }
+  body.light .flow-box.result { background: #ffedd5; color: #7c2d12; border-color: #fb923c; }
+  body.light .flow-box.combine { background: #ede9fe; color: #4c1d95; border-color: #a78bfa; }
+  body.light .flow-box.error { background: #fee2e2; color: #7f1d1d; border-color: #f87171; }
+  body.light .formula { background: #ecfeff; color: #0e7490; border-color: #67e8f9; }
+  body.light .formula-explain { color: #475569; }
+  body.light .key-point { background: #eff6ff; border-color: #93c5fd; color: #1e293b; }
+  body.light .step-content { color: #1e293b; }
+  body.light .quiz { background: #ffffff; border-color: #d97706; color: #1e293b; }
+  body.light .quiz-title { color: #b45309; }
+  body.light .quiz-q-text { color: #1e293b; }
+  body.light .quiz-option { background: #f8fafc; border-color: #cbd5e1; color: #1e293b; }
+  body.light .quiz-option:hover { border-color: #3b82f6; background: rgba(59,130,246,0.1); }
+  body.light .nav-tab { background: #ffffff; color: #475569; border-color: #cbd5e1; }
+  body.light .nav-tab:hover { background: #eff6ff; color: #1e40af; border-color: #93c5fd; }
+  body.light .nav-tab.active { background: #2563eb; color: white; }
+  body.light code { background: #e2e8f0; color: #0f172a; }
+  body.light .comp-table th { background: #2563eb; color: white; }
+  body.light .comp-table td { border-color: #cbd5e1; color: #1e293b; background: #ffffff; }
+  body.light .comp-table tr:hover td { background: #eff6ff; }
+  body.light .numerical { background: #ecfdf5; border-color: #34d399; color: #1e293b; }
+  body.light .mistake { background: #fef2f2; border-color: #f87171; color: #1e293b; }
+  body.light .mistake-title { color: #dc2626; }
+  body.light .mistake-problem { color: #1e293b; }
+  body.light .mistake-fix { color: #059669; border-top-color: #e2e8f0; }
+  body.light .cheat-item { background: #ffffff; border-color: #2563eb; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  body.light .cheat-item-title { color: #1e40af; }
+  body.light .cheat-item-content { color: #1e293b; }
+  body.light .course-link { background: #eff6ff; border-color: #2563eb; color: #2563eb; }
+  body.light .course-link:hover { background: #2563eb; color: #ffffff; }
+  body.light .highlight { color: #b45309; }
+  body.light .blue { color: #2563eb; }
+  body.light .green { color: #059669; }
+  body.light .purple { color: #7c3aed; }
+  body.light .red { color: #dc2626; }
+  body.light .week-badge.week1 { background: #dbeafe; color: #1e3a8a; }
+  body.light .week-badge.week2 { background: #ede9fe; color: #4c1d95; }
+  body.light .week-badge.week3 { background: #d1fae5; color: #064e3b; }
+  body.light .theme-toggle { background: #ffffff; border-color: #3b82f6; color: #1e293b; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+  body.light strong { color: #0f172a; }
+  body.light p, body.light li { color: #334155; }
+  body.light ul { color: #334155; }
+  body.light a { color: #2563eb; }
+  body.light .side-by-side > div { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 1rem; }
+  body.light [style*="background:#172554"] { background: #eff6ff !important; border-color: #93c5fd !important; }
+  body.light [style*="background:#0f172a"] { background: #f1f5f9 !important; border-color: #cbd5e1 !important; }
+  body.light [style*="background:#1e293b"] { background: #f1f5f9 !important; border-color: #cbd5e1 !important; }
+  body.light [style*="background:#1e40af"] { background: #dbeafe !important; border-color: #60a5fa !important; }
+  body.light [style*="background:#065f46"] { background: #d1fae5 !important; border-color: #34d399 !important; }
+  body.light [style*="background:#7c2d12"] { background: #ffedd5 !important; border-color: #fb923c !important; }
+  body.light [style*="background:#991b1b"] { background: #fee2e2 !important; border-color: #f87171 !important; }
+  body.light [style*="background:#581c87"] { background: #f3e8ff !important; border-color: #c084fc !important; }
+  body.light [style*="color:#94a3b8"] { color: #475569 !important; }
+  body.light [style*="color:#fbbf24"] { color: #b45309 !important; }
+  body.light [style*="color:#60a5fa"] { color: #2563eb !important; }
+  body.light [style*="color:#a78bfa"] { color: #7c3aed !important; }
+  body.light [style*="color:#34d399"] { color: #059669 !important; }
+  body.light [style*="color:#f87171"] { color: #dc2626 !important; }
+  body.light [style*="color:#e2e8f0"] { color: #1e293b !important; }
+  body.light [style*="color:#7dd3fc"] { color: #0e7490 !important; }
+  body.light [style*="color:#84cc16"] { color: #4d7c0f !important; }
+  body.light pre { background: #1e293b !important; color: #e2e8f0 !important; border-color: #475569 !important; }
+  body.light pre code { color: #e2e8f0 !important; background: transparent !important; }
+  body.light pre [style*="color:#94a3b8"] { color: #94a3b8 !important; }
+  body.light pre [style*="color:#fbbf24"] { color: #fbbf24 !important; }
+  body.light pre [style*="color:#60a5fa"] { color: #60a5fa !important; }
+  body.light pre [style*="color:#a78bfa"] { color: #a78bfa !important; }
+  body.light pre [style*="color:#34d399"] { color: #34d399 !important; }
+  body.light pre [style*="color:#f87171"] { color: #f87171 !important; }
+  body.light pre [style*="color:#e2e8f0"] { color: #e2e8f0 !important; }
+  body.light pre [style*="color:#7dd3fc"] { color: #7dd3fc !important; }
+  body.light pre span { color: inherit; }
+@media (max-width: 768px) {
+  .flow-row { flex-direction: column; }
+  h1 { font-size: 1.4em; }
+  .nav-tab { padding: 8px 12px; font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<button class="theme-toggle" onclick="toggleTheme(event)">🌙</button>
+<div class="container">
+<h1>Machine Learning: Complete Visual Guide</h1>
+<p class="subtitle">UT Austin | Great Learning PGP in AI &amp; ML<br>
+<small>Every concept explained from scratch. No assumptions. Real-life examples for everything.</small><br>
+<small>Notes prepared by: <a href="https://www.linkedin.com/in/vamshireddi/" target="_blank" style="color:#60a5fa; text-decoration:none;">Vamshi Krishan Reddy Bandaru</a></small></p>
+
+<div class="nav-tabs">
+  <button class="nav-tab active" onclick="showSection('cheat')">Cheat Sheet</button>
+  <button class="nav-tab" onclick="showSection('concepts')">Concept Map</button>
+  <button class="nav-tab" onclick="showSection('w1-intro')">W1: Regression Intro</button>
+  <button class="nav-tab" onclick="showSection('w1-simple')">W1: Simple Regression</button>
+  <button class="nav-tab" onclick="showSection('w1-multiple')">W1: Multiple Regression</button>
+  <button class="nav-tab" onclick="showSection('w1-metrics')">W1: Metrics</button>
+  <button class="nav-tab" onclick="showSection('w2-tree')">W2: Decision Trees</button>
+  <button class="nav-tab" onclick="showSection('w2-pruning')">W2: Pruning</button>
+  <button class="nav-tab" onclick="showSection('w3-kmeans')">W3: K-Means</button>
+  <button class="nav-tab" onclick="showSection('w3-hier')">W3: Hierarchical</button>
+  <button class="nav-tab" onclick="showSection('w3-dbscan')">W3: DBSCAN</button>
+  <button class="nav-tab" onclick="showSection('mistakes')">Common Mistakes</button>
+</div>
+
+<div id="cheat" class="section active">
+<h2>Quick Reference: All Formulas & Key Concepts</h2>
+<div class="card card-blue">
+<h3>Week 1: Linear Regression Essentials</h3>
+<div class="formula">y = β₀ + β₁x₁ + β₂x₂ + ... + βₚxₚ + ε<div class="formula-explain">Multiple Linear Regression: β₀ intercept, β₁ to βₚ slopes</div></div>
+<div class="cheat-grid">
+<div class="cheat-item"><div class="cheat-item-title">R² (Coefficient of Determination)</div><div class="formula">R² = 1 - (SS_res / SS_tot)</div><div class="cheat-item-content">Explains % variance explained. Range: 0 to 1. Higher = better.</div></div>
+<div class="cheat-item"><div class="cheat-item-title">Adjusted R²</div><div class="formula">R²_adj = 1 - [(1-R²)(n-1)/(n-p-1)]</div><div class="cheat-item-content">Penalizes adding variables. Use for model comparison.</div></div>
+<div class="cheat-item"><div class="cheat-item-title">MAE (Mean Absolute Error)</div><div class="formula">MAE = (1/n) Σ|yᵢ - ŷᵢ|</div><div class="cheat-item-content">Avg absolute difference. Interpretable, ignores sign.</div></div>
+<div class="cheat-item"><div class="cheat-item-title">RMSE (Root Mean Squared Error)</div><div class="formula">RMSE = √[(1/n) Σ(yᵢ - ŷᵢ)²]</div><div class="cheat-item-content">Penalizes large errors more. Same units as target.</div></div>
+<div class="cheat-item"><div class="cheat-item-title">Pearson Correlation</div><div class="formula">r = Σ(xᵢ - x̄)(yᵢ - ȳ) / √[Σ(xᵢ - x̄)² Σ(yᵢ - ȳ)²]</div><div class="cheat-item-content">Range -1 to +1. Shows linear relationship strength.</div></div>
+<div class="cheat-item"><div class="cheat-item-title">Dummy Variable Trap</div><div class="cheat-item-content"><strong>Rule:</strong> If categorical has k values, create k-1 dummies. Use <code>drop_first=True</code></div></div>
+</div>
+</div>
+
+<div class="card card-purple">
+<h3>Week 2: Decision Trees Essentials</h3>
+<div class="cheat-grid">
+<div class="cheat-item"><div class="cheat-item-title">Entropy (Information Measure)</div><div class="formula">Entropy = -Σ pᵢ log₂(pᵢ)</div><div class="cheat-item-content">Higher = more impurity. Max entropy when 50-50 split.</div></div>
+<div class="cheat-item"><div class="cheat-item-title">Gini Impurity</div><div class="formula">Gini = 1 - Σ pᵢ²</div><div class="cheat-item-content">Range 0 to 0.5. 0 = pure node. Used in sklearn.</div></div>
+<div class="cheat-item"><div class="cheat-item-title">Information Gain</div><div class="formula">IG = Entropy(parent) - Σ(weighted) Entropy(children)</div><div class="cheat-item-content">Higher IG = better split. Tree chooses max IG.</div></div>
+<div class="cheat-item"><div class="cheat-item-title">Key Hyperparameters</div><div class="cheat-item-content"><strong>max_depth:</strong> Limits tree height<br><strong>min_samples_split:</strong> Min samples to split<br><strong>min_samples_leaf:</strong> Min samples in leaf</div></div>
+</div>
+</div>
+
+<div class="card card-green">
+<h3>Week 3: Clustering Essentials</h3>
+<div class="cheat-grid">
+<div class="cheat-item"><div class="cheat-item-title">K-Means WCSS</div><div class="formula">WCSS = Σ Σ ||xᵢ - μₖ||²</div><div class="cheat-item-content">Within-Cluster Sum of Squares. Lower = tighter clusters.</div></div>
+<div class="cheat-item"><div class="cheat-item-title">Silhouette Score</div><div class="formula">Silhouette = (b - a) / max(a, b)</div><div class="cheat-item-content">Range -1 to +1. +1 = perfect clustering, -1 = wrong.</div></div>
+<div class="cheat-item"><div class="cheat-item-title">Elbow Method</div><div class="cheat-item-content">Plot WCSS vs K. Choose K where curve bends (elbow). Heuristic, not perfect.</div></div>
+<div class="cheat-item"><div class="cheat-item-title">K-Means++ Initialization</div><div class="cheat-item-content">Smart init: spread centroids far apart. Converges faster. Use <code>init='k-means++'</code></div></div>
+</div>
+</div>
+</div>
+
+<div id="concepts" class="section">
+<h2>Module 02 Overview: All Three Weeks</h2>
+<div class="diagram">
+<div class="diagram-title">Machine Learning Algorithms in Module 02</div>
+<div class="flow">
+<div class="flow-box data">Data</div>
+<div class="arrow-down">↓</div>
+<div class="flow-row">
+<div style="flex: 1; text-align: center;">
+<div style="font-weight: 700; color: #60a5fa; margin-bottom: 8px;">WEEK 1: REGRESSION</div>
+<div class="flow-box model" style="margin: 8px auto;">Linear Regression</div>
+<div style="color: #94a3b8; font-size: 0.85em; margin: 4px 0;">Predict continuous values</div>
+</div>
+<div style="flex: 1; text-align: center;">
+<div style="font-weight: 700; color: #a855f7; margin-bottom: 8px;">WEEK 2: CLASSIFICATION</div>
+<div class="flow-box model" style="margin: 8px auto;">Decision Trees</div>
+<div style="color: #94a3b8; font-size: 0.85em; margin: 4px 0;">Classify data hierarchically</div>
+</div>
+<div style="flex: 1; text-align: center;">
+<div style="font-weight: 700; color: #10b981; margin-bottom: 8px;">WEEK 3: CLUSTERING</div>
+<div class="flow-box model" style="margin: 8px auto;">K-Means, Hierarchical, DBSCAN</div>
+<div style="color: #94a3b8; font-size: 0.85em; margin: 4px 0;">Group unlabeled data</div>
+</div>
+</div>
+<div class="arrow-down">↓</div>
+<div class="flow-box result">Model Evaluation & Insights</div>
+</div>
+</div>
+<div class="card card-blue">
+<h3>Week 1: Linear Regression (Supervised Learning)</h3>
+<p><strong>Goal:</strong> Predict continuous values (price, sales, temperature)</p>
+<ul>
+<li><strong>Simple Linear Regression:</strong> 1 predictor (x) → 1 target (y)</li>
+<li><strong>Multiple Linear Regression:</strong> Many predictors → 1 target. Handle numeric & categorical via one-hot encoding</li>
+<li><strong>Correlation first:</strong> Use Pearson correlation to spot relationships</li>
+<li><strong>Evaluate with:</strong> R², MAE, RMSE</li>
+</ul>
+</div>
+<div class="card card-purple">
+<h3>Week 2: Decision Trees (Supervised Learning)</h3>
+<p><strong>Goal:</strong> Classify data or predict continuous values using tree structure</p>
+<ul>
+<li><strong>How it works:</strong> Recursively split data using best features. Uses Gini/Entropy to measure impurity</li>
+<li><strong>Overfitting risk:</strong> Tree grows too deep, memorizes training data</li>
+<li><strong>Pruning:</strong> Cut weak branches. Pre-pruning (max_depth) or post-pruning</li>
+<li><strong>Tuning:</strong> max_depth, min_samples_split, min_samples_leaf control complexity</li>
+</ul>
+</div>
+<div class="card card-green">
+<h3>Week 3: Clustering (Unsupervised Learning)</h3>
+<p><strong>Goal:</strong> Find hidden patterns in unlabeled data</p>
+<ul>
+<li><strong>K-Means:</strong> Partitions data into k clusters. Fast, scalable.</li>
+<li><strong>Hierarchical:</strong> Build tree of clusters. Dendrograms show relationships.</li>
+<li><strong>DBSCAN:</strong> Density-based. Finds clusters of arbitrary shape.</li>
+<li><strong>Evaluation:</strong> Elbow method, Silhouette score</li>
+</ul>
+</div>
+</div>
+
+<div id="w1-intro" class="section">
+<h2><span class="week-badge week1">Week 1</span> Linear Regression: Business Problem & Correlation</h2>
+<div class="card card-blue">
+<h3>Business Problem Statement</h3>
+<div class="def">
+<div class="def-term">Regression Problem:</div>
+<div class="def-meaning">Given historical data with features and outcomes, learn function to predict future continuous outcomes.</div>
+<div class="def-example">Real estate company has sold 500 houses. Features: square footage, bedrooms, location, year built. Can we predict price of new house?</div>
+</div>
+<p style="margin-top: 16px;"><strong>Key Question:</strong> What mathematical relationship connects input features to output values?</p>
+<p><strong>Why Linear First?</strong> Simple, interpretable, fast. Great baseline.</p>
+</div>
+<div class="card card-yellow">
+<h3>Visualizing Relationships</h3>
+<div class="analogy">
+Imagine height vs weight of people. Plot each person as dot: x-axis = height, y-axis = weight. You'll see cloud trending upward—taller people weigh more. That trend is the relationship we want to capture.
+</div>
+<h3>Scatter Plots & Correlation</h3>
+<p>A scatter plot shows (x, y) values visually. Look for patterns:</p>
+<ul>
+<li><strong>Positive trend:</strong> x increases, y increases → positive correlation</li>
+<li><strong>Negative trend:</strong> x increases, y decreases → negative correlation</li>
+<li><strong>No trend:</strong> Random cloud → no correlation (r ≈ 0)</li>
+</ul>
+<div class="def">
+<div class="def-term">Pearson's Correlation Coefficient (r):</div>
+<div class="def-meaning">Measures strength & direction of linear relationship. Range: -1 to +1.</div>
+<div class="def-example">r = 0.95 means almost perfect positive correlation. r = -0.3 means weak negative.</div>
+</div>
+<div class="formula">
+r = Σ(xᵢ - x̄)(yᵢ - ȳ) / √[Σ(xᵢ - x̄)² Σ(yᵢ - ȳ)²]
+<div class="formula-explain">Numerator: co-variation. Denominator: normalizes to -1 to +1 range</div>
+</div>
+<div class="key-point">
+<span class="icon">⚡</span>
+<div><strong>Correlation ≠ Causation:</strong> High correlation doesn't mean x causes y. Could be coincidence or third variable causing both.</div>
+</div>
+</div>
+<div class="quiz">
+<div class="quiz-title">Test Your Understanding</div>
+<div class="quiz-q">
+<div class="quiz-q-text">Q: If Pearson correlation = -0.85, what does it tell you?</div>
+<button class="quiz-option" onclick="checkQuiz('w1q1', this, false)">A) Strong positive relationship</button>
+<button class="quiz-option" onclick="checkQuiz('w1q1', this, true)">B) Strong negative relationship (x increases, y decreases)</button>
+<button class="quiz-option" onclick="checkQuiz('w1q1', this, false)">C) Causation: x causes y</button>
+<button class="quiz-option" onclick="checkQuiz('w1q1', this, false)">D) Variables are categorical</button>
+<div class="quiz-feedback" id="w1q1-feedback"></div>
+</div>
+</div>
+</div>
+
+<div id="w1-simple" class="section">
+<h2><span class="week-badge week1">Week 1</span> Simple Linear Regression</h2>
+<div class="card card-blue">
+<h3>Definition & Intuition</h3>
+<div class="def">
+<div class="def-term">Simple Linear Regression:</div>
+<div class="def-meaning">Fit straight line through data points to model relationship between one input (x) and one output (y).</div>
+<div class="def-example">House price data: x = square footage, y = price. Draw best-fit line. Given new house area, predict price from line.</div>
+</div>
+<div class="formula">
+ŷ = β₀ + β₁x
+<div class="formula-explain">ŷ = predicted y, β₀ = intercept (y when x=0), β₁ = slope (change in y per unit x)</div>
+</div>
+<h3>Understanding the Coefficients</h3>
+<div class="def">
+<div class="def-term">Intercept (β₀):</div>
+<div class="def-meaning">Y-value where regression line crosses y-axis (when x = 0).</div>
+<div class="def-example">House price model: intercept = $50,000. A house with 0 sq ft "costs" $50k (mathematical, not realistic).</div>
+</div>
+<div class="def">
+<div class="def-term">Slope (β₁):</div>
+<div class="def-meaning">Change in predicted y for each 1-unit increase in x.</div>
+<div class="def-example">Slope = $100/sq ft. Each extra square foot adds $100 to predicted price.</div>
+</div>
+<div class="key-point">
+<span class="icon">💡</span>
+<div><strong>Interpretation matters:</strong> Always describe slope in context. "$100 per square foot" is actionable.</div>
+</div>
+</div>
+<div class="card card-yellow">
+<h3>Best-Fit Line: Least Squares Method</h3>
+<div class="analogy">
+Draw line through scattered points to pass as close as possible to all points. Least squares finds line minimizing total distance from points to line (squared).
+</div>
+<p>The <span class="highlight">residual</span> for each point is: eᵢ = yᵢ - ŷᵢ (actual minus predicted)</p>
+<p>Least squares minimizes: Σ(eᵢ)² = Σ(yᵢ - ŷ)²</p>
+<div class="diagram">
+<div class="diagram-title">Least Squares Concept</div>
+<div style="text-align: center; color: #94a3b8; font-size: 0.95em;">
+Line is fitted to minimize sum of squared vertical distances from points to line.
+</div>
+</div>
+<div class="key-point">
+<span class="icon">🎯</span>
+<div><strong>Why squared errors?</strong> Penalizes large errors heavily. Prevents large misses from offsetting small hits.</div>
+</div>
+<pre><code><span style="color:#94a3b8"># Simple Linear Regression with sklearn</span>
+<span style="color:#60a5fa">from</span> sklearn.linear_model <span style="color:#60a5fa">import</span> LinearRegression
+<span style="color:#60a5fa">import</span> numpy <span style="color:#60a5fa">as</span> np
+
+<span style="color:#a78bfa">X</span> <span style="color:#94a3b8">=</span> np.array([[100], [200], [300], [400], [500]])
+<span style="color:#a78bfa">y</span> <span style="color:#94a3b8">=</span> np.array([10000, 20000, 30000, 40000, 50000])
+
+<span style="color:#a78bfa">model</span> <span style="color:#94a3b8">=</span> LinearRegression()
+<span style="color:#a78bfa">model</span>.fit(<span style="color:#a78bfa">X</span>, <span style="color:#a78bfa">y</span>)
+
+<span style="color:#a78bfa">y_pred</span> <span style="color:#94a3b8">=</span> <span style="color:#a78bfa">model</span>.predict([[350]])
+</code></pre>
+</div>
+<div class="quiz">
+<div class="quiz-title">Test Your Understanding</div>
+<div class="quiz-q">
+<div class="quiz-q-text">Q: If β₀ = 10,000 and β₁ = 100, and x = 500, what is ŷ?</div>
+<button class="quiz-option" onclick="checkQuiz('w1q2', this, false)">A) 10,500</button>
+<button class="quiz-option" onclick="checkQuiz('w1q2', this, true)">B) 60,000 (10,000 + 100*500)</button>
+<button class="quiz-option" onclick="checkQuiz('w1q2', this, false)">C) 50,000</button>
+<button class="quiz-option" onclick="checkQuiz('w1q2', this, false)">D) 100</button>
+<div class="quiz-feedback" id="w1q2-feedback"></div>
+</div>
+</div>
+</div>
+
+<div id="w1-multiple" class="section">
+<h2><span class="week-badge week1">Week 1</span> Multiple Linear Regression</h2>
+<div class="card card-blue">
+<h3>From Simple to Multiple</h3>
+<div class="def">
+<div class="def-term">Multiple Linear Regression:</div>
+<div class="def-meaning">Use multiple features (x₁, x₂, ..., xₚ) to predict one target (y).</div>
+<div class="def-example">Predict house price using: square footage, bedrooms, bathrooms, year built, location. Each gets its own coefficient.</div>
+</div>
+<div class="formula">
+ŷ = β₀ + β₁x₁ + β₂x₂ + ... + βₚxₚ
+<div class="formula-explain">β₀ = intercept, β₁...βₚ = partial slopes. Each βᵢ = change in y per unit xᵢ (holding others constant)</div>
+</div>
+<div class="key-point">
+<span class="icon">📊</span>
+<div><strong>"Holding others constant":</strong> β₁ = impact of x₁ after accounting for x₂, x₃, etc. That's the power of multiple regression!</div>
+</div>
+</div>
+<div class="card card-yellow">
+<h3>Categorical Variables: One-Hot Encoding</h3>
+<p>Features like "location" (North, South, East, West) are categorical. Can't plug directly. Solution: <span class="highlight">one-hot encoding</span></p>
+<div class="analogy">
+Imagine checklist: "Is location North? (Yes/No). Is it South? (Yes/No). Is it East? (Yes/No)." Convert to 0/1 columns. House in North: [1,0,0]. House in South: [0,1,0].
+</div>
+<h3>The Dummy Variable Trap</h3>
+<p>If location has 4 categories, create only 3 dummy columns, not 4. Why?</p>
+<ul>
+<li>If North=1, South=0, East=0, then West=0 (implied). Perfect multicollinearity if include all 4.</li>
+<li>Sklearn's <code>get_dummies()</code> creates all 4. Use <code>drop_first=True</code> to drop one.</li>
+<li>Same rule: k categories → k-1 dummies</li>
+</ul>
+<div class="def">
+<div class="def-term">Multicollinearity:</div>
+<div class="def-meaning">Predictor variables highly correlated with each other. Coefficients become unstable.</div>
+<div class="def-example">If you include all 4 dummy columns (North, South, East, West), they sum to 1 always. Singular matrix. Model breaks.</div>
+</div>
+<div class="key-point">
+<span class="icon">⚠️</span>
+<div><strong>Always:</strong> Check <code>drop_first=True</code> when using categorical variables with regression. Prevents dummy variable trap.</div>
+</div>
+<pre><code><span style="color:#94a3b8"># Handling categorical variables</span>
+<span style="color:#60a5fa">import</span> pandas <span style="color:#60a5fa">as</span> pd
+
+<span style="color:#a78bfa">df</span> <span style="color:#94a3b8">=</span> pd.DataFrame({
+    <span style="color:#f87171">'price'</span>: [100000, 200000, 150000],
+    <span style="color:#f87171">'location'</span>: [<span style="color:#f87171">'North'</span>, <span style="color:#f87171">'South'</span>, <span style="color:#f87171">'North'</span>]
+})
+
+<span style="color:#a78bfa">df_encoded</span> <span style="color:#94a3b8">=</span> pd.get_dummies(<span style="color:#a78bfa">df</span>, drop_first<span style="color:#94a3b8">=</span><span style="color:#60a5fa">True</span>)
+</code></pre>
+</div>
+
+<div id="w1-metrics" class="section">
+<h2><span class="week-badge week1">Week 1</span> Regression Evaluation Metrics</h2>
+<div class="card card-blue">
+<h3>R² (Coefficient of Determination)</h3>
+<div class="def">
+<div class="def-term">R²:</div>
+<div class="def-meaning">Proportion of variance in target explained by predictors. Range: 0 to 1.</div>
+<div class="def-example">R² = 0.85 means model explains 85% of price variation. 15% unexplained.</div>
+</div>
+<div class="formula">
+R² = 1 - (SS_res / SS_tot)
+<div class="formula-explain">SS_res = sum of squared residuals. SS_tot = total sum of squares.</div>
+</div>
+<div class="key-point">
+<span class="icon">⚠️</span>
+<div><strong>R² increases with more features,</strong> even useless ones! Use <strong>Adjusted R²</strong> when comparing models.</div>
+</div>
+<div class="formula">
+R²_adjusted = 1 - [(1 - R²) × (n - 1) / (n - p - 1)]
+<div class="formula-explain">Penalizes each added variable. Use to compare models with different numbers of predictors.</div>
+</div>
+</div>
+<div class="card card-yellow">
+<h3>Error Metrics: MAE & RMSE</h3>
+<div class="def">
+<div class="def-term">MAE (Mean Absolute Error):</div>
+<div class="def-meaning">Average absolute prediction error. In same units as target.</div>
+<div class="def-example">House price model MAE = $5,000. On average, predictions off by $5,000.</div>
+</div>
+<div class="formula">
+MAE = (1/n) Σ|yᵢ - ŷᵢ|
+<div class="formula-explain">Absolute value: ignores direction. Robust to outliers.</div>
+</div>
+<div class="def">
+<div class="def-term">RMSE (Root Mean Squared Error):</div>
+<div class="def-meaning">Square root of average squared error. Penalizes large errors more.</div>
+<div class="def-example">RMSE = $8,000. Large errors get huge penalty.</div>
+</div>
+<div class="formula">
+RMSE = √[(1/n) Σ(yᵢ - ŷᵢ)²]
+<div class="formula-explain">Squaring penalizes outliers. √ returns to original units.</div>
+</div>
+<div class="analogy">
+MAE = "average difference" (robust). RMSE = "typical worst error" (penalizes outliers). RMSE always ≥ MAE.
+</div>
+<div class="key-point">
+<span class="icon">🎯</span>
+<div><strong>Which to use?</strong> MAE if outliers don't matter. RMSE if large errors very costly. Use both.</div>
+</div>
+</div>
+<div class="card card-green">
+<h3>Metrics Comparison Table</h3>
+<table class="comp-table">
+<tr><th>Metric</th><th>Formula</th><th>Range</th><th>When to Use</th></tr>
+<tr><td><strong>R²</strong></td><td>1 - (SS_res/SS_tot)</td><td>0 to 1 (higher better)</td><td>Explain variance. Compare similar models.</td></tr>
+<tr><td><strong>Adj R²</strong></td><td>1 - [(1-R²)(n-1)/(n-p-1)]</td><td>0 to 1 (higher better)</td><td>Compare models with different features.</td></tr>
+<tr><td><strong>MAE</strong></td><td>(1/n)Σ|yᵢ - ŷᵢ|</td><td>0 to ∞ (lower better)</td><td>Interpretable. Robust to outliers.</td></tr>
+<tr><td><strong>RMSE</strong></td><td>√[(1/n)Σ(yᵢ - ŷᵢ)²]</td><td>0 to ∞ (lower better)</td><td>Penalize large errors. Fair comparison.</td></tr>
+</table>
+<pre><code><span style="color:#94a3b8"># Calculate all metrics with sklearn</span>
+<span style="color:#60a5fa">from</span> sklearn.metrics <span style="color:#60a5fa">import</span> r2_score, mean_absolute_error, mean_squared_error
+<span style="color:#60a5fa">import</span> numpy <span style="color:#60a5fa">as</span> np
+
+<span style="color:#a78bfa">r2</span> <span style="color:#94a3b8">=</span> r2_score(<span style="color:#a78bfa">y_test</span>, <span style="color:#a78bfa">y_pred</span>)
+<span style="color:#a78bfa">mae</span> <span style="color:#94a3b8">=</span> mean_absolute_error(<span style="color:#a78bfa">y_test</span>, <span style="color:#a78bfa">y_pred</span>)
+<span style="color:#a78bfa">rmse</span> <span style="color:#94a3b8">=</span> np.sqrt(mean_squared_error(<span style="color:#a78bfa">y_test</span>, <span style="color:#a78bfa">y_pred</span>))
+</code></pre>
+</div>
+<div class="quiz">
+<div class="quiz-title">Test Your Understanding</div>
+<div class="quiz-q">
+<div class="quiz-q-text">Q: You add a useless feature to regression. What happens?</div>
+<button class="quiz-option" onclick="checkQuiz('w1q4', this, false)">A) Both R² and Adjusted R² increase</button>
+<button class="quiz-option" onclick="checkQuiz('w1q4', this, false)">B) Both decrease</button>
+<button class="quiz-option" onclick="checkQuiz('w1q4', this, true)">C) R² increases, Adjusted R² decreases</button>
+<button class="quiz-option" onclick="checkQuiz('w1q4', this, false)">D) No change</button>
+<div class="quiz-feedback" id="w1q4-feedback"></div>
+</div>
+</div>
+</div>
+
+<div id="w2-tree" class="section">
+<h2><span class="week-badge week2">Week 2</span> Decision Trees: From Intuition to Implementation</h2>
+<div class="card card-blue">
+<h3>Classification vs Regression Recap</h3>
+<p>Regression: Predict continuous values (price, temperature). Classification: Predict categories (spam/not, pass/fail).</p>
+<p>Decision Trees work for both! This week focuses on classification trees.</p>
+<div class="def">
+<div class="def-term">Decision Tree:</div>
+<div class="def-meaning">Hierarchical model making decisions by recursively splitting data. Each split maximizes information gain or minimizes impurity.</div>
+<div class="def-example">Email spam detector: "Is word 'free' present? If yes, check word count. If > 100 words, likely spam." Tree of conditions.</div>
+</div>
+</div>
+<div class="card card-purple">
+<h3>Impurity Measures: Entropy & Gini</h3>
+<div class="def">
+<div class="def-term">Entropy:</div>
+<div class="def-meaning">Measure of disorder/randomness. Max entropy = equal mix of all classes. Min entropy = all one class.</div>
+<div class="def-example">Dataset 50% spam, 50% ham: high entropy. Dataset 99% spam, 1% ham: low entropy.</div>
+</div>
+<div class="formula">
+Entropy = -Σ pᵢ log₂(pᵢ)
+<div class="formula-explain">pᵢ = proportion of class i. Max = 1, min = 0.</div>
+</div>
+<div class="analogy">
+Bag of colored balls. All same color = boring (low entropy). Half red, half blue = unpredictable (high entropy). Entropy measures that unpredictability.
+</div>
+<div class="def">
+<div class="def-term">Gini Impurity:</div>
+<div class="def-meaning">Probability of incorrectly classifying random point. Range 0 (pure) to 0.5 (balanced).</div>
+<div class="def-example">Dataset 80% class A, 20% class B: Gini = 1 - (0.8² + 0.2²) = 0.32.</div>
+</div>
+<div class="formula">
+Gini = 1 - Σ pᵢ²
+<div class="formula-explain">Simpler math than entropy. Both measure impurity.</div>
+</div>
+<div class="key-point">
+<span class="icon">💡</span>
+<div><strong>Interpretation:</strong> Both = 0 means pure node. Both = max when balanced. Use to select best split.</div>
+</div>
+</div>
+<div class="card card-green">
+<h3>Information Gain: Choosing the Best Split</h3>
+<div class="def">
+<div class="def-term">Information Gain:</div>
+<div class="def-meaning">Reduction in impurity after split. Tree chooses split maximizing information gain.</div>
+<div class="def-example">Before split: entropy 0.9. After split: left (0.3), right (0.4). Big reduction = high IG.</div>
+</div>
+<div class="formula">
+Information Gain = Entropy(parent) - Σ [weighted Entropy(children)]
+<div class="formula-explain">Weighted = proportion in each child. Higher IG = better split.</div>
+</div>
+<div class="diagram">
+<div class="diagram-title">Tree Building Process</div>
+<div class="flow">
+<div class="flow-box data">Start with all data</div>
+<div class="arrow-down">↓</div>
+<div class="flow-box model">Try all possible splits</div>
+<div class="arrow-down">↓</div>
+<div class="flow-box result">Pick split with max IG</div>
+<div class="arrow-down">↓</div>
+<div class="flow-box combine">Recursively repeat</div>
+<div class="arrow-down">↓</div>
+<div class="flow-box result">Stop when pure or min samples reached</div>
+</div>
+</div>
+<div class="key-point">
+<span class="icon">🎯</span>
+<div><strong>Greedy approach:</strong> Best local split at each node. Doesn't guarantee globally optimal tree, but fast.</div>
+</div>
+</div>
+<div class="card card-yellow">
+<h3>Hands-On: Build & Visualize</h3>
+<pre><code><span style="color:#94a3b8"># Decision Tree Classifier</span>
+<span style="color:#60a5fa">from</span> sklearn.tree <span style="color:#60a5fa">import</span> DecisionTreeClassifier, plot_tree
+<span style="color:#60a5fa">import</span> matplotlib.pyplot <span style="color:#60a5fa">as</span> plt
+
+<span style="color:#a78bfa">model</span> <span style="color:#94a3b8">=</span> DecisionTreeClassifier(max_depth<span style="color:#94a3b8">=</span>5, random_state<span style="color:#94a3b8">=</span>42)
+<span style="color:#a78bfa">model</span>.fit(<span style="color:#a78bfa">X_train</span>, <span style="color:#a78bfa">y_train</span>)
+
+plot_tree(<span style="color:#a78bfa">model</span>, feature_names<span style="color:#94a3b8">=</span>[<span style="color:#f87171">'age'</span>, <span style="color:#f87171">'income'</span>], filled<span style="color:#94a3b8">=</span><span style="color:#60a5fa">True</span>)
+plt.show()
+
+<span style="color:#a78bfa">accuracy</span> <span style="color:#94a3b8">=</span> <span style="color:#a78bfa">model</span>.score(<span style="color:#a78bfa">X_test</span>, <span style="color:#a78bfa">y_test</span>)
+</code></pre>
+</div>
+<div class="quiz">
+<div class="quiz-title">Test Your Understanding</div>
+<div class="quiz-q">
+<div class="quiz-q-text">Q: A dataset has 60% class A, 40% class B. What is Gini impurity?</div>
+<button class="quiz-option" onclick="checkQuiz('w2q1', this, true)">A) 1 - (0.6² + 0.4²) = 0.48</button>
+<button class="quiz-option" onclick="checkQuiz('w2q1', this, false)">B) 0.6 + 0.4 = 1.0</button>
+<button class="quiz-option" onclick="checkQuiz('w2q1', this, false)">C) log₂(0.6) + log₂(0.4)</button>
+<button class="quiz-option" onclick="checkQuiz('w2q1', this, false)">D) 0 (pure)</button>
+<div class="quiz-feedback" id="w2q1-feedback"></div>
+</div>
+</div>
+</div>
+
+<div id="w2-pruning" class="section">
+<h2><span class="week-badge week2">Week 2</span> Overfitting & Pruning</h2>
+<div class="card card-blue">
+<h3>The Overfitting Problem</h3>
+<div class="def">
+<div class="def-term">Overfitting:</div>
+<div class="def-meaning">Model learns training data too well, including noise. Poor test performance.</div>
+<div class="def-example">Decision tree with no depth limit grows very deep. Fits training perfectly but fails on test. Tree memorized.</div>
+</div>
+<div class="analogy">
+Student memorizes exact exam questions & answers, but can't solve new problems. Memorization vs understanding.
+</div>
+<div class="key-point">
+<span class="icon">⚠️</span>
+<div><strong>Training accuracy ≠ Test accuracy.</strong> High training, low test = overfitting. Model doesn't generalize.</div>
+</div>
+</div>
+<div class="card card-purple">
+<h3>Pre-Pruning: Prevent Growth</h3>
+<div class="def">
+<div class="def-term">Pre-Pruning:</div>
+<div class="def-meaning">Stop tree growth early. Control via hyperparameters.</div>
+</div>
+<p><strong>Key hyperparameters in sklearn:</strong></p>
+<ul>
+<li><code>max_depth</code>: Max levels tree can have. Lower = simpler, less overfitting.</li>
+<li><code>min_samples_split</code>: Min samples before split. Default = 2. Higher = less splits.</li>
+<li><code>min_samples_leaf</code>: Min samples in leaf. Prevents tiny leaves.</li>
+<li><code>max_leaf_nodes</code>: Max leaf nodes. Limits tree size.</li>
+</ul>
+<div class="key-point">
+<span class="icon">🎯</span>
+<div><strong>Start simple:</strong> max_depth=5, then tune. Too restrictive = underfitting. Too loose = overfitting.</div>
+</div>
+<pre><code><span style="color:#94a3b8"># Pre-pruning with hyperparameters</span>
+<span style="color:#a78bfa">model</span> <span style="color:#94a3b8">=</span> DecisionTreeClassifier(
+    max_depth<span style="color:#94a3b8">=</span>5,
+    min_samples_split<span style="color:#94a3b8">=</span>10,
+    min_samples_leaf<span style="color:#94a3b8">=</span>4,
+    random_state<span style="color:#94a3b8">=</span>42
+)
+</code></pre>
+</div>
+<div class="card card-green">
+<h3>Post-Pruning: Remove Weak Branches</h3>
+<div class="def">
+<div class="def-term">Post-Pruning:</div>
+<div class="def-meaning">Grow full tree, then remove branches not improving validation performance.</div>
+<div class="def-example">Tree has 20 nodes. Remove node 15. If validation accuracy stays same or improves, prune it.</div>
+</div>
+<p><strong>Steps:</strong></p>
+<div class="step">
+<div class="step-num">1</div>
+<div class="step-content">Grow full tree with minimal restrictions</div>
+</div>
+<div class="step">
+<div class="step-num">2</div>
+<div class="step-content">For each internal node, calculate cost if pruned vs kept</div>
+</div>
+<div class="step">
+<div class="step-num">3</div>
+<div class="step-content">Prune weakest nodes (lowest validation impact)</div>
+</div>
+<div class="step">
+<div class="step-num">4</div>
+<div class="step-content">Repeat until cost-benefit no longer favors pruning</div>
+</div>
+<div class="key-point">
+<span class="icon">💡</span>
+<div><strong>Sklearn note:</strong> No built-in post-pruning. Use pre-pruning or cost_complexity_pruning_path.</div>
+</div>
+</div>
+<div class="card card-yellow">
+<h3>Bias-Variance Tradeoff</h3>
+<div class="diagram">
+<div class="diagram-title">Underfitting vs Overfitting</div>
+<table class="comp-table">
+<tr><th>Characteristic</th><th>Underfitting (High Bias)</th><th>Good Fit</th><th>Overfitting (High Variance)</th></tr>
+<tr><td><strong>max_depth</strong></td><td>Too low (e.g., 2)</td><td>Optimal (e.g., 5-7)</td><td>Too high (no limit)</td></tr>
+<tr><td><strong>Train Accuracy</strong></td><td>Low</td><td>High</td><td>Very High (100%)</td></tr>
+<tr><td><strong>Test Accuracy</strong></td><td>Low</td><td>High</td><td>Low</td></tr>
+<tr><td><strong>Train-Test Gap</strong></td><td>Small</td><td>Small</td><td>Large</td></tr>
+<tr><td><strong>Problem</strong></td><td>Model too simple</td><td>—</td><td>Model too complex</td></tr>
+</table>
+</div>
+<div class="key-point">
+<span class="icon">🎯</span>
+<div><strong>Goal:</strong> Maximize test accuracy. Monitor both train & test. If test plateaus while train rises = overfitting.</div>
+</div>
+</div>
+<div class="quiz">
+<div class="quiz-title">Test Your Understanding</div>
+<div class="quiz-q">
+<div class="quiz-q-text">Q: Decision tree has train accuracy 99%, test accuracy 65%. What's happening?</div>
+<button class="quiz-option" onclick="checkQuiz('w2q2', this, true)">A) Overfitting: tree too complex, memorized training data</button>
+<button class="quiz-option" onclick="checkQuiz('w2q2', this, false)">B) Underfitting: tree too simple</button>
+<button class="quiz-option" onclick="checkQuiz('w2q2', this, false)">C) Perfect fit: exactly what we want</button>
+<button class="quiz-option" onclick="checkQuiz('w2q2', this, false)">D) Random noise</button>
+<div class="quiz-feedback" id="w2q2-feedback"></div>
+</div>
+</div>
+</div>
+
+<div id="w3-kmeans" class="section">
+<h2><span class="week-badge week3">Week 3</span> K-Means Clustering</h2>
+<div class="card card-blue">
+<h3>Unsupervised Learning Intro</h3>
+<div class="def">
+<div class="def-term">Unsupervised Learning:</div>
+<div class="def-meaning">No labels/targets. Goal: discover hidden structure or patterns in data.</div>
+<div class="def-example">Customer data (age, spending, region) with no target. Goal: segment customers into groups with similar traits.</div>
+</div>
+<div class="analogy">
+Supervised = labeled photos, sort by species. Unsupervised = pile of unlabeled photos. You find natural groups on your own.
+</div>
+<div class="def">
+<div class="def-term">Clustering:</div>
+<div class="def-meaning">Partitioning data into groups where within-group similarity is high, between-group similarity is low.</div>
+<div class="def-example">Customer clustering: High earners grouped, low earners separately. Different marketing per group.</div>
+</div>
+</div>
+<div class="card card-purple">
+<h3>K-Means Algorithm</h3>
+<div class="def">
+<div class="def-term">K-Means:</div>
+<div class="def-meaning">Partitions data into k clusters by iteratively minimizing within-cluster sum of squared distances.</div>
+</div>
+<p><strong>Algorithm steps:</strong></p>
+<div class="step">
+<div class="step-num">1</div>
+<div class="step-content"><strong>Initialize:</strong> Randomly place k centroids in data space</div>
+</div>
+<div class="step">
+<div class="step-num">2</div>
+<div class="step-content"><strong>Assign:</strong> Each point goes to nearest centroid (forms k clusters)</div>
+</div>
+<div class="step">
+<div class="step-num">3</div>
+<div class="step-content"><strong>Update:</strong> Move each centroid to mean of its assigned points</div>
+</div>
+<div class="step">
+<div class="step-num">4</div>
+<div class="step-content"><strong>Repeat:</strong> Steps 2-3 until centroids don't move</div>
+</div>
+<div class="diagram">
+<div class="diagram-title">K-Means Process (Simplified)</div>
+<div style="text-align: center; color: #94a3b8; font-size: 0.9em; line-height: 1.8;">
+Random Start → Assign Points → Move Centroids → Assign Again → ... → Converged
+</div>
+</div>
+<div class="formula">
+WCSS (Within-Cluster Sum of Squares) = Σ Σ ||xᵢ - μₖ||²
+<div class="formula-explain">Distance from each point to centroid squared, summed. K-Means minimizes WCSS.</div>
+</div>
+<div class="key-point">
+<span class="icon">⚡</span>
+<div><strong>K-Means assumes:</strong> Spherical clusters of similar size. Long/elliptical clusters may not work well.</div>
+</div>
+<pre><code><span style="color:#94a3b8"># K-Means with sklearn</span>
+<span style="color:#60a5fa">from</span> sklearn.cluster <span style="color:#60a5fa">import</span> KMeans
+
+<span style="color:#a78bfa">model</span> <span style="color:#94a3b8">=</span> KMeans(n_clusters<span style="color:#94a3b8">=</span>3, init<span style="color:#94a3b8">=</span><span style="color:#f87171">'k-means++'</span>, random_state<span style="color:#94a3b8">=</span>42)
+<span style="color:#a78bfa">clusters</span> <span style="color:#94a3b8">=</span> <span style="color:#a78bfa">model</span>.fit_predict(<span style="color:#a78bfa">X</span>)
+<span style="color:#a78bfa">wcss</span> <span style="color:#94a3b8">=</span> <span style="color:#a78bfa">model</span>.inertia_
+</code></pre>
+</div>
+<div class="card card-green">
+<h3>Choosing K: Elbow Method & Silhouette</h3>
+<div class="def">
+<div class="def-term">Elbow Method:</div>
+<div class="def-meaning">Plot WCSS vs K. Look for "elbow" where WCSS stops decreasing sharply. That's optimal k.</div>
+<div class="def-example">WCSS: K=1→100, K=2→40, K=3→15, K=4→14. Elbow at K=3 (big drop before, small after).</div>
+</div>
+<div class="def">
+<div class="def-term">Silhouette Score:</div>
+<div class="def-meaning">Measures clustering quality. Range -1 to +1. +1 = perfect.</div>
+<div class="def-example">Silhouette = 0.65 = good clustering. Silhouette = 0.2 = weak, overlapping.</div>
+</div>
+<div class="formula">
+Silhouette(point) = (b - a) / max(a, b)
+<div class="formula-explain">a = avg distance to same cluster. b = avg distance to nearest other cluster.</div>
+</div>
+<pre><code><span style="color:#94a3b8"># Elbow method & Silhouette analysis</span>
+<span style="color:#60a5fa">from</span> sklearn.metrics <span style="color:#60a5fa">import</span> silhouette_score
+
+<span style="color:#a78bfa">wcss_list</span> <span style="color:#94a3b8">=</span> []
+<span style="color:#60a5fa">for</span> <span style="color:#a78bfa">k</span> <span style="color:#60a5fa">in</span> <span style="color:#f87171">range</span>(2, 11):
+    <span style="color:#a78bfa">km</span> <span style="color:#94a3b8">=</span> KMeans(n_clusters<span style="color:#94a3b8">=</span><span style="color:#a78bfa">k</span>, random_state<span style="color:#94a3b8">=</span>42)
+    <span style="color:#a78bfa">km</span>.fit(<span style="color:#a78bfa">X</span>)
+    <span style="color:#a78bfa">wcss_list</span>.append(<span style="color:#a78bfa">km</span>.inertia_)
+</code></pre>
+<div class="key-point">
+<span class="icon">⚠️</span>
+<div><strong>K-Means++:</strong> Spread initial centroids far apart. Converges faster. Use <code>init='k-means++'</code></div>
+</div>
+</div>
+<div class="quiz">
+<div class="quiz-title">Test Your Understanding</div>
+<div class="quiz-q">
+<div class="quiz-q-text">Q: In elbow method, WCSS: K=1→500, K=2→200, K=3→180, K=4→170. Which K?</div>
+<button class="quiz-option" onclick="checkQuiz('w3q1', this, true)">A) K=2 (big drop: 500→200, then small drops after)</button>
+<button class="quiz-option" onclick="checkQuiz('w3q1', this, false)">B) K=4 (lowest WCSS)</button>
+<button class="quiz-option" onclick="checkQuiz('w3q1', this, false)">C) K=1 (simpler)</button>
+<button class="quiz-option" onclick="checkQuiz('w3q1', this, false)">D) K=3 (middle)</button>
+<div class="quiz-feedback" id="w3q1-feedback"></div>
+</div>
+</div>
+</div>
+
+<div id="w3-hier" class="section">
+<h2><span class="week-badge week3">Week 3</span> Hierarchical Clustering</h2>
+<div class="card card-blue">
+<h3>Agglomerative (Bottom-Up) Approach</h3>
+<div class="def">
+<div class="def-term">Hierarchical Clustering:</div>
+<div class="def-meaning">Builds tree of clusters (dendrogram). Shows nested relationships at different distance thresholds.</div>
+<div class="def-example">Agglomerative: Start with each point as separate cluster. Merge closest pairs until all in one cluster.</div>
+</div>
+<div class="analogy">
+Organize people into teams. Start with everyone alone. Pair closest friends. Merge pairs that are close. Eventually all together. At any height, cut dendrogram to get k clusters.
+</div>
+<p><strong>Agglomerative (Bottom-Up):</strong></p>
+<div class="step">
+<div class="step-num">1</div>
+<div class="step-content">Start: Each point is its own cluster (n clusters)</div>
+</div>
+<div class="step">
+<div class="step-num">2</div>
+<div class="step-content">Find two nearest clusters. Merge them (n-1 clusters)</div>
+</div>
+<div class="step">
+<div class="step-num">3</div>
+<div class="step-content">Repeat until all points in one cluster</div>
+</div>
+<div class="step">
+<div class="step-num">4</div>
+<div class="step-content">Dendrogram shows merging history. Cut at height = desired k</div>
+</div>
+</div>
+<div class="card card-purple">
+<h3>Linkage Methods: How to Measure Distance</h3>
+<p>When merging clusters, how do you measure distance? Four common methods:</p>
+<table class="comp-table">
+<tr><th>Linkage Type</th><th>Distance Calculation</th><th>When to Use</th><th>Bias</th></tr>
+<tr><td><strong>Single</strong></td><td>Min distance between any two points</td><td>Chain clusters</td><td>Tends to chain together</td></tr>
+<tr><td><strong>Complete</strong></td><td>Max distance between any two points</td><td>Compact clusters</td><td>Tends to produce spherical</td></tr>
+<tr><td><strong>Average</strong></td><td>Mean distance between all pairs</td><td>Balanced approach</td><td>Compromise</td></tr>
+<tr><td><strong>Ward</strong></td><td>Minimizes within-cluster variance</td><td>Most common, good default</td><td>Similar-sized clusters</td></tr>
+</table>
+<div class="def">
+<div class="def-term">Dendrogram:</div>
+<div class="def-meaning">Tree diagram showing cluster merging history. Height = distance at merge. Horizontal line = cut threshold for k clusters.</div>
+<div class="def-example">Samples A,B merge at height 5. Samples C,D merge at height 8. At height 10, all together. Cut at height 7 → 2 clusters.</div>
+</div>
+<pre><code><span style="color:#94a3b8"># Hierarchical clustering</span>
+<span style="color:#60a5fa">from</span> sklearn.cluster <span style="color:#60a5fa">import</span> AgglomerativeClustering
+<span style="color:#60a5fa">from</span> scipy.cluster.hierarchy <span style="color:#60a5fa">import</span> dendrogram, linkage
+
+<span style="color:#a78bfa">Z</span> <span style="color:#94a3b8">=</span> linkage(<span style="color:#a78bfa">X</span>, method<span style="color:#94a3b8">=</span><span style="color:#f87171">'ward'</span>)
+dendrogram(<span style="color:#a78bfa">Z</span>)
+
+<span style="color:#a78bfa">model</span> <span style="color:#94a3b8">=</span> AgglomerativeClustering(n_clusters<span style="color:#94a3b8">=</span>3, linkage<span style="color:#94a3b8">=</span><span style="color:#f87171">'ward'</span>)
+<span style="color:#a78bfa">labels</span> <span style="color:#94a3b8">=</span> <span style="color:#a78bfa">model</span>.fit_predict(<span style="color:#a78bfa">X</span>)
+</code></pre>
+<div class="key-point">
+<span class="icon">💡</span>
+<div><strong>Ward is default:</strong> Minimizes within-cluster variance. Similar to K-Means. Good starting point.</div>
+</div>
+</div>
+<div class="card card-green">
+<h3>Dendrograms & Interpretation</h3>
+<div class="analogy">
+Dendrogram is like evolutionary tree. Height = "distance" or "time since common ancestor." Horizontal line = you cutting tree, determining clusters.
+</div>
+<p><strong>Reading dendrograms:</strong></p>
+<ul>
+<li>Y-axis = distance at merge. Higher = more different clusters.</li>
+<li>Vertical lines = points or clusters. Horizontal = merge event.</li>
+<li>Cut dendrogram at height to get k clusters. Higher = fewer clusters.</li>
+<li>Tall jumps indicate natural boundaries.</li>
+</ul>
+<div class="key-point">
+<span class="icon">🎯</span>
+<div><strong>Advantage over K-Means:</strong> No need to specify k upfront. Visualize dendrogram first. Handles non-spherical clusters better.</div>
+</div>
+</div>
+<div class="quiz">
+<div class="quiz-title">Test Your Understanding</div>
+<div class="quiz-q">
+<div class="quiz-q-text">Q: Which linkage method produces most balanced, spherical clusters?</div>
+<button class="quiz-option" onclick="checkQuiz('w3q2', this, false)">A) Single linkage</button>
+<button class="quiz-option" onclick="checkQuiz('w3q2', this, true)">B) Complete linkage (uses max distance, resists chaining)</button>
+<button class="quiz-option" onclick="checkQuiz('w3q2', this, false)">C) Average linkage</button>
+<button class="quiz-option" onclick="checkQuiz('w3q2', this, false)">D) Ward linkage</button>
+<div class="quiz-feedback" id="w3q2-feedback"></div>
+</div>
+</div>
+</div>
+
+<div id="w3-dbscan" class="section">
+<h2><span class="week-badge week3">Week 3</span> DBSCAN: Density-Based Clustering</h2>
+<div class="card card-blue">
+<h3>Why DBSCAN?</h3>
+<p>K-Means & Hierarchical assume globular (spherical) clusters. Real data often has irregular shapes.</p>
+<div class="def">
+<div class="def-term">DBSCAN (Density-Based Spatial Clustering):</div>
+<div class="def-meaning">Groups points based on density. Finds clusters of any shape. Labels low-density points as outliers.</div>
+<div class="def-example">Credit card fraud: Normal transactions (high density). Frauds (isolated, low density). DBSCAN finds frauds as outliers.</div>
+</div>
+<div class="analogy">
+Groups of people in room. Densely packed groups = clusters. Isolated people = outliers/noise. DBSCAN finds dense groups, ignores sparse.
+</div>
+<p><strong>Key advantage:</strong> Detects outliers. K-Means forces every point into cluster. DBSCAN can reject points as noise.</p>
+</div>
+<div class="card card-purple">
+<h3>DBSCAN Algorithm & Parameters</h3>
+<div class="def">
+<div class="def-term">Core Points, Border Points, Noise:</div>
+<div class="def-meaning">Core = at least min_samples neighbors within eps. Border = neighbor of core. Noise = neither.</div>
+</div>
+<p><strong>Key parameters:</strong></p>
+<ul>
+<li><code>eps (ε):</code> Radius of neighborhood. Too small = many noise. Too large = merges clusters.</li>
+<li><code>min_samples:</code> Min neighbors to be core point. Default = 2*dimensions. High = more noise.</li>
+</ul>
+<p><strong>Algorithm:</strong></p>
+<div class="step">
+<div class="step-num">1</div>
+<div class="step-content">For each point, find all neighbors within eps</div>
+</div>
+<div class="step">
+<div class="step-num">2</div>
+<div class="step-content">If ≥ min_samples neighbors, mark as core point</div>
+</div>
+<div class="step">
+<div class="step-num">3</div>
+<div class="step-content">Core points within eps → same cluster</div>
+</div>
+<div class="step">
+<div class="step-num">4</div>
+<div class="step-content">Border points added to nearest core's cluster. Noise stays alone.</div>
+</div>
+<div class="key-point">
+<span class="icon">⚡</span>
+<div><strong>No k parameter:</strong> DBSCAN discovers clusters. eps & min_samples control granularity.</div>
+</div>
+<pre><code><span style="color:#94a3b8"># DBSCAN clustering</span>
+<span style="color:#60a5fa">from</span> sklearn.cluster <span style="color:#60a5fa">import</span> DBSCAN
+<span style="color:#60a5fa">from</span> sklearn.preprocessing <span style="color:#60a5fa">import</span> StandardScaler
+
+<span style="color:#a78bfa">X_scaled</span> <span style="color:#94a3b8">=</span> StandardScaler().fit_transform(<span style="color:#a78bfa">X</span>)
+
+<span style="color:#a78bfa">model</span> <span style="color:#94a3b8">=</span> DBSCAN(eps<span style="color:#94a3b8">=</span>0.3, min_samples<span style="color:#94a3b8">=</span>5)
+<span style="color:#a78bfa">labels</span> <span style="color:#94a3b8">=</span> <span style="color:#a78bfa">model</span>.fit_predict(<span style="color:#a78bfa">X_scaled</span>)
+
+<span style="color:#a78bfa">n_clusters</span> <span style="color:#94a3b8">=</span> <span style="color:#f87171">len</span>(<span style="color:#f87171">set</span>(<span style="color:#a78bfa">labels</span>))
+<span style="color:#a78bfa">n_noise</span> <span style="color:#94a3b8">=</span> <span style="color:#f87171">list</span>(<span style="color:#a78bfa">labels</span>).count(<span style="color:#94a3b8">-</span>1)
+</code></pre>
+</div>
+<div class="card card-green">
+<h3>Clustering Comparison</h3>
+<table class="comp-table">
+<tr><th>Algorithm</th><th>Cluster Shape</th><th>Need k?</th><th>Handles Outliers</th><th>Complexity</th></tr>
+<tr><td><strong>K-Means</strong></td><td>Spherical</td><td>Yes (specify k)</td><td>No</td><td>O(nkd) Fast</td></tr>
+<tr><td><strong>Hierarchical</strong></td><td>Any shape</td><td>No (cut dendrogram)</td><td>No</td><td>O(n²) Slow</td></tr>
+<tr><td><strong>DBSCAN</strong></td><td>Any shape</td><td>No (uses density)</td><td>Yes (labels -1)</td><td>O(n²)</td></tr>
+</table>
+<div class="key-point">
+<span class="icon">🎯</span>
+<div><strong>Choose based on your problem:</strong> K-Means = quick baseline. Hierarchical = explore. DBSCAN = when outliers matter or irregular shapes.</div>
+</div>
+</div>
+<div class="quiz">
+<div class="quiz-title">Test Your Understanding</div>
+<div class="quiz-q">
+<div class="quiz-q-text">Q: DBSCAN assigns label -1 to points. What does this mean?</div>
+<button class="quiz-option" onclick="checkQuiz('w3q3', this, true)">A) Noise/outliers: not dense enough to be core, not neighbor of core</button>
+<button class="quiz-option" onclick="checkQuiz('w3q3', this, false)">B) Error: something went wrong</button>
+<button class="quiz-option" onclick="checkQuiz('w3q3', this, false)">C) First cluster</button>
+<button class="quiz-option" onclick="checkQuiz('w3q3', this, false)">D) Unassigned: wait for next iteration</button>
+<div class="quiz-feedback" id="w3q3-feedback"></div>
+</div>
+</div>
+</div>
+
+<div id="mistakes" class="section">
+<h2>Common Mistakes & How to Avoid Them</h2>
+<div class="mistake">
+<div class="mistake-title">Mistake 1: Forgetting drop_first=True with Categorical Variables</div>
+<div class="mistake-problem"><strong>Error:</strong> model.fit() crashes with "singular matrix" or coefficients are NaN.</div>
+<div class="mistake-fix"><strong>Fix:</strong> Always use <code>pd.get_dummies(df, drop_first=True)</code>. k categories → k-1 dummies.</div>
+</div>
+<div class="mistake">
+<div class="mistake-title">Mistake 2: Comparing Models Using Only R² (High Bias)</div>
+<div class="mistake-problem"><strong>Error:</strong> Add useless feature. R² increases (always does with more features). You think improved, but didn't.</div>
+<div class="mistake-fix"><strong>Fix:</strong> Use Adjusted R² for comparison. Check test set performance.</div>
+</div>
+<div class="mistake">
+<div class="mistake-title">Mistake 3: Not Scaling Features for K-Means</div>
+<div class="mistake-problem"><strong>Error:</strong> Feature "income" (0-1,000,000) dominates "age" (0-100). K-Means uses Euclidean, sensitive to scale.</div>
+<div class="mistake-fix"><strong>Fix:</strong> StandardScaler or MinMaxScaler before clustering. <code>StandardScaler().fit_transform(X)</code></div>
+</div>
+<div class="mistake">
+<div class="mistake-title">Mistake 4: Decision Tree: Not Preventing Overfitting</div>
+<div class="mistake-problem"><strong>Error:</strong> Tree grows unbounded. Train = 100%, test = 60%. Memorized noise.</div>
+<div class="mistake-fix"><strong>Fix:</strong> Use pre-pruning: max_depth, min_samples_split, min_samples_leaf. Monitor test accuracy.</div>
+</div>
+<div class="mistake">
+<div class="mistake-title">Mistake 5: Choosing K in K-Means by Elbow Alone</div>
+<div class="mistake-problem"><strong>Error:</strong> Elbow method is heuristic. Denbow not always clear. Pick K=4 but K=5 better.</div>
+<div class="mistake-fix"><strong>Fix:</strong> Use both elbow AND silhouette score. Try multiple K. Cross-validate.</div>
+</div>
+<div class="mistake">
+<div class="mistake-title">Mistake 6: Confusing Correlation with Causation</div>
+<div class="mistake-problem"><strong>Error:</strong> Correlation = 0.9 between hours studied and test score. "More studying causes higher scores." Maybe both from student ability.</div>
+<div class="mistake-fix"><strong>Fix:</strong> Correlation shows association only. Prove causation with experiments or domain logic.</div>
+</div>
+<div class="mistake">
+<div class="mistake-title">Mistake 7: K-Means on Non-Spherical Data</div>
+<div class="mistake-problem"><strong>Error:</strong> Data has elongated/crescent clusters. K-Means assumes spherical. Bad clusters.</div>
+<div class="mistake-fix"><strong>Fix:</strong> Use DBSCAN or hierarchical clustering. Or transform features (e.g., PCA) first.</div>
+</div>
+<div class="mistake">
+<div class="mistake-title">Mistake 8: Ignoring Interpretation of Regression Coefficients</div>
+<div class="mistake-problem"><strong>Error:</strong> β₁ = 0.0034. You say "slope is 0.0034" without context. Not actionable.</div>
+<div class="mistake-fix"><strong>Fix:</strong> Describe coefficient in business context. "Each year of experience adds $3,400 to salary." Check units!</div>
+</div>
+
+<div id="faqs" class="section">
+<h2>Frequently Asked Questions & Interview Prep</h2>
+<div class="card card-blue">
+<h3>Regression Interview Questions</h3>
+<div class="def">
+<div class="def-term">Q1: Explain the difference between R² and Adjusted R².</div>
+<div class="def-meaning">R² increases with any added variable. Adjusted R² penalizes extra variables via (n-1)/(n-p-1) factor. Use Adjusted R² for fair model comparison.</div>
+<div class="def-example">Model A: R²=0.85 with 5 features. Model B: R²=0.87 with 20 features. Adjusted R² A=0.84, B=0.80. Model A is better despite lower R²!</div>
+</div>
+
+<div class="def">
+<div class="def-term">Q2: When should you use MAE vs RMSE?</div>
+<div class="def-meaning">MAE = robust to outliers (doesn't penalize huge errors as much). RMSE = sensitive to outliers (penalizes large errors heavily).</div>
+<div class="def-example">Predictions [1, 2, 3, 1000]: MAE = 251.5, RMSE = 500.1. If outlier matters (like hospital readmissions), use RMSE.</div>
+</div>
+
+<div class="def">
+<div class="def-term">Q3: Your model has multicollinearity. What happens & how to fix?</div>
+<div class="def-meaning">Coefficients become unstable, interpretations unreliable, predictions OK. Check VIF. If VIF > 5-10, remove or combine correlated features.</div>
+<div class="def-example">Income & wealth highly correlated (r=0.95). Both coefficients ±wildly. Remove one or use PCA. Problem fixed.</div>
+</div>
+
+<div class="def">
+<div class="def-term">Q4: Why scale features for regression? Is it necessary?</div>
+<div class="def-meaning">Not necessary for Linear Regression (invariant to scaling). BUT necessary for: gradient descent (converges faster), regularization (Ridge/Lasso), distance-based methods.</div>
+<div class="def-example">Income (0-1M) vs years employed (0-50). If using Ridge, scaling prevents income dominating penalty. Always scale for consistency.</div>
+</div>
+</div>
+
+<div class="card card-purple">
+<h3>Decision Trees & Ensemble Methods Interview Questions</h3>
+<div class="def">
+<div class="def-term">Q5: Explain overfitting in decision trees and how to prevent it.</div>
+<div class="def-meaning">Tree grows deep, memorizes training data including noise. Train accuracy high, test accuracy low. Prevent via: max_depth, min_samples_split, min_samples_leaf, post-pruning.</div>
+<div class="def-example">Unrestricted tree: 100 nodes, train=99%, test=60%. Limited tree (max_depth=5): train=85%, test=82%. Gap reduced = less overfitting.</div>
+</div>
+
+<div class="def">
+<div class="def-term">Q6: What is information gain and how does tree selection use it?</div>
+<div class="def-meaning">IG = reduction in impurity after split. Tree greedily picks split maximizing IG at each node. Doesn't guarantee globally optimal tree.</div>
+<div class="def-example">Before split: Entropy=0.8. After split A: Entropy=0.3, 0.2 (IG=0.5). After split B: Entropy=0.5, 0.3 (IG=0.3). Choose A (higher IG).</div>
+</div>
+
+<div class="def">
+<div class="def-term">Q7: Gini vs Entropy - which is better?</div>
+<div class="def-meaning">Both measure impurity, produce similar trees. Gini simpler math (no log). Entropy more information-theoretic. sklearn defaults to Gini. Choose either.</div>
+<div class="def-example">For classification: both work. Gini slightly faster. Entropy slightly more interpretable. Performance difference negligible.</div>
+</div>
+
+<div class="def">
+<div class="def-term">Q8: How do you interpret feature importance from tree?</div>
+<div class="def-meaning">Feature importance = total reduction in impurity across all splits using that feature. Higher = more influential in predictions.</div>
+<div class="def-example">Credit score: 0.45, Income: 0.35, Employment: 0.20. Credit score drives model most. First split often uses most important feature.</div>
+</div>
+</div>
+
+<div class="card card-green">
+<h3>Clustering Interview Questions</h3>
+<div class="def">
+<div class="def-term">Q9: How do you choose k in K-Means?</div>
+<div class="def-meaning">No perfect answer. Elbow method (plot WCSS vs k), Silhouette score (higher = better), domain knowledge. Combine methods.</div>
+<div class="def-example">Elbow suggests k=3. Silhouette: k=2→0.45, k=3→0.52, k=4→0.50. Choose k=3. Domain: 3 customer segments makes business sense.</div>
+</div>
+
+<div class="def">
+<div class="def-term">Q10: Why is K-Means++ better than random initialization?</div>
+<div class="def-meaning">K-Means++ spreads initial centroids far apart. Converges faster & finds better solutions. Random init may get stuck in local minima.</div>
+<div class="def-example">Random init: converges in 15 iterations. K-Means++: converges in 4 iterations. Same WCSS, much faster. Use init='k-means++' always.</div>
+</div>
+
+<div class="def">
+<div class="div-term">Q11: When should you use DBSCAN instead of K-Means?</div>
+<div class="def-meaning">DBSCAN when: (1) clusters non-spherical, (2) outliers important, (3) k unknown. K-Means when: (1) spherical clusters, (2) fast needed, (3) k specified.</div>
+<div class="def-example">Fraud detection: K-Means forces every transaction into cluster. DBSCAN labels anomalies as -1 (noise) = frauds detected! Use DBSCAN.</div>
+</div>
+
+<div class="def">
+<div class="def-term">Q12: What does Silhouette score measure? How to interpret?</div>
+<div class="def-meaning">Silhouette = how similar point is to its cluster vs nearest other cluster. Range -1 to +1. -1 = wrong cluster, 0 = ambiguous, +1 = perfect.</div>
+<div class="def-example">Silhouette = 0.65 = good clustering. Silhouette = -0.1 = some points in wrong clusters. Silhouette = 0.2 = weak, overlapping clusters.</div>
+</div>
+</div>
+
+</div>
+
+<div class="section" style="display: block !important; margin-top: 40px; padding: 20px 0; border-top: 2px solid #334155;">
+<h2>Detailed Hands-On Walkthroughs & Real Examples</h2>
+
+<div class="card card-blue">
+<h3>Hyperparameter Tuning Guide: Finding Optimal Parameters</h3>
+<p><strong>What are hyperparameters?</strong> Parameters you set BEFORE training (not learned from data). Examples: max_depth, learning_rate, k, eps.</p>
+
+<p><strong>Manual tuning approach:</strong></p>
+<table class="comp-table">
+<tr>
+<th>Algorithm</th>
+<th>Key Hyperparameters</th>
+<th>Typical Range to Try</th>
+<th>Direction When Model Overfits</th>
+</tr>
+<tr>
+<td><strong>Linear Regression</strong></td>
+<td>Regularization (Ridge/Lasso): alpha</td>
+<td>0.001, 0.01, 0.1, 1.0, 10.0</td>
+<td>Increase alpha (more penalty)</td>
+</tr>
+<tr>
+<td><strong>Decision Tree</strong></td>
+<td>max_depth, min_samples_split, min_samples_leaf</td>
+<td>depth: 3-15, samples: 5-50</td>
+<td>Decrease max_depth, increase min_samples</td>
+</tr>
+<tr>
+<td><strong>K-Means</strong></td>
+<td>n_clusters, init, n_init</td>
+<td>Try multiple k (elbow), use init='k-means++'</td>
+<td>k selection via elbow or silhouette</td>
+</tr>
+<tr>
+<td><strong>Hierarchical</strong></td>
+<td>n_clusters, linkage</td>
+<td>linkage: 'ward', 'complete', 'average'</td>
+<td>Try different linkage methods</td>
+</tr>
+<tr>
+<td><strong>DBSCAN</strong></td>
+<td>eps, min_samples</td>
+<td>eps: 0.1-0.9 (scale-dependent), min_samples: 5-50</td>
+<td>Increase eps if too many noise points</td>
+</tr>
+</table>
+
+<div class="key-point">
+<span class="icon">🎯</span>
+<div><strong>GridSearchCV:</strong> Automatically try all parameter combinations. Very useful for finding optimal hyperparameters without manual effort.</div>
+</div>
+
+<pre><code><span style="color:#94a3b8"># Hyperparameter tuning with GridSearchCV</span>
+<span style="color:#60a5fa">from</span> sklearn.model_selection <span style="color:#60a5fa">import</span> GridSearchCV
+<span style="color:#60a5fa">from</span> sklearn.tree <span style="color:#60a5fa">import</span> DecisionTreeClassifier
+
+<span style="color:#a78bfa">param_grid</span> <span style="color:#94a3b8">=</span> {
+    <span style="color:#f87171">'max_depth'</span>: [3, 5, 7, 10, 15],
+    <span style="color:#f87171">'min_samples_split'</span>: [5, 10, 20, 50],
+    <span style="color:#f87171">'min_samples_leaf'</span>: [2, 4, 8]
+}
+
+<span style="color:#a78bfa">grid_search</span> <span style="color:#94a3b8">=</span> GridSearchCV(
+    DecisionTreeClassifier(random_state<span style="color:#94a3b8">=</span>42),
+    <span style="color:#a78bfa">param_grid</span>,
+    cv<span style="color:#94a3b8">=</span>5,
+    scoring<span style="color:#94a3b8">=</span><span style="color:#f87171">'accuracy'</span>,
+    n_jobs<span style="color:#94a3b8">=</span><span style="color:#94a3b8">-</span>1  <span style="color:#94a3b8"># Use all cores</span>
+)
+<span style="color:#a78bfa">grid_search</span>.fit(<span style="color:#a78bfa">X_train</span>, <span style="color:#a78bfa">y_train</span>)
+
+<span style="color:#60a5fa">print</span>(<span style="color:#f87171">f</span><span style="color:#94a3b8">"Best params: {grid_search.best_params_}"</span>)
+<span style="color:#60a5fa">print</span>(<span style="color:#f87171">f</span><span style="color:#94a3b8">"Best CV score: {grid_search.best_score_:.3f}"</span>)
+
+<span style="color:#a78bfa">best_model</span> <span style="color:#94a3b8">=</span> <span style="color:#a78bfa">grid_search</span>.best_estimator_
+<span style="color:#a78bfa">test_score</span> <span style="color:#94a3b8">=</span> <span style="color:#a78bfa">best_model</span>.score(<span style="color:#a78bfa">X_test</span>, <span style="color:#a78bfa">y_test</span>)
+</code></pre>
+
+</div>
+
+<div class="card card-blue">
+<h3>Week 1: Complete Regression Workflow Example</h3>
+<p><strong>Scenario:</strong> Predict used car prices using features: mileage, age, engine size, condition rating.</p>
+
+<div class="diagram">
+<div class="diagram-title">Complete Regression Pipeline</div>
+<div class="flow">
+<div class="flow-box data">Load Car Data (500 cars)</div>
+<div class="arrow-down">↓</div>
+<div class="flow-box model">EDA: Check correlations, visualize relationships</div>
+<div class="arrow-down">↓</div>
+<div class="flow-box result">Split: 70% train, 30% test</div>
+<div class="arrow-down">↓</div>
+<div class="flow-box combine">Scale features & encode categorical</div>
+<div class="arrow-down">↓</div>
+<div class="flow-box model">Build & Train Multiple Linear Regression</div>
+<div class="arrow-down">↓</div>
+<div class="flow-box result">Evaluate: R²=0.87, RMSE=$2,450, MAE=$1,800</div>
+<div class="arrow-down">↓</div>
+<div class="flow-box data">Interpret: Each 1000 mi → -$280, Each year older → -$1200</div>
+</div>
+</div>
+
+<pre><code><span style="color:#94a3b8"># Complete regression example: predict car prices</span>
+<span style="color:#60a5fa">import</span> pandas <span style="color:#60a5fa">as</span> pd
+<span style="color:#60a5fa">import</span> numpy <span style="color:#60a5fa">as</span> np
+<span style="color:#60a5fa">from</span> sklearn.model_selection <span style="color:#60a5fa">import</span> train_test_split
+<span style="color:#60a5fa">from</span> sklearn.linear_model <span style="color:#60a5fa">import</span> LinearRegression
+<span style="color:#60a5fa">from</span> sklearn.preprocessing <span style="color:#60a5fa">import</span> StandardScaler
+<span style="color:#60a5fa">from</span> sklearn.metrics <span style="color:#60a5fa">import</span> r2_score, mean_absolute_error
+
+<span style="color:#94a3b8"># Load & prepare</span>
+<span style="color:#a78bfa">df</span> <span style="color:#94a3b8">=</span> pd.read_csv(<span style="color:#f87171">'cars.csv'</span>)
+<span style="color:#a78bfa">X</span> <span style="color:#94a3b8">=</span> df[[<span style="color:#f87171">'mileage'</span>, <span style="color:#f87171">'age'</span>, <span style="color:#f87171">'engine_size'</span>, <span style="color:#f87171">'condition'</span>]]
+<span style="color:#a78bfa">y</span> <span style="color:#94a3b8">=</span> df[<span style="color:#f87171">'price'</span>]
+
+<span style="color:#94a3b8"># Split & scale</span>
+<span style="color:#a78bfa">X_train</span>, <span style="color:#a78bfa">X_test</span>, <span style="color:#a78bfa">y_train</span>, <span style="color:#a78bfa">y_test</span> <span style="color:#94a3b8">=</span> train_test_split(<span style="color:#a78bfa">X</span>, <span style="color:#a78bfa">y</span>, test_size<span style="color:#94a3b8">=</span>0.3, random_state<span style="color:#94a3b8">=</span>42)
+<span style="color:#a78bfa">scaler</span> <span style="color:#94a3b8">=</span> StandardScaler()
+<span style="color:#a78bfa">X_train_scaled</span> <span style="color:#94a3b8">=</span> <span style="color:#a78bfa">scaler</span>.fit_transform(<span style="color:#a78bfa">X_train</span>)
+<span style="color:#a78bfa">X_test_scaled</span> <span style="color:#94a3b8">=</span> <span style="color:#a78bfa">scaler</span>.transform(<span style="color:#a78bfa">X_test</span>)
+
+<span style="color:#94a3b8"># Train model</span>
+<span style="color:#a78bfa">model</span> <span style="color:#94a3b8">=</span> LinearRegression()
+<span style="color:#a78bfa">model</span>.fit(<span style="color:#a78bfa">X_train_scaled</span>, <span style="color:#a78bfa">y_train</span>)
+
+<span style="color:#94a3b8"># Evaluate</span>
+<span style="color:#a78bfa">y_pred</span> <span style="color:#94a3b8">=</span> <span style="color:#a78bfa">model</span>.predict(<span style="color:#a78bfa">X_test_scaled</span>)
+<span style="color:#60a5fa">print</span>(<span style="color:#f87171">f</span><span style="color:#94a3b8">"R²: {r2_score(y_test, y_pred):.3f}"</span>)
+<span style="color:#60a5fa">print</span>(<span style="color:#f87171">f</span><span style="color:#94a3b8">"MAE: ${mean_absolute_error(y_test, y_pred):.0f}"</span>)
+</code></pre>
+
+<div class="key-point">
+<span class="icon">💡</span>
+<div><strong>Order matters:</strong> fit_transform() on training (learn mean/std), transform() on test (apply same scaling). Don't fit on test!</div>
+</div>
+</div>
+
+<div class="card card-purple">
+<h3>Week 2: Decision Tree Deep Dive with Visualization</h3>
+<p><strong>Scenario:</strong> Classify loan applications as "Approve" or "Reject" using income, credit score, debt-to-income ratio, employment history.</p>
+
+<p><strong>Step-by-step tree building:</strong></p>
+<div class="step">
+<div class="step-num">1</div>
+<div class="step-content"><strong>Root Node (All 1000 applications):</strong> 70% Approved, 30% Rejected. Entropy = 0.88. Try all possible first splits.</div>
+</div>
+<div class="step">
+<div class="step-num">2</div>
+<div class="step-content"><strong>Best split found:</strong> "Credit Score > 650?" IG = 0.45. Split into left (850 samples, 80% approved) and right (150 samples, 20% approved).</div>
+</div>
+<div class="step">
+<div class="step-num">3</div>
+<div class="step-content"><strong>Left node (credit > 650):</strong> Entropy = 0.64. Further split on "Income > 50k?" IG = 0.25.</div>
+</div>
+<div class="step">
+<div class="step-num">4</div>
+<div class="step-content"><strong>Right node (credit ≤ 650):</strong> Entropy = 0.97. Try splits. Best: "Years employed > 3?" IG = 0.15.</div>
+</div>
+<div class="step">
+<div class="step-num">5</div>
+<div class="step-content"><strong>Recursively continue</strong> until nodes pure enough or min_samples reached. Tree height limited by max_depth.</div>
+</div>
+
+<pre><code><span style="color:#94a3b8"># Decision tree with feature importance & visualization</span>
+<span style="color:#60a5fa">from</span> sklearn.tree <span style="color:#60a5fa">import</span> DecisionTreeClassifier, plot_tree
+<span style="color:#60a5fa">import</span> matplotlib.pyplot <span style="color:#60a5fa">as</span> plt
+
+<span style="color:#a78bfa">model</span> <span style="color:#94a3b8">=</span> DecisionTreeClassifier(
+    max_depth<span style="color:#94a3b8">=</span>4,
+    min_samples_split<span style="color:#94a3b8">=</span>20,
+    min_samples_leaf<span style="color:#94a3b8">=</span>10,
+    criterion<span style="color:#94a3b8">=</span><span style="color:#f87171">'gini'</span>,
+    random_state<span style="color:#94a3b8">=</span>42
+)
+<span style="color:#a78bfa">model</span>.fit(<span style="color:#a78bfa">X_train</span>, <span style="color:#a78bfa">y_train</span>)
+
+<span style="color:#94a3b8"># Which features matter?</span>
+<span style="color:#60a5fa">for</span> <span style="color:#a78bfa">feature</span>, <span style="color:#a78bfa">importance</span> <span style="color:#60a5fa">in</span> <span style="color:#f87171">zip</span>(<span style="color:#a78bfa">X_train</span>.columns, <span style="color:#a78bfa">model</span>.feature_importances_):
+    <span style="color:#60a5fa">print</span>(<span style="color:#f87171">f</span><span style="color:#94a3b8">"{feature}: {importance:.3f}"</span>)
+
+<span style="color:#94a3b8"># Visualize tree</span>
+plt.figure(figsize<span style="color:#94a3b8">=</span>(20, 10))
+plot_tree(<span style="color:#a78bfa">model</span>, feature_names<span style="color:#94a3b8">=</span><span style="color:#a78bfa">X_train</span>.columns, class_names<span style="color:#94a3b8">=</span>[<span style="color:#f87171">'Reject'</span>, <span style="color:#f87171">'Approve'</span>], filled<span style="color:#94a3b8">=</span><span style="color:#60a5fa">True</span>, rounded<span style="color:#94a3b8">=</span><span style="color:#60a5fa">True</span>)
+plt.show()
+</code></pre>
+
+<div class="def">
+<div class="def-term">Feature Importance in Trees:</div>
+<div class="def-meaning">Measures how much each feature contributes to reducing impurity across all splits. Higher = more important for predictions.</div>
+<div class="def-example">Credit score importance = 0.45, Income importance = 0.35, Debt ratio = 0.15, Employment = 0.05. Credit score drives decisions most.</div>
+</div>
+
+</div>
+
+<div class="card card-purple">
+<h3>Model Evaluation Best Practices Checklist</h3>
+<p><strong>Before deploying any model, verify:</strong></p>
+<ul>
+<li><strong>Data quality:</strong> Check for missing values, outliers, class imbalance</li>
+<li><strong>Train/test split:</strong> Proper stratification for classification, time-series aware for temporal data</li>
+<li><strong>No data leakage:</strong> Preprocessing fit on train only, target info never in features</li>
+<li><strong>Baseline comparison:</strong> Model beats simple baseline (mean predictor, dummy classifier)</li>
+<li><strong>Multiple metrics:</strong> Don't rely on single metric (R², accuracy). Check MAE, RMSE, precision/recall for classification</li>
+<li><strong>Cross-validation:</strong> 5-fold CV to ensure stable performance across different data splits</li>
+<li><strong>Feature importance:</strong> Verify important features make business sense (not random noise)</li>
+<li><strong>Residual analysis (regression):</strong> Plot residuals. Should be random, normally distributed, homoscedastic (constant variance)</li>
+<li><strong>Confusion matrix (classification):</strong> Understand false positives vs false negatives impact for your problem</li>
+<li><strong>Sensitivity analysis:</strong> Small changes in hyperparameters shouldn't drastically change results</li>
+</ul>
+
+<div class="analogy">
+Deploying untested model = flying plane without pre-flight check. Crashes guaranteed. Checklist prevents catastrophe.
+</div>
+
+<pre><code><span style="color:#94a3b8"># Model evaluation checklist code</span>
+<span style="color:#60a5fa">from</span> sklearn.model_selection <span style="color:#60a5fa">import</span> cross_val_score
+<span style="color:#60a5fa">import</span> numpy <span style="color:#60a5fa">as</span> np
+
+<span style="color:#94a3b8"># 1. Baseline</span>
+<span style="color:#a78bfa">baseline_score</span> <span style="color:#94a3b8">=</span> (<span style="color:#a78bfa">y_test</span> <span style="color:#94a3b8">==</span> <span style="color:#a78bfa">y_test</span>.mode()[0]).mean()  <span style="color:#94a3b8"># Accuracy of always predicting most common class</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#f87171">f</span><span style="color:#94a3b8">"Baseline accuracy: {baseline_score:.3f}"</span>)
+
+<span style="color:#94a3b8"># 2. Cross-validation</span>
+<span style="color:#a78bfa">cv_scores</span> <span style="color:#94a3b8">=</span> cross_val_score(<span style="color:#a78bfa">model</span>, <span style="color:#a78bfa">X</span>, <span style="color:#a78bfa">y</span>, cv<span style="color:#94a3b8">=</span>5, scoring<span style="color:#94a3b8">=</span><span style="color:#f87171">'accuracy'</span>)
+<span style="color:#60a5fa">print</span>(<span style="color:#f87171">f</span><span style="color:#94a3b8">"CV scores: {cv_scores}, mean: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}"</span>)
+
+<span style="color:#94a3b8"># 3. Residual analysis (regression)</span>
+<span style="color:#a78bfa">residuals</span> <span style="color:#94a3b8">=</span> <span style="color:#a78bfa">y_test</span> <span style="color:#94a3b8">-</span> <span style="color:#a78bfa">y_pred</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#f87171">f</span><span style="color:#94a3b8">"Mean residual: {residuals.mean():.6f} (should be ~0)"</span>)
+<span style="color:#60a3fa">print</span>(<span style="color:#f87171">f</span><span style="color:#94a3b8">"Std of residuals: {residuals.std():.3f}"</span>)
+</code></pre>
+
+</div>
+
+<div class="card card-green">
+<h3>Week 3: End-to-End Clustering Comparison</h3>
+<p><strong>Scenario:</strong> Customer segmentation. Dataset: 5000 customers with spending, frequency, recency, product preferences.</p>
+
+<p><strong>Comparing all 3 algorithms:</strong></p>
+<div class="step">
+<div class="step-num">1</div>
+<div class="step-content"><strong>K-Means:</strong> Elbow method suggests k=4. Train model. 4 spherical customer groups found. Fast, but misses non-spherical patterns.</div>
+</div>
+<div class="step">
+<div class="step-num">2</div>
+<div class="step-content"><strong>Hierarchical:</strong> Dendogram shows natural breaks at 3, 4, or 5 clusters. Ward linkage produces balanced clusters. More flexible shape.</div>
+</div>
+<div class="step">
+<div class="step-num">3</div>
+<div class="step-content"><strong>DBSCAN:</strong> eps=0.4, min_samples=15. Finds 5 clusters + identifies 42 outliers (fraud/unusual behavior). Reveals hidden anomalies!</div>
+</div>
+
+<pre><code><span style="color:#94a3b8"># Compare clustering approaches on same data</span>
+<span style="color:#60a5fa">from</span> sklearn.cluster <span style="color:#60a5fa">import</span> KMeans, AgglomerativeClustering, DBSCAN
+<span style="color:#60a5fa">from</span> sklearn.preprocessing <span style="color:#60a5fa">import</span> StandardScaler
+<span style="color:#60a5fa">from</span> sklearn.metrics <span style="color:#60a5fa">import</span> silhouette_score, davies_bouldin_score
+<span style="color:#60a5fa">import</span> matplotlib.pyplot <span style="color:#60a5fa">as</span> plt
+
+<span style="color:#a78bfa">X_scaled</span> <span style="color:#94a3b8">=</span> StandardScaler().fit_transform(<span style="color:#a78bfa">X</span>)
+
+<span style="color:#94a3b8"># K-Means</span>
+<span style="color:#a78bfa">km</span> <span style="color:#94a3b8">=</span> KMeans(n_clusters<span style="color:#94a3b8">=</span>4, init<span style="color:#94a3b8">=</span><span style="color:#f87171">'k-means++'</span>, random_state<span style="color:#94a3b8">=</span>42)
+<span style="color:#a78bfa">km_labels</span> <span style="color:#94a3b8">=</span> <span style="color:#a78bfa">km</span>.fit_predict(<span style="color:#a78bfa">X_scaled</span>)
+<span style="color:#a78bfa">km_silhouette</span> <span style="color:#94a3b8">=</span> silhouette_score(<span style="color:#a78bfa">X_scaled</span>, <span style="color:#a78bfa">km_labels</span>)
+
+<span style="color:#94a3b8"># Hierarchical</span>
+<span style="color:#a78bfa">hc</span> <span style="color:#94a3b8">=</span> AgglomerativeClustering(n_clusters<span style="color:#94a3b8">=</span>4, linkage<span style="color:#94a3b8">=</span><span style="color:#f87171">'ward'</span>)
+<span style="color:#a78bfa">hc_labels</span> <span style="color:#94a3b8">=</span> <span style="color:#a78bfa">hc</span>.fit_predict(<span style="color:#a78bfa">X_scaled</span>)
+<span style="color:#a78bfa">hc_silhouette</span> <span style="color:#94a3b8">=</span> silhouette_score(<span style="color:#a78bfa">X_scaled</span>, <span style="color:#a78bfa">hc_labels</span>)
+
+<span style="color:#94a3b8"># DBSCAN</span>
+<span style="color:#a78bfa">db</span> <span style="color:#94a3b8">=</span> DBSCAN(eps<span style="color:#94a3b8">=</span>0.4, min_samples<span style="color:#94a3b8">=</span>15)
+<span style="color:#a78bfa">db_labels</span> <span style="color:#94a3b8">=</span> <span style="color:#a78bfa">db</span>.fit_predict(<span style="color:#a78bfa">X_scaled</span>)
+<span style="color:#a78bfa">n_clusters_db</span> <span style="color:#94a3b8">=</span> <span style="color:#f87171">len</span>(<span style="color:#f87171">set</span>(<span style="color:#a78bfa">db_labels</span>)) <span style="color:#94a3b8">-</span> (1 <span style="color:#60a5fa">if</span> <span style="color:#94a3b8">-</span>1 <span style="color:#60a5fa">in</span> <span style="color:#a78bfa">db_labels</span> <span style="color:#60a5fa">else</span> 0)
+<span style="color:#a78bfa">db_silhouette</span> <span style="color:#94a3b8">=</span> silhouette_score(<span style="color:#a78bfa">X_scaled</span>[<span style="color:#a78bfa">db_labels</span> <span style="color:#94a3b8">!=</span> <span style="color:#94a3b8">-</span>1], <span style="color:#a78bfa">db_labels</span>[<span style="color:#a78bfa">db_labels</span> <span style="color:#94a3b8">!=</span> <span style="color:#94a3b8">-</span>1])
+
+<span style="color:#60a5fa">print</span>(<span style="color:#f87171">f</span><span style="color:#94a3b8">"K-Means Silhouette: {km_silhouette:.3f}"</span>)
+<span style="color:#60a5fa">print</span>(<span style="color:#f87171">f</span><span style="color:#94a3b8">"Hierarchical Silhouette: {hc_silhouette:.3f}"</span>)
+<span style="color:#60a5fa">print</span>(<span style="color:#f87171">f</span><span style="color:#94a3b8">"DBSCAN Clusters: {n_clusters_db}, Silhouette: {db_silhouette:.3f}"</span>)
+</code></pre>
+
+</div>
+
+<div class="card card-blue">
+<h3>Model Selection Decision Tree</h3>
+<p><strong>How to choose between algorithms?</strong></p>
+<div class="step">
+<div class="step-num">1</div>
+<div class="step-content"><strong>Is target continuous or categorical?</strong> Continuous → Regression (linear, tree-based). Categorical → Classification (tree, etc.).</div>
+</div>
+<div class="step">
+<div class="step-num">2</div>
+<div class="step-content"><strong>Do you have labels?</strong> Yes → Supervised (regression, classification). No → Unsupervised (clustering).</div>
+</div>
+<div class="step">
+<div class="step-num">3</div>
+<div class="step-content"><strong>Supervised regression:</strong> Start with Linear. If non-linear, try Tree/Polynomial.</div>
+</div>
+<div class="step">
+<div class="step-num">4</div>
+<div class="step-content"><strong>Supervised classification:</strong> Tree is good baseline. Fast, interpretable.</div>
+</div>
+<div class="step">
+<div class="step-num">5</div>
+<div class="step-content"><strong>Unsupervised clustering:</strong> K-Means if spherical, DBSCAN if arbitrary shape, Hierarchical to explore.</div>
+</div>
+</div>
+
+<table class="comp-table">
+<tr>
+<th>Problem Type</th>
+<th>Best Starting Algorithm</th>
+<th>Reason</th>
+<th>Try Next If Needed</th>
+</tr>
+<tr>
+<td>Regression (simple)</td>
+<td>Linear Regression</td>
+<td>Fast, interpretable, linear baseline</td>
+<td>Polynomial, Ridge, Tree</td>
+</tr>
+<tr>
+<td>Regression (complex)</td>
+<td>Decision Tree</td>
+<td>Captures non-linearity, handles mixed types</td>
+<td>Random Forest, Gradient Boosting</td>
+</tr>
+<tr>
+<td>Classification</td>
+<td>Decision Tree</td>
+<td>Interpretable, handles mixed features, no scaling needed</td>
+<td>Logistic, SVM, Random Forest</td>
+</tr>
+<tr>
+<td>Clustering (spherical)</td>
+<td>K-Means</td>
+<td>Fast, scalable, simple</td>
+<td>Hierarchical with different linkage</td>
+</tr>
+<tr>
+<td>Clustering (arbitrary shape)</td>
+<td>DBSCAN</td>
+<td>No need for k, handles outliers, finds non-convex shapes</td>
+<td>Hierarchical Clustering</td>
+</tr>
+<tr>
+<td>Clustering (explore)</td>
+<td>Hierarchical</td>
+<td>Dendrogram shows structure, easy to choose k post-hoc</td>
+<td>K-Means with elbow/silhouette</td>
+</tr>
+</table>
+
+</div>
+
+<div class="card card-yellow">
+<h3>Advanced Regression Topics: Ridge & Lasso Regularization</h3>
+<p><strong>Problem:</strong> Complex models overfit. Solution: Penalize large coefficients via regularization.</p>
+
+<p><strong>Types of regularization:</strong></p>
+<div class="def">
+<div class="def-term">Ridge (L2) Regression:</div>
+<div class="def-meaning">Adds penalty = λ × Σ(βᵢ²) to loss function. Shrinks all coefficients toward zero, but never exactly zero.</div>
+<div class="def-example">High λ: All coefficients approach 0, model simpler, may underfit. Low λ: Coefficients unconstrained, may overfit. Find balance via CV.</div>
+</div>
+
+<div class="def">
+<div class="def-term">Lasso (L1) Regression:</div>
+<div class="def-meaning">Adds penalty = λ × Σ|βᵢ| to loss function. Shrinks some coefficients exactly to zero (feature selection!).</div>
+<div class="def-example">If feature unhelpful, Lasso sets its coefficient = 0 (removes it). Ridge keeps it but small. Lasso = automatic feature selection.</div>
+</div>
+
+<pre><code><span style="color:#94a3b8"># Ridge vs Lasso vs Linear</span>
+<span style="color:#60a5fa">from</span> sklearn.linear_model <span style="color:#60a5fa">import</span> LinearRegression, Ridge, Lasso
+<span style="color:#60a5fa">from</span> sklearn.model_selection <span style="color:#60a5fa">import</span> GridSearchCV
+
+<span style="color:#94a3b8"># Try different alpha values</span>
+<span style="color:#a78bfa">alphas</span> <span style="color:#94a3b8">=</span> [0.001, 0.01, 0.1, 1.0, 10.0, 100.0]
+
+<span style="color:#a78bfa">ridge_scores</span> <span style="color:#94a3b8">=</span> []
+<span style="color:#60a5fa">for</span> <span style="color:#a78bfa">alpha</span> <span style="color:#60a5fa">in</span> <span style="color:#a78bfa">alphas</span>:
+    <span style="color:#a78bfa">ridge</span> <span style="color:#94a3b8">=</span> Ridge(alpha<span style="color:#94a3b8">=</span><span style="color:#a78bfa">alpha</span>)
+    <span style="color:#a78bfa">ridge</span>.fit(<span style="color:#a78bfa">X_train</span>, <span style="color:#a78bfa">y_train</span>)
+    <span style="color:#a78bfa">ridge_scores</span>.append(<span style="color:#a78bfa">ridge</span>.score(<span style="color:#a78bfa">X_test</span>, <span style="color:#a78bfa">y_test</span>))
+
+<span style="color:#94a3b8"># Find best alpha</span>
+<span style="color:#a78bfa">best_alpha</span> <span style="color:#94a3b8">=</span> <span style="color:#a78bfa">alphas</span>[np.argmax(<span style="color:#a78bfa">ridge_scores</span>)]
+<span style="color:#60a5fa">print</span>(<span style="color:#f87171">f</span><span style="color:#94a3b8">"Best alpha: {best_alpha}, score: {max(ridge_scores):.3f}"</span>)
+</code></pre>
+
+<div class="key-point">
+<span class="icon">⚡</span>
+<div><strong>When to use:</strong> Ridge for multicollinearity. Lasso for feature selection (want sparse model). Elastic Net for both.</div>
+</div>
+
+</div>
+
+<div class="card cart-purple">
+<h3>Feature Engineering & Preprocessing Techniques</h3>
+<p><strong>Good features = good models. Garbage in, garbage out!</strong></p>
+
+<p><strong>Feature engineering tactics:</strong></p>
+<ul>
+<li><strong>Domain knowledge:</strong> Create new features from existing ones based on business logic (e.g., age² for non-linear effects)</li>
+<li><strong>Polynomial features:</strong> x² , x³, x₁×x₂ to capture interactions</li>
+<li><strong>Log transformation:</strong> If data skewed, log(x) normalizes distribution</li>
+<li><strong>Binning/Discretization:</strong> Convert continuous to categorical (age groups: 0-18, 18-35, 35-65, 65+)</li>
+<li><strong>Normalization:</strong> Scale to 0-1 range (MinMaxScaler). Useful for neural networks.</li>
+<li><strong>Standardization:</strong> Scale to mean=0, std=1 (StandardScaler). Useful for distance-based algorithms.</li>
+<li><strong>Target encoding:</strong> For categorical with target correlation, encode as target mean within that category</li>
+<li><strong>Dropping low-variance features:</strong> Features with zero variance (same value) add no info, remove</li>
+</ul>
+
+<pre><code><span style="color:#94a3b8"># Feature engineering example</span>
+<span style="color:#60a5fa">import</span> pandas <span style="color:#60a5fa">as</span> pd
+<span style="color:#60a5fa">from</span> sklearn.preprocessing <span style="color:#60a5fa">import</span> PolynomialFeatures, StandardScaler
+
+<span style="color:#a78bfa">df</span> <span style="color:#94a3b8">=</span> pd.read_csv(<span style="color:#f87171">'data.csv'</span>)
+
+<span style="color:#94a3b8"># Create polynomial features</span>
+<span style="color:#a78bfa">poly</span> <span style="color:#94a3b8">=</span> PolynomialFeatures(degree<span style="color:#94a3b8">=</span>2, include_bias<span style="color:#94a3b8">=</span><span style="color:#60a5fa">False</span>)
+<span style="color:#a78bfa">X_poly</span> <span style="color:#94a3b8">=</span> <span style="color:#a78bfa">poly</span>.fit_transform(<span style="color:#a78bfa">df</span>[[<span style="color:#f87171">'age'</span>, <span style="color:#f87171">'income'</span>]])
+
+<span style="color:#94a3b8"># Log transform for skewed features</span>
+<span style="color:#a78bfa">df</span>[<span style="color:#f87171">'log_income'</span>] <span style="color:#94a3b8">=</span> np.log(<span style="color:#a78bfa">df</span>[<span style="color:#f87171">'income'</span>] <span style="color:#94a3b8">+</span> 1)
+
+<span style="color:#94a3b8"># Binning</span>
+<span style="color:#a78bfa">df</span>[<span style="color:#f87171">'age_group'</span>] <span style="color:#94a3b8">=</span> pd.cut(<span style="color:#a78bfa">df</span>[<span style="color:#f87171">'age'</span>], bins<span style="color:#94a3b8">=</span>[0, 18, 35, 65, 100], labels<span style="color:#94a3b8">=</span>[<span style="color:#f87171">'Child'</span>, <span style="color:#f87171">'Young'</span>, <span style="color:#f87171">'Adult'</span>, <span style="color:#f87171">'Senior'</span>])
+</code></pre>
+
+</div>
+
+<div class="card card-yellow">
+<h3>FAQ Responses & Clarifications</h3>
+
+<div class="def">
+<div class="def-term">Q: What is the intercept in linear regression? Why is it sometimes weird?</div>
+<div class="def-meaning">The intercept β₀ is the predicted y value when all predictors = 0. Mathematically necessary, but often not interpretable in context.</div>
+<div class="def-example">House price model: intercept = $50,000. A 0-square-foot house doesn't exist! Intercept is just the mathematical anchor point for the line. Never interpret intercepts literally unless x=0 makes sense.</div>
+</div>
+
+<div class="def">
+<div class="def-term">Q: My dataset has one categorical with 100 categories. Should I create 100 dummies?</div>
+<div class="def-meaning">No! Create 99 dummies (drop_first=True). 100 dummies → perfect multicollinearity → singular matrix.</div>
+<div class="def-example">City variable: NYC, LA, Chicago, ..., (100 cities). Create dummies for 99 cities. If all 99 = 0, then it's the 100th city (implied).</div>
+</div>
+
+<div class="def">
+<div class="def-term">Q: My tree has train accuracy 98%, test accuracy 72%. How do I fix it?</div>
+<div class="def-meaning">Classic overfitting. Tree memorized training data including noise. Solution: reduce complexity via hyperparameters.</div>
+<div class="def-example">Reduce max_depth from unlimited to 5. Increase min_samples_split from 2 to 20. Increase min_samples_leaf from 1 to 10. Recheck train/test accuracy gap.</div>
+</div>
+
+<div class="def">
+<div class="def-term">Q: K-Means found k=3 clusters, but elbow looks ambiguous. Should I trust silhouette?</div>
+<div class="def-meaning">Elbow method is heuristic. Use silhouette as tiebreaker. Higher silhouette score = better separated clusters.</div>
+<div class="def-example">Silhouette scores: k=2→0.45, k=3→0.52, k=4→0.50. Choose k=3 (highest silhouette). Confirms elbow ambiguity resolves toward k=3.</div>
+</div>
+
+<div class="def">
+<div class="def-term">Q: Can I use categorical variables directly in K-Means or Decision Tree?</div>
+<div class="def-meaning">Decision trees handle categorical directly (split on categories). K-Means cannot (uses Euclidean distance). Encode categorical as dummies or ordinal for K-Means.</div>
+<div class="def-example">Color variable (Red, Blue, Green): DT uses as-is. K-Means needs [1,0,0], [0,1,0], [0,0,1]. Or ordinal: Red=0, Blue=1, Green=2 (if order matters).</div>
+</div>
+
+<div class="def">
+<div class="def-term">Q: How do I handle missing values in regression/clustering?</div>
+<div class="def-meaning">Options: (1) Drop rows with missing (lose data). (2) Impute with mean/median (assumes MCAR). (3) Impute with KNN/iterative (more sophisticated).</div>
+<div class="def-example">10% missing values: impute with median to keep 90% of data. 50% missing: likely drop rows or features. Use sklearn.impute.SimpleImputer.</div>
+</div>
+
+<div class="def">
+<div class="def-term">Q: Should I scale features before Decision Tree? Before K-Means?</div>
+<div class="def-meaning">DT: No (tree-based, not distance-based). K-Means: Yes (uses Euclidean distance). Hierarchical/DBSCAN: Yes (distance-based). Regression: No (invariant), but yes for Ridge/Lasso.</div>
+<div class="def-example">DT with income (0-1M) and age (0-100): both work fine, tree finds optimal splits. K-Means: income dominates (larger scale). Must scale both to equal importance.</div>
+</div>
+
+<div class="def">
+<div class="def-term">Q: What is train/test split ratio? Does it matter?</div>
+<div class="def-meaning">Common: 70/30, 80/20, or 60/20/20 (include validation). Depends on data size. Small dataset: 80/20 (preserve training data). Large dataset: 70/30 OK.</div>
+<div class="def-example">1000 samples: 70% train=700, 30% test=300 (enough for reliable evaluation). 100k samples: 80% train=80k, 20% test=20k (still robust).</div>
+</div>
+
+<div class="def">
+<div class="def-term">Q: How do I prevent data leakage in preprocessing?</div>
+<div class="def-meaning">CRITICAL: fit all preprocessors (scaler, imputer) on TRAINING only. Transform test using training statistics. If fit on test, information leaks from test into training.</div>
+<div class="def-example">WRONG: Scaler.fit(all_data). CORRECT: Scaler.fit(X_train), then Scaler.transform(X_train), Scaler.transform(X_test). Test statistics NEVER used in training.</div>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function checkQuiz(qId, el, isCorrect) {
+  var feedback = document.getElementById(qId + '-feedback');
+  if (isCorrect) {
+    el.classList.add('correct');
+    feedback.classList.add('correct', 'show');
+    feedback.textContent = '✅ Correct! ' + getExplanation(qId);
+  } else {
+    el.classList.add('wrong');
+    feedback.classList.add('wrong', 'show');
+    feedback.textContent = '❌ Incorrect. Try again or review the concept.';
+  }
+}
+
+function getExplanation(qId) {
+  var explanations = {
+    'q1a': 'The intercept is the predicted value of y when all x variables equal zero.',
+    'q2a': 'Correlation ranges from -1 to +1, measuring linear relationship strength.',
+    'q3a': 'The best-fit line minimizes the sum of squared residuals (OLS method).',
+    'q4a': 'R-squared measures the proportion of variance in y explained by the model.',
+    'q5a': 'drop_first=True avoids the dummy variable trap by dropping one reference category.',
+    'q6a': 'Entropy measures the impurity or uncertainty in a set of labels.',
+    'q7a': 'Pre-pruning stops tree growth early; post-pruning trims after full growth.',
+    'q8a': 'The Elbow method looks for the point where adding more clusters gives diminishing returns in WCSS reduction.',
+  };
+  return explanations[qId] || '';
+}
+
+function toggleTheme(e) {
+  if (e) { e.preventDefault(); e.stopPropagation(); }
+  var scrollPos = window.scrollY || window.pageYOffset;
+  var body = document.body;
+  var btn = document.querySelector('.theme-toggle');
+  if (body.classList.contains('light')) {
+    body.classList.remove('light');
+    btn.textContent = '🌙';
+  } else {
+    body.classList.add('light');
+    btn.textContent = '☀️';
+  }
+  requestAnimationFrame(function() {
+    window.scrollTo(0, scrollPos);
+  });
+}
+
+window.addEventListener('load', function() {
+  document.body.classList.remove('light');
+  document.querySelector('.theme-toggle').textContent = '🌙';
+});
+</script>
+</html>

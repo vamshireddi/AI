@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Foundations - Complete Visual Study Guide</title>
+<meta property="og:title" content="Python Foundations — Complete Visual Study Guide | Module 01">
+<meta property="og:description" content="A comprehensive visual guide to Python foundations: EDA, data manipulation, visualization, and business problem-solving. Part of the PGP AI&ML program.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://vamshireddi.com/AI/greatlearning/module-01-python-foundations/">
+<meta property="og:image" content="https://vamshireddi.com/og-image.jpg?v=4">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Python Foundations — Complete Visual Study Guide | Module 01">
+<meta name="twitter:description" content="A comprehensive visual guide to Python foundations: EDA, data manipulation, visualization, and business problem-solving.">
+<meta name="twitter:image" content="https://vamshireddi.com/og-image.jpg?v=4">
+<link rel="canonical" href="https://vamshireddi.com/AI/greatlearning/module-01-python-foundations/">
+<style>
+  :root {
+    --bg: #0f172a;
+    --bg-surface: #1e293b;
+    --bg-surface2: #1e293b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #60a5fa;
+    --accent2: #fbbf24;
+    --accent3: #f87171;
+    --border: #334155;
+    --success: #34d399;
+  }
+  body.light {
+    --bg: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-surface2: #f1f5f9;
+    --text: #1e293b;
+    --text-muted: #475569;
+    --accent: #2563eb;
+    --accent2: #d97706;
+    --accent3: #dc2626;
+    --border: #cbd5e1;
+    --success: #059669;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.7; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+  h1 { text-align: center; font-size: 2em; margin: 30px 0 5px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .subtitle { text-align:center; color:#94a3b8; margin-bottom:25px; }
+  h2 { font-size: 1.6em; margin: 40px 0 15px; color: #60a5fa; border-bottom: 2px solid #1e40af; padding-bottom: 10px; }
+  h3 { font-size: 1.2em; margin: 20px 0 10px; color: #93c5fd; }
+  .week-badge { display: inline-block; padding: 4px 16px; border-radius: 20px; font-size: 0.8em; font-weight: 700; margin-bottom: 8px; }
+  .week1 { background: #1e40af; color: #bfdbfe; }
+  .week2 { background: #7c3aed; color: #ddd6fe; }
+  .week3 { background: #065f46; color: #a7f3d0; }
+  .week4 { background: #9a3412; color: #fed7aa; }
+  .nav-tabs { display: flex; justify-content: center; gap: 8px; margin: 20px 0 30px; flex-wrap: wrap; }
+  .nav-tab { padding: 10px 20px; border-radius: 8px; background: #1e293b; color: #94a3b8; cursor: pointer; border: 1px solid #334155; font-size: 0.9em; transition: all 0.3s; }
+  .nav-tab:hover, .nav-tab.active { background: #3b82f6; color: white; border-color: #3b82f6; }
+  .theme-toggle { position: fixed; top: 16px; right: 20px; z-index: 1000; width: 44px; height: 44px; border-radius: 50%; border: 2px solid #3b82f6; background: #1e293b; color: #fbbf24; font-size: 1.3em; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+  .section { display: none; }
+  .section.active { display: block; }
+  .card { background: #1e293b; border-radius: 12px; padding: 22px; margin: 18px 0; border: 1px solid #334155; }
+  .card-blue { border-left: 4px solid #3b82f6; }
+  .card-yellow { border-left: 4px solid #f59e0b; }
+  .card-green { border-left: 4px solid #10b981; }
+  .card-purple { border-left: 4px solid #8b5cf6; }
+  .card-red { border-left: 4px solid #ef4444; }
+  .def { background: #172554; border-radius: 8px; padding: 12px 16px; margin: 10px 0; border: 1px solid #1e40af; }
+  .def-term { color: #fbbf24; font-weight: 700; font-size: 1em; }
+  .def-meaning { color: #e2e8f0; margin-top: 4px; }
+  .def-example { color: #94a3b8; font-style: italic; margin-top: 6px; font-size: 0.9em; }
+  .def-example::before { content: "Real-life example: "; color: #34d399; font-style: normal; font-weight: 600; }
+  .analogy { background: #1a2e05; border: 1px solid #365314; border-radius: 10px; padding: 16px; margin: 14px 0; }
+  .analogy::before { content: "Real-World Analogy"; display: block; color: #84cc16; font-weight: 700; margin-bottom: 6px; font-size: 0.95em; }
+  .diagram { background: #0f172a; border-radius: 12px; padding: 25px; margin: 18px 0; border: 1px solid #334155; overflow-x: auto; }
+  .diagram-title { text-align: center; font-weight: 700; color: #60a5fa; margin-bottom: 18px; font-size: 1.05em; }
+  .flow { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .flow-row { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .flow-box { padding: 10px 16px; border-radius: 8px; font-weight: 600; text-align: center; min-width: 110px; font-size: 0.88em; }
+  .flow-box.data { background: #1e40af; color: #bfdbfe; border: 2px solid #3b82f6; }
+  .flow-box.model { background: #065f46; color: #a7f3d0; border: 2px solid #10b981; }
+  .flow-box.result { background: #7c2d12; color: #fed7aa; border: 2px solid #f59e0b; }
+  .flow-box.combine { background: #581c87; color: #e9d5ff; border: 2px solid #a855f7; }
+  .flow-box.error { background: #991b1b; color: #fecaca; border: 2px solid #ef4444; }
+  .arrow-down { text-align: center; color: #64748b; font-size: 1.4em; }
+  .formula { background: #0c4a6e; border-radius: 8px; padding: 14px 18px; margin: 10px 0; font-family: 'Courier New', monospace; text-align: center; font-size: 1.05em; color: #7dd3fc; border: 1px solid #0369a1; }
+  .formula-explain { text-align: center; color: #94a3b8; font-size: 0.85em; margin-top: 4px; }
+  .key-point { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; background: #172554; border-radius: 8px; margin: 10px 0; }
+  .key-point .icon { font-size: 1.2em; flex-shrink: 0; }
+  .step { display: flex; gap: 14px; margin: 12px 0; align-items: flex-start; }
+  .step-num { width: 30px; height: 30px; border-radius: 50%; background: #3b82f6; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85em; flex-shrink: 0; }
+  .step-content { flex: 1; }
+  .comp-table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  .comp-table th { background: #1e40af; color: white; padding: 10px 14px; text-align: left; font-size: 0.88em; }
+  .comp-table td { padding: 10px 14px; border-bottom: 1px solid #334155; font-size: 0.88em; }
+  .comp-table tr:hover td { background: rgba(59,130,246,0.1); }
+  .highlight { color: #fbbf24; font-weight: 600; }
+  .blue { color: #60a5fa; }
+  .green { color: #34d399; }
+  .purple { color: #a78bfa; }
+  .red { color: #f87171; }
+  p { margin: 8px 0; }
+  ul { margin: 8px 0 8px 20px; }
+  li { margin: 5px 0; }
+  code { background: #334155; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+  pre { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 16px; margin: 12px 0; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.9em; line-height: 1.5; }
+  .data-cell { width: 30px; height: 30px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.7em; font-weight: 700; margin: 1px; }
+  .cell-blue { background: #3b82f6; color: white; }
+  .cell-yellow { background: #f59e0b; color: #1e293b; }
+  .cell-red { background: #ef4444; color: white; }
+  .cell-gray { background: #1e293b; color: #475569; border: 1px dashed #475569; }
+  @media (max-width: 768px) {
+    .flow-row { flex-direction: column; }
+    h1 { font-size: 1.4em; }
+    .nav-tab { padding: 8px 12px; font-size: 0.8em; }
+  }
+  .course-link { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bg-surface2); border: 2px solid var(--accent); padding: 0.8rem 1.2rem; border-radius: 6px; color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.3s; margin: 0.5rem 0.5rem 0.5rem 0; }
+  .course-link:hover { background: var(--accent); color: var(--bg); }
+  .course-link::before { font-size: 1.2rem; }
+  .course-link.video::before { content: "🎬"; }
+  .course-link.quiz::before { content: "📝"; }
+  .course-link.faq::before { content: "❓"; }
+  .quiz { background: var(--bg-surface2); border: 2px solid var(--accent2); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .quiz-title { font-size: 1.1rem; font-weight: 700; color: var(--accent2); margin-bottom: 1rem; }
+  .quiz-q { margin: 1rem 0; }
+  .quiz-q-text { font-weight: 600; color: var(--text); margin-bottom: 0.8rem; }
+  .quiz-option { background: var(--bg-surface); border: 2px solid var(--border); border-radius: 4px; padding: 0.8rem; margin: 0.5rem 0; cursor: pointer; transition: all 0.2s; display: block; width: 100%; text-align: left; color: var(--text); font-size: 0.95rem; font-family: inherit; line-height: 1.5; }
+  .quiz-option:hover { border-color: var(--accent); background: rgba(108, 99, 255, 0.1); }
+  .quiz-option.disabled { cursor: not-allowed; opacity: 0.6; }
+  .quiz-option.correct { background: rgba(63, 185, 80, 0.2); border-color: var(--success); color: var(--success); }
+  .quiz-option.wrong { background: rgba(255, 107, 107, 0.2); border-color: var(--accent3); color: var(--accent3); }
+  .quiz-feedback { margin-top: 1rem; padding: 0.8rem; border-radius: 4px; font-weight: 600; display: none; }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct { background: rgba(63, 185, 80, 0.2); color: var(--success); }
+  .quiz-feedback.wrong { background: rgba(255, 107, 107, 0.2); color: var(--accent3); }
+  .numerical { background: var(--bg-surface2); border-left: 4px solid var(--accent2); padding: 1.5rem; margin: 1.5rem 0; border-radius: 4px; font-family: 'Monaco', 'Courier New', monospace; font-size: 0.95rem; }
+  .mistake { background: rgba(255, 107, 107, 0.05); border-left: 4px solid var(--accent3); padding: 1.5rem; margin: 1.5rem 0; border-radius: 4px; }
+  .mistake-title { font-weight: 700; color: var(--accent3); font-size: 1.05rem; margin-bottom: 0.8rem; }
+  .mistake-problem { color: var(--text); margin-bottom: 0.8rem; }
+  .mistake-fix { color: var(--success); font-weight: 600; padding-top: 0.8rem; border-top: 1px solid var(--border); margin-top: 0.8rem; }
+  .cheat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
+  .cheat-item { background: var(--bg-surface2); border: 2px solid var(--accent); border-radius: 8px; padding: 1.5rem; }
+  .cheat-item-title { font-weight: 700; color: var(--accent); margin-bottom: 0.8rem; font-size: 1.05rem; }
+  .cheat-item-content { color: var(--text); font-size: 0.95rem; line-height: 1.7; }
+  .side-by-side { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+
+  /* LIGHT MODE */
+  body.light { background: #f8fafc; color: #1e293b; }
+  body.light .container { color: #1e293b; }
+  body.light h1 { -webkit-text-fill-color: #0c4a6e; color: #0c4a6e; background: none; }
+  body.light h2 { color: #1e40af; border-bottom-color: #93c5fd; }
+  body.light h3 { color: #1e3a5f; }
+  body.light .subtitle { color: #475569; }
+  body.light .subtitle small { color: #475569; }
+  body.light .subtitle a { color: #2563eb !important; }
+  body.light .card { background: #ffffff; border-color: #cbd5e1; color: #1e293b; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  body.light .def { background: #eff6ff; border-color: #93c5fd; color: #1e293b; }
+  body.light .def-term { color: #b45309; }
+  body.light .def-meaning { color: #1e293b; }
+  body.light .def-example { color: #475569; }
+  body.light .def-example::before { color: #059669; }
+  body.light .analogy { background: #f0fdf4; border-color: #86efac; color: #1e293b; }
+  body.light .analogy::before { color: #15803d; }
+  body.light .diagram { background: #f1f5f9; border-color: #cbd5e1; color: #1e293b; }
+  body.light .diagram-title { color: #1e40af; }
+  body.light .arrow-down { color: #94a3b8; }
+  body.light .flow-box { color: #1e293b; }
+  body.light .flow-box.data { background: #dbeafe; color: #1e3a8a; border-color: #60a5fa; }
+  body.light .flow-box.model { background: #d1fae5; color: #064e3b; border-color: #34d399; }
+  body.light .flow-box.result { background: #ffedd5; color: #7c2d12; border-color: #fb923c; }
+  body.light .flow-box.combine { background: #ede9fe; color: #4c1d95; border-color: #a78bfa; }
+  body.light .flow-box.error { background: #fee2e2; color: #7f1d1d; border-color: #f87171; }
+  body.light .formula { background: #ecfeff; color: #0e7490; border-color: #67e8f9; }
+  body.light .formula-explain { color: #475569; }
+  body.light .key-point { background: #eff6ff; border-color: #93c5fd; color: #1e293b; }
+  body.light .step-content { color: #1e293b; }
+  body.light .quiz { background: #ffffff; border-color: #d97706; color: #1e293b; }
+  body.light .quiz-title { color: #b45309; }
+  body.light .quiz-q-text { color: #1e293b; }
+  body.light .quiz-option { background: #f8fafc; border-color: #cbd5e1; color: #1e293b; }
+  body.light .quiz-option:hover { border-color: #3b82f6; background: rgba(59,130,246,0.1); }
+  body.light .nav-tab { background: #ffffff; color: #475569; border-color: #cbd5e1; }
+  body.light .nav-tab:hover { background: #eff6ff; color: #1e40af; border-color: #93c5fd; }
+  body.light .nav-tab.active { background: #2563eb; color: white; }
+  body.light code { background: #e2e8f0; color: #0f172a; }
+  body.light .comp-table th { background: #2563eb; color: white; }
+  body.light .comp-table td { border-color: #cbd5e1; color: #1e293b; background: #ffffff; }
+  body.light .comp-table tr:hover td { background: #eff6ff; }
+  body.light .numerical { background: #ecfdf5; border-color: #34d399; color: #1e293b; }
+  body.light .mistake { background: #fef2f2; border-color: #f87171; color: #1e293b; }
+  body.light .mistake-title { color: #dc2626; }
+  body.light .mistake-problem { color: #1e293b; }
+  body.light .mistake-fix { color: #059669; border-top-color: #e2e8f0; }
+  body.light .cheat-item { background: #ffffff; border-color: #2563eb; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  body.light .cheat-item-title { color: #1e40af; }
+  body.light .cheat-item-content { color: #1e293b; }
+  body.light .course-link { background: #eff6ff; border-color: #2563eb; color: #2563eb; }
+  body.light .course-link:hover { background: #2563eb; color: #ffffff; }
+  body.light .highlight { color: #b45309; }
+  body.light .blue { color: #2563eb; }
+  body.light .green { color: #059669; }
+  body.light .purple { color: #7c3aed; }
+  body.light .red { color: #dc2626; }
+  body.light .cell-gray { background: #e2e8f0; color: #475569; border-color: #94a3b8; }
+  body.light .week-badge.week1 { background: #dbeafe; color: #1e3a8a; }
+  body.light .week-badge.week2 { background: #ede9fe; color: #4c1d95; }
+  body.light .week-badge.week3 { background: #d1fae5; color: #064e3b; }
+  body.light .week-badge.week4 { background: #ffedd5; color: #7c2d12; }
+  body.light .theme-toggle { background: #ffffff; border-color: #3b82f6; color: #1e293b; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+  body.light strong { color: #0f172a; }
+  body.light p, body.light li { color: #334155; }
+  body.light ul { color: #334155; }
+  body.light a { color: #2563eb; }
+  body.light .side-by-side > div { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 1rem; }
+  body.light [style*="background:#172554"] { background: #eff6ff !important; border-color: #93c5fd !important; }
+  body.light [style*="background:#2e1065"] { background: #f3e8ff !important; border-color: #c084fc !important; }
+  body.light [style*="background:#0f766e"] { background: #ccfbf1 !important; border-color: #2dd4bf !important; }
+  body.light [style*="background:#0f172a"] { background: #f1f5f9 !important; border-color: #cbd5e1 !important; }
+  body.light [style*="background:#1e293b"] { background: #f1f5f9 !important; border-color: #cbd5e1 !important; }
+  body.light [style*="background:#581c87"] { background: #f3e8ff !important; border-color: #c084fc !important; }
+  body.light [style*="background:#1e40af"] { background: #dbeafe !important; border-color: #60a5fa !important; }
+  body.light [style*="background:#065f46"] { background: #d1fae5 !important; border-color: #34d399 !important; }
+  body.light [style*="background:#7c2d12"] { background: #ffedd5 !important; border-color: #fb923c !important; }
+  body.light [style*="background:#991b1b"] { background: #fee2e2 !important; border-color: #f87171 !important; }
+  body.light [style*="color:#94a3b8"] { color: #475569 !important; }
+  body.light [style*="color:#fbbf24"] { color: #b45309 !important; }
+  body.light [style*="color:#60a5fa"] { color: #2563eb !important; }
+  body.light [style*="color:#a78bfa"] { color: #7c3aed !important; }
+  body.light [style*="color:#34d399"] { color: #059669 !important; }
+  body.light [style*="color:#f87171"] { color: #dc2626 !important; }
+  body.light [style*="color:#e2e8f0"] { color: #1e293b !important; }
+  body.light [style*="color:#7dd3fc"] { color: #0e7490 !important; }
+  body.light [style*="color:#84cc16"] { color: #4d7c0f !important; }
+  body.light pre { background: #1e293b !important; color: #e2e8f0 !important; border-color: #475569 !important; }
+  body.light pre code { color: #e2e8f0 !important; background: transparent !important; }
+  body.light pre [style*="color:#94a3b8"] { color: #94a3b8 !important; }
+  body.light pre [style*="color:#fbbf24"] { color: #fbbf24 !important; }
+  body.light pre [style*="color:#60a5fa"] { color: #60a5fa !important; }
+  body.light pre [style*="color:#a78bfa"] { color: #a78bfa !important; }
+  body.light pre [style*="color:#34d399"] { color: #34d399 !important; }
+  body.light pre [style*="color:#f87171"] { color: #f87171 !important; }
+  body.light pre [style*="color:#e2e8f0"] { color: #e2e8f0 !important; }
+  body.light pre [style*="color:#7dd3fc"] { color: #7dd3fc !important; }
+  body.light pre span { color: inherit; }
+</style>
+</head>
+<body>
+<button class="theme-toggle" onclick="toggleTheme(event)" type="button">🌙</button>
+<div class="container">
+  <h1>Python Foundations: Complete Visual Guide</h1>
+  <p class="subtitle">UT Austin | Great Learning PGP in AI &amp; ML<br>
+  <small>Every concept explained from scratch. No assumptions. Real-life examples for everything.</small><br>
+  <small>Notes prepared by: <a href="https://www.linkedin.com/in/vamshireddi/" target="_blank" style="color:#60a5fa; text-decoration:none;">Vamshi Krishan Reddy Bandaru</a></small></p>
+
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="showSection('cheat')">⚡ Cheat Sheet</div>
+    <div class="nav-tab" onclick="showSection('concept')">🗺️ Concept Map</div>
+    <div class="nav-tab" onclick="showSection('colab')">💻 1.1 Colab &amp; Setup</div>
+    <div class="nav-tab" onclick="showSection('variables')">🔤 1.2 Variables</div>
+    <div class="nav-tab" onclick="showSection('datastructs')">📦 1.3 Data Structures</div>
+    <div class="nav-tab" onclick="showSection('control')">🔀 1.4 Control Flow</div>
+    <div class="nav-tab" onclick="showSection('functions')">⚙️ 1.5 Functions</div>
+    <div class="nav-tab" onclick="showSection('numpy')">🔢 2.1 NumPy</div>
+    <div class="nav-tab" onclick="showSection('pandas')">🐼 2.2 Pandas</div>
+    <div class="nav-tab" onclick="showSection('cleaning')">🧹 2.3 Data Cleaning</div>
+    <div class="nav-tab" onclick="showSection('viz')">📊 3.1 Visualization</div>
+    <div class="nav-tab" onclick="showSection('eda')">🔍 3.2 EDA Techniques</div>
+    <div class="nav-tab" onclick="showSection('text')">📝 4.1 Text Analysis</div>
+    <div class="nav-tab" onclick="showSection('mistakes')">⚠️ Mistakes</div>
+  </div>
+
+<!-- ==================== CHEAT SHEET ==================== -->
+<div class="section active" id="cheat">
+<h2>⚡ Python Foundations Cheat Sheet</h2>
+
+<div class="card card-purple">
+  <h3>Big Picture</h3>
+  <p>This module covers Python from zero to data analysis. Four weeks of building blocks:</p>
+  <ul style="margin: 1rem 0 0 2rem;">
+    <li><strong>Week 1:</strong> Python basics — variables, data structures, loops, functions</li>
+    <li><strong>Week 2:</strong> Data manipulation — NumPy arrays and Pandas DataFrames</li>
+    <li><strong>Week 3:</strong> Exploratory Data Analysis — visualization and statistical insights</li>
+    <li><strong>Week 4:</strong> Text analysis — string processing, regex, basic NLP</li>
+  </ul>
+</div>
+
+<h3>Vocabulary Quick Reference</h3>
+<table class="comp-table">
+  <thead><tr><th>Term</th><th>Definition</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Variable</strong></td><td>Named container storing a value</td><td><code>x = 42</code></td></tr>
+    <tr><td><strong>List</strong></td><td>Mutable ordered collection</td><td><code>[1, 2, 3]</code></td></tr>
+    <tr><td><strong>Tuple</strong></td><td>Immutable ordered collection</td><td><code>(1, 2, 3)</code></td></tr>
+    <tr><td><strong>Dictionary</strong></td><td>Key-value pair mapping</td><td><code>{"a": 1}</code></td></tr>
+    <tr><td><strong>DataFrame</strong></td><td>2D labeled data table (Pandas)</td><td><code>pd.DataFrame(data)</code></td></tr>
+    <tr><td><strong>ndarray</strong></td><td>N-dimensional array (NumPy)</td><td><code>np.array([1,2,3])</code></td></tr>
+    <tr><td><strong>EDA</strong></td><td>Exploratory Data Analysis</td><td>Histograms, box plots, heatmaps</td></tr>
+    <tr><td><strong>NaN</strong></td><td>Not a Number (missing value)</td><td><code>np.nan</code></td></tr>
+    <tr><td><strong>Boolean Indexing</strong></td><td>Filter rows by condition</td><td><code>df[df['age'] > 30]</code></td></tr>
+    <tr><td><strong>Lambda</strong></td><td>Anonymous one-line function</td><td><code>lambda x: x*2</code></td></tr>
+    <tr><td><strong>List Comprehension</strong></td><td>Compact list creation</td><td><code>[x**2 for x in range(5)]</code></td></tr>
+    <tr><td><strong>Regex</strong></td><td>Regular expression for pattern matching</td><td><code>re.findall(r'\d+', text)</code></td></tr>
+  </tbody>
+</table>
+
+<h3>Data Types at a Glance</h3>
+<div class="cheat-grid">
+  <div class="cheat-item">
+    <div class="cheat-item-title">Numeric Types</div>
+    <div class="cheat-item-content">
+      <code>int</code> — whole numbers: 42, -7<br>
+      <code>float</code> — decimals: 3.14, -0.5<br>
+      <code>bool</code> — True or False<br>
+      <code>complex</code> — 3+4j (rarely used)
+    </div>
+  </div>
+  <div class="cheat-item">
+    <div class="cheat-item-title">Text &amp; Sequence</div>
+    <div class="cheat-item-content">
+      <code>str</code> — "Hello World"<br>
+      <code>list</code> — [1, "a", True]<br>
+      <code>tuple</code> — (1, "a", True)<br>
+      <code>range</code> — range(0, 10, 2)
+    </div>
+  </div>
+  <div class="cheat-item">
+    <div class="cheat-item-title">Mapping &amp; Set</div>
+    <div class="cheat-item-content">
+      <code>dict</code> — {"key": "value"}<br>
+      <code>set</code> — {1, 2, 3} (unique)<br>
+      <code>frozenset</code> — immutable set
+    </div>
+  </div>
+  <div class="cheat-item">
+    <div class="cheat-item-title">Bracket Guide</div>
+    <div class="cheat-item-content">
+      <code>()</code> — tuples, function calls<br>
+      <code>[]</code> — lists, indexing<br>
+      <code>{}</code> — dicts, sets<br>
+      <code>{k:v}</code> — dict with key-value
+    </div>
+  </div>
+</div>
+
+<h3>Essential Operations</h3>
+<div class="side-by-side">
+  <div>
+    <strong style="color: var(--success);">Python Basics (Week 1)</strong>
+    <ul style="margin: 1rem 0 0 1.5rem;">
+      <li><code>type(x)</code> — check data type</li>
+      <li><code>int("5")</code> — convert to integer</li>
+      <li><code>len(my_list)</code> — count elements</li>
+      <li><code>my_list.append(x)</code> — add to list</li>
+      <li><code>for i in range(n):</code> — loop n times</li>
+      <li><code>if/elif/else</code> — conditionals</li>
+      <li><code>def func(x): return x*2</code> — function</li>
+    </ul>
+  </div>
+  <div>
+    <strong style="color: var(--accent2);">Data Tools (Weeks 2-3)</strong>
+    <ul style="margin: 1rem 0 0 1.5rem;">
+      <li><code>pd.read_csv("file.csv")</code> — load data</li>
+      <li><code>df.head()</code> — first 5 rows</li>
+      <li><code>df.describe()</code> — summary stats</li>
+      <li><code>df.groupby("col").mean()</code> — aggregate</li>
+      <li><code>df.isnull().sum()</code> — count missing</li>
+      <li><code>plt.hist(data)</code> — histogram</li>
+      <li><code>sns.heatmap(corr)</code> — correlation map</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Common Syntax Patterns</h3>
+<div class="formula">
+  List Comprehension: [expression for item in iterable if condition]
+  <div class="formula-explain">squares = [x**2 for x in range(10) if x % 2 == 0] → [0, 4, 16, 36, 64]</div>
+</div>
+<div class="formula">
+  Lambda Function: lambda arguments: expression
+  <div class="formula-explain">double = lambda x: x * 2 → double(5) = 10</div>
+</div>
+<div class="formula">
+  String Formatting: f"Hello {name}, you are {age} years old"
+  <div class="formula-explain">f-strings (Python 3.6+) embed variables directly in strings</div>
+</div>
+<div class="formula">
+  Floor Division: a // b (integer result, no decimal)
+  <div class="formula-explain">9 // 5 = 1 | 17 // 3 = 5 | -7 // 2 = -4 (rounds toward negative infinity)</div>
+</div>
+</div>
+
+<!-- ==================== CONCEPT MAP ==================== -->
+<div class="section" id="concept">
+<h2>🗺️ Concept Map: Python Foundations Journey</h2>
+
+<div class="diagram">
+  <div class="diagram-title">Learning Path: From Zero to Data Analysis</div>
+  <div class="flow">
+    <div class="flow-row">
+      <div class="flow-box data">Week 1: Python Basics</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="flow-row">
+      <div class="flow-box data">Google Colab Setup</div>
+      <div class="flow-box data">Variables &amp; Types</div>
+      <div class="flow-box data">Data Structures</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="flow-row">
+      <div class="flow-box data">Control Flow</div>
+      <div class="flow-box data">Functions</div>
+      <div class="flow-box data">List Comprehension</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="flow-row">
+      <div class="flow-box model">Week 2: Data Manipulation</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="flow-row">
+      <div class="flow-box model">NumPy Arrays</div>
+      <div class="flow-box model">Pandas DataFrames</div>
+      <div class="flow-box model">Data Cleaning</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="flow-row">
+      <div class="flow-box result">Week 3: EDA &amp; Visualization</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="flow-row">
+      <div class="flow-box result">Matplotlib</div>
+      <div class="flow-box result">Seaborn</div>
+      <div class="flow-box result">Statistical Analysis</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="flow-row">
+      <div class="flow-box combine">Week 4: Text Analysis</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="flow-row">
+      <div class="flow-box combine">String Methods</div>
+      <div class="flow-box combine">Regex</div>
+      <div class="flow-box combine">NLP Basics</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="flow-row">
+      <div class="flow-box error" style="background:#065f46; border-color:#10b981; color:#a7f3d0;">🎯 FoodHub Project</div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-blue">
+  <h3>Week 1: Python Basics (15 Videos, ~2.75 hours)</h3>
+  <p>Build the foundation — learn to think in Python. Every data science workflow starts here.</p>
+  <div class="key-point"><span class="icon">🎬</span><div>Videos 1.1-1.3: Google Colab setup — your free cloud coding environment. Markdown cells for documentation, code cells for execution.</div></div>
+  <div class="key-point"><span class="icon">🎬</span><div>Videos 1.4-1.6: Variables and type conversion — the building blocks. Python is dynamically typed, so <code>x = 5</code> then <code>x = "hello"</code> is perfectly valid.</div></div>
+  <div class="key-point"><span class="icon">🎬</span><div>Videos 1.7-1.9: Data structures — lists (mutable, ordered), tuples (immutable, ordered), dictionaries (key-value pairs). The trio you will use in every project.</div></div>
+  <div class="key-point"><span class="icon">🎬</span><div>Videos 1.10-1.12: Control flow — conditionals (if/elif/else) and loops (for, while). The logic engine of every program.</div></div>
+  <div class="key-point"><span class="icon">🎬</span><div>Videos 1.13-1.15: List comprehension and functions — writing clean, reusable, Pythonic code. Lambda functions for quick one-liners.</div></div>
+</div>
+
+<div class="card card-green">
+  <h3>Week 2: Data Manipulation (18 Videos)</h3>
+  <p>Move from basic Python to data science tools. NumPy for numerical computing, Pandas for structured data.</p>
+  <div class="key-point"><span class="icon">📊</span><div>NumPy: Fast numerical operations on arrays. Broadcasting, vectorized operations, and mathematical functions that work on entire arrays at once.</div></div>
+  <div class="key-point"><span class="icon">🐼</span><div>Pandas: The Swiss Army knife of data manipulation. Read CSV files, explore with <code>head()</code>/<code>describe()</code>, filter with boolean indexing, aggregate with <code>groupby()</code>.</div></div>
+  <div class="key-point"><span class="icon">🧹</span><div>Data Cleaning: Handle missing values (<code>isnull</code>, <code>dropna</code>, <code>fillna</code>), fix data types, merge datasets, and prepare data for analysis.</div></div>
+</div>
+
+<div class="card card-yellow">
+  <h3>Week 3: Exploratory Data Analysis (16 Videos)</h3>
+  <p>Turn raw data into visual insights. Learn to see patterns, detect outliers, and tell stories with data.</p>
+  <div class="key-point"><span class="icon">📈</span><div>Matplotlib: The foundation of Python plotting. Figures, axes, subplots, and full customization control.</div></div>
+  <div class="key-point"><span class="icon">🎨</span><div>Seaborn: Beautiful statistical visualizations built on Matplotlib. Heatmaps, pair plots, distribution plots with minimal code.</div></div>
+  <div class="key-point"><span class="icon">📐</span><div>Statistical measures: mean, median, mode, variance, standard deviation, IQR for outlier detection, correlation for relationships.</div></div>
+</div>
+
+<div class="card card-red">
+  <h3>Week 4: Analyzing Text Data (5 Videos)</h3>
+  <p>Text is data too. Learn to process, clean, and extract insights from unstructured text.</p>
+  <div class="key-point"><span class="icon">📝</span><div>String methods, regular expressions, tokenization, and word frequency analysis — the basics of Natural Language Processing.</div></div>
+</div>
+</div>
+
+<!-- ==================== 1.1 COLAB & SETUP ==================== -->
+<div class="section" id="colab">
+<h2>💻 1.1 Google Colab &amp; Python Setup</h2>
+<span class="week-badge week1">Week 1</span>
+
+<div class="def">
+  <div class="def-term">Google Colab (Colaboratory)</div>
+  <div class="def-meaning">A free, cloud-based Jupyter notebook environment by Google. Write and execute Python code in your browser — no installation required. Comes with free GPU/TPU access for machine learning.</div>
+  <div class="def-example">Like Google Docs, but for code. Multiple people can edit the same notebook simultaneously, and everything saves to Google Drive.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Jupyter Notebook (.ipynb)</div>
+  <div class="def-meaning">An interactive document format that combines code, text, and visualizations in a single file. The <code>.ipynb</code> extension stands for "IPython Notebook." Colab uses this format natively.</div>
+  <div class="def-example">A scientist's lab notebook — you write observations (Markdown), run experiments (code cells), and see results (outputs) all in one place.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Markdown Cell</div>
+  <div class="def-meaning">A cell in Colab for writing formatted text using Markdown syntax. Use <code>#</code> for headings, <code>**bold**</code> for bold, <code>*italic*</code> for italic, and <code>-</code> for bullet points.</div>
+  <div class="def-example">The table of contents and chapter headers in your lab notebook — they organize and explain your work.</div>
+</div>
+
+<div class="analogy">Think of Google Colab as a free cooking show kitchen. The stove (Python engine) is already set up, the ingredients (libraries like NumPy, Pandas) are pre-stocked, and you just need to follow the recipe (write code). You do not need to buy any equipment or install anything — just show up and start cooking.</div>
+
+<div class="diagram">
+  <div class="diagram-title">Colab Notebook Structure</div>
+  <div class="flow">
+    <div class="flow-row">
+      <div class="flow-box data">Notebook (.ipynb)</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="flow-row">
+      <div class="flow-box model">Markdown Cells (Text + Formatting)</div>
+      <div class="flow-box result">Code Cells (Python Execution)</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="flow-row">
+      <div class="flow-box combine">Output (Results, Charts, Tables)</div>
+    </div>
+  </div>
+</div>
+
+<h3>Getting Started Steps</h3>
+<div class="step"><div class="step-num">1</div><div class="step-content">Go to <strong>colab.research.google.com</strong> and sign in with your Google account.</div></div>
+<div class="step"><div class="step-num">2</div><div class="step-content">Click <strong>"New Notebook"</strong> — a fresh .ipynb file opens connected to a cloud Python runtime.</div></div>
+<div class="step"><div class="step-num">3</div><div class="step-content">Type Python code in a code cell and press <strong>Shift + Enter</strong> to execute. The output appears below the cell.</div></div>
+<div class="step"><div class="step-num">4</div><div class="step-content">Add a text cell (Insert → Text cell) to write notes using Markdown formatting.</div></div>
+<div class="step"><div class="step-num">5</div><div class="step-content">Save your work: it auto-saves to Google Drive. Download via <strong>File → Download → Download .ipynb</strong>.</div></div>
+
+<h3>Essential Keyboard Shortcuts</h3>
+<table class="comp-table">
+  <thead><tr><th>Shortcut</th><th>Action</th><th>When to Use</th></tr></thead>
+  <tbody>
+    <tr><td><code>Shift + Enter</code></td><td>Run cell and move to next</td><td>Execute code and continue</td></tr>
+    <tr><td><code>Ctrl + Enter</code></td><td>Run cell, stay in place</td><td>Test code without moving</td></tr>
+    <tr><td><code>Ctrl + M, B</code></td><td>Insert cell below</td><td>Add new code/text cell</td></tr>
+    <tr><td><code>Ctrl + M, D</code></td><td>Delete current cell</td><td>Remove unwanted cells</td></tr>
+    <tr><td><code>Ctrl + M, M</code></td><td>Convert to Markdown</td><td>Switch cell type to text</td></tr>
+    <tr><td><code>Ctrl + M, Y</code></td><td>Convert to Code</td><td>Switch cell type to code</td></tr>
+    <tr><td><code>Ctrl + /</code></td><td>Toggle comment</td><td>Comment/uncomment lines</td></tr>
+  </tbody>
+</table>
+
+<pre><code><span style="color:#94a3b8"># Your very first Python code in Colab</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Hello, World!"</span>)  <span style="color:#94a3b8"># Output: Hello, World!</span>
+
+<span style="color:#94a3b8"># Python is case-sensitive!</span>
+<span style="color:#a78bfa">Name</span> = <span style="color:#34d399">"Alice"</span>
+<span style="color:#a78bfa">name</span> = <span style="color:#34d399">"Bob"</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">Name</span>)  <span style="color:#94a3b8"># Alice</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">name</span>)  <span style="color:#94a3b8"># Bob  — these are DIFFERENT variables</span>
+
+<span style="color:#94a3b8"># Comments: # for single-line, triple quotes for multi-line</span>
+<span style="color:#34d399">'''
+This is a multi-line comment.
+It can span several lines.
+Useful for documentation.
+'''</span>
+</code></pre>
+
+<div class="key-point"><span class="icon">⚠️</span><div><strong>Python is case-sensitive!</strong> <code>HelloWorld</code> and <code>helloworld</code> are completely different. This is one of the most common beginner mistakes (FAQ #2 from the course).</div></div>
+
+<div class="quiz">
+  <div class="quiz-title">Test Your Understanding</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q: How do you download a Colab notebook to your computer?</div>
+    <button class="quiz-option" onclick="checkQuiz('q1a', this, false)">A) Right-click → Save As</button>
+    <button class="quiz-option" onclick="checkQuiz('q1a', this, true)">B) File → Download → Download .ipynb</button>
+    <button class="quiz-option" onclick="checkQuiz('q1a', this, false)">C) Edit → Export → Python File</button>
+    <button class="quiz-option" onclick="checkQuiz('q1a', this, false)">D) Share → Download Link</button>
+    <div class="quiz-feedback" id="q1a-feedback"></div>
+  </div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q: What happens if you write <code>Print("Hello")</code> instead of <code>print("Hello")</code>?</div>
+    <button class="quiz-option" onclick="checkQuiz('q1b', this, false)">A) It works fine, Python ignores case</button>
+    <button class="quiz-option" onclick="checkQuiz('q1b', this, true)">B) NameError — Python is case-sensitive</button>
+    <button class="quiz-option" onclick="checkQuiz('q1b', this, false)">C) It prints in uppercase</button>
+    <button class="quiz-option" onclick="checkQuiz('q1b', this, false)">D) SyntaxError — invalid function</button>
+    <div class="quiz-feedback" id="q1b-feedback"></div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== 1.2 VARIABLES ==================== -->
+<div class="section" id="variables">
+<h2>🔤 1.2 Variables &amp; Data Types</h2>
+<span class="week-badge week1">Week 1</span>
+
+<div class="def">
+  <div class="def-term">Variable</div>
+  <div class="def-meaning">A named container that stores a value in memory. In Python, you create a variable simply by assigning a value: <code>x = 10</code>. No need to declare the type — Python figures it out automatically (dynamic typing).</div>
+  <div class="def-example">A labeled jar in your kitchen. The label says "sugar" (variable name), and inside is the actual sugar (the value). You can empty it and fill it with salt later — the jar does not care what is inside.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Dynamic Typing</div>
+  <div class="def-meaning">Python determines the type of a variable at runtime based on the value assigned. You can reassign a variable to a completely different type without errors. Use <code>type(x)</code> to check the current type.</div>
+  <div class="def-example">A parking spot that accepts any vehicle — car, motorcycle, or truck. The spot does not need a sign saying "cars only."</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Type Conversion (Casting)</div>
+  <div class="def-meaning">Explicitly changing a value from one type to another using functions like <code>int()</code>, <code>float()</code>, <code>str()</code>, <code>bool()</code>. Essential when combining different types — you cannot concatenate a string and an integer directly.</div>
+  <div class="def-example">Converting currency — changing US dollars to Euros. The value stays the same in principle, but the format changes so it can be used in a different context.</div>
+</div>
+
+<div class="analogy">Variables are like phone contacts. The contact name ("Mom") is the variable name, and the phone number (555-1234) is the value. You can update the number anytime, and the name still works. You can even change "Mom" to store an email address instead of a phone number — Python does not mind.</div>
+
+<h3>Python Data Types</h3>
+<table class="comp-table">
+  <thead><tr><th>Type</th><th>Description</th><th>Example</th><th>Check With</th></tr></thead>
+  <tbody>
+    <tr><td><code>int</code></td><td>Whole numbers (no decimal)</td><td><code>x = 42</code></td><td><code>type(42) → &lt;class 'int'&gt;</code></td></tr>
+    <tr><td><code>float</code></td><td>Decimal numbers</td><td><code>pi = 3.14</code></td><td><code>type(3.14) → &lt;class 'float'&gt;</code></td></tr>
+    <tr><td><code>str</code></td><td>Text (string of characters)</td><td><code>name = "Alice"</code></td><td><code>type("hi") → &lt;class 'str'&gt;</code></td></tr>
+    <tr><td><code>bool</code></td><td>True or False</td><td><code>is_valid = True</code></td><td><code>type(True) → &lt;class 'bool'&gt;</code></td></tr>
+    <tr><td><code>NoneType</code></td><td>Absence of value</td><td><code>x = None</code></td><td><code>type(None) → &lt;class 'NoneType'&gt;</code></td></tr>
+  </tbody>
+</table>
+
+<div class="card card-blue">
+  <h3>int32 vs int64 (FAQ #8)</h3>
+  <p>When working with NumPy and Pandas, you will encounter <code>int32</code> and <code>int64</code>:</p>
+  <ul>
+    <li><strong>int32:</strong> Uses 4 bytes (32 bits) of memory. Range: -2,147,483,648 to 2,147,483,647</li>
+    <li><strong>int64:</strong> Uses 8 bytes (64 bits) of memory. Range: approximately -9.2 × 10¹⁸ to 9.2 × 10¹⁸</li>
+  </ul>
+  <p>For most data science work, <code>int64</code> is the default and perfectly fine. Only optimize to <code>int32</code> when memory is a constraint with large datasets.</p>
+</div>
+
+<div class="diagram">
+  <div class="diagram-title">Type Conversion Flow</div>
+  <div class="flow">
+    <div class="flow-row">
+      <div class="flow-box data">str("42") → "42"</div>
+      <div class="flow-box model">int("42") → 42</div>
+      <div class="flow-box result">float("42") → 42.0</div>
+    </div>
+    <div class="arrow-down">↕ Convert Between Types</div>
+    <div class="flow-row">
+      <div class="flow-box data">str(42) → "42"</div>
+      <div class="flow-box model">int(42.9) → 42</div>
+      <div class="flow-box result">float(42) → 42.0</div>
+    </div>
+    <div class="arrow-down">⚠️ Watch Out!</div>
+    <div class="flow-row">
+      <div class="flow-box error">int("hello") → ValueError!</div>
+      <div class="flow-box error">int("42.5") → ValueError!</div>
+    </div>
+  </div>
+</div>
+
+<pre><code><span style="color:#94a3b8"># Variable assignment — no type declaration needed</span>
+<span style="color:#a78bfa">age</span> = <span style="color:#fbbf24">25</span>             <span style="color:#94a3b8"># int</span>
+<span style="color:#a78bfa">height</span> = <span style="color:#fbbf24">5.9</span>          <span style="color:#94a3b8"># float</span>
+<span style="color:#a78bfa">name</span> = <span style="color:#34d399">"Vamshi"</span>       <span style="color:#94a3b8"># str</span>
+<span style="color:#a78bfa">is_student</span> = <span style="color:#fbbf24">True</span>     <span style="color:#94a3b8"># bool</span>
+
+<span style="color:#94a3b8"># Check types</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#60a5fa">type</span>(<span style="color:#a78bfa">age</span>))       <span style="color:#94a3b8"># &lt;class 'int'&gt;</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#60a5fa">type</span>(<span style="color:#a78bfa">height</span>))    <span style="color:#94a3b8"># &lt;class 'float'&gt;</span>
+
+<span style="color:#94a3b8"># Type conversion</span>
+<span style="color:#a78bfa">age_str</span> = <span style="color:#60a5fa">str</span>(<span style="color:#a78bfa">age</span>)     <span style="color:#94a3b8"># "25" — now a string</span>
+<span style="color:#a78bfa">price</span> = <span style="color:#60a5fa">float</span>(<span style="color:#34d399">"19.99"</span>) <span style="color:#94a3b8"># 19.99 — string to float</span>
+
+<span style="color:#94a3b8"># Common mistake: concatenating str + int (FAQ #14)</span>
+<span style="color:#a78bfa">count</span> = <span style="color:#fbbf24">5</span>
+<span style="color:#94a3b8"># print("I have " + count + " apples")  # TypeError!</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">"I have "</span> + <span style="color:#60a5fa">str</span>(<span style="color:#a78bfa">count</span>) + <span style="color:#34d399">" apples"</span>)  <span style="color:#94a3b8"># Fixed!</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">f"I have </span><span style="color:#fbbf24">{count}</span><span style="color:#34d399"> apples"</span>)  <span style="color:#94a3b8"># Better: f-string</span>
+
+<span style="color:#94a3b8"># Comparison operators (FAQ #4)</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#fbbf24">10</span> == <span style="color:#fbbf24">10</span>)   <span style="color:#94a3b8"># True  (equal to)</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#fbbf24">10</span> != <span style="color:#fbbf24">5</span>)    <span style="color:#94a3b8"># True  (not equal)</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#fbbf24">10</span> > <span style="color:#fbbf24">5</span>)     <span style="color:#94a3b8"># True  (greater than)</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#fbbf24">10</span> >= <span style="color:#fbbf24">10</span>)   <span style="color:#94a3b8"># True  (greater or equal)</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#fbbf24">10</span> &lt; <span style="color:#fbbf24">20</span>)    <span style="color:#94a3b8"># True  (less than)</span>
+
+<span style="color:#94a3b8"># Floor division (FAQ #15)</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#fbbf24">9</span> // <span style="color:#fbbf24">5</span>)     <span style="color:#94a3b8"># 1 (not 1.8)</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#fbbf24">9</span> / <span style="color:#fbbf24">5</span>)      <span style="color:#94a3b8"># 1.8 (regular division)</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#fbbf24">9</span> % <span style="color:#fbbf24">5</span>)      <span style="color:#94a3b8"># 4 (modulo — remainder)</span>
+</code></pre>
+
+<div class="key-point"><span class="icon">💡</span><div><strong>TypeError: can only concatenate str to str.</strong> This is one of the most common Python errors (FAQ #14). Fix it by converting the number to a string with <code>str()</code> or by using f-strings: <code>f"value is {x}"</code>.</div></div>
+
+<div class="quiz">
+  <div class="quiz-title">Test Your Understanding</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q: What does <code>type(42)</code> return in Python?</div>
+    <button class="quiz-option" onclick="checkQuiz('q2a', this, false)">A) str</button>
+    <button class="quiz-option" onclick="checkQuiz('q2a', this, true)">B) &lt;class 'int'&gt;</button>
+    <button class="quiz-option" onclick="checkQuiz('q2a', this, false)">C) float</button>
+    <button class="quiz-option" onclick="checkQuiz('q2a', this, false)">D) number</button>
+    <div class="quiz-feedback" id="q2a-feedback"></div>
+  </div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q: What is the result of <code>9 // 5</code>?</div>
+    <button class="quiz-option" onclick="checkQuiz('q2b', this, true)">A) 1</button>
+    <button class="quiz-option" onclick="checkQuiz('q2b', this, false)">B) 1.8</button>
+    <button class="quiz-option" onclick="checkQuiz('q2b', this, false)">C) 4</button>
+    <button class="quiz-option" onclick="checkQuiz('q2b', this, false)">D) 2</button>
+    <div class="quiz-feedback" id="q2b-feedback"></div>
+  </div>
+</div>
+</div>
+<!-- ==================== 1.3 DATA STRUCTURES ==================== -->
+<div class="section" id="datastructs">
+<h2>📦 1.3 Data Structures: Lists, Tuples, Dictionaries</h2>
+<span class="week-badge week1">Week 1</span>
+
+<div class="def">
+  <div class="def-term">List</div>
+  <div class="def-meaning">A mutable, ordered collection of items enclosed in square brackets <code>[]</code>. Lists can hold mixed types (integers, strings, booleans, even other lists). Created with <code>list()</code> or <code>[]</code>.</div>
+  <div class="def-example">A shopping list on paper — you can add items, cross them off, rearrange them, and they stay in order.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Tuple</div>
+  <div class="def-meaning">An immutable, ordered collection enclosed in parentheses <code>()</code>. Once created, you cannot add, remove, or modify elements. Created with <code>tuple()</code> or <code>()</code>.</div>
+  <div class="def-example">A sealed time capsule — once you put items in and seal it, you can look at the contents but cannot change them.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Dictionary</div>
+  <div class="def-meaning">A mutable, unordered collection of key-value pairs enclosed in curly braces <code>{}</code>. Access values by their unique key, not by position. Created with <code>dict()</code> or <code>{}</code>.</div>
+  <div class="def-example">A real dictionary book — you look up a word (key) to find its definition (value). You do not search by page number.</div>
+</div>
+
+<div class="analogy">A <strong>list</strong> is a shelf with numbered slots — items stay in order, you can swap them. A <strong>tuple</strong> is a display case with a glass cover — look but do not touch. A <strong>dictionary</strong> is a filing cabinet — each drawer has a label (key), inside is the content (value).</div>
+
+<h3>Comparison: List vs Tuple vs Dictionary (FAQ #5)</h3>
+<table class="comp-table">
+  <thead><tr><th>Feature</th><th>List</th><th>Tuple</th><th>Dictionary</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Syntax</strong></td><td><code>[1, 2, 3]</code></td><td><code>(1, 2, 3)</code></td><td><code>{"a": 1}</code></td></tr>
+    <tr><td><strong>Mutable?</strong></td><td>Yes — can add/remove/change</td><td>No — immutable</td><td>Yes — can add/remove/change</td></tr>
+    <tr><td><strong>Ordered?</strong></td><td>Yes — maintains insertion order</td><td>Yes — maintains insertion order</td><td>Yes (Python 3.7+)</td></tr>
+    <tr><td><strong>Access By</strong></td><td>Index: <code>lst[0]</code></td><td>Index: <code>tpl[0]</code></td><td>Key: <code>dct["key"]</code></td></tr>
+    <tr><td><strong>Duplicates?</strong></td><td>Allowed</td><td>Allowed</td><td>Keys must be unique</td></tr>
+    <tr><td><strong>Use Case</strong></td><td>Dynamic collections</td><td>Fixed data (coordinates, constants)</td><td>Lookups, mappings</td></tr>
+    <tr><td><strong>Constructor</strong></td><td><code>list()</code></td><td><code>tuple()</code></td><td><code>dict()</code></td></tr>
+  </tbody>
+</table>
+
+<div class="card card-blue">
+  <h3>Bracket Guide (FAQ #6)</h3>
+  <p>One of the most confusing things for beginners — which bracket for what?</p>
+  <div class="cheat-grid">
+    <div class="cheat-item">
+      <div class="cheat-item-title">( ) Parentheses</div>
+      <div class="cheat-item-content">Tuples: <code>(1, 2, 3)</code><br>Function calls: <code>print("hi")</code><br>Grouping: <code>(2 + 3) * 4</code></div>
+    </div>
+    <div class="cheat-item">
+      <div class="cheat-item-title">[ ] Square Brackets</div>
+      <div class="cheat-item-content">Lists: <code>[1, 2, 3]</code><br>Indexing: <code>my_list[0]</code><br>Slicing: <code>my_list[1:3]</code></div>
+    </div>
+    <div class="cheat-item">
+      <div class="cheat-item-title">{ } Curly Braces</div>
+      <div class="cheat-item-content">Dicts: <code>{"a": 1}</code><br>Sets: <code>{1, 2, 3}</code><br>f-strings: <code>f"{var}"</code></div>
+    </div>
+  </div>
+</div>
+
+<pre><code><span style="color:#94a3b8"># ============ LISTS ============</span>
+<span style="color:#a78bfa">fruits</span> = [<span style="color:#34d399">"apple"</span>, <span style="color:#34d399">"banana"</span>, <span style="color:#34d399">"cherry"</span>]
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">fruits</span>[<span style="color:#fbbf24">0</span>])      <span style="color:#94a3b8"># "apple" — indexing starts at 0</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">fruits</span>[<span style="color:#fbbf24">-1</span>])     <span style="color:#94a3b8"># "cherry" — negative index = from end</span>
+
+<span style="color:#a78bfa">fruits</span>.<span style="color:#60a5fa">append</span>(<span style="color:#34d399">"date"</span>)   <span style="color:#94a3b8"># Add to end: ["apple","banana","cherry","date"]</span>
+<span style="color:#a78bfa">fruits</span>.<span style="color:#60a5fa">remove</span>(<span style="color:#34d399">"banana"</span>) <span style="color:#94a3b8"># Remove by value</span>
+<span style="color:#a78bfa">fruits</span>.<span style="color:#60a5fa">insert</span>(<span style="color:#fbbf24">1</span>, <span style="color:#34d399">"fig"</span>) <span style="color:#94a3b8"># Insert at index 1</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#60a5fa">len</span>(<span style="color:#a78bfa">fruits</span>))     <span style="color:#94a3b8"># 3 — number of items</span>
+
+<span style="color:#94a3b8"># Slicing: list[start:stop:step]</span>
+<span style="color:#a78bfa">nums</span> = [<span style="color:#fbbf24">0</span>, <span style="color:#fbbf24">1</span>, <span style="color:#fbbf24">2</span>, <span style="color:#fbbf24">3</span>, <span style="color:#fbbf24">4</span>, <span style="color:#fbbf24">5</span>]
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">nums</span>[<span style="color:#fbbf24">1</span>:<span style="color:#fbbf24">4</span>])     <span style="color:#94a3b8"># [1, 2, 3] — start inclusive, stop exclusive</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">nums</span>[:<span style="color:#fbbf24">3</span>])      <span style="color:#94a3b8"># [0, 1, 2] — from beginning</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">nums</span>[<span style="color:#fbbf24">3</span>:])      <span style="color:#94a3b8"># [3, 4, 5] — to end</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">nums</span>[::<span style="color:#fbbf24">2</span>])     <span style="color:#94a3b8"># [0, 2, 4] — every 2nd element</span>
+
+<span style="color:#94a3b8"># ============ TUPLES ============</span>
+<span style="color:#a78bfa">coords</span> = (<span style="color:#fbbf24">10.5</span>, <span style="color:#fbbf24">20.3</span>)
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">coords</span>[<span style="color:#fbbf24">0</span>])     <span style="color:#94a3b8"># 10.5</span>
+<span style="color:#94a3b8"># coords[0] = 99      # TypeError! Tuples are immutable</span>
+
+<span style="color:#94a3b8"># ============ DICTIONARIES ============</span>
+<span style="color:#a78bfa">student</span> = {
+    <span style="color:#34d399">"name"</span>: <span style="color:#34d399">"Vamshi"</span>,
+    <span style="color:#34d399">"age"</span>: <span style="color:#fbbf24">25</span>,
+    <span style="color:#34d399">"courses"</span>: [<span style="color:#34d399">"Python"</span>, <span style="color:#34d399">"ML"</span>]
+}
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">student</span>[<span style="color:#34d399">"name"</span>])     <span style="color:#94a3b8"># "Vamshi" — access by key (FAQ #7)</span>
+<span style="color:#a78bfa">student</span>[<span style="color:#34d399">"grade"</span>] = <span style="color:#34d399">"A"</span>    <span style="color:#94a3b8"># Add new key-value pair</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">student</span>.<span style="color:#60a5fa">keys</span>())     <span style="color:#94a3b8"># dict_keys(['name', 'age', 'courses', 'grade'])</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">student</span>.<span style="color:#60a5fa">values</span>())   <span style="color:#94a3b8"># dict_values(['Vamshi', 25, ['Python', 'ML'], 'A'])</span>
+</code></pre>
+
+<div class="diagram">
+  <div class="diagram-title">Indexing Visual — How Python Counts</div>
+  <div class="flow">
+    <div class="flow-row" style="gap: 2px;">
+      <div class="data-cell cell-blue">0</div>
+      <div class="data-cell cell-blue">1</div>
+      <div class="data-cell cell-blue">2</div>
+      <div class="data-cell cell-blue">3</div>
+      <div class="data-cell cell-blue">4</div>
+    </div>
+    <div style="text-align:center; color:#94a3b8; font-size:0.85em;">["a", "b", "c", "d", "e"] — Forward index (0 to n-1)</div>
+    <div class="flow-row" style="gap: 2px;">
+      <div class="data-cell cell-red">-5</div>
+      <div class="data-cell cell-red">-4</div>
+      <div class="data-cell cell-red">-3</div>
+      <div class="data-cell cell-red">-2</div>
+      <div class="data-cell cell-red">-1</div>
+    </div>
+    <div style="text-align:center; color:#94a3b8; font-size:0.85em;">Negative index — counts from the end</div>
+  </div>
+</div>
+
+<h3>Common List Methods</h3>
+<table class="comp-table">
+  <thead><tr><th>Method</th><th>What It Does</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><code>.append(x)</code></td><td>Add x to end</td><td><code>[1,2].append(3) → [1,2,3]</code></td></tr>
+    <tr><td><code>.insert(i, x)</code></td><td>Insert x at index i</td><td><code>[1,3].insert(1,2) → [1,2,3]</code></td></tr>
+    <tr><td><code>.remove(x)</code></td><td>Remove first occurrence of x</td><td><code>[1,2,2].remove(2) → [1,2]</code></td></tr>
+    <tr><td><code>.pop(i)</code></td><td>Remove &amp; return item at index i</td><td><code>[1,2,3].pop(0) → 1</code></td></tr>
+    <tr><td><code>.sort()</code></td><td>Sort in place (ascending)</td><td><code>[3,1,2].sort() → [1,2,3]</code></td></tr>
+    <tr><td><code>.reverse()</code></td><td>Reverse in place</td><td><code>[1,2,3].reverse() → [3,2,1]</code></td></tr>
+    <tr><td><code>.index(x)</code></td><td>Find index of first x</td><td><code>[10,20,30].index(20) → 1</code></td></tr>
+    <tr><td><code>.count(x)</code></td><td>Count occurrences of x</td><td><code>[1,1,2].count(1) → 2</code></td></tr>
+    <tr><td><code>.extend(lst)</code></td><td>Add all items from another list</td><td><code>[1].extend([2,3]) → [1,2,3]</code></td></tr>
+  </tbody>
+</table>
+
+<div class="quiz">
+  <div class="quiz-title">Test Your Understanding</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q: Which data structure uses curly braces <code>{}</code> and stores key-value pairs?</div>
+    <button class="quiz-option" onclick="checkQuiz('q3a', this, false)">A) List</button>
+    <button class="quiz-option" onclick="checkQuiz('q3a', this, false)">B) Tuple</button>
+    <button class="quiz-option" onclick="checkQuiz('q3a', this, true)">C) Dictionary</button>
+    <button class="quiz-option" onclick="checkQuiz('q3a', this, false)">D) Set</button>
+    <div class="quiz-feedback" id="q3a-feedback"></div>
+  </div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q: What happens when you try <code>my_tuple[0] = "new"</code> on an existing tuple?</div>
+    <button class="quiz-option" onclick="checkQuiz('q3b', this, false)">A) It updates the first element</button>
+    <button class="quiz-option" onclick="checkQuiz('q3b', this, true)">B) TypeError — tuples are immutable</button>
+    <button class="quiz-option" onclick="checkQuiz('q3b', this, false)">C) It creates a new tuple</button>
+    <button class="quiz-option" onclick="checkQuiz('q3b', this, false)">D) IndexError — invalid operation</button>
+    <div class="quiz-feedback" id="q3b-feedback"></div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== 1.4 CONTROL FLOW ==================== -->
+<div class="section" id="control">
+<h2>🔀 1.4 Control Flow: Conditionals &amp; Loops</h2>
+<span class="week-badge week1">Week 1</span>
+
+<div class="def">
+  <div class="def-term">Conditional Statement (if/elif/else)</div>
+  <div class="def-meaning">A control structure that executes different blocks of code based on whether a condition is True or False. Python uses indentation (4 spaces) to define code blocks — no curly braces like other languages.</div>
+  <div class="def-example">A traffic light — if green, go. Elif (else if) yellow, slow down. Else (red), stop. Only one action happens based on the current state.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">For Loop</div>
+  <div class="def-meaning">Iterates over a sequence (list, tuple, string, range) executing a block of code for each element. The variable <code>i</code> (or any name you choose) takes on each value in the sequence, one at a time (FAQ #13).</div>
+  <div class="def-example">A postal worker delivering mail — they visit each house on the street in order, drop off the mail, then move to the next house.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">While Loop</div>
+  <div class="def-meaning">Repeats a block of code as long as a condition remains True. Be careful — if the condition never becomes False, you get an infinite loop! Always make sure the condition will eventually change (FAQ #12).</div>
+  <div class="def-example">Filling a bathtub — keep the water running WHILE the tub is not full. Once it is full, stop. If you forget to check, the water overflows (infinite loop).</div>
+</div>
+
+<div class="analogy">Control flow is like a choose-your-own-adventure book. At each decision point (if), you pick a path. For loops know how many times to repeat; while loops keep going until a condition changes.</div>
+
+<div class="diagram">
+  <div class="diagram-title">Control Flow Decision Tree</div>
+  <div class="flow">
+    <div class="flow-row">
+      <div class="flow-box data">Start</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="flow-row">
+      <div class="flow-box result">Evaluate Condition</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="flow-row">
+      <div class="flow-box model">True → Execute Block</div>
+      <div class="flow-box error">False → Skip / Try elif / else</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="flow-row">
+      <div class="flow-box combine">Continue to Next Statement</div>
+    </div>
+  </div>
+</div>
+
+<pre><code><span style="color:#94a3b8"># ============ CONDITIONALS ============</span>
+<span style="color:#a78bfa">score</span> = <span style="color:#fbbf24">85</span>
+
+<span style="color:#60a5fa">if</span> <span style="color:#a78bfa">score</span> >= <span style="color:#fbbf24">90</span>:
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Grade: A"</span>)
+<span style="color:#60a5fa">elif</span> <span style="color:#a78bfa">score</span> >= <span style="color:#fbbf24">80</span>:
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Grade: B"</span>)    <span style="color:#94a3b8"># This runs! score=85 >= 80</span>
+<span style="color:#60a5fa">elif</span> <span style="color:#a78bfa">score</span> >= <span style="color:#fbbf24">70</span>:
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Grade: C"</span>)
+<span style="color:#60a5fa">else</span>:
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Grade: F"</span>)
+
+<span style="color:#94a3b8"># Logical operators: and, or, not</span>
+<span style="color:#a78bfa">age</span> = <span style="color:#fbbf24">25</span>
+<span style="color:#a78bfa">has_license</span> = <span style="color:#fbbf24">True</span>
+<span style="color:#60a5fa">if</span> <span style="color:#a78bfa">age</span> >= <span style="color:#fbbf24">18</span> <span style="color:#60a5fa">and</span> <span style="color:#a78bfa">has_license</span>:
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Can drive"</span>)
+
+<span style="color:#94a3b8"># ============ FOR LOOP ============</span>
+<span style="color:#94a3b8"># Iterate over a list</span>
+<span style="color:#a78bfa">fruits</span> = [<span style="color:#34d399">"apple"</span>, <span style="color:#34d399">"banana"</span>, <span style="color:#34d399">"cherry"</span>]
+<span style="color:#60a5fa">for</span> <span style="color:#a78bfa">fruit</span> <span style="color:#60a5fa">in</span> <span style="color:#a78bfa">fruits</span>:
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">f"I like </span><span style="color:#fbbf24">{fruit}</span><span style="color:#34d399">"</span>)
+
+<span style="color:#94a3b8"># Using range(): range(start, stop, step) — FAQ #13</span>
+<span style="color:#60a5fa">for</span> <span style="color:#a78bfa">i</span> <span style="color:#60a5fa">in</span> <span style="color:#60a5fa">range</span>(<span style="color:#fbbf24">0</span>, <span style="color:#fbbf24">10</span>, <span style="color:#fbbf24">2</span>):   <span style="color:#94a3b8"># 0, 2, 4, 6, 8</span>
+    <span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">i</span>, end=<span style="color:#34d399">" "</span>)
+
+<span style="color:#94a3b8"># Nested loop with enumerate</span>
+<span style="color:#60a5fa">for</span> <span style="color:#a78bfa">index</span>, <span style="color:#a78bfa">fruit</span> <span style="color:#60a5fa">in</span> <span style="color:#60a5fa">enumerate</span>(<span style="color:#a78bfa">fruits</span>):
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">f"</span><span style="color:#fbbf24">{index}</span><span style="color:#34d399">: </span><span style="color:#fbbf24">{fruit}</span><span style="color:#34d399">"</span>)   <span style="color:#94a3b8"># 0: apple, 1: banana, 2: cherry</span>
+
+<span style="color:#94a3b8"># ============ WHILE LOOP ============</span>
+<span style="color:#a78bfa">count</span> = <span style="color:#fbbf24">0</span>
+<span style="color:#60a5fa">while</span> <span style="color:#a78bfa">count</span> &lt; <span style="color:#fbbf24">5</span>:       <span style="color:#94a3b8"># FAQ #12: runs while condition is True</span>
+    <span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">count</span>)
+    <span style="color:#a78bfa">count</span> += <span style="color:#fbbf24">1</span>         <span style="color:#94a3b8"># Don't forget this! Otherwise infinite loop</span>
+
+<span style="color:#94a3b8"># break and continue</span>
+<span style="color:#60a5fa">for</span> <span style="color:#a78bfa">i</span> <span style="color:#60a5fa">in</span> <span style="color:#60a5fa">range</span>(<span style="color:#fbbf24">10</span>):
+    <span style="color:#60a5fa">if</span> <span style="color:#a78bfa">i</span> == <span style="color:#fbbf24">3</span>: <span style="color:#60a5fa">continue</span>   <span style="color:#94a3b8"># Skip 3</span>
+    <span style="color:#60a5fa">if</span> <span style="color:#a78bfa">i</span> == <span style="color:#fbbf24">7</span>: <span style="color:#60a5fa">break</span>      <span style="color:#94a3b8"># Stop at 7</span>
+    <span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">i</span>, end=<span style="color:#34d399">" "</span>)       <span style="color:#94a3b8"># Output: 0 1 2 4 5 6</span>
+</code></pre>
+
+<h3>For Loop vs While Loop</h3>
+<div class="side-by-side">
+  <div>
+    <strong style="color: var(--success);">For Loop — Use When:</strong>
+    <ul style="margin: 1rem 0 0 1.5rem;">
+      <li>You know how many iterations</li>
+      <li>Iterating over a sequence</li>
+      <li>Processing each item in a collection</li>
+      <li>Using <code>range()</code> for counted loops</li>
+    </ul>
+  </div>
+  <div>
+    <strong style="color: var(--accent2);">While Loop — Use When:</strong>
+    <ul style="margin: 1rem 0 0 1.5rem;">
+      <li>Unknown number of iterations</li>
+      <li>Waiting for a condition to change</li>
+      <li>User input validation</li>
+      <li>Running until a flag is set</li>
+    </ul>
+  </div>
+</div>
+
+<div class="quiz">
+  <div class="quiz-title">Test Your Understanding</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q: What does <code>range(1, 10, 3)</code> produce?</div>
+    <button class="quiz-option" onclick="checkQuiz('q4a', this, false)">A) [1, 2, 3, 4, 5, 6, 7, 8, 9]</button>
+    <button class="quiz-option" onclick="checkQuiz('q4a', this, true)">B) [1, 4, 7]</button>
+    <button class="quiz-option" onclick="checkQuiz('q4a', this, false)">C) [1, 3, 6, 9]</button>
+    <button class="quiz-option" onclick="checkQuiz('q4a', this, false)">D) [3, 6, 9]</button>
+    <div class="quiz-feedback" id="q4a-feedback"></div>
+  </div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q: What keyword skips the current iteration and moves to the next one?</div>
+    <button class="quiz-option" onclick="checkQuiz('q4b', this, false)">A) break</button>
+    <button class="quiz-option" onclick="checkQuiz('q4b', this, true)">B) continue</button>
+    <button class="quiz-option" onclick="checkQuiz('q4b', this, false)">C) pass</button>
+    <button class="quiz-option" onclick="checkQuiz('q4b', this, false)">D) skip</button>
+    <div class="quiz-feedback" id="q4b-feedback"></div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== 1.5 FUNCTIONS ==================== -->
+<div class="section" id="functions">
+<h2>⚙️ 1.5 Functions &amp; List Comprehension</h2>
+<span class="week-badge week1">Week 1</span>
+
+<div class="def">
+  <div class="def-term">Function</div>
+  <div class="def-meaning">A reusable block of code that performs a specific task. Defined with the <code>def</code> keyword, it can accept inputs (parameters) and return outputs. Functions eliminate code duplication and make programs modular.</div>
+  <div class="def-example">A coffee machine — you put in water and beans (inputs), press a button (call the function), and get coffee (output). You do not need to know how the machine works internally to use it.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Return Statement</div>
+  <div class="def-meaning">Sends a value back from a function to the caller. Without <code>return</code>, the function returns <code>None</code> by default. A function can return multiple values as a tuple: <code>return a, b</code>.</div>
+  <div class="def-example">A vending machine — you insert money (arguments), the machine processes your selection, and <strong>returns</strong> the snack to you. If you just press buttons without inserting money, you get nothing (None).</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Lambda Function</div>
+  <div class="def-meaning">An anonymous, one-line function defined with the <code>lambda</code> keyword. Syntax: <code>lambda arguments: expression</code>. Best for simple operations where defining a full function would be overkill.</div>
+  <div class="def-example">A sticky note with a quick formula — instead of writing a full instruction manual, you jot down "multiply by 2" on a Post-it and stick it where needed.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">List Comprehension</div>
+  <div class="def-meaning">A concise, Pythonic way to create lists in a single line. Syntax: <code>[expression for item in iterable if condition]</code>. It replaces multi-line for loops with a compact, readable expression.</div>
+  <div class="def-example">A factory assembly line — raw materials (iterable) come in, each gets processed (expression), and defective ones are filtered out (condition). The output is a list of finished products.</div>
+</div>
+
+<div class="analogy">Functions are recipes in a cookbook — define once, call by name whenever needed. Lambda functions are quick recipes on a napkin. List comprehensions are speed-cooking: make 10 dishes at once in one instruction.</div>
+
+<pre><code><span style="color:#94a3b8"># ============ DEFINING FUNCTIONS ============</span>
+<span style="color:#60a5fa">def</span> <span style="color:#a78bfa">greet</span>(<span style="color:#a78bfa">name</span>):
+    <span style="color:#34d399">"""Greet a person by name."""</span>
+    <span style="color:#60a5fa">return</span> <span style="color:#34d399">f"Hello, </span><span style="color:#fbbf24">{name}</span><span style="color:#34d399">!"</span>
+
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">greet</span>(<span style="color:#34d399">"Vamshi"</span>))   <span style="color:#94a3b8"># "Hello, Vamshi!"</span>
+
+<span style="color:#94a3b8"># Default parameters</span>
+<span style="color:#60a5fa">def</span> <span style="color:#a78bfa">power</span>(<span style="color:#a78bfa">base</span>, <span style="color:#a78bfa">exp</span>=<span style="color:#fbbf24">2</span>):
+    <span style="color:#60a5fa">return</span> <span style="color:#a78bfa">base</span> ** <span style="color:#a78bfa">exp</span>
+
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">power</span>(<span style="color:#fbbf24">3</span>))       <span style="color:#94a3b8"># 9 (uses default exp=2)</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">power</span>(<span style="color:#fbbf24">3</span>, <span style="color:#fbbf24">3</span>))    <span style="color:#94a3b8"># 27 (exp=3)</span>
+
+<span style="color:#94a3b8"># Multiple return values</span>
+<span style="color:#60a5fa">def</span> <span style="color:#a78bfa">min_max</span>(<span style="color:#a78bfa">numbers</span>):
+    <span style="color:#60a5fa">return</span> <span style="color:#60a5fa">min</span>(<span style="color:#a78bfa">numbers</span>), <span style="color:#60a5fa">max</span>(<span style="color:#a78bfa">numbers</span>)
+
+<span style="color:#a78bfa">lo</span>, <span style="color:#a78bfa">hi</span> = <span style="color:#a78bfa">min_max</span>([<span style="color:#fbbf24">4</span>, <span style="color:#fbbf24">2</span>, <span style="color:#fbbf24">9</span>, <span style="color:#fbbf24">1</span>])
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">f"Min: </span><span style="color:#fbbf24">{lo}</span><span style="color:#34d399">, Max: </span><span style="color:#fbbf24">{hi}</span><span style="color:#34d399">"</span>)  <span style="color:#94a3b8"># Min: 1, Max: 9</span>
+
+<span style="color:#94a3b8"># ============ LAMBDA FUNCTIONS ============</span>
+<span style="color:#a78bfa">double</span> = <span style="color:#60a5fa">lambda</span> <span style="color:#a78bfa">x</span>: <span style="color:#a78bfa">x</span> * <span style="color:#fbbf24">2</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">double</span>(<span style="color:#fbbf24">5</span>))     <span style="color:#94a3b8"># 10</span>
+
+<span style="color:#94a3b8"># Lambda with sorted</span>
+<span style="color:#a78bfa">students</span> = [(<span style="color:#34d399">"Alice"</span>, <span style="color:#fbbf24">85</span>), (<span style="color:#34d399">"Bob"</span>, <span style="color:#fbbf24">92</span>), (<span style="color:#34d399">"Charlie"</span>, <span style="color:#fbbf24">78</span>)]
+<span style="color:#a78bfa">by_score</span> = <span style="color:#60a5fa">sorted</span>(<span style="color:#a78bfa">students</span>, key=<span style="color:#60a5fa">lambda</span> <span style="color:#a78bfa">s</span>: <span style="color:#a78bfa">s</span>[<span style="color:#fbbf24">1</span>], reverse=<span style="color:#fbbf24">True</span>)
+<span style="color:#94a3b8"># [('Bob', 92), ('Alice', 85), ('Charlie', 78)]</span>
+
+<span style="color:#94a3b8"># ============ LIST COMPREHENSION ============</span>
+<span style="color:#94a3b8"># Instead of:</span>
+<span style="color:#a78bfa">squares</span> = []
+<span style="color:#60a5fa">for</span> <span style="color:#a78bfa">x</span> <span style="color:#60a5fa">in</span> <span style="color:#60a5fa">range</span>(<span style="color:#fbbf24">10</span>):
+    <span style="color:#a78bfa">squares</span>.<span style="color:#60a5fa">append</span>(<span style="color:#a78bfa">x</span>**<span style="color:#fbbf24">2</span>)
+
+<span style="color:#94a3b8"># Write this:</span>
+<span style="color:#a78bfa">squares</span> = [<span style="color:#a78bfa">x</span>**<span style="color:#fbbf24">2</span> <span style="color:#60a5fa">for</span> <span style="color:#a78bfa">x</span> <span style="color:#60a5fa">in</span> <span style="color:#60a5fa">range</span>(<span style="color:#fbbf24">10</span>)]
+<span style="color:#94a3b8"># [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</span>
+
+<span style="color:#94a3b8"># With condition: only even squares</span>
+<span style="color:#a78bfa">even_sq</span> = [<span style="color:#a78bfa">x</span>**<span style="color:#fbbf24">2</span> <span style="color:#60a5fa">for</span> <span style="color:#a78bfa">x</span> <span style="color:#60a5fa">in</span> <span style="color:#60a5fa">range</span>(<span style="color:#fbbf24">10</span>) <span style="color:#60a5fa">if</span> <span style="color:#a78bfa">x</span> % <span style="color:#fbbf24">2</span> == <span style="color:#fbbf24">0</span>]
+<span style="color:#94a3b8"># [0, 4, 16, 36, 64]</span>
+
+<span style="color:#94a3b8"># Nested: flatten 2D list</span>
+<span style="color:#a78bfa">flat</span> = [<span style="color:#a78bfa">n</span> <span style="color:#60a5fa">for</span> <span style="color:#a78bfa">row</span> <span style="color:#60a5fa">in</span> [[<span style="color:#fbbf24">1</span>,<span style="color:#fbbf24">2</span>],[<span style="color:#fbbf24">3</span>,<span style="color:#fbbf24">4</span>]] <span style="color:#60a5fa">for</span> <span style="color:#a78bfa">n</span> <span style="color:#60a5fa">in</span> <span style="color:#a78bfa">row</span>]  <span style="color:#94a3b8"># [1,2,3,4]</span>
+</code></pre>
+
+<div class="diagram">
+  <div class="diagram-title">Function Anatomy</div>
+  <div class="flow">
+    <div class="flow-row">
+      <div class="flow-box data">def function_name(params):</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="flow-row">
+      <div class="flow-box model">"""Docstring: what it does"""</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="flow-row">
+      <div class="flow-box result">Function body (indented)</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="flow-row">
+      <div class="flow-box combine">return result</div>
+    </div>
+  </div>
+</div>
+
+<div class="key-point"><span class="icon">💡</span><div><strong>Pythonic Code:</strong> List comprehensions are considered more "Pythonic" than equivalent for loops. They are also slightly faster because the loop happens internally in C. Use them for simple transformations. For complex logic, stick with regular for loops for readability.</div></div>
+
+<div class="quiz">
+  <div class="quiz-title">Test Your Understanding</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q: What does <code>[x*2 for x in [1,2,3] if x > 1]</code> return?</div>
+    <button class="quiz-option" onclick="checkQuiz('q5a', this, false)">A) [2, 4, 6]</button>
+    <button class="quiz-option" onclick="checkQuiz('q5a', this, true)">B) [4, 6]</button>
+    <button class="quiz-option" onclick="checkQuiz('q5a', this, false)">C) [1, 4, 6]</button>
+    <button class="quiz-option" onclick="checkQuiz('q5a', this, false)">D) [2, 6]</button>
+    <div class="quiz-feedback" id="q5a-feedback"></div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== 2.1 NUMPY ==================== -->
+<div class="section" id="numpy">
+<h2>🔢 2.1 NumPy: Numerical Computing</h2>
+<span class="week-badge week2">Week 2</span>
+
+<div class="def">
+  <div class="def-term">NumPy (Numerical Python)</div>
+  <div class="def-meaning">A fundamental Python library for numerical computing. Its core object is the <code>ndarray</code> (N-dimensional array), which enables fast mathematical operations on large datasets. NumPy is the foundation upon which Pandas, scikit-learn, and most data science libraries are built.</div>
+  <div class="def-example">A calculator that can handle millions of numbers at once. Instead of adding numbers one by one in a loop, NumPy adds entire arrays in a single operation — like having a million calculators working simultaneously.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Vectorized Operations</div>
+  <div class="def-meaning">Operations that apply to entire arrays at once, without explicit loops. NumPy executes these in optimized C code, making them 10-100x faster than Python loops. Examples: <code>arr * 2</code>, <code>arr1 + arr2</code>, <code>np.sqrt(arr)</code>.</div>
+  <div class="def-example">A factory production line that stamps all parts at once, vs. a craftsman filing each part individually.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Broadcasting</div>
+  <div class="def-meaning">NumPy's ability to perform operations on arrays of different shapes by automatically expanding the smaller array to match. For example, adding a scalar to an array or adding a 1D array to each row of a 2D array.</div>
+  <div class="def-example">Giving a $5 raise to every employee in a company. You state the raise once, and it "broadcasts" to everyone's salary — you do not need to write each person's new salary individually.</div>
+</div>
+
+<div class="analogy">Think of Python lists as a regular backpack — flexible, can hold anything, but slow to search through. NumPy arrays are like an organized toolbox — everything has a fixed type and position, so finding and using tools is lightning fast. The trade-off: the toolbox only holds one type of item (all integers, all floats, etc.), but it is extremely efficient.</div>
+
+<h3>NumPy vs Python Lists</h3>
+<table class="comp-table">
+  <thead><tr><th>Feature</th><th>Python List</th><th>NumPy Array</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Speed</strong></td><td>Slow (interpreted loop)</td><td>Fast (C-compiled vectorized)</td></tr>
+    <tr><td><strong>Types</strong></td><td>Mixed types allowed</td><td>Homogeneous (one type only)</td></tr>
+    <tr><td><strong>Operations</strong></td><td>Element-by-element manual</td><td>Vectorized (whole-array at once)</td></tr>
+    <tr><td><strong>Memory</strong></td><td>More (each element is an object)</td><td>Less (contiguous memory block)</td></tr>
+    <tr><td><strong>Methods</strong></td><td><code>.append()</code>, <code>.sort()</code></td><td><code>.mean()</code>, <code>.std()</code>, <code>.reshape()</code></td></tr>
+    <tr><td><strong>Math</strong></td><td><code>[1,2]+[3,4]=[1,2,3,4]</code> (concat)</td><td><code>arr([1,2])+arr([3,4])=arr([4,6])</code></td></tr>
+  </tbody>
+</table>
+
+<pre><code><span style="color:#60a5fa">import</span> numpy <span style="color:#60a5fa">as</span> np
+
+<span style="color:#94a3b8"># Creating arrays</span>
+<span style="color:#a78bfa">arr</span> = np.<span style="color:#60a5fa">array</span>([<span style="color:#fbbf24">1</span>, <span style="color:#fbbf24">2</span>, <span style="color:#fbbf24">3</span>, <span style="color:#fbbf24">4</span>, <span style="color:#fbbf24">5</span>])
+<span style="color:#a78bfa">zeros</span> = np.<span style="color:#60a5fa">zeros</span>((<span style="color:#fbbf24">3</span>, <span style="color:#fbbf24">4</span>))        <span style="color:#94a3b8"># 3x4 matrix of zeros</span>
+<span style="color:#a78bfa">ones</span> = np.<span style="color:#60a5fa">ones</span>((<span style="color:#fbbf24">2</span>, <span style="color:#fbbf24">3</span>))          <span style="color:#94a3b8"># 2x3 matrix of ones</span>
+<span style="color:#a78bfa">rng</span> = np.<span style="color:#60a5fa">arange</span>(<span style="color:#fbbf24">0</span>, <span style="color:#fbbf24">10</span>, <span style="color:#fbbf24">2</span>)      <span style="color:#94a3b8"># [0, 2, 4, 6, 8]</span>
+<span style="color:#a78bfa">lin</span> = np.<span style="color:#60a5fa">linspace</span>(<span style="color:#fbbf24">0</span>, <span style="color:#fbbf24">1</span>, <span style="color:#fbbf24">5</span>)     <span style="color:#94a3b8"># [0, 0.25, 0.5, 0.75, 1.0]</span>
+
+<span style="color:#94a3b8"># Array properties</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">arr</span>.shape)     <span style="color:#94a3b8"># (5,) — dimensions</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">arr</span>.dtype)     <span style="color:#94a3b8"># int64 — data type</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">arr</span>.ndim)      <span style="color:#94a3b8"># 1 — number of dimensions</span>
+
+<span style="color:#94a3b8"># Vectorized operations — no loops needed!</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">arr</span> * <span style="color:#fbbf24">2</span>)       <span style="color:#94a3b8"># [2, 4, 6, 8, 10]</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">arr</span> ** <span style="color:#fbbf24">2</span>)      <span style="color:#94a3b8"># [1, 4, 9, 16, 25]</span>
+<span style="color:#60a5fa">print</span>(np.<span style="color:#60a5fa">sqrt</span>(<span style="color:#a78bfa">arr</span>))  <span style="color:#94a3b8"># [1.0, 1.41, 1.73, 2.0, 2.24]</span>
+
+<span style="color:#94a3b8"># Statistical functions</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">arr</span>.<span style="color:#60a5fa">mean</span>())    <span style="color:#94a3b8"># 3.0</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">arr</span>.<span style="color:#60a5fa">std</span>())     <span style="color:#94a3b8"># 1.414</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">arr</span>.<span style="color:#60a5fa">sum</span>())     <span style="color:#94a3b8"># 15</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">arr</span>.<span style="color:#60a5fa">min</span>())     <span style="color:#94a3b8"># 1</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">arr</span>.<span style="color:#60a5fa">max</span>())     <span style="color:#94a3b8"># 5</span>
+
+<span style="color:#94a3b8"># Indexing and slicing (same as lists)</span>
+<span style="color:#a78bfa">matrix</span> = np.<span style="color:#60a5fa">array</span>([[<span style="color:#fbbf24">1</span>,<span style="color:#fbbf24">2</span>,<span style="color:#fbbf24">3</span>], [<span style="color:#fbbf24">4</span>,<span style="color:#fbbf24">5</span>,<span style="color:#fbbf24">6</span>], [<span style="color:#fbbf24">7</span>,<span style="color:#fbbf24">8</span>,<span style="color:#fbbf24">9</span>]])
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">matrix</span>[<span style="color:#fbbf24">0</span>, <span style="color:#fbbf24">1</span>])    <span style="color:#94a3b8"># 2 (row 0, col 1)</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">matrix</span>[:<span style="color:#fbbf24">2</span>, <span style="color:#fbbf24">1</span>:])  <span style="color:#94a3b8"># [[2,3],[5,6]] — first 2 rows, cols 1+</span>
+
+<span style="color:#94a3b8"># Boolean indexing</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">arr</span>[<span style="color:#a78bfa">arr</span> > <span style="color:#fbbf24">3</span>])    <span style="color:#94a3b8"># [4, 5] — filter elements</span>
+
+<span style="color:#94a3b8"># Reshape</span>
+<span style="color:#a78bfa">reshaped</span> = np.<span style="color:#60a5fa">arange</span>(<span style="color:#fbbf24">12</span>).<span style="color:#60a5fa">reshape</span>(<span style="color:#fbbf24">3</span>, <span style="color:#fbbf24">4</span>)  <span style="color:#94a3b8"># 3 rows, 4 cols</span>
+</code></pre>
+
+<div class="quiz">
+  <div class="quiz-title">Test Your Understanding</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q: What is the main advantage of NumPy arrays over Python lists for numerical data?</div>
+    <button class="quiz-option" onclick="checkQuiz('q6a', this, false)">A) They can hold mixed data types</button>
+    <button class="quiz-option" onclick="checkQuiz('q6a', this, true)">B) Vectorized operations make them 10-100x faster</button>
+    <button class="quiz-option" onclick="checkQuiz('q6a', this, false)">C) They use more memory for safety</button>
+    <button class="quiz-option" onclick="checkQuiz('q6a', this, false)">D) They are easier to create</button>
+    <div class="quiz-feedback" id="q6a-feedback"></div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== 2.2 PANDAS ==================== -->
+<div class="section" id="pandas">
+<h2>🐼 2.2 Pandas: Data Manipulation</h2>
+<span class="week-badge week2">Week 2</span>
+
+<div class="def">
+  <div class="def-term">Pandas</div>
+  <div class="def-meaning">The most popular Python library for data manipulation and analysis. It provides two primary data structures: <code>Series</code> (1D labeled array) and <code>DataFrame</code> (2D labeled table with rows and columns). Think of a DataFrame as a supercharged Excel spreadsheet that you can program.</div>
+  <div class="def-example">Excel on steroids — you can load a million-row CSV file, filter it, group it, merge it with another file, and compute statistics, all in a few lines of code.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">DataFrame</div>
+  <div class="def-meaning">A 2D labeled data structure with named columns and an index. Each column is a Pandas Series. Created from dictionaries, CSV files, Excel files, or SQL queries. The workhorse of data science in Python.</div>
+  <div class="def-example">A database table or Excel spreadsheet — rows are individual records (customers, transactions), columns are attributes (name, age, purchase amount).</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Boolean Indexing</div>
+  <div class="def-meaning">Filtering rows in a DataFrame using a condition that returns True/False for each row. Syntax: <code>df[df['column'] > value]</code>. You can combine conditions with <code>&amp;</code> (and) and <code>|</code> (or).</div>
+  <div class="def-example">Telling a librarian "Show me only the books published after 2020 that are science fiction" — the librarian checks each book and hands you only the matching ones.</div>
+</div>
+
+<div class="analogy">Pandas is like hiring a personal assistant for your data. You say "read this CSV file" (<code>pd.read_csv</code>), "show me the first few rows" (<code>.head()</code>), "what are the stats?" (<code>.describe()</code>), "group by department and give me averages" (<code>.groupby().mean()</code>). The assistant does all the tedious work instantly.</div>
+
+<pre><code><span style="color:#60a5fa">import</span> pandas <span style="color:#60a5fa">as</span> pd
+
+<span style="color:#94a3b8"># Creating a DataFrame from a dictionary</span>
+<span style="color:#a78bfa">data</span> = {
+    <span style="color:#34d399">"Name"</span>: [<span style="color:#34d399">"Alice"</span>, <span style="color:#34d399">"Bob"</span>, <span style="color:#34d399">"Charlie"</span>, <span style="color:#34d399">"Diana"</span>],
+    <span style="color:#34d399">"Age"</span>: [<span style="color:#fbbf24">25</span>, <span style="color:#fbbf24">30</span>, <span style="color:#fbbf24">35</span>, <span style="color:#fbbf24">28</span>],
+    <span style="color:#34d399">"Salary"</span>: [<span style="color:#fbbf24">50000</span>, <span style="color:#fbbf24">60000</span>, <span style="color:#fbbf24">75000</span>, <span style="color:#fbbf24">55000</span>]
+}
+<span style="color:#a78bfa">df</span> = pd.<span style="color:#60a5fa">DataFrame</span>(<span style="color:#a78bfa">data</span>)
+
+<span style="color:#94a3b8"># Reading from a CSV file</span>
+<span style="color:#a78bfa">df</span> = pd.<span style="color:#60a5fa">read_csv</span>(<span style="color:#34d399">"employees.csv"</span>)
+
+<span style="color:#94a3b8"># First look at data — the essential 5</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">df</span>.<span style="color:#60a5fa">head</span>())        <span style="color:#94a3b8"># First 5 rows</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">df</span>.<span style="color:#60a5fa">tail</span>())        <span style="color:#94a3b8"># Last 5 rows</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">df</span>.shape)         <span style="color:#94a3b8"># (rows, columns)</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">df</span>.<span style="color:#60a5fa">info</span>())        <span style="color:#94a3b8"># Column types, non-null counts</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">df</span>.<span style="color:#60a5fa">describe</span>())    <span style="color:#94a3b8"># Summary statistics</span>
+
+<span style="color:#94a3b8"># Selecting columns</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Name"</span>])       <span style="color:#94a3b8"># Single column → Series</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">df</span>[[<span style="color:#34d399">"Name"</span>, <span style="color:#34d399">"Age"</span>]])  <span style="color:#94a3b8"># Multiple columns → DataFrame</span>
+
+<span style="color:#94a3b8"># Selecting rows: loc (label-based) vs iloc (integer-based)</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">df</span>.<span style="color:#60a5fa">loc</span>[<span style="color:#fbbf24">0</span>])          <span style="color:#94a3b8"># First row by label</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">df</span>.<span style="color:#60a5fa">iloc</span>[<span style="color:#fbbf24">0</span>:<span style="color:#fbbf24">3</span>])      <span style="color:#94a3b8"># First 3 rows by position</span>
+
+<span style="color:#94a3b8"># Boolean indexing — filtering</span>
+<span style="color:#a78bfa">seniors</span> = <span style="color:#a78bfa">df</span>[<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Age"</span>] > <span style="color:#fbbf24">30</span>]
+<span style="color:#a78bfa">high_earners</span> = <span style="color:#a78bfa">df</span>[(<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Salary"</span>] > <span style="color:#fbbf24">55000</span>) &amp; (<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Age"</span>] &lt; <span style="color:#fbbf24">35</span>)]
+
+<span style="color:#94a3b8"># Sorting</span>
+<span style="color:#a78bfa">df_sorted</span> = <span style="color:#a78bfa">df</span>.<span style="color:#60a5fa">sort_values</span>(<span style="color:#34d399">"Salary"</span>, ascending=<span style="color:#fbbf24">False</span>)
+
+<span style="color:#94a3b8"># Groupby — split-apply-combine</span>
+<span style="color:#a78bfa">dept_avg</span> = <span style="color:#a78bfa">df</span>.<span style="color:#60a5fa">groupby</span>(<span style="color:#34d399">"Department"</span>)[<span style="color:#34d399">"Salary"</span>].<span style="color:#60a5fa">mean</span>()
+
+<span style="color:#94a3b8"># Adding new columns</span>
+<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Bonus"</span>] = <span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Salary"</span>] * <span style="color:#fbbf24">0.1</span>
+
+<span style="color:#94a3b8"># Apply custom function</span>
+<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Category"</span>] = <span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Age"</span>].<span style="color:#60a5fa">apply</span>(<span style="color:#60a5fa">lambda</span> <span style="color:#a78bfa">x</span>: <span style="color:#34d399">"Senior"</span> <span style="color:#60a5fa">if</span> <span style="color:#a78bfa">x</span> > <span style="color:#fbbf24">30</span> <span style="color:#60a5fa">else</span> <span style="color:#34d399">"Junior"</span>)
+</code></pre>
+
+<h3>Essential Pandas Methods</h3>
+<table class="comp-table">
+  <thead><tr><th>Method</th><th>Purpose</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><code>.head(n)</code></td><td>First n rows</td><td><code>df.head(10)</code></td></tr>
+    <tr><td><code>.describe()</code></td><td>Summary statistics</td><td><code>df.describe()</code></td></tr>
+    <tr><td><code>.value_counts()</code></td><td>Frequency of values</td><td><code>df["City"].value_counts()</code></td></tr>
+    <tr><td><code>.groupby()</code></td><td>Group and aggregate</td><td><code>df.groupby("Dept").mean()</code></td></tr>
+    <tr><td><code>.sort_values()</code></td><td>Sort by column</td><td><code>df.sort_values("Age")</code></td></tr>
+    <tr><td><code>.merge()</code></td><td>Join two DataFrames</td><td><code>pd.merge(df1, df2, on="ID")</code></td></tr>
+    <tr><td><code>.concat()</code></td><td>Stack DataFrames</td><td><code>pd.concat([df1, df2])</code></td></tr>
+    <tr><td><code>.apply()</code></td><td>Apply function to column</td><td><code>df["Col"].apply(func)</code></td></tr>
+    <tr><td><code>.unique()</code></td><td>Unique values</td><td><code>df["City"].unique()</code></td></tr>
+    <tr><td><code>.nunique()</code></td><td>Count of unique values</td><td><code>df["City"].nunique()</code></td></tr>
+  </tbody>
+</table>
+
+<div class="diagram">
+  <div class="diagram-title">GroupBy: Split → Apply → Combine</div>
+  <div class="flow">
+    <div class="flow-row">
+      <div class="flow-box data">Original DataFrame</div>
+    </div>
+    <div class="arrow-down">↓ .groupby("Department")</div>
+    <div class="flow-row">
+      <div class="flow-box model">Group: Sales</div>
+      <div class="flow-box model">Group: Engineering</div>
+      <div class="flow-box model">Group: Marketing</div>
+    </div>
+    <div class="arrow-down">↓ .mean() / .sum() / .count()</div>
+    <div class="flow-row">
+      <div class="flow-box result">Aggregated Result per Group</div>
+    </div>
+  </div>
+</div>
+
+<div class="quiz">
+  <div class="quiz-title">Test Your Understanding</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q: How do you select rows where the "Age" column is greater than 30?</div>
+    <button class="quiz-option" onclick="checkQuiz('q7a', this, false)">A) <code>df.select(Age > 30)</code></button>
+    <button class="quiz-option" onclick="checkQuiz('q7a', this, true)">B) <code>df[df["Age"] > 30]</code></button>
+    <button class="quiz-option" onclick="checkQuiz('q7a', this, false)">C) <code>df.filter("Age > 30")</code></button>
+    <button class="quiz-option" onclick="checkQuiz('q7a', this, false)">D) <code>df.where(Age, ">", 30)</code></button>
+    <div class="quiz-feedback" id="q7a-feedback"></div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== 2.3 DATA CLEANING ==================== -->
+<div class="section" id="cleaning">
+<h2>🧹 2.3 Data Cleaning &amp; Preparation</h2>
+<span class="week-badge week2">Week 2</span>
+
+<div class="def">
+  <div class="def-term">Missing Values (NaN)</div>
+  <div class="def-meaning">Entries in your dataset that have no value. Represented as <code>NaN</code> (Not a Number) in Pandas. Can occur due to data entry errors, sensor failures, or optional fields. Must be handled before analysis because they propagate through calculations.</div>
+  <div class="def-example">Blank cells in a spreadsheet — some customers did not fill in their phone number. You cannot compute an "average phone number," so you must decide: fill in a default, remove those rows, or ignore that column.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Data Type Conversion</div>
+  <div class="def-meaning">Changing the data type of a column to the appropriate type. Common conversions: string to datetime, object to category, string to numeric. Use <code>df['col'].astype()</code> or <code>pd.to_datetime()</code>, <code>pd.to_numeric()</code>.</div>
+  <div class="def-example">Converting currency strings like "$1,500.00" to the number 1500.0 so you can do math with them.</div>
+</div>
+
+<div class="analogy">Data cleaning is like preparing ingredients before cooking. You wash vegetables (remove duplicates), peel and chop them (type conversion), and check for any rotten pieces (missing values). No chef starts cooking with dirty, unprepped ingredients — and no data scientist starts analyzing dirty data.</div>
+
+<pre><code><span style="color:#60a5fa">import</span> pandas <span style="color:#60a5fa">as</span> pd
+<span style="color:#60a5fa">import</span> numpy <span style="color:#60a5fa">as</span> np
+
+<span style="color:#94a3b8"># ============ MISSING VALUES ============</span>
+<span style="color:#94a3b8"># Detect missing values</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">df</span>.<span style="color:#60a5fa">isnull</span>().<span style="color:#60a5fa">sum</span>())         <span style="color:#94a3b8"># Count NaN per column</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">df</span>.<span style="color:#60a5fa">isnull</span>().<span style="color:#60a5fa">sum</span>() / <span style="color:#60a5fa">len</span>(<span style="color:#a78bfa">df</span>) * <span style="color:#fbbf24">100</span>)  <span style="color:#94a3b8"># Percentage missing</span>
+
+<span style="color:#94a3b8"># Strategy 1: Drop rows with any NaN</span>
+<span style="color:#a78bfa">df_clean</span> = <span style="color:#a78bfa">df</span>.<span style="color:#60a5fa">dropna</span>()
+
+<span style="color:#94a3b8"># Strategy 2: Drop columns with too many NaN</span>
+<span style="color:#a78bfa">df_clean</span> = <span style="color:#a78bfa">df</span>.<span style="color:#60a5fa">dropna</span>(axis=<span style="color:#fbbf24">1</span>, thresh=<span style="color:#60a5fa">len</span>(<span style="color:#a78bfa">df</span>)*<span style="color:#fbbf24">0.5</span>)  <span style="color:#94a3b8"># Keep cols with >50% data</span>
+
+<span style="color:#94a3b8"># Strategy 3: Fill missing values</span>
+<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Age"</span>].<span style="color:#60a5fa">fillna</span>(<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Age"</span>].<span style="color:#60a5fa">mean</span>(), inplace=<span style="color:#fbbf24">True</span>)   <span style="color:#94a3b8"># Fill with mean</span>
+<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"City"</span>].<span style="color:#60a5fa">fillna</span>(<span style="color:#34d399">"Unknown"</span>, inplace=<span style="color:#fbbf24">True</span>)     <span style="color:#94a3b8"># Fill with constant</span>
+<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Score"</span>].<span style="color:#60a5fa">fillna</span>(<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Score"</span>].<span style="color:#60a5fa">median</span>(), inplace=<span style="color:#fbbf24">True</span>)  <span style="color:#94a3b8"># Median for skewed data</span>
+
+<span style="color:#94a3b8"># ============ DUPLICATES ============</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">df</span>.<span style="color:#60a5fa">duplicated</span>().<span style="color:#60a5fa">sum</span>())     <span style="color:#94a3b8"># Count duplicate rows</span>
+<span style="color:#a78bfa">df_clean</span> = <span style="color:#a78bfa">df</span>.<span style="color:#60a5fa">drop_duplicates</span>()   <span style="color:#94a3b8"># Remove duplicates</span>
+
+<span style="color:#94a3b8"># ============ TYPE CONVERSION ============</span>
+<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Date"</span>] = pd.<span style="color:#60a5fa">to_datetime</span>(<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Date"</span>])
+<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Price"</span>] = pd.<span style="color:#60a5fa">to_numeric</span>(<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Price"</span>], errors=<span style="color:#34d399">"coerce"</span>)
+
+<span style="color:#94a3b8"># ============ STRING CLEANING ============</span>
+<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Name"</span>] = <span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Name"</span>].<span style="color:#60a5fa">str</span>.<span style="color:#60a5fa">strip</span>()     <span style="color:#94a3b8"># Remove whitespace</span>
+<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Name"</span>] = <span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Name"</span>].<span style="color:#60a5fa">str</span>.<span style="color:#60a5fa">lower</span>()    <span style="color:#94a3b8"># Lowercase</span>
+<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Email"</span>] = <span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Email"</span>].<span style="color:#60a5fa">str</span>.<span style="color:#60a5fa">replace</span>(<span style="color:#34d399">"@old.com"</span>, <span style="color:#34d399">"@new.com"</span>)
+
+<span style="color:#94a3b8"># ============ MERGING DATASETS ============</span>
+<span style="color:#a78bfa">merged</span> = pd.<span style="color:#60a5fa">merge</span>(<span style="color:#a78bfa">df1</span>, <span style="color:#a78bfa">df2</span>, on=<span style="color:#34d399">"CustomerID"</span>, how=<span style="color:#34d399">"left"</span>)
+<span style="color:#a78bfa">stacked</span> = pd.<span style="color:#60a5fa">concat</span>([<span style="color:#a78bfa">df_2023</span>, <span style="color:#a78bfa">df_2024</span>], ignore_index=<span style="color:#fbbf24">True</span>)
+</code></pre>
+
+<h3>Missing Value Strategy Decision Guide</h3>
+<table class="comp-table">
+  <thead><tr><th>Scenario</th><th>Strategy</th><th>Code</th></tr></thead>
+  <tbody>
+    <tr><td>Very few missing (&lt;5%)</td><td>Drop rows</td><td><code>df.dropna()</code></td></tr>
+    <tr><td>Numerical, normally distributed</td><td>Fill with mean</td><td><code>df["col"].fillna(df["col"].mean())</code></td></tr>
+    <tr><td>Numerical, skewed</td><td>Fill with median</td><td><code>df["col"].fillna(df["col"].median())</code></td></tr>
+    <tr><td>Categorical</td><td>Fill with mode</td><td><code>df["col"].fillna(df["col"].mode()[0])</code></td></tr>
+    <tr><td>Column >50% missing</td><td>Drop column</td><td><code>df.drop("col", axis=1)</code></td></tr>
+    <tr><td>Time series</td><td>Forward/backward fill</td><td><code>df["col"].fillna(method="ffill")</code></td></tr>
+  </tbody>
+</table>
+
+<div class="quiz">
+  <div class="quiz-title">Test Your Understanding</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q: Which method counts the number of missing values per column?</div>
+    <button class="quiz-option" onclick="checkQuiz('q8a', this, true)">A) <code>df.isnull().sum()</code></button>
+    <button class="quiz-option" onclick="checkQuiz('q8a', this, false)">B) <code>df.missing()</code></button>
+    <button class="quiz-option" onclick="checkQuiz('q8a', this, false)">C) <code>df.count_na()</code></button>
+    <button class="quiz-option" onclick="checkQuiz('q8a', this, false)">D) <code>df.nulls()</code></button>
+    <div class="quiz-feedback" id="q8a-feedback"></div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== 3.1 VISUALIZATION ==================== -->
+<div class="section" id="viz">
+<h2>📊 3.1 Data Visualization</h2>
+<span class="week-badge week3">Week 3</span>
+
+<div class="def">
+  <div class="def-term">Matplotlib</div>
+  <div class="def-meaning">The foundational Python plotting library. Provides complete control over every element of a figure: axes, labels, colors, sizes, legends. Most other Python visualization libraries (including Seaborn) are built on top of Matplotlib.</div>
+  <div class="def-example">A blank canvas with all the paint colors — you can create any visualization, but you must specify every detail yourself.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Seaborn</div>
+  <div class="def-meaning">A statistical visualization library built on Matplotlib. Provides beautiful, informative plots with minimal code. Especially good for showing distributions, relationships, and categorical comparisons.</div>
+  <div class="def-example">A paint-by-numbers kit — you get professional-looking results with much less effort. Perfect for statistical plots.</div>
+</div>
+
+<div class="analogy">Matplotlib is like cooking from scratch — full control, but you do everything yourself. Seaborn is like using a meal kit — pre-measured ingredients, beautiful presentation, and it still tastes great. Most data scientists use both: Seaborn for quick statistical plots, Matplotlib for custom fine-tuning.</div>
+
+<h3>Chart Selection Guide</h3>
+<table class="comp-table">
+  <thead><tr><th>Question</th><th>Chart Type</th><th>Code</th></tr></thead>
+  <tbody>
+    <tr><td>Distribution of one variable?</td><td>Histogram / KDE</td><td><code>sns.histplot(df["Age"])</code></td></tr>
+    <tr><td>Relationship between two numeric?</td><td>Scatter plot</td><td><code>plt.scatter(x, y)</code></td></tr>
+    <tr><td>Comparison across categories?</td><td>Bar chart</td><td><code>sns.countplot(x="City", data=df)</code></td></tr>
+    <tr><td>Spread and outliers?</td><td>Box plot</td><td><code>sns.boxplot(x="Dept", y="Salary")</code></td></tr>
+    <tr><td>Correlation between all pairs?</td><td>Heatmap</td><td><code>sns.heatmap(df.corr())</code></td></tr>
+    <tr><td>Trend over time?</td><td>Line chart</td><td><code>plt.plot(dates, values)</code></td></tr>
+    <tr><td>All pairwise relationships?</td><td>Pair plot</td><td><code>sns.pairplot(df)</code></td></tr>
+    <tr><td>Proportions of a whole?</td><td>Pie chart</td><td><code>plt.pie(sizes, labels=labels)</code></td></tr>
+  </tbody>
+</table>
+
+<pre><code><span style="color:#60a5fa">import</span> matplotlib.pyplot <span style="color:#60a5fa">as</span> plt
+<span style="color:#60a5fa">import</span> seaborn <span style="color:#60a5fa">as</span> sns
+
+<span style="color:#94a3b8"># ============ MATPLOTLIB BASICS ============</span>
+<span style="color:#94a3b8"># Simple line plot</span>
+<span style="color:#a78bfa">fig</span>, <span style="color:#a78bfa">ax</span> = plt.<span style="color:#60a5fa">subplots</span>(figsize=(<span style="color:#fbbf24">10</span>, <span style="color:#fbbf24">6</span>))
+<span style="color:#a78bfa">ax</span>.<span style="color:#60a5fa">plot</span>([<span style="color:#fbbf24">1</span>,<span style="color:#fbbf24">2</span>,<span style="color:#fbbf24">3</span>,<span style="color:#fbbf24">4</span>], [<span style="color:#fbbf24">10</span>,<span style="color:#fbbf24">20</span>,<span style="color:#fbbf24">25</span>,<span style="color:#fbbf24">30</span>], marker=<span style="color:#34d399">'o'</span>)
+<span style="color:#a78bfa">ax</span>.<span style="color:#60a5fa">set_xlabel</span>(<span style="color:#34d399">"Quarter"</span>)
+<span style="color:#a78bfa">ax</span>.<span style="color:#60a5fa">set_ylabel</span>(<span style="color:#34d399">"Revenue ($K)"</span>)
+<span style="color:#a78bfa">ax</span>.<span style="color:#60a5fa">set_title</span>(<span style="color:#34d399">"Quarterly Revenue"</span>)
+plt.<span style="color:#60a5fa">show</span>()
+
+<span style="color:#94a3b8"># Multiple subplots</span>
+<span style="color:#a78bfa">fig</span>, <span style="color:#a78bfa">axes</span> = plt.<span style="color:#60a5fa">subplots</span>(<span style="color:#fbbf24">1</span>, <span style="color:#fbbf24">3</span>, figsize=(<span style="color:#fbbf24">15</span>, <span style="color:#fbbf24">5</span>))
+<span style="color:#a78bfa">axes</span>[<span style="color:#fbbf24">0</span>].<span style="color:#60a5fa">hist</span>(<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Age"</span>], bins=<span style="color:#fbbf24">20</span>)
+<span style="color:#a78bfa">axes</span>[<span style="color:#fbbf24">1</span>].<span style="color:#60a5fa">scatter</span>(<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Age"</span>], <span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Salary"</span>])
+<span style="color:#a78bfa">axes</span>[<span style="color:#fbbf24">2</span>].<span style="color:#60a5fa">boxplot</span>(<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Salary"</span>])
+plt.<span style="color:#60a5fa">tight_layout</span>()
+plt.<span style="color:#60a5fa">show</span>()
+
+<span style="color:#94a3b8"># ============ SEABORN ============</span>
+<span style="color:#94a3b8"># Distribution plot</span>
+sns.<span style="color:#60a5fa">histplot</span>(<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Age"</span>], kde=<span style="color:#fbbf24">True</span>, bins=<span style="color:#fbbf24">20</span>)
+
+<span style="color:#94a3b8"># Correlation heatmap</span>
+plt.<span style="color:#60a5fa">figure</span>(figsize=(<span style="color:#fbbf24">10</span>, <span style="color:#fbbf24">8</span>))
+sns.<span style="color:#60a5fa">heatmap</span>(<span style="color:#a78bfa">df</span>.<span style="color:#60a5fa">corr</span>(), annot=<span style="color:#fbbf24">True</span>, cmap=<span style="color:#34d399">"coolwarm"</span>, vmin=<span style="color:#fbbf24">-1</span>, vmax=<span style="color:#fbbf24">1</span>)
+
+<span style="color:#94a3b8"># Box plot for comparing groups</span>
+sns.<span style="color:#60a5fa">boxplot</span>(x=<span style="color:#34d399">"Department"</span>, y=<span style="color:#34d399">"Salary"</span>, data=<span style="color:#a78bfa">df</span>)
+
+<span style="color:#94a3b8"># Pair plot — all relationships at once</span>
+sns.<span style="color:#60a5fa">pairplot</span>(<span style="color:#a78bfa">df</span>, hue=<span style="color:#34d399">"Category"</span>)
+</code></pre>
+
+<div class="quiz">
+  <div class="quiz-title">Test Your Understanding</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q: Which plot is best for showing the correlation between all numerical variables at once?</div>
+    <button class="quiz-option" onclick="checkQuiz('q9a', this, false)">A) Bar chart</button>
+    <button class="quiz-option" onclick="checkQuiz('q9a', this, true)">B) Heatmap with <code>df.corr()</code></button>
+    <button class="quiz-option" onclick="checkQuiz('q9a', this, false)">C) Pie chart</button>
+    <button class="quiz-option" onclick="checkQuiz('q9a', this, false)">D) Line plot</button>
+    <div class="quiz-feedback" id="q9a-feedback"></div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== 3.2 EDA TECHNIQUES ==================== -->
+<div class="section" id="eda">
+<h2>🔍 3.2 EDA Techniques &amp; Statistics</h2>
+<span class="week-badge week3">Week 3</span>
+
+<div class="def">
+  <div class="def-term">Exploratory Data Analysis (EDA)</div>
+  <div class="def-meaning">A systematic approach to investigating datasets using summary statistics and visualizations before formal modeling. The goal is to discover patterns, spot anomalies, test hypotheses, and check assumptions. John Tukey coined the term in 1977.</div>
+  <div class="def-example">A detective examining a crime scene — before forming theories, you observe everything: what is there, what is missing, what looks unusual, what patterns emerge.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Outlier</div>
+  <div class="def-meaning">A data point that lies significantly outside the overall pattern of the data. Can be detected using the IQR method (below Q1-1.5×IQR or above Q3+1.5×IQR) or Z-score (more than 3 standard deviations from the mean). May indicate errors, fraud, or genuinely extreme values.</div>
+  <div class="def-example">In a classroom of 30 students with ages 18-22, one "student" listed as age 97 is clearly an outlier — likely a data entry error.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Correlation</div>
+  <div class="def-meaning">A statistical measure (-1 to +1) of the linear relationship between two variables. +1 means perfect positive correlation, -1 means perfect negative, 0 means no linear relationship. Calculated with <code>df.corr()</code>. Remember: correlation does not imply causation.</div>
+  <div class="def-example">Ice cream sales and drowning deaths are positively correlated — not because ice cream causes drowning, but because both increase in summer (confounding variable: hot weather).</div>
+</div>
+
+<div class="analogy">EDA is like a doctor doing a checkup — take vital signs (summary stats), look at X-rays (visualizations), check for symptoms (outliers), and run blood tests (correlations) before diagnosing (modeling).</div>
+
+<h3>EDA Checklist</h3>
+<div class="step"><div class="step-num">1</div><div class="step-content"><strong>Shape &amp; Structure:</strong> <code>df.shape</code>, <code>df.info()</code>, <code>df.dtypes</code> — How big is the data? What types are the columns?</div></div>
+<div class="step"><div class="step-num">2</div><div class="step-content"><strong>Summary Statistics:</strong> <code>df.describe()</code> — Mean, median, min, max, quartiles for every numerical column.</div></div>
+<div class="step"><div class="step-num">3</div><div class="step-content"><strong>Missing Values:</strong> <code>df.isnull().sum()</code> — Which columns have gaps? How much data is missing?</div></div>
+<div class="step"><div class="step-num">4</div><div class="step-content"><strong>Univariate Analysis:</strong> Histograms and box plots for each variable individually — What does each variable look like?</div></div>
+<div class="step"><div class="step-num">5</div><div class="step-content"><strong>Bivariate Analysis:</strong> Scatter plots, grouped bar charts — How do variables relate to each other?</div></div>
+<div class="step"><div class="step-num">6</div><div class="step-content"><strong>Correlation Analysis:</strong> <code>sns.heatmap(df.corr())</code> — Which variables move together?</div></div>
+<div class="step"><div class="step-num">7</div><div class="step-content"><strong>Outlier Detection:</strong> IQR method or Z-scores — Are there extreme values that need attention?</div></div>
+
+<h3>Statistical Measures Quick Reference</h3>
+<div class="cheat-grid">
+  <div class="cheat-item">
+    <div class="cheat-item-title">Central Tendency</div>
+    <div class="cheat-item-content">
+      <strong>Mean:</strong> <code>df["col"].mean()</code> — average, sensitive to outliers<br>
+      <strong>Median:</strong> <code>df["col"].median()</code> — middle value, robust to outliers<br>
+      <strong>Mode:</strong> <code>df["col"].mode()</code> — most frequent value
+    </div>
+  </div>
+  <div class="cheat-item">
+    <div class="cheat-item-title">Spread / Dispersion</div>
+    <div class="cheat-item-content">
+      <strong>Std Dev:</strong> <code>df["col"].std()</code> — average distance from mean<br>
+      <strong>Variance:</strong> <code>df["col"].var()</code> — std dev squared<br>
+      <strong>IQR:</strong> Q3 - Q1 — spread of middle 50%<br>
+      <strong>Range:</strong> max - min — total spread
+    </div>
+  </div>
+  <div class="cheat-item">
+    <div class="cheat-item-title">Shape</div>
+    <div class="cheat-item-content">
+      <strong>Skewness:</strong> <code>df["col"].skew()</code><br>
+      0 = symmetric, &gt;0 = right-skewed, &lt;0 = left-skewed<br>
+      <strong>Kurtosis:</strong> <code>df["col"].kurtosis()</code><br>
+      Measures tail heaviness (outlier-proneness)
+    </div>
+  </div>
+  <div class="cheat-item">
+    <div class="cheat-item-title">Outlier Detection: IQR</div>
+    <div class="cheat-item-content">
+      Q1 = 25th percentile<br>
+      Q3 = 75th percentile<br>
+      IQR = Q3 - Q1<br>
+      Lower fence = Q1 - 1.5 × IQR<br>
+      Upper fence = Q3 + 1.5 × IQR
+    </div>
+  </div>
+</div>
+
+<pre><code><span style="color:#94a3b8"># Outlier detection using IQR method</span>
+<span style="color:#a78bfa">Q1</span> = <span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Salary"</span>].<span style="color:#60a5fa">quantile</span>(<span style="color:#fbbf24">0.25</span>)
+<span style="color:#a78bfa">Q3</span> = <span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Salary"</span>].<span style="color:#60a5fa">quantile</span>(<span style="color:#fbbf24">0.75</span>)
+<span style="color:#a78bfa">IQR</span> = <span style="color:#a78bfa">Q3</span> - <span style="color:#a78bfa">Q1</span>
+
+<span style="color:#a78bfa">lower_bound</span> = <span style="color:#a78bfa">Q1</span> - <span style="color:#fbbf24">1.5</span> * <span style="color:#a78bfa">IQR</span>
+<span style="color:#a78bfa">upper_bound</span> = <span style="color:#a78bfa">Q3</span> + <span style="color:#fbbf24">1.5</span> * <span style="color:#a78bfa">IQR</span>
+
+<span style="color:#94a3b8"># Filter outliers</span>
+<span style="color:#a78bfa">outliers</span> = <span style="color:#a78bfa">df</span>[(<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Salary"</span>] &lt; <span style="color:#a78bfa">lower_bound</span>) | (<span style="color:#a78bfa">df</span>[<span style="color:#34d399">"Salary"</span>] > <span style="color:#a78bfa">upper_bound</span>)]
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">f"Found </span><span style="color:#fbbf24">{len(outliers)}</span><span style="color:#34d399"> outliers"</span>)
+
+<span style="color:#94a3b8"># Correlation matrix</span>
+<span style="color:#a78bfa">corr_matrix</span> = <span style="color:#a78bfa">df</span>.<span style="color:#60a5fa">corr</span>()
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">corr_matrix</span>)
+</code></pre>
+
+<div class="quiz">
+  <div class="quiz-title">Test Your Understanding</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q: If a dataset has a few extreme high values, which measure of central tendency is more reliable?</div>
+    <button class="quiz-option" onclick="checkQuiz('q10a', this, false)">A) Mean — it accounts for all values</button>
+    <button class="quiz-option" onclick="checkQuiz('q10a', this, true)">B) Median — it is robust to outliers</button>
+    <button class="quiz-option" onclick="checkQuiz('q10a', this, false)">C) Mode — it shows the most common value</button>
+    <button class="quiz-option" onclick="checkQuiz('q10a', this, false)">D) Range — it captures the full spread</button>
+    <div class="quiz-feedback" id="q10a-feedback"></div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== 4.1 TEXT ANALYSIS ==================== -->
+<div class="section" id="text">
+<h2>📝 4.1 Analyzing Text Data</h2>
+<span class="week-badge week4">Week 4</span>
+
+<div class="def">
+  <div class="def-term">Regular Expression (Regex)</div>
+  <div class="def-meaning">A powerful pattern-matching language for searching, extracting, and manipulating text. Python provides the <code>re</code> module. Common patterns: <code>\d</code> (digit), <code>\w</code> (word character), <code>\s</code> (whitespace), <code>.</code> (any character), <code>*</code> (0 or more), <code>+</code> (1 or more).</div>
+  <div class="def-example">A metal detector on a beach — you define what you are looking for (pattern), and the regex engine scans through the entire text to find all matches.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Tokenization</div>
+  <div class="def-meaning">The process of splitting text into individual units (tokens), typically words or sentences. The first step in most text analysis pipelines. Can be done with <code>.split()</code> for simple cases or with NLP libraries for complex text.</div>
+  <div class="def-example">Breaking a sentence into individual words — like taking apart a LEGO structure into its individual bricks before sorting and counting them.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Stop Words</div>
+  <div class="def-meaning">Common words (the, is, at, which, on) that carry little meaningful information and are typically removed during text preprocessing. Removing them reduces noise and improves analysis quality.</div>
+  <div class="def-example">In a book review, words like "the," "is," and "was" appear everywhere but tell you nothing about whether the reviewer liked the book. The meaningful words are "excellent," "boring," "recommended."</div>
+</div>
+
+<div class="analogy">Text analysis is like being a librarian organizing documents: break into words (tokenization), ignore filler words (stop word removal), count important words (frequency analysis), and use patterns to find specific info like phone numbers (regex).</div>
+
+<pre><code><span style="color:#60a5fa">import</span> re
+
+<span style="color:#94a3b8"># ============ STRING METHODS ============</span>
+<span style="color:#a78bfa">text</span> = <span style="color:#34d399">"  Hello, World! Welcome to Python.  "</span>
+
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">text</span>.<span style="color:#60a5fa">strip</span>())       <span style="color:#94a3b8"># Remove leading/trailing whitespace</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">text</span>.<span style="color:#60a5fa">lower</span>())       <span style="color:#94a3b8"># "  hello, world! welcome to python.  "</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">text</span>.<span style="color:#60a5fa">upper</span>())       <span style="color:#94a3b8"># "  HELLO, WORLD! WELCOME TO PYTHON.  "</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">text</span>.<span style="color:#60a5fa">replace</span>(<span style="color:#34d399">"World"</span>, <span style="color:#34d399">"Data Science"</span>))
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">text</span>.<span style="color:#60a5fa">split</span>())        <span style="color:#94a3b8"># Split by whitespace → list of words</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">", "</span>.<span style="color:#60a5fa">join</span>([<span style="color:#34d399">"a"</span>, <span style="color:#34d399">"b"</span>, <span style="color:#34d399">"c"</span>]))  <span style="color:#94a3b8"># "a, b, c"</span>
+
+<span style="color:#94a3b8"># ============ REGULAR EXPRESSIONS ============</span>
+<span style="color:#a78bfa">text</span> = <span style="color:#34d399">"Contact us at info@company.com or call 555-123-4567"</span>
+
+<span style="color:#94a3b8"># Find all email addresses</span>
+<span style="color:#a78bfa">emails</span> = re.<span style="color:#60a5fa">findall</span>(<span style="color:#34d399">r'[\w.]+@[\w.]+'</span>, <span style="color:#a78bfa">text</span>)
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">emails</span>)  <span style="color:#94a3b8"># ['info@company.com']</span>
+
+<span style="color:#94a3b8"># Find all phone numbers</span>
+<span style="color:#a78bfa">phones</span> = re.<span style="color:#60a5fa">findall</span>(<span style="color:#34d399">r'\d{3}-\d{3}-\d{4}'</span>, <span style="color:#a78bfa">text</span>)
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">phones</span>)  <span style="color:#94a3b8"># ['555-123-4567']</span>
+
+<span style="color:#94a3b8"># Search for a pattern</span>
+<span style="color:#a78bfa">match</span> = re.<span style="color:#60a5fa">search</span>(<span style="color:#34d399">r'\d+'</span>, <span style="color:#34d399">"Order #12345"</span>)
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">match</span>.<span style="color:#60a5fa">group</span>())  <span style="color:#94a3b8"># "12345"</span>
+
+<span style="color:#94a3b8"># ============ WORD FREQUENCY ============</span>
+<span style="color:#60a5fa">from</span> collections <span style="color:#60a5fa">import</span> Counter
+
+<span style="color:#a78bfa">text</span> = <span style="color:#34d399">"the cat sat on the mat the cat likes the mat"</span>
+<span style="color:#a78bfa">words</span> = <span style="color:#a78bfa">text</span>.<span style="color:#60a5fa">lower</span>().<span style="color:#60a5fa">split</span>()
+<span style="color:#a78bfa">freq</span> = Counter(<span style="color:#a78bfa">words</span>)
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">freq</span>.<span style="color:#60a5fa">most_common</span>(<span style="color:#fbbf24">3</span>))
+<span style="color:#94a3b8"># [('the', 4), ('cat', 2), ('mat', 2)]</span>
+
+<span style="color:#94a3b8"># Remove stop words</span>
+<span style="color:#a78bfa">stop_words</span> = {<span style="color:#34d399">"the"</span>, <span style="color:#34d399">"on"</span>, <span style="color:#34d399">"a"</span>, <span style="color:#34d399">"an"</span>, <span style="color:#34d399">"is"</span>, <span style="color:#34d399">"in"</span>}
+<span style="color:#a78bfa">filtered</span> = [<span style="color:#a78bfa">w</span> <span style="color:#60a5fa">for</span> <span style="color:#a78bfa">w</span> <span style="color:#60a5fa">in</span> <span style="color:#a78bfa">words</span> <span style="color:#60a5fa">if</span> <span style="color:#a78bfa">w</span> <span style="color:#60a5fa">not</span> <span style="color:#60a5fa">in</span> <span style="color:#a78bfa">stop_words</span>]
+<span style="color:#60a5fa">print</span>(Counter(<span style="color:#a78bfa">filtered</span>).<span style="color:#60a5fa">most_common</span>(<span style="color:#fbbf24">3</span>))
+<span style="color:#94a3b8"># [('cat', 2), ('mat', 2), ('sat', 1)]</span>
+</code></pre>
+
+<h3>Common Regex Patterns</h3>
+<table class="comp-table">
+  <thead><tr><th>Pattern</th><th>Matches</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><code>\d</code></td><td>Any digit (0-9)</td><td><code>\d{3}</code> matches "123"</td></tr>
+    <tr><td><code>\w</code></td><td>Word character (a-z, A-Z, 0-9, _)</td><td><code>\w+</code> matches "hello_world"</td></tr>
+    <tr><td><code>\s</code></td><td>Whitespace (space, tab, newline)</td><td><code>\s+</code> matches any spaces</td></tr>
+    <tr><td><code>.</code></td><td>Any character except newline</td><td><code>a.c</code> matches "abc", "a1c"</td></tr>
+    <tr><td><code>+</code></td><td>1 or more of previous</td><td><code>\d+</code> matches "123"</td></tr>
+    <tr><td><code>*</code></td><td>0 or more of previous</td><td><code>ab*c</code> matches "ac", "abc"</td></tr>
+    <tr><td><code>^</code></td><td>Start of string</td><td><code>^Hello</code> matches "Hello world"</td></tr>
+    <tr><td><code>$</code></td><td>End of string</td><td><code>world$</code> matches "Hello world"</td></tr>
+    <tr><td><code>[abc]</code></td><td>Any of a, b, or c</td><td><code>[aeiou]</code> matches vowels</td></tr>
+  </tbody>
+</table>
+
+<div class="quiz">
+  <div class="quiz-title">Test Your Understanding</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q: What does <code>re.findall(r'\d+', "I have 3 cats and 12 fish")</code> return?</div>
+    <button class="quiz-option" onclick="checkQuiz('q11a', this, false)">A) ['3']</button>
+    <button class="quiz-option" onclick="checkQuiz('q11a', this, true)">B) ['3', '12']</button>
+    <button class="quiz-option" onclick="checkQuiz('q11a', this, false)">C) ['I', 'have', 'cats', 'and', 'fish']</button>
+    <button class="quiz-option" onclick="checkQuiz('q11a', this, false)">D) 15</button>
+    <div class="quiz-feedback" id="q11a-feedback"></div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== MISTAKES ==================== -->
+<div class="section" id="mistakes">
+<h2>⚠️ Common Mistakes &amp; Misconceptions</h2>
+
+<h3>Week 1: Python Basics</h3>
+
+<div class="mistake">
+  <div class="mistake-title">1. "Python is not case-sensitive"</div>
+  <div class="mistake-problem">Writing <code>Print("hello")</code> instead of <code>print("hello")</code>, or using <code>True</code> as <code>true</code>. Python IS case-sensitive — every character matters.</div>
+  <div class="mistake-fix">✓ Always use lowercase for built-in functions: <code>print()</code>, <code>len()</code>, <code>type()</code>. Boolean values are capitalized: <code>True</code>, <code>False</code>, <code>None</code>.</div>
+</div>
+
+<div class="mistake">
+  <div class="mistake-title">2. Concatenating strings and numbers directly</div>
+  <div class="mistake-problem"><code>"I am " + 25 + " years old"</code> → TypeError: can only concatenate str to str (FAQ #14)</div>
+  <div class="mistake-fix">✓ Convert with <code>str()</code>: <code>"I am " + str(25)</code> or use f-strings: <code>f"I am {25} years old"</code>. F-strings handle conversion automatically.</div>
+</div>
+
+<div class="mistake">
+  <div class="mistake-title">3. Confusing = and ==</div>
+  <div class="mistake-problem">Using <code>x = 5</code> when you mean to check equality <code>x == 5</code>. One assigns, the other compares.</div>
+  <div class="mistake-fix">✓ <code>=</code> is assignment (x = 5 stores 5 in x). <code>==</code> is comparison (x == 5 returns True/False). Use == in if statements.</div>
+</div>
+
+<div class="mistake">
+  <div class="mistake-title">4. Modifying a list while iterating over it</div>
+  <div class="mistake-problem">Removing items from a list inside a for loop causes skipped elements or IndexError.</div>
+  <div class="mistake-fix">✓ Create a new list with list comprehension: <code>filtered = [x for x in items if x != "remove"]</code>. Never modify a collection while looping through it.</div>
+</div>
+
+<div class="mistake">
+  <div class="mistake-title">5. Forgetting that range() excludes the stop value</div>
+  <div class="mistake-problem"><code>range(1, 5)</code> produces [1, 2, 3, 4], NOT [1, 2, 3, 4, 5]. Beginners expect 5 to be included.</div>
+  <div class="mistake-fix">✓ <code>range(start, stop)</code> goes from start to stop-1. To include 5: <code>range(1, 6)</code>. Think of it as "up to but not including."</div>
+</div>
+
+<h3>Week 2: Data Manipulation</h3>
+
+<div class="mistake">
+  <div class="mistake-title">6. Using df["col"] = df["col"].fillna(value) without inplace</div>
+  <div class="mistake-problem">Writing <code>df["Age"].fillna(0)</code> but forgetting to assign it back. fillna() returns a new Series by default.</div>
+  <div class="mistake-fix">✓ Either <code>df["Age"] = df["Age"].fillna(0)</code> or <code>df["Age"].fillna(0, inplace=True)</code>. Always assign the result!</div>
+</div>
+
+<div class="mistake">
+  <div class="mistake-title">7. Using loc when you mean iloc (or vice versa)</div>
+  <div class="mistake-problem"><code>df.loc[0:3]</code> returns 4 rows (label-based, inclusive), but <code>df.iloc[0:3]</code> returns 3 rows (position-based, exclusive stop).</div>
+  <div class="mistake-fix">✓ <code>loc</code> = label-based (inclusive both ends). <code>iloc</code> = integer position-based (exclusive stop, like range()). When in doubt, use iloc for predictable slicing.</div>
+</div>
+
+<h3>Week 3: EDA &amp; Visualization</h3>
+
+<div class="mistake">
+  <div class="mistake-title">8. "Correlation means causation"</div>
+  <div class="mistake-problem">Seeing a high correlation between two variables and concluding one causes the other.</div>
+  <div class="mistake-fix">✓ Correlation only measures how variables move together. Always look for confounding variables. Ice cream sales and drownings correlate because both increase in summer — not because one causes the other.</div>
+</div>
+
+<div class="mistake">
+  <div class="mistake-title">9. Using mean for skewed data</div>
+  <div class="mistake-problem">Reporting mean salary as $80K when most employees earn $50K and a few executives earn $500K.</div>
+  <div class="mistake-fix">✓ For skewed distributions, use median (robust to outliers). Always visualize first — a histogram reveals whether mean or median is more representative.</div>
+</div>
+
+<div class="mistake">
+  <div class="mistake-title">10. Forgetting the raw string prefix in regex</div>
+  <div class="mistake-problem"><code>re.findall("\bword\b", text)</code> fails because <code>\b</code> is a backspace character in normal strings.</div>
+  <div class="mistake-fix">✓ Always use raw strings with regex: <code>r"\bword\b"</code>. The <code>r</code> prefix tells Python to treat backslashes literally.</div>
+</div>
+</div>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function checkQuiz(qId, el, isCorrect) {
+  var feedback = document.getElementById(qId + '-feedback');
+  if (isCorrect) {
+    el.classList.add('correct');
+    feedback.classList.add('correct', 'show');
+    feedback.textContent = '✅ Correct! ' + getExplanation(qId);
+  } else {
+    el.classList.add('wrong');
+    feedback.classList.add('wrong', 'show');
+    feedback.textContent = '❌ Incorrect. Try again or review the concept.';
+  }
+}
+
+function getExplanation(qId) {
+  var explanations = {
+    'q1a': 'Go to File menu → Download → Download .ipynb to save the notebook file.',
+    'q1b': 'Python is case-sensitive! print() is a built-in function, but Print() is not defined.',
+    'q2a': 'type() returns the class of the value. 42 is an integer, so it returns <class \'int\'>.',
+    'q2b': 'Floor division (//) returns only the whole number part. 9÷5=1.8, floor is 1.',
+    'q3a': 'Dictionaries use curly braces {} with key:value pairs. Lists use [], tuples use ().',
+    'q3b': 'Tuples are immutable — once created, their elements cannot be changed, added, or removed.',
+    'q4a': 'range(1, 10, 3) starts at 1, steps by 3: 1, 4, 7. Stops before 10.',
+    'q4b': 'continue skips the rest of the current iteration and moves to the next. break exits the loop entirely.',
+    'q5a': 'First filter: x > 1 keeps [2, 3]. Then multiply by 2: [4, 6].',
+    'q6a': 'NumPy uses vectorized operations in compiled C code, making array operations 10-100x faster than Python loops.',
+    'q7a': 'Boolean indexing: df[condition] filters rows where the condition is True.',
+    'q8a': 'isnull() creates a True/False mask, sum() counts the Trues per column.',
+    'q9a': 'A heatmap of df.corr() shows the correlation coefficient between every pair of numerical variables.',
+    'q10a': 'Median is the middle value and is not affected by extreme outliers, unlike the mean which gets pulled toward them.',
+    'q11a': '\\d+ matches one or more digits. findall returns all matches as a list: [\'3\', \'12\'].',
+  };
+  return explanations[qId] || '';
+}
+
+function toggleTheme(e) {
+  if (e) { e.preventDefault(); e.stopPropagation(); }
+  var scrollPos = window.scrollY || window.pageYOffset;
+  var body = document.body;
+  var btn = document.querySelector('.theme-toggle');
+  if (body.classList.contains('light')) {
+    body.classList.remove('light');
+    btn.textContent = '🌙';
+  } else {
+    body.classList.add('light');
+    btn.textContent = '☀️';
+  }
+  requestAnimationFrame(function() {
+    window.scrollTo(0, scrollPos);
+  });
+}
+
+window.addEventListener('load', function() {
+  document.body.classList.remove('light');
+  document.querySelector('.theme-toggle').textContent = '🌙';
+  localStorage.removeItem('theme');
+});
+</script>
+
+</div>
+</body>
+</html>
