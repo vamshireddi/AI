@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre-Work: Introduction to AI Landscape & Python Programming</title>
+<meta property="og:title" content="Pre-Work — AI Landscape & Python Programming | PGP AI&ML">
+<meta property="og:description" content="A comprehensive visual guide to AI fundamentals, history of AI, ML vs DL vs GenAI, Google Colab setup, and Python programming basics. Part of the PGP AI&ML program.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://vamshireddi.com/AI/greatlearning/prework-ai-python/">
+<meta property="og:image" content="https://vamshireddi.com/og-image.jpg?v=4">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Vamshi Krishna Reddy Bandaru — AI Learning Journey">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pre-Work — AI Landscape & Python Programming | PGP AI&ML">
+<meta name="twitter:description" content="A comprehensive visual guide to AI fundamentals, history of AI, ML vs DL vs GenAI, Google Colab setup, and Python programming basics.">
+<meta name="twitter:image" content="https://vamshireddi.com/og-image.jpg?v=4">
+<link rel="canonical" href="https://vamshireddi.com/AI/greatlearning/prework-ai-python/">
+<style>
+  /* CSS Custom Properties - Dark Mode (default) */
+  :root {
+    --bg: #0f172a;
+    --bg-surface: #1e293b;
+    --bg-surface2: #1e293b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #60a5fa;
+    --accent2: #fbbf24;
+    --accent3: #f87171;
+    --border: #334155;
+    --success: #34d399;
+  }
+  body.light {
+    --bg: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-surface2: #f1f5f9;
+    --text: #1e293b;
+    --text-muted: #475569;
+    --accent: #2563eb;
+    --accent2: #d97706;
+    --accent3: #dc2626;
+    --border: #cbd5e1;
+    --success: #059669;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.7; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+  h1 { text-align: center; font-size: 2em; margin: 30px 0 5px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .subtitle { text-align:center; color:#94a3b8; margin-bottom:25px; }
+  h2 { font-size: 1.6em; margin: 40px 0 15px; color: #60a5fa; border-bottom: 2px solid #1e40af; padding-bottom: 10px; }
+  h3 { font-size: 1.2em; margin: 20px 0 10px; color: #93c5fd; }
+
+  /* Nav */
+  .nav-tabs { display: flex; justify-content: center; gap: 8px; margin: 20px 0 30px; flex-wrap: wrap; }
+  .nav-tab { padding: 10px 20px; border-radius: 8px; background: #1e293b; color: #94a3b8; cursor: pointer; border: 1px solid #334155; font-size: 0.9em; transition: all 0.3s; }
+  .nav-tab:hover, .nav-tab.active { background: #3b82f6; color: white; border-color: #3b82f6; }
+
+  /* Theme Toggle */
+  .theme-toggle { position: fixed; top: 16px; right: 20px; z-index: 1000; width: 44px; height: 44px; border-radius: 50%; border: 2px solid #3b82f6; background: #1e293b; color: #fbbf24; font-size: 1.3em; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* Cards */
+  .card { background: #1e293b; border-radius: 12px; padding: 22px; margin: 18px 0; border: 1px solid #334155; }
+  .card-blue { border-left: 4px solid #3b82f6; }
+  .card-yellow { border-left: 4px solid #f59e0b; }
+  .card-green { border-left: 4px solid #10b981; }
+  .card-purple { border-left: 4px solid #8b5cf6; }
+  .card-red { border-left: 4px solid #ef4444; }
+
+  /* Definitions */
+  .def { background: #172554; border-radius: 8px; padding: 12px 16px; margin: 10px 0; border: 1px solid #1e40af; }
+  .def-term { color: #fbbf24; font-weight: 700; font-size: 1em; }
+  .def-meaning { color: #e2e8f0; margin-top: 4px; }
+  .def-example { color: #94a3b8; font-style: italic; margin-top: 6px; font-size: 0.9em; }
+  .def-example::before { content: "Real-life example: "; color: #34d399; font-style: normal; font-weight: 600; }
+
+  /* Analogy */
+  .analogy { background: #1a2e05; border: 1px solid #365314; border-radius: 10px; padding: 16px; margin: 14px 0; }
+  .analogy::before { content: "Real-World Analogy"; display: block; color: #84cc16; font-weight: 700; margin-bottom: 6px; font-size: 0.95em; }
+
+  /* Diagrams */
+  .diagram { background: #0f172a; border-radius: 12px; padding: 25px; margin: 18px 0; border: 1px solid #334155; overflow-x: auto; }
+  .diagram-title { text-align: center; font-weight: 700; color: #60a5fa; margin-bottom: 18px; font-size: 1.05em; }
+  .flow { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .flow-row { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .flow-box { padding: 10px 16px; border-radius: 8px; font-weight: 600; text-align: center; min-width: 110px; font-size: 0.88em; }
+  .flow-box.data { background: #1e40af; color: #bfdbfe; border: 2px solid #3b82f6; }
+  .flow-box.model { background: #065f46; color: #a7f3d0; border: 2px solid #10b981; }
+  .flow-box.result { background: #7c2d12; color: #fed7aa; border: 2px solid #f59e0b; }
+  .flow-box.combine { background: #581c87; color: #e9d5ff; border: 2px solid #a855f7; }
+  .flow-box.error { background: #991b1b; color: #fecaca; border: 2px solid #ef4444; }
+  .arrow-down { text-align: center; color: #64748b; font-size: 1.4em; }
+
+  /* Formula */
+  .formula { background: #0c4a6e; border-radius: 8px; padding: 14px 18px; margin: 10px 0; font-family: 'Courier New', monospace; text-align: center; font-size: 1.05em; color: #7dd3fc; border: 1px solid #0369a1; }
+  .formula-explain { text-align: center; color: #94a3b8; font-size: 0.85em; margin-top: 4px; }
+
+  /* Key point */
+  .key-point { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; background: #172554; border-radius: 8px; margin: 10px 0; }
+  .key-point .icon { font-size: 1.2em; flex-shrink: 0; }
+
+  /* Steps */
+  .step { display: flex; gap: 14px; margin: 12px 0; align-items: flex-start; }
+  .step-num { width: 30px; height: 30px; border-radius: 50%; background: #3b82f6; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85em; flex-shrink: 0; }
+  .step-content { flex: 1; }
+
+  /* Comparison table */
+  .comp-table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  .comp-table th { background: #1e40af; color: white; padding: 10px 14px; text-align: left; font-size: 0.88em; }
+  .comp-table td { padding: 10px 14px; border-bottom: 1px solid #334155; font-size: 0.88em; }
+  .comp-table tr:hover td { background: rgba(59,130,246,0.1); }
+
+  /* Colors */
+  .highlight { color: #fbbf24; font-weight: 600; }
+  .blue { color: #60a5fa; }
+  .green { color: #34d399; }
+  .purple { color: #a78bfa; }
+  .red { color: #f87171; }
+  p { margin: 8px 0; }
+  ul { margin: 8px 0 8px 20px; }
+  li { margin: 5px 0; }
+  code { background: #334155; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+
+  /* Quiz */
+  .quiz { background: var(--bg-surface2); border: 2px solid var(--accent2); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .quiz-title { font-size: 1.1rem; font-weight: 700; color: var(--accent2); margin-bottom: 1rem; }
+  .quiz-q { margin: 1rem 0; }
+  .quiz-q-text { font-weight: 600; color: var(--text); margin-bottom: 0.8rem; }
+  .quiz-option { background: var(--bg-surface); border: 2px solid var(--border); border-radius: 4px; padding: 0.8rem; margin: 0.5rem 0; cursor: pointer; transition: all 0.2s; display: block; width: 100%; text-align: left; color: var(--text); font-size: 0.95rem; font-family: inherit; line-height: 1.5; }
+  .quiz-option:hover { border-color: var(--accent); background: rgba(108, 99, 255, 0.1); }
+  .quiz-option.disabled { cursor: not-allowed; opacity: 0.6; }
+  .quiz-option.correct { background: rgba(63, 185, 80, 0.2); border-color: var(--success); color: var(--success); }
+  .quiz-option.wrong { background: rgba(255, 107, 107, 0.2); border-color: var(--accent3); color: var(--accent3); }
+  .quiz-feedback { margin-top: 1rem; padding: 0.8rem; border-radius: 4px; font-weight: 600; display: none; }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct { background: rgba(63, 185, 80, 0.2); color: var(--success); }
+  .quiz-feedback.wrong { background: rgba(255, 107, 107, 0.2); color: var(--accent3); }
+
+  /* Mistake */
+  .mistake { background: rgba(255, 107, 107, 0.05); border-left: 4px solid var(--accent3); padding: 1.5rem; margin: 1.5rem 0; border-radius: 4px; }
+  .mistake-title { font-weight: 700; color: var(--accent3); font-size: 1.05rem; margin-bottom: 0.8rem; }
+  .mistake-problem { color: var(--text); margin-bottom: 0.8rem; }
+  .mistake-fix { color: var(--success); font-weight: 600; padding-top: 0.8rem; border-top: 1px solid var(--border); margin-top: 0.8rem; }
+
+  /* Cheat grid */
+  .cheat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
+  .cheat-item { background: var(--bg-surface2); border: 2px solid var(--accent); border-radius: 8px; padding: 1.5rem; }
+  .cheat-item-title { font-weight: 700; color: var(--accent); margin-bottom: 0.8rem; font-size: 1.05rem; }
+  .cheat-item-content { color: var(--text); font-size: 0.95rem; line-height: 1.7; }
+
+  .side-by-side { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+
+  @media (max-width: 768px) {
+    .flow-row { flex-direction: column; }
+    h1 { font-size: 1.4em; }
+    .nav-tab { padding: 8px 12px; font-size: 0.8em; }
+    .side-by-side { grid-template-columns: 1fr; }
+  }
+
+  /* LIGHT MODE */
+  body.light { background: #f8fafc; color: #1e293b; }
+  body.light .container { color: #1e293b; }
+  body.light h1 { -webkit-text-fill-color: #0c4a6e; color: #0c4a6e; background: none; }
+  body.light h2 { color: #1e40af; border-bottom-color: #93c5fd; }
+  body.light h3 { color: #1e3a5f; }
+  body.light .subtitle { color: #475569; }
+  body.light .subtitle small { color: #475569; }
+  body.light .subtitle a { color: #2563eb !important; }
+  body.light .card { background: #ffffff; border-color: #cbd5e1; color: #1e293b; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  body.light .def { background: #eff6ff; border-color: #93c5fd; color: #1e293b; }
+  body.light .def-term { color: #b45309; }
+  body.light .def-meaning { color: #1e293b; }
+  body.light .def-example { color: #475569; }
+  body.light .def-example::before { color: #059669; }
+  body.light .analogy { background: #f0fdf4; border-color: #86efac; color: #1e293b; }
+  body.light .analogy::before { color: #15803d; }
+  body.light .diagram { background: #f1f5f9; border-color: #cbd5e1; color: #1e293b; }
+  body.light .diagram-title { color: #1e40af; }
+  body.light .arrow-down { color: #94a3b8; }
+  body.light .flow-box { color: #1e293b; }
+  body.light .flow-box.data { background: #dbeafe; color: #1e3a8a; border-color: #60a5fa; }
+  body.light .flow-box.model { background: #d1fae5; color: #064e3b; border-color: #34d399; }
+  body.light .flow-box.result { background: #ffedd5; color: #7c2d12; border-color: #fb923c; }
+  body.light .flow-box.combine { background: #ede9fe; color: #4c1d95; border-color: #a78bfa; }
+  body.light .flow-box.error { background: #fee2e2; color: #7f1d1d; border-color: #f87171; }
+  body.light .formula { background: #ecfeff; color: #0e7490; border-color: #67e8f9; }
+  body.light .formula-explain { color: #475569; }
+  body.light .key-point { background: #eff6ff; border-color: #93c5fd; color: #1e293b; }
+  body.light .step-content { color: #1e293b; }
+  body.light .quiz { background: #ffffff; border-color: #d97706; color: #1e293b; }
+  body.light .quiz-title { color: #b45309; }
+  body.light .quiz-q-text { color: #1e293b; }
+  body.light .quiz-option { background: #f8fafc; border-color: #cbd5e1; color: #1e293b; }
+  body.light .quiz-option:hover { border-color: #3b82f6; background: rgba(59,130,246,0.1); }
+  body.light .nav-tab { background: #ffffff; color: #475569; border-color: #cbd5e1; }
+  body.light .nav-tab:hover { background: #eff6ff; color: #1e40af; border-color: #93c5fd; }
+  body.light .nav-tab.active { background: #2563eb; color: white; }
+  body.light code { background: #e2e8f0; color: #0f172a; }
+  body.light .comp-table th { background: #2563eb; color: white; }
+  body.light .comp-table td { border-color: #cbd5e1; color: #1e293b; background: #ffffff; }
+  body.light .comp-table tr:hover td { background: #eff6ff; }
+  body.light .mistake { background: #fef2f2; border-color: #f87171; color: #1e293b; }
+  body.light .mistake-title { color: #dc2626; }
+  body.light .mistake-problem { color: #1e293b; }
+  body.light .mistake-fix { color: #059669; border-top-color: #e2e8f0; }
+  body.light .cheat-item { background: #ffffff; border-color: #2563eb; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  body.light .cheat-item-title { color: #1e40af; }
+  body.light .cheat-item-content { color: #1e293b; }
+  body.light .highlight { color: #b45309; }
+  body.light .blue { color: #2563eb; }
+  body.light .green { color: #059669; }
+  body.light .purple { color: #7c3aed; }
+  body.light .red { color: #dc2626; }
+  body.light .theme-toggle { background: #ffffff; border-color: #3b82f6; color: #1e293b; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+  body.light strong { color: #0f172a; }
+  body.light p, body.light li { color: #334155; }
+  body.light ul { color: #334155; }
+  body.light a { color: #2563eb; }
+  body.light .side-by-side > div { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 1rem; }
+  /* Fix inline dark backgrounds */
+  body.light [style*="background:#172554"] { background: #eff6ff !important; border-color: #93c5fd !important; }
+  body.light [style*="background:#2e1065"] { background: #f3e8ff !important; border-color: #c084fc !important; }
+  body.light [style*="background:#0f766e"] { background: #ccfbf1 !important; border-color: #2dd4bf !important; }
+  body.light [style*="background:#0f172a"] { background: #f1f5f9 !important; border-color: #cbd5e1 !important; }
+  body.light [style*="background:#1e293b"] { background: #f1f5f9 !important; border-color: #cbd5e1 !important; }
+  body.light [style*="background:#581c87"] { background: #f3e8ff !important; border-color: #c084fc !important; }
+  body.light [style*="background:#1e40af"] { background: #dbeafe !important; border-color: #60a5fa !important; }
+  body.light [style*="background:#065f46"] { background: #d1fae5 !important; border-color: #34d399 !important; }
+  body.light [style*="background:#7c2d12"] { background: #ffedd5 !important; border-color: #fb923c !important; }
+  body.light [style*="background:#991b1b"] { background: #fee2e2 !important; border-color: #f87171 !important; }
+  body.light [style*="background:#0c4a6e"] { background: #ecfeff !important; border-color: #67e8f9 !important; }
+  /* Fix inline text colors */
+  body.light [style*="color:#94a3b8"] { color: #475569 !important; }
+  body.light [style*="color:#fbbf24"] { color: #b45309 !important; }
+  body.light [style*="color:#60a5fa"] { color: #2563eb !important; }
+  body.light [style*="color:#a78bfa"] { color: #7c3aed !important; }
+  body.light [style*="color:#34d399"] { color: #059669 !important; }
+  body.light [style*="color:#f87171"] { color: #dc2626 !important; }
+  body.light [style*="color:#e2e8f0"] { color: #1e293b !important; }
+  body.light [style*="color:#7dd3fc"] { color: #0e7490 !important; }
+  body.light [style*="color:#84cc16"] { color: #4d7c0f !important; }
+  body.light [style*="color:#bfdbfe"] { color: #1e3a8a !important; }
+  body.light [style*="color:#a7f3d0"] { color: #064e3b !important; }
+  body.light [style*="color:#fed7aa"] { color: #7c2d12 !important; }
+  body.light [style*="color:#e9d5ff"] { color: #4c1d95 !important; }
+  body.light [style*="color:#fecaca"] { color: #7f1d1d !important; }
+  /* Code blocks: keep dark in both modes */
+  body.light pre { background: #1e293b !important; color: #e2e8f0 !important; border-color: #475569 !important; }
+  body.light pre code { color: #e2e8f0 !important; background: transparent !important; }
+  body.light pre [style*="color:#94a3b8"] { color: #94a3b8 !important; }
+  body.light pre [style*="color:#fbbf24"] { color: #fbbf24 !important; }
+  body.light pre [style*="color:#60a5fa"] { color: #60a5fa !important; }
+  body.light pre [style*="color:#a78bfa"] { color: #a78bfa !important; }
+  body.light pre [style*="color:#34d399"] { color: #34d399 !important; }
+  body.light pre [style*="color:#f87171"] { color: #f87171 !important; }
+  body.light pre [style*="color:#e2e8f0"] { color: #e2e8f0 !important; }
+  body.light pre [style*="color:#7dd3fc"] { color: #7dd3fc !important; }
+  body.light pre span { color: inherit; }
+</style>
+</head>
+<body>
+<button class="theme-toggle" onclick="toggleTheme(event)" type="button">&#127769;</button>
+<div class="container">
+  <h1>Pre-Work: Introduction to AI Landscape &amp; Python Programming</h1>
+  <p class="subtitle">University of Texas at Austin | Great Learning | PGP in AI &amp; ML<br>
+  <small>Every concept explained from scratch. No assumptions. Real-life examples for everything.</small><br>
+  <small>Notes prepared by: <a href="https://www.linkedin.com/in/vamshireddi/" target="_blank" style="color:#60a5fa; text-decoration:none;">Vamshi Krishan Reddy Bandaru</a></small></p>
+
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="showSection('cheat')">&#9889; Cheat Sheet</div>
+    <div class="nav-tab" onclick="showSection('concept')">&#128506; Concept Map</div>
+    <div class="nav-tab" onclick="showSection('ailandscape')">&#129302; AI Landscape</div>
+    <div class="nav-tab" onclick="showSection('aitypes')">&#128736; Types of AI</div>
+    <div class="nav-tab" onclick="showSection('aibusiness')">&#128188; AI in Business</div>
+    <div class="nav-tab" onclick="showSection('colab')">&#128187; Google Colab</div>
+    <div class="nav-tab" onclick="showSection('variables')">&#128196; Variables &amp; Types</div>
+    <div class="nav-tab" onclick="showSection('operators')">&#9997; Operators</div>
+    <div class="nav-tab" onclick="showSection('strings')">&#128292; Strings</div>
+    <div class="nav-tab" onclick="showSection('datastruct')">&#128230; Data Structures</div>
+    <div class="nav-tab" onclick="showSection('controlflow')">&#128256; Control Flow</div>
+    <div class="nav-tab" onclick="showSection('mistakes')">&#9888; Mistakes</div>
+  </div>
+
+  <!-- ==================== CHEAT SHEET ==================== -->
+  <div class="section active" id="cheat">
+<h2>&#9889; Cheat Sheet</h2>
+
+<div class="card card-purple">
+  <h3>AI Landscape at a Glance</h3>
+  <div class="cheat-grid">
+    <div class="cheat-item">
+      <div class="cheat-item-title">Artificial Intelligence</div>
+      <div class="cheat-item-content">Machines that mimic human intelligence. Broadest umbrella covering all approaches from rule-based to learning systems.</div>
+    </div>
+    <div class="cheat-item">
+      <div class="cheat-item-title">Machine Learning</div>
+      <div class="cheat-item-content">Subset of AI. Systems that learn patterns from data without explicit programming. Needs structured data + features.</div>
+    </div>
+    <div class="cheat-item">
+      <div class="cheat-item-title">Deep Learning</div>
+      <div class="cheat-item-content">Subset of ML. Neural networks with many layers. Learns features automatically from raw data. Needs lots of data + compute.</div>
+    </div>
+    <div class="cheat-item">
+      <div class="cheat-item-title">Generative AI</div>
+      <div class="cheat-item-content">Subset of DL. Creates new content (text, images, code). Built on transformers, diffusion models, and foundation models.</div>
+    </div>
+    <div class="cheat-item">
+      <div class="cheat-item-title">LLMs</div>
+      <div class="cheat-item-content">Subset of GenAI. Large Language Models trained on massive text. GPT-4, Claude, Llama. Understand and generate human language.</div>
+    </div>
+    <div class="cheat-item">
+      <div class="cheat-item-title">Why Python?</div>
+      <div class="cheat-item-content">De facto language for AI/ML. Rich ecosystem: NumPy, Pandas, Scikit-learn, TensorFlow, PyTorch. Easy syntax, huge community.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-blue">
+  <h3>Python Essentials Quick Reference</h3>
+  <div class="cheat-grid">
+    <div class="cheat-item">
+      <div class="cheat-item-title">Data Types</div>
+      <div class="cheat-item-content"><code>int</code> (42), <code>float</code> (3.14), <code>str</code> ("hello"), <code>bool</code> (True/False), <code>None</code></div>
+    </div>
+    <div class="cheat-item">
+      <div class="cheat-item-title">Lists</div>
+      <div class="cheat-item-content">Ordered, mutable, duplicates OK. <code>[1, 2, 3]</code>. Use for collections that change.</div>
+    </div>
+    <div class="cheat-item">
+      <div class="cheat-item-title">Tuples</div>
+      <div class="cheat-item-content">Ordered, immutable, duplicates OK. <code>(1, 2, 3)</code>. Use for fixed data like coordinates.</div>
+    </div>
+    <div class="cheat-item">
+      <div class="cheat-item-title">Dictionaries</div>
+      <div class="cheat-item-content">Key-value pairs, mutable. <code>{"name": "AI"}</code>. Use for labeled data, lookups.</div>
+    </div>
+    <div class="cheat-item">
+      <div class="cheat-item-title">Sets</div>
+      <div class="cheat-item-content">Unordered, unique items. <code>{1, 2, 3}</code>. Use for membership tests, removing duplicates.</div>
+    </div>
+    <div class="cheat-item">
+      <div class="cheat-item-title">Control Flow</div>
+      <div class="cheat-item-content"><code>if/elif/else</code> for branching. <code>for/while</code> for loops. Indentation matters!</div>
+    </div>
+  </div>
+</div>
+
+<div class="key-point">
+  <div class="icon">&#128161;</div>
+  <p><strong>This Pre-Work module establishes the foundation for the entire PGP program.</strong> Understanding the AI landscape gives you context for every technique you will learn. Mastering Python basics ensures you can implement those techniques from Day 1.</p>
+</div>
+</div>
+
+  <!-- ==================== CONCEPT MAP ==================== -->
+  <div class="section" id="concept">
+<h2>&#128506; Concept Map</h2>
+<p>How all Pre-Work topics connect together:</p>
+
+<div class="diagram">
+  <div class="diagram-title">Pre-Work Module: Complete Knowledge Map</div>
+  <div class="flow">
+    <div class="flow-box combine" style="min-width:280px;">&#127891; PRE-WORK MODULE</div>
+    <div class="arrow-down">&#9660;</div>
+    <div class="flow-row">
+      <div class="flow-box data" style="min-width:200px;">&#129302; AI Landscape</div>
+      <div class="flow-box model" style="min-width:200px;">&#128013; Python Programming</div>
+    </div>
+    <div class="arrow-down">&#9660;</div>
+    <div class="flow-row">
+      <div class="flow-box data">What is AI?</div>
+      <div class="flow-box data">AI vs ML vs DL</div>
+      <div class="flow-box data">AI in Business</div>
+    </div>
+    <div class="arrow-down">&#9660;</div>
+    <div class="flow-row">
+      <div class="flow-box model">Variables &amp; Types</div>
+      <div class="flow-box model">Operators</div>
+      <div class="flow-box model">Strings</div>
+    </div>
+    <div class="arrow-down">&#9660;</div>
+    <div class="flow-row">
+      <div class="flow-box model">Data Structures</div>
+      <div class="flow-box model">Control Flow</div>
+      <div class="flow-box result">Google Colab</div>
+    </div>
+    <div class="arrow-down">&#9660;</div>
+    <div class="flow-box combine" style="min-width:280px;">Ready for Module 01: Python Foundations</div>
+  </div>
+</div>
+
+<div class="card card-blue">
+  <h3>Learning Path</h3>
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content"><strong>AI Landscape</strong> &mdash; Understand what AI is, its types, history, and real-world business applications. This is your "why" for the entire program.</div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content"><strong>Google Colab Setup</strong> &mdash; Set up your coding environment. Colab gives you free GPU access and zero setup hassle.</div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content"><strong>Python Basics</strong> &mdash; Variables, data types, operators, strings. The atoms of every program you will write.</div>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content"><strong>Data Structures</strong> &mdash; Lists, tuples, dicts, sets. How you store, organize, and access data efficiently.</div>
+  </div>
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-content"><strong>Control Flow</strong> &mdash; if/elif/else, ternary. Making decisions in code. The logic layer of every ML pipeline.</div>
+  </div>
+</div>
+</div>
+
+  <!-- ==================== AI LANDSCAPE ==================== -->
+  <div class="section" id="ailandscape">
+<h2>&#129302; Introduction to AI Landscape</h2>
+
+<div class="def">
+  <div class="def-term">Artificial Intelligence (AI)</div>
+  <div class="def-meaning">The science and engineering of creating machines capable of performing tasks that typically require human intelligence: reasoning, learning, problem-solving, perception, and language understanding.</div>
+  <div class="def-example">A spam filter that learns to identify unwanted emails, or a self-driving car navigating traffic.</div>
+</div>
+
+<div class="analogy">Think of AI as a giant tree. The trunk is AI itself (the broadest concept). The main branches are Machine Learning, the smaller branches are Deep Learning, and the newest leaves are Generative AI and LLMs. Each level builds on the one before it, getting more specialized and powerful.</div>
+
+<h3>AI vs ML vs Deep Learning vs GenAI vs LLMs</h3>
+
+<div class="diagram">
+  <div class="diagram-title">The AI Hierarchy: Nested Subsets</div>
+  <div class="flow">
+    <div class="flow-box combine" style="min-width:380px; padding:14px 20px;">&#129302; ARTIFICIAL INTELLIGENCE<br><span style="font-size:0.8em; font-weight:400;">Broadest: any system mimicking human intelligence</span></div>
+    <div class="arrow-down">&#9660;</div>
+    <div class="flow-box data" style="min-width:330px; padding:14px 20px;">&#129504; MACHINE LEARNING<br><span style="font-size:0.8em; font-weight:400;">Systems that learn from data without explicit rules</span></div>
+    <div class="arrow-down">&#9660;</div>
+    <div class="flow-box model" style="min-width:280px; padding:14px 20px;">&#129504; DEEP LEARNING<br><span style="font-size:0.8em; font-weight:400;">Multi-layer neural networks</span></div>
+    <div class="arrow-down">&#9660;</div>
+    <div class="flow-box result" style="min-width:230px; padding:14px 20px;">&#9997; GENERATIVE AI<br><span style="font-size:0.8em; font-weight:400;">Creates new content</span></div>
+    <div class="arrow-down">&#9660;</div>
+    <div class="flow-box error" style="min-width:180px; padding:14px 20px;">&#128172; LLMs<br><span style="font-size:0.8em; font-weight:400;">Language-focused GenAI</span></div>
+  </div>
+</div>
+
+<table class="comp-table">
+  <tr><th>Aspect</th><th>AI</th><th>ML</th><th>Deep Learning</th><th>GenAI</th><th>LLMs</th></tr>
+  <tr><td><strong>Definition</strong></td><td>Machines that mimic intelligence</td><td>Learn from data</td><td>Multi-layer neural nets</td><td>Creates new content</td><td>Text-focused GenAI</td></tr>
+  <tr><td><strong>Data Needed</strong></td><td>Can be rule-based (none)</td><td>Moderate</td><td>Large</td><td>Very large</td><td>Massive text corpora</td></tr>
+  <tr><td><strong>Feature Eng.</strong></td><td>Manual rules</td><td>Manual features</td><td>Automatic</td><td>Automatic</td><td>Automatic</td></tr>
+  <tr><td><strong>Example</strong></td><td>Chess engine (1997)</td><td>Spam filter</td><td>Image recognition</td><td>DALL-E, Midjourney</td><td>GPT-4, Claude</td></tr>
+  <tr><td><strong>Compute</strong></td><td>Low-High</td><td>Moderate</td><td>High</td><td>Very High</td><td>Extremely High</td></tr>
+</table>
+
+<h3>History &amp; Evolution of AI</h3>
+
+<div class="diagram">
+  <div class="diagram-title">AI Timeline: From Turing to Transformers</div>
+  <div class="flow">
+    <div class="flow-row">
+      <div class="flow-box data" style="min-width:180px;">&#128218; 1950<br><span style="font-size:0.8em;">Turing Test proposed</span></div>
+      <div class="flow-box data" style="min-width:180px;">&#128161; 1956<br><span style="font-size:0.8em;">Dartmouth: "AI" coined</span></div>
+      <div class="flow-box data" style="min-width:180px;">&#129504; 1957<br><span style="font-size:0.8em;">Perceptron invented</span></div>
+    </div>
+    <div class="arrow-down">&#9660;</div>
+    <div class="flow-row">
+      <div class="flow-box error" style="min-width:180px;">&#10052; 1974-80<br><span style="font-size:0.8em;">First AI Winter</span></div>
+      <div class="flow-box model" style="min-width:180px;">&#128200; 1980s<br><span style="font-size:0.8em;">Expert Systems boom</span></div>
+      <div class="flow-box error" style="min-width:180px;">&#10052; 1987-93<br><span style="font-size:0.8em;">Second AI Winter</span></div>
+    </div>
+    <div class="arrow-down">&#9660;</div>
+    <div class="flow-row">
+      <div class="flow-box model" style="min-width:180px;">&#9823; 1997<br><span style="font-size:0.8em;">Deep Blue beats Kasparov</span></div>
+      <div class="flow-box combine" style="min-width:180px;">&#128248; 2012<br><span style="font-size:0.8em;">AlexNet: DL revolution</span></div>
+      <div class="flow-box result" style="min-width:180px;">&#128640; 2017<br><span style="font-size:0.8em;">Transformer paper</span></div>
+    </div>
+    <div class="arrow-down">&#9660;</div>
+    <div class="flow-row">
+      <div class="flow-box result" style="min-width:180px;">&#129302; 2020<br><span style="font-size:0.8em;">GPT-3: GenAI begins</span></div>
+      <div class="flow-box result" style="min-width:180px;">&#128172; 2022-23<br><span style="font-size:0.8em;">ChatGPT, Claude, Bard</span></div>
+      <div class="flow-box combine" style="min-width:180px;">&#127759; 2024+<br><span style="font-size:0.8em;">Multimodal, Agents</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="key-point">
+  <div class="icon">&#128161;</div>
+  <p><strong>Key Insight:</strong> AI has gone through multiple hype cycles and "winters." The current wave is different because of three converging factors: massive data availability, cheap compute (GPUs/cloud), and algorithmic breakthroughs (transformers). Understanding this history helps you evaluate new AI claims critically.</p>
+</div>
+
+<div class="quiz">
+  <div class="quiz-title">&#128221; Knowledge Check: AI Landscape</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q1: Which statement best describes the relationship between AI, ML, and Deep Learning?</div>
+    <button class="quiz-option" onclick="checkQuiz('q1a', this, false)">A) They are three separate, unrelated fields</button>
+    <button class="quiz-option" onclick="checkQuiz('q1a', this, false)">B) Deep Learning contains ML, which contains AI</button>
+    <button class="quiz-option" onclick="checkQuiz('q1a', this, true)">C) AI is the broadest field; ML is a subset of AI; DL is a subset of ML</button>
+    <button class="quiz-option" onclick="checkQuiz('q1a', this, false)">D) ML and DL are both subsets of AI but unrelated to each other</button>
+    <div class="quiz-feedback" id="q1a-feedback"></div>
+  </div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q2: What event is considered the birth of AI as a formal field?</div>
+    <button class="quiz-option" onclick="checkQuiz('q1b', this, false)">A) Turing Test proposal in 1950</button>
+    <button class="quiz-option" onclick="checkQuiz('q1b', this, true)">B) Dartmouth Conference in 1956</button>
+    <button class="quiz-option" onclick="checkQuiz('q1b', this, false)">C) Deep Blue defeating Kasparov in 1997</button>
+    <button class="quiz-option" onclick="checkQuiz('q1b', this, false)">D) The invention of the perceptron in 1957</button>
+    <div class="quiz-feedback" id="q1b-feedback"></div>
+  </div>
+</div>
+</div>
+
+  <!-- ==================== TYPES OF AI ==================== -->
+  <div class="section" id="aitypes">
+<h2>&#128736; Types of AI</h2>
+
+<div class="def">
+  <div class="def-term">Narrow AI (Weak AI / ANI)</div>
+  <div class="def-meaning">AI designed and trained for a specific task. It excels at one thing but cannot transfer knowledge to other domains. This is ALL AI that exists today.</div>
+  <div class="def-example">Siri answering questions, Netflix recommending movies, Tesla autopilot driving on highways. Each can only do its one job.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">General AI (Strong AI / AGI)</div>
+  <div class="def-meaning">Hypothetical AI with human-level intelligence across all cognitive tasks. Could learn any intellectual task a human can, transfer knowledge between domains, and reason abstractly.</div>
+  <div class="def-example">An AI that could write code, compose music, diagnose diseases, AND carry a natural conversation &mdash; all without retraining. Does not exist yet.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Super AI (ASI)</div>
+  <div class="def-meaning">Theoretical AI that surpasses human intelligence in all aspects: creativity, problem-solving, social intelligence. Purely theoretical and widely debated.</div>
+  <div class="def-example">An intelligence that could solve climate change, cure cancer, and advance science beyond human capability simultaneously. Science fiction for now.</div>
+</div>
+
+<div class="analogy">Think of it like cooking skills. <strong>Narrow AI</strong> is a chef who only makes pizza (amazing pizza, but can't boil an egg). <strong>General AI</strong> is a chef who can cook any cuisine at a professional level. <strong>Super AI</strong> is a chef who invents entirely new cuisines that humans couldn't even imagine.</div>
+
+<div class="diagram">
+  <div class="diagram-title">Types of AI: Current vs. Future</div>
+  <div class="flow">
+    <div class="flow-row">
+      <div class="flow-box model" style="min-width:200px; padding:14px;">&#9989; NARROW AI<br><span style="font-size:0.8em;">Exists today</span><br><span style="font-size:0.75em; font-weight:400;">Siri, Alexa, ChatGPT, Self-driving</span></div>
+      <div class="flow-box result" style="min-width:200px; padding:14px;">&#128301; GENERAL AI<br><span style="font-size:0.8em;">Research stage</span><br><span style="font-size:0.75em; font-weight:400;">Human-level across all tasks</span></div>
+      <div class="flow-box error" style="min-width:200px; padding:14px;">&#128302; SUPER AI<br><span style="font-size:0.8em;">Theoretical</span><br><span style="font-size:0.75em; font-weight:400;">Surpasses all human intelligence</span></div>
+    </div>
+  </div>
+</div>
+
+<table class="comp-table">
+  <tr><th>Feature</th><th>Narrow AI (ANI)</th><th>General AI (AGI)</th><th>Super AI (ASI)</th></tr>
+  <tr><td><strong>Status</strong></td><td>&#9989; Exists now</td><td>&#128301; Research phase</td><td>&#128302; Theoretical</td></tr>
+  <tr><td><strong>Scope</strong></td><td>Single task/domain</td><td>All human cognitive tasks</td><td>Exceeds all human abilities</td></tr>
+  <tr><td><strong>Learning</strong></td><td>Task-specific training</td><td>Transfer learning across domains</td><td>Self-improving beyond human design</td></tr>
+  <tr><td><strong>Creativity</strong></td><td>Within narrow bounds</td><td>Human-level creativity</td><td>Beyond human imagination</td></tr>
+  <tr><td><strong>Examples</strong></td><td>GPT-4, AlphaGo, DALL-E</td><td>None yet</td><td>None yet</td></tr>
+  <tr><td><strong>Timeline</strong></td><td>Now</td><td>Debated: 2030-2060+</td><td>Unknown / may never happen</td></tr>
+</table>
+
+<h3>ML Learning Paradigms</h3>
+
+<div class="def">
+  <div class="def-term">Supervised Learning</div>
+  <div class="def-meaning">Model learns from labeled data (input-output pairs). You give it questions AND answers, and it learns the mapping.</div>
+  <div class="def-example">Email spam detection: trained on thousands of emails labeled "spam" or "not spam." Predicting house prices from features like area, bedrooms, location.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Unsupervised Learning</div>
+  <div class="def-meaning">Model finds patterns in data without labels. No "right answers" &mdash; the model discovers structure on its own.</div>
+  <div class="def-example">Customer segmentation: grouping shoppers by behavior without predefined categories. Anomaly detection in credit card transactions.</div>
+</div>
+
+<div class="def">
+  <div class="def-term">Reinforcement Learning</div>
+  <div class="def-meaning">Model learns by trial and error, receiving rewards for good actions and penalties for bad ones. Optimizes for maximum cumulative reward.</div>
+  <div class="def-example">AlphaGo learning to play Go by playing millions of games against itself. A robot learning to walk by trying and falling.</div>
+</div>
+
+<div class="diagram">
+  <div class="diagram-title">Three Pillars of Machine Learning</div>
+  <div class="flow">
+    <div class="flow-box combine" style="min-width:250px;">&#129504; MACHINE LEARNING</div>
+    <div class="arrow-down">&#9660;</div>
+    <div class="flow-row">
+      <div class="flow-box data" style="min-width:180px;">Supervised<br><span style="font-size:0.8em;">Labeled data</span><br><span style="font-size:0.75em; font-weight:400;">Classification, Regression</span></div>
+      <div class="flow-box model" style="min-width:180px;">Unsupervised<br><span style="font-size:0.8em;">No labels</span><br><span style="font-size:0.75em; font-weight:400;">Clustering, Dim. Reduction</span></div>
+      <div class="flow-box result" style="min-width:180px;">Reinforcement<br><span style="font-size:0.8em;">Rewards/Penalties</span><br><span style="font-size:0.75em; font-weight:400;">Game AI, Robotics</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="quiz">
+  <div class="quiz-title">&#128221; Knowledge Check: Types of AI</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q3: Which type of AI is ChatGPT an example of?</div>
+    <button class="quiz-option" onclick="checkQuiz('q2a', this, true)">A) Narrow AI &mdash; it excels at language tasks but can't drive a car</button>
+    <button class="quiz-option" onclick="checkQuiz('q2a', this, false)">B) General AI &mdash; it can do many different things</button>
+    <button class="quiz-option" onclick="checkQuiz('q2a', this, false)">C) Super AI &mdash; it often seems smarter than humans</button>
+    <button class="quiz-option" onclick="checkQuiz('q2a', this, false)">D) None of the above &mdash; it is not truly AI</button>
+    <div class="quiz-feedback" id="q2a-feedback"></div>
+  </div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q4: A model trained on customer purchase data (without labels) to find distinct customer groups is using:</div>
+    <button class="quiz-option" onclick="checkQuiz('q2b', this, false)">A) Supervised Learning</button>
+    <button class="quiz-option" onclick="checkQuiz('q2b', this, true)">B) Unsupervised Learning</button>
+    <button class="quiz-option" onclick="checkQuiz('q2b', this, false)">C) Reinforcement Learning</button>
+    <button class="quiz-option" onclick="checkQuiz('q2b', this, false)">D) Transfer Learning</button>
+    <div class="quiz-feedback" id="q2b-feedback"></div>
+  </div>
+</div>
+</div>
+
+  <!-- ==================== AI IN BUSINESS ==================== -->
+  <div class="section" id="aibusiness">
+<h2>&#128188; AI in Business</h2>
+
+<p>AI is transforming every major industry. Understanding where AI creates value helps you identify opportunities and frame problems correctly throughout the PGP program.</p>
+
+<h3>Industry Applications</h3>
+
+<table class="comp-table">
+  <tr><th>Industry</th><th>AI Application</th><th>Business Impact</th><th>ML Type</th></tr>
+  <tr><td><strong>Healthcare</strong></td><td>Medical image diagnosis, drug discovery, patient readmission prediction</td><td>Earlier detection, 30-40% faster diagnosis</td><td>Supervised, DL</td></tr>
+  <tr><td><strong>Finance</strong></td><td>Fraud detection, algorithmic trading, credit scoring, risk assessment</td><td>Real-time fraud prevention, better risk models</td><td>Supervised, RL</td></tr>
+  <tr><td><strong>Retail</strong></td><td>Recommendation engines, demand forecasting, dynamic pricing</td><td>35% of Amazon revenue from recommendations</td><td>Supervised, Unsupervised</td></tr>
+  <tr><td><strong>Manufacturing</strong></td><td>Predictive maintenance, quality control, supply chain optimization</td><td>Reduce downtime by 30-50%, fewer defects</td><td>Supervised, Unsupervised</td></tr>
+  <tr><td><strong>Transportation</strong></td><td>Self-driving vehicles, route optimization, traffic prediction</td><td>Safer roads, reduced logistics costs</td><td>DL, RL</td></tr>
+  <tr><td><strong>Marketing</strong></td><td>Customer segmentation, churn prediction, ad targeting</td><td>Higher ROI, personalized experiences</td><td>Supervised, Unsupervised</td></tr>
+  <tr><td><strong>Agriculture</strong></td><td>Crop disease detection, yield prediction, precision farming</td><td>Increased yields, reduced waste</td><td>DL, Supervised</td></tr>
+  <tr><td><strong>Education</strong></td><td>Personalized learning, automated grading, dropout prediction</td><td>Better outcomes, scalable instruction</td><td>Supervised, NLP</td></tr>
+</table>
+
+<h3>Case Studies</h3>
+
+<div class="card card-green">
+  <h3>Case 1: Netflix Recommendation Engine</h3>
+  <p><strong>Problem:</strong> With 17,000+ titles, users struggle to find content they enjoy. Poor recommendations lead to churn.</p>
+  <p><strong>AI Solution:</strong> Collaborative filtering + content-based filtering + deep learning. Analyzes viewing history, ratings, time of day, device, and even thumbnail engagement.</p>
+  <p><strong>Impact:</strong> Recommendations drive 80% of watched content. Saves Netflix an estimated $1 billion per year in reduced churn.</p>
+  <p><strong>ML Types Used:</strong> Supervised learning (predict ratings), Unsupervised (user clusters), Deep learning (visual features).</p>
+</div>
+
+<div class="card card-blue">
+  <h3>Case 2: JPMorgan COIN (Contract Intelligence)</h3>
+  <p><strong>Problem:</strong> Lawyers spent 360,000 hours annually reviewing commercial loan agreements.</p>
+  <p><strong>AI Solution:</strong> NLP-based system that reads and interprets legal documents, extracts key data points, and flags anomalies.</p>
+  <p><strong>Impact:</strong> Reduced review time from 360,000 hours to seconds. Fewer errors than human reviewers. Freed lawyers for higher-value work.</p>
+  <p><strong>ML Types Used:</strong> NLP, Supervised learning, Deep learning for text understanding.</p>
+</div>
+
+<div class="card card-purple">
+  <h3>Case 3: John Deere Precision Agriculture</h3>
+  <p><strong>Problem:</strong> Farmers spray herbicides uniformly, wasting chemicals on bare soil and harming the environment.</p>
+  <p><strong>AI Solution:</strong> Computer vision cameras on sprayers identify weeds in real-time and spray only where needed (See &amp; Spray technology).</p>
+  <p><strong>Impact:</strong> Reduces herbicide use by up to 77%. Saves farmers thousands per season while being environmentally sustainable.</p>
+  <p><strong>ML Types Used:</strong> Deep learning (image classification), real-time inference at the edge.</p>
+</div>
+
+<div class="analogy">Think of AI in business like electricity in the early 1900s. At first, only a few industries used it. Then it became a "general purpose technology" that transformed everything. AI is following the same trajectory &mdash; it is not a product, it is an ingredient that makes every product better.</div>
+
+<div class="key-point">
+  <div class="icon">&#128161;</div>
+  <p><strong>Framework for AI Opportunities:</strong> Look for tasks that are (1) repetitive, (2) data-rich, (3) require pattern recognition, and (4) have clear success metrics. These are the best candidates for AI solutions in any industry.</p>
+</div>
+
+<div class="quiz">
+  <div class="quiz-title">&#128221; Knowledge Check: AI in Business</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q5: What percentage of Netflix watched content is driven by AI recommendations?</div>
+    <button class="quiz-option" onclick="checkQuiz('q3a', this, false)">A) 30%</button>
+    <button class="quiz-option" onclick="checkQuiz('q3a', this, false)">B) 50%</button>
+    <button class="quiz-option" onclick="checkQuiz('q3a', this, true)">C) 80%</button>
+    <button class="quiz-option" onclick="checkQuiz('q3a', this, false)">D) 95%</button>
+    <div class="quiz-feedback" id="q3a-feedback"></div>
+  </div>
+</div>
+</div>
+
+  <!-- ==================== GOOGLE COLAB ==================== -->
+  <div class="section" id="colab">
+<h2>&#128187; Google Colab Setup</h2>
+
+<div class="def">
+  <div class="def-term">Google Colaboratory (Colab)</div>
+  <div class="def-meaning">A free, cloud-based Jupyter notebook environment from Google. Runs Python in your browser with zero setup. Provides free access to GPUs and TPUs for compute-intensive ML tasks.</div>
+  <div class="def-example">Instead of installing Python, Anaconda, and libraries on your laptop, you open colab.research.google.com and start coding immediately.</div>
+</div>
+
+<div class="analogy">Colab is like Google Docs for code. Just as Google Docs lets you write documents without installing Word, Colab lets you write and run Python without installing anything. It is saved to your Google Drive and shareable with a link.</div>
+
+<h3>Why Use Colab for This Program?</h3>
+
+<div class="card card-green">
+  <ul>
+    <li><strong>Zero Setup:</strong> No installation needed. Works on any device with a browser (even a Chromebook or tablet).</li>
+    <li><strong>Free GPU/TPU:</strong> Train deep learning models without buying expensive hardware. Free tier includes T4 GPU.</li>
+    <li><strong>Pre-installed Libraries:</strong> NumPy, Pandas, Scikit-learn, TensorFlow, PyTorch all come pre-installed.</li>
+    <li><strong>Google Drive Integration:</strong> Save notebooks directly to Drive. Access datasets from Drive seamlessly.</li>
+    <li><strong>Collaboration:</strong> Share notebooks like Google Docs. Real-time collaborative editing.</li>
+    <li><strong>Version History:</strong> Automatic versioning. Never lose your work.</li>
+  </ul>
+</div>
+
+<h3>Getting Started with Colab</h3>
+
+<div class="step">
+  <div class="step-num">1</div>
+  <div class="step-content"><strong>Open Colab:</strong> Navigate to <code>colab.research.google.com</code>. Sign in with your Google account.</div>
+</div>
+<div class="step">
+  <div class="step-num">2</div>
+  <div class="step-content"><strong>Create a Notebook:</strong> Click "New Notebook." You get a blank notebook with one code cell ready to go.</div>
+</div>
+<div class="step">
+  <div class="step-num">3</div>
+  <div class="step-content"><strong>Write Code:</strong> Click the code cell, type Python code, and press <code>Shift+Enter</code> to run it.</div>
+</div>
+<div class="step">
+  <div class="step-num">4</div>
+  <div class="step-content"><strong>Add Cells:</strong> Use "+ Code" for code cells or "+ Text" for markdown explanations.</div>
+</div>
+<div class="step">
+  <div class="step-num">5</div>
+  <div class="step-content"><strong>Enable GPU:</strong> Runtime &rarr; Change runtime type &rarr; T4 GPU. Use this for deep learning tasks.</div>
+</div>
+
+<h3>Essential Colab Code</h3>
+
+<pre><code><span style="color:#94a3b8"># Check Python version</span>
+<span style="color:#60a5fa">import</span> sys
+<span style="color:#60a5fa">print</span>(sys.version)
+
+<span style="color:#94a3b8"># Mount Google Drive to access your files</span>
+<span style="color:#60a5fa">from</span> google.colab <span style="color:#60a5fa">import</span> drive
+drive.<span style="color:#60a5fa">mount</span>(<span style="color:#34d399">'/content/drive'</span>)
+
+<span style="color:#94a3b8"># Install a library not in Colab by default</span>
+!pip install <span style="color:#a78bfa">xgboost</span>
+
+<span style="color:#94a3b8"># Upload files from your computer</span>
+<span style="color:#60a5fa">from</span> google.colab <span style="color:#60a5fa">import</span> files
+uploaded = files.<span style="color:#60a5fa">upload</span>()
+
+<span style="color:#94a3b8"># Download a file to your computer</span>
+files.<span style="color:#60a5fa">download</span>(<span style="color:#34d399">'my_model.pkl'</span>)
+</code></pre>
+
+<h3>Keyboard Shortcuts</h3>
+
+<table class="comp-table">
+  <tr><th>Shortcut</th><th>Action</th><th>When to Use</th></tr>
+  <tr><td><code>Shift + Enter</code></td><td>Run cell &amp; move to next</td><td>Most common. Run and continue.</td></tr>
+  <tr><td><code>Ctrl + Enter</code></td><td>Run cell &amp; stay</td><td>When iterating on a single cell.</td></tr>
+  <tr><td><code>Alt + Enter</code></td><td>Run cell &amp; insert new below</td><td>When building code step by step.</td></tr>
+  <tr><td><code>Ctrl + M + B</code></td><td>Insert code cell below</td><td>Add a new cell quickly.</td></tr>
+  <tr><td><code>Ctrl + M + D</code></td><td>Delete current cell</td><td>Clean up unused cells.</td></tr>
+  <tr><td><code>Ctrl + /</code></td><td>Toggle comment</td><td>Comment/uncomment selected lines.</td></tr>
+  <tr><td><code>Ctrl + Shift + H</code></td><td>Show keyboard shortcuts</td><td>Discover more shortcuts.</td></tr>
+  <tr><td><code>Ctrl + S</code></td><td>Save notebook</td><td>Save your work (also auto-saves).</td></tr>
+</table>
+
+<div class="key-point">
+  <div class="icon">&#128161;</div>
+  <p><strong>Pro Tip:</strong> Always mount Google Drive at the start of your notebook. Save datasets and model checkpoints to Drive so you never lose work when the Colab session disconnects (free tier disconnects after ~90 min of inactivity).</p>
+</div>
+</div>
+
+  <!-- ==================== VARIABLES & TYPES ==================== -->
+  <div class="section" id="variables">
+<h2>&#128196; Variables &amp; Data Types</h2>
+
+<div class="def">
+  <div class="def-term">Variable</div>
+  <div class="def-meaning">A named container that stores a value in memory. In Python, you create variables by simply assigning a value with <code>=</code>. No need to declare types &mdash; Python figures it out automatically (dynamic typing).</div>
+  <div class="def-example">Like a labeled box: <code>age = 25</code> creates a box labeled "age" containing the number 25.</div>
+</div>
+
+<div class="analogy">Variables are like labeled jars in a kitchen. Each jar has a name (the variable name) and contains something (the value). You can change what is inside the jar at any time, and you can even put a completely different type of ingredient in it.</div>
+
+<h3>Python Data Types</h3>
+
+<table class="comp-table">
+  <tr><th>Type</th><th>Python Name</th><th>Examples</th><th>Used For</th></tr>
+  <tr><td><strong>Integer</strong></td><td><code>int</code></td><td><code>42</code>, <code>-7</code>, <code>0</code></td><td>Counting, indexing, whole numbers</td></tr>
+  <tr><td><strong>Float</strong></td><td><code>float</code></td><td><code>3.14</code>, <code>-0.5</code>, <code>1e10</code></td><td>Decimals, measurements, probabilities</td></tr>
+  <tr><td><strong>String</strong></td><td><code>str</code></td><td><code>"hello"</code>, <code>'AI'</code></td><td>Text, names, labels, file paths</td></tr>
+  <tr><td><strong>Boolean</strong></td><td><code>bool</code></td><td><code>True</code>, <code>False</code></td><td>Conditions, flags, filters</td></tr>
+  <tr><td><strong>None</strong></td><td><code>NoneType</code></td><td><code>None</code></td><td>Missing/empty values, default returns</td></tr>
+</table>
+
+<pre><code><span style="color:#94a3b8"># Creating variables — Python infers the type</span>
+<span style="color:#a78bfa">name</span> = <span style="color:#34d399">"Vamshi"</span>          <span style="color:#94a3b8"># str</span>
+<span style="color:#a78bfa">age</span> = <span style="color:#fbbf24">25</span>                 <span style="color:#94a3b8"># int</span>
+<span style="color:#a78bfa">gpa</span> = <span style="color:#fbbf24">3.85</span>               <span style="color:#94a3b8"># float</span>
+<span style="color:#a78bfa">is_student</span> = <span style="color:#60a5fa">True</span>         <span style="color:#94a3b8"># bool</span>
+<span style="color:#a78bfa">scholarship</span> = <span style="color:#60a5fa">None</span>       <span style="color:#94a3b8"># NoneType</span>
+
+<span style="color:#94a3b8"># Check type with type()</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#60a5fa">type</span>(<span style="color:#a78bfa">name</span>))       <span style="color:#94a3b8"># &lt;class 'str'&gt;</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#60a5fa">type</span>(<span style="color:#a78bfa">age</span>))        <span style="color:#94a3b8"># &lt;class 'int'&gt;</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#60a5fa">type</span>(<span style="color:#a78bfa">gpa</span>))        <span style="color:#94a3b8"># &lt;class 'float'&gt;</span>
+
+<span style="color:#94a3b8"># Check type with isinstance()</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#60a5fa">isinstance</span>(<span style="color:#a78bfa">age</span>, <span style="color:#60a5fa">int</span>))   <span style="color:#94a3b8"># True</span>
+</code></pre>
+
+<h3>Type Conversion (Casting)</h3>
+
+<div class="def">
+  <div class="def-term">Type Conversion</div>
+  <div class="def-meaning">Changing a value from one type to another. Python provides built-in functions: <code>int()</code>, <code>float()</code>, <code>str()</code>, <code>bool()</code>. Essential when combining data from different sources.</div>
+</div>
+
+<pre><code><span style="color:#94a3b8"># Explicit type conversion</span>
+<span style="color:#a78bfa">x</span> = <span style="color:#34d399">"42"</span>             <span style="color:#94a3b8"># string</span>
+<span style="color:#a78bfa">y</span> = <span style="color:#60a5fa">int</span>(<span style="color:#a78bfa">x</span>)            <span style="color:#94a3b8"># now integer 42</span>
+<span style="color:#a78bfa">z</span> = <span style="color:#60a5fa">float</span>(<span style="color:#a78bfa">x</span>)          <span style="color:#94a3b8"># now float 42.0</span>
+
+<span style="color:#94a3b8"># Common pitfall — can't convert non-numeric strings</span>
+<span style="color:#94a3b8"># int("hello")  # ValueError!</span>
+
+<span style="color:#94a3b8"># Implicit conversion (Python does it automatically)</span>
+<span style="color:#a78bfa">result</span> = <span style="color:#fbbf24">5</span> + <span style="color:#fbbf24">3.0</span>     <span style="color:#94a3b8"># int + float = float (8.0)</span>
+
+<span style="color:#94a3b8"># Boolean conversions (truthy/falsy)</span>
+<span style="color:#60a5fa">bool</span>(<span style="color:#fbbf24">0</span>)         <span style="color:#94a3b8"># False (zero is falsy)</span>
+<span style="color:#60a5fa">bool</span>(<span style="color:#fbbf24">42</span>)        <span style="color:#94a3b8"># True  (non-zero is truthy)</span>
+<span style="color:#60a5fa">bool</span>(<span style="color:#34d399">""</span>)        <span style="color:#94a3b8"># False (empty string is falsy)</span>
+<span style="color:#60a5fa">bool</span>(<span style="color:#34d399">"hello"</span>)  <span style="color:#94a3b8"># True  (non-empty is truthy)</span>
+<span style="color:#60a5fa">bool</span>([])        <span style="color:#94a3b8"># False (empty list is falsy)</span>
+<span style="color:#60a5fa">bool</span>(<span style="color:#60a5fa">None</span>)      <span style="color:#94a3b8"># False (None is falsy)</span>
+</code></pre>
+
+<div class="key-point">
+  <div class="icon">&#128161;</div>
+  <p><strong>Why this matters for AI/ML:</strong> Data from CSV files comes in as strings. You will constantly convert types: <code>"3.14"</code> &rarr; <code>3.14</code>, <code>"True"</code> &rarr; <code>True</code>. Understanding truthy/falsy is critical for data filtering and cleaning with Pandas.</p>
+</div>
+
+<div class="quiz">
+  <div class="quiz-title">&#128221; Knowledge Check: Variables &amp; Types</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q6: What is the output of <code>type(3.0)</code>?</div>
+    <button class="quiz-option" onclick="checkQuiz('q4a', this, false)">A) &lt;class 'int'&gt;</button>
+    <button class="quiz-option" onclick="checkQuiz('q4a', this, true)">B) &lt;class 'float'&gt;</button>
+    <button class="quiz-option" onclick="checkQuiz('q4a', this, false)">C) &lt;class 'str'&gt;</button>
+    <button class="quiz-option" onclick="checkQuiz('q4a', this, false)">D) &lt;class 'number'&gt;</button>
+    <div class="quiz-feedback" id="q4a-feedback"></div>
+  </div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q7: What does <code>bool([])</code> return?</div>
+    <button class="quiz-option" onclick="checkQuiz('q4b', this, true)">A) False &mdash; empty collections are falsy</button>
+    <button class="quiz-option" onclick="checkQuiz('q4b', this, false)">B) True &mdash; a list object exists</button>
+    <button class="quiz-option" onclick="checkQuiz('q4b', this, false)">C) None &mdash; empty list has no boolean</button>
+    <button class="quiz-option" onclick="checkQuiz('q4b', this, false)">D) Error &mdash; lists can't be converted to bool</button>
+    <div class="quiz-feedback" id="q4b-feedback"></div>
+  </div>
+</div>
+</div>
+
+  <!-- ==================== OPERATORS ==================== -->
+  <div class="section" id="operators">
+<h2>&#9997; Operators</h2>
+
+<h3>Arithmetic Operators</h3>
+
+<table class="comp-table">
+  <tr><th>Operator</th><th>Name</th><th>Example</th><th>Result</th><th>ML Use Case</th></tr>
+  <tr><td><code>+</code></td><td>Addition</td><td><code>7 + 3</code></td><td><code>10</code></td><td>Summing features, loss accumulation</td></tr>
+  <tr><td><code>-</code></td><td>Subtraction</td><td><code>7 - 3</code></td><td><code>4</code></td><td>Residuals (actual - predicted)</td></tr>
+  <tr><td><code>*</code></td><td>Multiplication</td><td><code>7 * 3</code></td><td><code>21</code></td><td>Weights * features in linear models</td></tr>
+  <tr><td><code>/</code></td><td>Division</td><td><code>7 / 3</code></td><td><code>2.333...</code></td><td>Normalization, averaging</td></tr>
+  <tr><td><code>//</code></td><td>Floor Division</td><td><code>7 // 3</code></td><td><code>2</code></td><td>Batch indexing, integer splits</td></tr>
+  <tr><td><code>%</code></td><td>Modulo</td><td><code>7 % 3</code></td><td><code>1</code></td><td>Cyclic features (day of week)</td></tr>
+  <tr><td><code>**</code></td><td>Exponentiation</td><td><code>2 ** 3</code></td><td><code>8</code></td><td>Squared errors, polynomial features</td></tr>
+</table>
+
+<pre><code><span style="color:#94a3b8"># Arithmetic in action — MSE calculation</span>
+<span style="color:#a78bfa">actual</span> = <span style="color:#fbbf24">100</span>
+<span style="color:#a78bfa">predicted</span> = <span style="color:#fbbf24">95</span>
+<span style="color:#a78bfa">error</span> = <span style="color:#a78bfa">actual</span> - <span style="color:#a78bfa">predicted</span>      <span style="color:#94a3b8"># 5 (residual)</span>
+<span style="color:#a78bfa">sq_error</span> = <span style="color:#a78bfa">error</span> ** <span style="color:#fbbf24">2</span>         <span style="color:#94a3b8"># 25 (squared error)</span>
+
+<span style="color:#94a3b8"># Floor division for batching</span>
+<span style="color:#a78bfa">total_samples</span> = <span style="color:#fbbf24">1000</span>
+<span style="color:#a78bfa">batch_size</span> = <span style="color:#fbbf24">32</span>
+<span style="color:#a78bfa">num_batches</span> = <span style="color:#a78bfa">total_samples</span> // <span style="color:#a78bfa">batch_size</span>  <span style="color:#94a3b8"># 31</span>
+<span style="color:#a78bfa">leftover</span> = <span style="color:#a78bfa">total_samples</span> % <span style="color:#a78bfa">batch_size</span>    <span style="color:#94a3b8"># 8</span>
+</code></pre>
+
+<h3>Comparison Operators</h3>
+
+<table class="comp-table">
+  <tr><th>Operator</th><th>Meaning</th><th>Example</th><th>Result</th></tr>
+  <tr><td><code>==</code></td><td>Equal to</td><td><code>5 == 5</code></td><td><code>True</code></td></tr>
+  <tr><td><code>!=</code></td><td>Not equal to</td><td><code>5 != 3</code></td><td><code>True</code></td></tr>
+  <tr><td><code>&gt;</code></td><td>Greater than</td><td><code>5 &gt; 3</code></td><td><code>True</code></td></tr>
+  <tr><td><code>&lt;</code></td><td>Less than</td><td><code>5 &lt; 3</code></td><td><code>False</code></td></tr>
+  <tr><td><code>&gt;=</code></td><td>Greater or equal</td><td><code>5 &gt;= 5</code></td><td><code>True</code></td></tr>
+  <tr><td><code>&lt;=</code></td><td>Less or equal</td><td><code>5 &lt;= 3</code></td><td><code>False</code></td></tr>
+</table>
+
+<h3>Logical Operators</h3>
+
+<table class="comp-table">
+  <tr><th>Operator</th><th>Meaning</th><th>Example</th><th>Result</th></tr>
+  <tr><td><code>and</code></td><td>Both must be True</td><td><code>True and False</code></td><td><code>False</code></td></tr>
+  <tr><td><code>or</code></td><td>At least one True</td><td><code>True or False</code></td><td><code>True</code></td></tr>
+  <tr><td><code>not</code></td><td>Inverts the value</td><td><code>not True</code></td><td><code>False</code></td></tr>
+</table>
+
+<pre><code><span style="color:#94a3b8"># Practical: Filter conditions for ML data</span>
+<span style="color:#a78bfa">age</span> = <span style="color:#fbbf24">30</span>
+<span style="color:#a78bfa">income</span> = <span style="color:#fbbf24">75000</span>
+<span style="color:#a78bfa">has_degree</span> = <span style="color:#60a5fa">True</span>
+
+<span style="color:#94a3b8"># Complex condition</span>
+<span style="color:#a78bfa">is_target</span> = (<span style="color:#a78bfa">age</span> >= <span style="color:#fbbf24">25</span>) <span style="color:#60a5fa">and</span> (<span style="color:#a78bfa">income</span> > <span style="color:#fbbf24">50000</span>) <span style="color:#60a5fa">and</span> <span style="color:#a78bfa">has_degree</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">is_target</span>)  <span style="color:#94a3b8"># True</span>
+
+<span style="color:#94a3b8"># Chaining comparisons (Python allows this!)</span>
+<span style="color:#a78bfa">score</span> = <span style="color:#fbbf24">85</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#fbbf24">70</span> <= <span style="color:#a78bfa">score</span> <= <span style="color:#fbbf24">90</span>)  <span style="color:#94a3b8"># True (same as: score >= 70 and score <= 90)</span>
+</code></pre>
+
+<div class="key-point">
+  <div class="icon">&#128161;</div>
+  <p><strong>Why this matters for AI/ML:</strong> Every data filter in Pandas uses comparison operators: <code>df[df['age'] > 25]</code>. Every decision tree split is a comparison. Understanding operator precedence prevents subtle bugs in feature engineering.</p>
+</div>
+
+<h3>Assignment Operators (Shortcuts)</h3>
+
+<pre><code><span style="color:#a78bfa">x</span> = <span style="color:#fbbf24">10</span>
+<span style="color:#a78bfa">x</span> += <span style="color:#fbbf24">5</span>   <span style="color:#94a3b8"># x = x + 5  → 15</span>
+<span style="color:#a78bfa">x</span> -= <span style="color:#fbbf24">3</span>   <span style="color:#94a3b8"># x = x - 3  → 12</span>
+<span style="color:#a78bfa">x</span> *= <span style="color:#fbbf24">2</span>   <span style="color:#94a3b8"># x = x * 2  → 24</span>
+<span style="color:#a78bfa">x</span> /= <span style="color:#fbbf24">4</span>   <span style="color:#94a3b8"># x = x / 4  → 6.0</span>
+<span style="color:#a78bfa">x</span> **= <span style="color:#fbbf24">2</span>  <span style="color:#94a3b8"># x = x ** 2 → 36.0</span>
+</code></pre>
+</div>
+
+  <!-- ==================== STRINGS ==================== -->
+  <div class="section" id="strings">
+<h2>&#128292; Strings</h2>
+
+<div class="def">
+  <div class="def-term">String (str)</div>
+  <div class="def-meaning">An ordered, immutable sequence of characters enclosed in quotes. Strings are the primary way to handle text data in Python. Immutable means you cannot change individual characters &mdash; you must create a new string.</div>
+</div>
+
+<h3>Creating Strings</h3>
+
+<pre><code><span style="color:#94a3b8"># Multiple ways to create strings</span>
+<span style="color:#a78bfa">s1</span> = <span style="color:#34d399">"Hello, World!"</span>          <span style="color:#94a3b8"># double quotes</span>
+<span style="color:#a78bfa">s2</span> = <span style="color:#34d399">'Hello, World!'</span>          <span style="color:#94a3b8"># single quotes (identical)</span>
+<span style="color:#a78bfa">s3</span> = <span style="color:#34d399">"""Multi-line
+string spanning
+several lines"""</span>                   <span style="color:#94a3b8"># triple quotes</span>
+<span style="color:#a78bfa">s4</span> = <span style="color:#34d399">"He said \"hello\""</span>      <span style="color:#94a3b8"># escaping quotes</span>
+<span style="color:#a78bfa">s5</span> = <span style="color:#34d399">r"C:\new\folder"</span>         <span style="color:#94a3b8"># raw string (no escape)</span>
+</code></pre>
+
+<h3>String Operations</h3>
+
+<pre><code><span style="color:#a78bfa">text</span> = <span style="color:#34d399">"Machine Learning"</span>
+
+<span style="color:#94a3b8"># Indexing (0-based)</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">text</span>[<span style="color:#fbbf24">0</span>])     <span style="color:#94a3b8"># "M"</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">text</span>[-<span style="color:#fbbf24">1</span>])    <span style="color:#94a3b8"># "g" (last character)</span>
+
+<span style="color:#94a3b8"># Slicing [start:stop:step]</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">text</span>[<span style="color:#fbbf24">0</span>:<span style="color:#fbbf24">7</span>])   <span style="color:#94a3b8"># "Machine"</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">text</span>[<span style="color:#fbbf24">8</span>:])    <span style="color:#94a3b8"># "Learning"</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">text</span>[::-<span style="color:#fbbf24">1</span>])  <span style="color:#94a3b8"># "gninraeL enihcaM" (reverse)</span>
+
+<span style="color:#94a3b8"># Common methods</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">text</span>.<span style="color:#60a5fa">upper</span>())         <span style="color:#94a3b8"># "MACHINE LEARNING"</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">text</span>.<span style="color:#60a5fa">lower</span>())         <span style="color:#94a3b8"># "machine learning"</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">text</span>.<span style="color:#60a5fa">split</span>())         <span style="color:#94a3b8"># ["Machine", "Learning"]</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">text</span>.<span style="color:#60a5fa">replace</span>(<span style="color:#34d399">"Machine"</span>, <span style="color:#34d399">"Deep"</span>))  <span style="color:#94a3b8"># "Deep Learning"</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#60a5fa">len</span>(<span style="color:#a78bfa">text</span>))              <span style="color:#94a3b8"># 16</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Learn"</span> <span style="color:#60a5fa">in</span> <span style="color:#a78bfa">text</span>)      <span style="color:#94a3b8"># True (membership test)</span>
+</code></pre>
+
+<h3>f-Strings (Formatted String Literals)</h3>
+
+<div class="def">
+  <div class="def-term">f-String (Python 3.6+)</div>
+  <div class="def-meaning">The modern way to embed expressions inside strings. Prefix with <code>f</code> and put expressions in <code>{}</code>. Much cleaner than <code>%</code> or <code>.format()</code>.</div>
+</div>
+
+<pre><code><span style="color:#a78bfa">model_name</span> = <span style="color:#34d399">"Random Forest"</span>
+<span style="color:#a78bfa">accuracy</span> = <span style="color:#fbbf24">0.9543</span>
+<span style="color:#a78bfa">n_trees</span> = <span style="color:#fbbf24">100</span>
+
+<span style="color:#94a3b8"># f-string with formatting</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">f"Model: </span><span style="color:#fbbf24">{</span><span style="color:#a78bfa">model_name</span><span style="color:#fbbf24">}</span><span style="color:#34d399">"</span>)
+<span style="color:#94a3b8"># "Model: Random Forest"</span>
+
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">f"Accuracy: </span><span style="color:#fbbf24">{</span><span style="color:#a78bfa">accuracy</span>:<span style="color:#fbbf24">.2%</span><span style="color:#fbbf24">}</span><span style="color:#34d399">"</span>)
+<span style="color:#94a3b8"># "Accuracy: 95.43%"</span>
+
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">f"Trees: </span><span style="color:#fbbf24">{</span><span style="color:#a78bfa">n_trees</span>:,<span style="color:#fbbf24">}</span><span style="color:#34d399"> | Acc: </span><span style="color:#fbbf24">{</span><span style="color:#a78bfa">accuracy</span>:<span style="color:#fbbf24">.4f</span><span style="color:#fbbf24">}</span><span style="color:#34d399">"</span>)
+<span style="color:#94a3b8"># "Trees: 100 | Acc: 0.9543"</span>
+
+<span style="color:#94a3b8"># Expressions inside f-strings</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">f"Error rate: </span><span style="color:#fbbf24">{</span>(<span style="color:#fbbf24">1</span> - <span style="color:#a78bfa">accuracy</span>) * <span style="color:#fbbf24">100</span>:<span style="color:#fbbf24">.2f</span><span style="color:#fbbf24">}</span><span style="color:#34d399">%"</span>)
+<span style="color:#94a3b8"># "Error rate: 4.57%"</span>
+</code></pre>
+
+<div class="key-point">
+  <div class="icon">&#128161;</div>
+  <p><strong>Why this matters for AI/ML:</strong> String operations are essential for text preprocessing in NLP: tokenization (<code>split()</code>), normalization (<code>lower()</code>), cleaning (<code>strip()</code>, <code>replace()</code>). f-strings are used everywhere for logging model metrics and formatting outputs.</p>
+</div>
+
+<div class="quiz">
+  <div class="quiz-title">&#128221; Knowledge Check: Strings</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q8: What does <code>"Hello World"[6:]</code> return?</div>
+    <button class="quiz-option" onclick="checkQuiz('q5a', this, false)">A) "Hello"</button>
+    <button class="quiz-option" onclick="checkQuiz('q5a', this, true)">B) "World"</button>
+    <button class="quiz-option" onclick="checkQuiz('q5a', this, false)">C) "World!"</button>
+    <button class="quiz-option" onclick="checkQuiz('q5a', this, false)">D) " World"</button>
+    <div class="quiz-feedback" id="q5a-feedback"></div>
+  </div>
+</div>
+</div>
+
+  <!-- ==================== DATA STRUCTURES ==================== -->
+  <div class="section" id="datastruct">
+<h2>&#128230; Data Structures</h2>
+
+<p>Data structures determine how you store, organize, and access data. Choosing the right one is fundamental to writing efficient Python code for data science.</p>
+
+<h3>Lists</h3>
+
+<div class="def">
+  <div class="def-term">List</div>
+  <div class="def-meaning">An ordered, mutable collection that can hold items of any type. Created with square brackets <code>[]</code>. The most versatile and commonly used data structure in Python.</div>
+  <div class="def-example">A shopping list: <code>["apples", "bread", "milk"]</code> &mdash; you can add, remove, or reorder items at any time.</div>
+</div>
+
+<pre><code><span style="color:#94a3b8"># Creating and manipulating lists</span>
+<span style="color:#a78bfa">scores</span> = [<span style="color:#fbbf24">85</span>, <span style="color:#fbbf24">92</span>, <span style="color:#fbbf24">78</span>, <span style="color:#fbbf24">95</span>, <span style="color:#fbbf24">88</span>]
+
+<span style="color:#94a3b8"># Indexing and slicing</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">scores</span>[<span style="color:#fbbf24">0</span>])      <span style="color:#94a3b8"># 85 (first)</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">scores</span>[-<span style="color:#fbbf24">1</span>])     <span style="color:#94a3b8"># 88 (last)</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">scores</span>[<span style="color:#fbbf24">1</span>:<span style="color:#fbbf24">4</span>])   <span style="color:#94a3b8"># [92, 78, 95]</span>
+
+<span style="color:#94a3b8"># Modifying (lists are mutable!)</span>
+<span style="color:#a78bfa">scores</span>.<span style="color:#60a5fa">append</span>(<span style="color:#fbbf24">91</span>)       <span style="color:#94a3b8"># Add to end: [85, 92, 78, 95, 88, 91]</span>
+<span style="color:#a78bfa">scores</span>.<span style="color:#60a5fa">insert</span>(<span style="color:#fbbf24">0</span>, <span style="color:#fbbf24">100</span>)  <span style="color:#94a3b8"># Insert at index 0</span>
+<span style="color:#a78bfa">scores</span>.<span style="color:#60a5fa">remove</span>(<span style="color:#fbbf24">78</span>)       <span style="color:#94a3b8"># Remove first occurrence of 78</span>
+<span style="color:#a78bfa">popped</span> = <span style="color:#a78bfa">scores</span>.<span style="color:#60a5fa">pop</span>()   <span style="color:#94a3b8"># Remove and return last item</span>
+
+<span style="color:#94a3b8"># Useful operations</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#60a5fa">len</span>(<span style="color:#a78bfa">scores</span>))      <span style="color:#94a3b8"># Length</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#60a5fa">sorted</span>(<span style="color:#a78bfa">scores</span>))   <span style="color:#94a3b8"># Returns sorted copy</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#60a5fa">sum</span>(<span style="color:#a78bfa">scores</span>))      <span style="color:#94a3b8"># Sum all elements</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#60a5fa">max</span>(<span style="color:#a78bfa">scores</span>))      <span style="color:#94a3b8"># Maximum value</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#60a5fa">min</span>(<span style="color:#a78bfa">scores</span>))      <span style="color:#94a3b8"># Minimum value</span>
+
+<span style="color:#94a3b8"># List comprehension (concise way to create lists)</span>
+<span style="color:#a78bfa">squares</span> = [<span style="color:#a78bfa">x</span>**<span style="color:#fbbf24">2</span> <span style="color:#60a5fa">for</span> <span style="color:#a78bfa">x</span> <span style="color:#60a5fa">in</span> <span style="color:#60a5fa">range</span>(<span style="color:#fbbf24">1</span>, <span style="color:#fbbf24">6</span>)]  <span style="color:#94a3b8"># [1, 4, 9, 16, 25]</span>
+</code></pre>
+
+<h3>Tuples</h3>
+
+<div class="def">
+  <div class="def-term">Tuple</div>
+  <div class="def-meaning">An ordered, immutable collection. Created with parentheses <code>()</code>. Once created, you cannot add, remove, or change elements. Faster and safer than lists for fixed data.</div>
+  <div class="def-example">GPS coordinates: <code>(37.7749, -122.4194)</code> &mdash; latitude and longitude shouldn't change.</div>
+</div>
+
+<pre><code><span style="color:#94a3b8"># Tuples are immutable</span>
+<span style="color:#a78bfa">coordinates</span> = (<span style="color:#fbbf24">37.7749</span>, -<span style="color:#fbbf24">122.4194</span>)
+<span style="color:#a78bfa">rgb_color</span> = (<span style="color:#fbbf24">255</span>, <span style="color:#fbbf24">128</span>, <span style="color:#fbbf24">0</span>)
+<span style="color:#a78bfa">model_config</span> = (<span style="color:#34d399">"RandomForest"</span>, <span style="color:#fbbf24">100</span>, <span style="color:#fbbf24">0.8</span>)
+
+<span style="color:#94a3b8"># Tuple unpacking</span>
+<span style="color:#a78bfa">lat</span>, <span style="color:#a78bfa">lon</span> = <span style="color:#a78bfa">coordinates</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">f"Lat: </span><span style="color:#fbbf24">{</span><span style="color:#a78bfa">lat</span><span style="color:#fbbf24">}</span><span style="color:#34d399">, Lon: </span><span style="color:#fbbf24">{</span><span style="color:#a78bfa">lon</span><span style="color:#fbbf24">}</span><span style="color:#34d399">"</span>)
+
+<span style="color:#94a3b8"># coordinates[0] = 40.0  # TypeError! Tuples are immutable</span>
+</code></pre>
+
+<h3>Dictionaries</h3>
+
+<div class="def">
+  <div class="def-term">Dictionary (dict)</div>
+  <div class="def-meaning">An unordered collection of key-value pairs. Created with curly braces <code>{}</code>. Keys must be unique and immutable (strings, numbers, tuples). Values can be anything.</div>
+  <div class="def-example">A student record: <code>{"name": "Vamshi", "age": 25, "program": "AI/ML"}</code> &mdash; look up any field by name.</div>
+</div>
+
+<pre><code><span style="color:#94a3b8"># Creating and using dictionaries</span>
+<span style="color:#a78bfa">model_results</span> = {
+    <span style="color:#34d399">"model"</span>: <span style="color:#34d399">"XGBoost"</span>,
+    <span style="color:#34d399">"accuracy"</span>: <span style="color:#fbbf24">0.9534</span>,
+    <span style="color:#34d399">"precision"</span>: <span style="color:#fbbf24">0.9412</span>,
+    <span style="color:#34d399">"recall"</span>: <span style="color:#fbbf24">0.9621</span>,
+    <span style="color:#34d399">"f1_score"</span>: <span style="color:#fbbf24">0.9515</span>
+}
+
+<span style="color:#94a3b8"># Access values</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">model_results</span>[<span style="color:#34d399">"accuracy"</span>])       <span style="color:#94a3b8"># 0.9534</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">model_results</span>.<span style="color:#60a5fa">get</span>(<span style="color:#34d399">"auc"</span>, <span style="color:#34d399">"N/A"</span>))  <span style="color:#94a3b8"># "N/A" (safe access)</span>
+
+<span style="color:#94a3b8"># Add/modify</span>
+<span style="color:#a78bfa">model_results</span>[<span style="color:#34d399">"auc"</span>] = <span style="color:#fbbf24">0.9801</span>          <span style="color:#94a3b8"># Add new key</span>
+<span style="color:#a78bfa">model_results</span>[<span style="color:#34d399">"accuracy"</span>] = <span style="color:#fbbf24">0.9567</span>     <span style="color:#94a3b8"># Update existing</span>
+
+<span style="color:#94a3b8"># Iterate</span>
+<span style="color:#60a5fa">for</span> <span style="color:#a78bfa">metric</span>, <span style="color:#a78bfa">value</span> <span style="color:#60a5fa">in</span> <span style="color:#a78bfa">model_results</span>.<span style="color:#60a5fa">items</span>():
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">f"</span><span style="color:#fbbf24">{</span><span style="color:#a78bfa">metric</span><span style="color:#fbbf24">}</span><span style="color:#34d399">: </span><span style="color:#fbbf24">{</span><span style="color:#a78bfa">value</span><span style="color:#fbbf24">}</span><span style="color:#34d399">"</span>)
+
+<span style="color:#94a3b8"># Useful methods</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">model_results</span>.<span style="color:#60a5fa">keys</span>())     <span style="color:#94a3b8"># all keys</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">model_results</span>.<span style="color:#60a5fa">values</span>())   <span style="color:#94a3b8"># all values</span>
+</code></pre>
+
+<h3>Sets</h3>
+
+<div class="def">
+  <div class="def-term">Set</div>
+  <div class="def-meaning">An unordered collection of unique elements. Created with <code>{}</code> or <code>set()</code>. Automatically removes duplicates. Supports mathematical set operations (union, intersection, difference).</div>
+</div>
+
+<pre><code><span style="color:#94a3b8"># Sets auto-remove duplicates</span>
+<span style="color:#a78bfa">features_v1</span> = {<span style="color:#34d399">"age"</span>, <span style="color:#34d399">"income"</span>, <span style="color:#34d399">"education"</span>, <span style="color:#34d399">"age"</span>}
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">features_v1</span>)  <span style="color:#94a3b8"># {"age", "income", "education"} (no dupe)</span>
+
+<span style="color:#a78bfa">features_v2</span> = {<span style="color:#34d399">"age"</span>, <span style="color:#34d399">"income"</span>, <span style="color:#34d399">"location"</span>, <span style="color:#34d399">"gender"</span>}
+
+<span style="color:#94a3b8"># Set operations</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">features_v1</span> | <span style="color:#a78bfa">features_v2</span>)  <span style="color:#94a3b8"># Union: all features</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">features_v1</span> & <span style="color:#a78bfa">features_v2</span>)  <span style="color:#94a3b8"># Intersection: common features</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">features_v1</span> - <span style="color:#a78bfa">features_v2</span>)  <span style="color:#94a3b8"># Difference: in v1 but not v2</span>
+</code></pre>
+
+<h3>When to Use Which?</h3>
+
+<table class="comp-table">
+  <tr><th>Structure</th><th>Ordered?</th><th>Mutable?</th><th>Duplicates?</th><th>Best For</th></tr>
+  <tr><td><strong>List</strong> <code>[]</code></td><td>&#9989; Yes</td><td>&#9989; Yes</td><td>&#9989; Yes</td><td>General collections, sequences, stacks</td></tr>
+  <tr><td><strong>Tuple</strong> <code>()</code></td><td>&#9989; Yes</td><td>&#10060; No</td><td>&#9989; Yes</td><td>Fixed data, dict keys, function returns</td></tr>
+  <tr><td><strong>Dict</strong> <code>{k:v}</code></td><td>&#9989; (3.7+)</td><td>&#9989; Yes</td><td>Keys: No</td><td>Labeled data, lookups, configs, JSON</td></tr>
+  <tr><td><strong>Set</strong> <code>{}</code></td><td>&#10060; No</td><td>&#9989; Yes</td><td>&#10060; No</td><td>Uniqueness, membership tests, dedup</td></tr>
+</table>
+
+<div class="analogy">Think of data structures like containers: A <strong>list</strong> is a numbered locker row (ordered, can swap items). A <strong>tuple</strong> is a sealed evidence bag (ordered, can't tamper). A <strong>dictionary</strong> is a filing cabinet with labeled folders (look up by name). A <strong>set</strong> is a bag of unique marbles (no duplicates, no order).</div>
+
+<div class="quiz">
+  <div class="quiz-title">&#128221; Knowledge Check: Data Structures</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q9: You need to store configuration settings where each setting has a name and value. Which data structure is best?</div>
+    <button class="quiz-option" onclick="checkQuiz('q6a', this, false)">A) List &mdash; ordered collection</button>
+    <button class="quiz-option" onclick="checkQuiz('q6a', this, false)">B) Tuple &mdash; immutable data</button>
+    <button class="quiz-option" onclick="checkQuiz('q6a', this, true)">C) Dictionary &mdash; key-value pairs for named lookups</button>
+    <button class="quiz-option" onclick="checkQuiz('q6a', this, false)">D) Set &mdash; unique values</button>
+    <div class="quiz-feedback" id="q6a-feedback"></div>
+  </div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q10: What happens when you run <code>{1, 2, 2, 3, 3, 3}</code>?</div>
+    <button class="quiz-option" onclick="checkQuiz('q6b', this, true)">A) You get {1, 2, 3} &mdash; sets auto-remove duplicates</button>
+    <button class="quiz-option" onclick="checkQuiz('q6b', this, false)">B) You get {1, 2, 2, 3, 3, 3} &mdash; sets keep all items</button>
+    <button class="quiz-option" onclick="checkQuiz('q6b', this, false)">C) Error &mdash; duplicate values aren't allowed</button>
+    <button class="quiz-option" onclick="checkQuiz('q6b', this, false)">D) You get a dictionary with those keys</button>
+    <div class="quiz-feedback" id="q6b-feedback"></div>
+  </div>
+</div>
+</div>
+
+  <!-- ==================== CONTROL FLOW ==================== -->
+  <div class="section" id="controlflow">
+<h2>&#128256; Conditional Statements &amp; Control Flow</h2>
+
+<div class="def">
+  <div class="def-term">Control Flow</div>
+  <div class="def-meaning">The order in which individual statements, instructions, or function calls are executed. <code>if/elif/else</code> lets your program make decisions. Without control flow, code runs top-to-bottom with no branching.</div>
+  <div class="def-example">A spam filter: IF email contains "lottery" AND sender is unknown, THEN mark as spam, ELSE deliver to inbox.</div>
+</div>
+
+<h3>if / elif / else</h3>
+
+<pre><code><span style="color:#94a3b8"># Basic if/elif/else</span>
+<span style="color:#a78bfa">accuracy</span> = <span style="color:#fbbf24">0.87</span>
+
+<span style="color:#60a5fa">if</span> <span style="color:#a78bfa">accuracy</span> >= <span style="color:#fbbf24">0.95</span>:
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Excellent model! Ready for production."</span>)
+<span style="color:#60a5fa">elif</span> <span style="color:#a78bfa">accuracy</span> >= <span style="color:#fbbf24">0.85</span>:
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Good model. Consider hyperparameter tuning."</span>)
+<span style="color:#60a5fa">elif</span> <span style="color:#a78bfa">accuracy</span> >= <span style="color:#fbbf24">0.70</span>:
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Acceptable. Try feature engineering."</span>)
+<span style="color:#60a5fa">else</span>:
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Poor model. Revisit data and approach."</span>)
+<span style="color:#94a3b8"># Output: "Good model. Consider hyperparameter tuning."</span>
+</code></pre>
+
+<div class="diagram">
+  <div class="diagram-title">Control Flow: Decision Tree</div>
+  <div class="flow">
+    <div class="flow-box combine" style="min-width:200px;">Check Accuracy</div>
+    <div class="arrow-down">&#9660;</div>
+    <div class="flow-row">
+      <div class="flow-box model" style="min-width:140px;">&ge; 0.95?<br><span style="font-size:0.8em;">Excellent</span></div>
+      <div class="flow-box data" style="min-width:140px;">&ge; 0.85?<br><span style="font-size:0.8em;">Good</span></div>
+      <div class="flow-box result" style="min-width:140px;">&ge; 0.70?<br><span style="font-size:0.8em;">Acceptable</span></div>
+      <div class="flow-box error" style="min-width:140px;">else<br><span style="font-size:0.8em;">Poor</span></div>
+    </div>
+  </div>
+</div>
+
+<h3>Nested Conditions</h3>
+
+<pre><code><span style="color:#94a3b8"># Nested conditions for complex logic</span>
+<span style="color:#a78bfa">has_gpu</span> = <span style="color:#60a5fa">True</span>
+<span style="color:#a78bfa">dataset_size</span> = <span style="color:#fbbf24">50000</span>
+<span style="color:#a78bfa">task</span> = <span style="color:#34d399">"image_classification"</span>
+
+<span style="color:#60a5fa">if</span> <span style="color:#a78bfa">task</span> == <span style="color:#34d399">"image_classification"</span>:
+    <span style="color:#60a5fa">if</span> <span style="color:#a78bfa">has_gpu</span> <span style="color:#60a5fa">and</span> <span style="color:#a78bfa">dataset_size</span> > <span style="color:#fbbf24">10000</span>:
+        <span style="color:#a78bfa">model</span> = <span style="color:#34d399">"Deep CNN"</span>
+    <span style="color:#60a5fa">elif</span> <span style="color:#a78bfa">dataset_size</span> > <span style="color:#fbbf24">1000</span>:
+        <span style="color:#a78bfa">model</span> = <span style="color:#34d399">"Transfer Learning"</span>
+    <span style="color:#60a5fa">else</span>:
+        <span style="color:#a78bfa">model</span> = <span style="color:#34d399">"Simple CNN + Augmentation"</span>
+<span style="color:#60a5fa">else</span>:
+    <span style="color:#a78bfa">model</span> = <span style="color:#34d399">"XGBoost"</span>
+
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">f"Recommended: </span><span style="color:#fbbf24">{</span><span style="color:#a78bfa">model</span><span style="color:#fbbf24">}</span><span style="color:#34d399">"</span>)
+<span style="color:#94a3b8"># Output: "Recommended: Deep CNN"</span>
+</code></pre>
+
+<h3>Ternary Expressions (One-line if)</h3>
+
+<pre><code><span style="color:#94a3b8"># Ternary: value_if_true if condition else value_if_false</span>
+<span style="color:#a78bfa">accuracy</span> = <span style="color:#fbbf24">0.92</span>
+<span style="color:#a78bfa">status</span> = <span style="color:#34d399">"Pass"</span> <span style="color:#60a5fa">if</span> <span style="color:#a78bfa">accuracy</span> >= <span style="color:#fbbf24">0.9</span> <span style="color:#60a5fa">else</span> <span style="color:#34d399">"Fail"</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#a78bfa">status</span>)  <span style="color:#94a3b8"># "Pass"</span>
+
+<span style="color:#94a3b8"># Practical: label encoding</span>
+<span style="color:#a78bfa">label</span> = <span style="color:#fbbf24">1</span> <span style="color:#60a5fa">if</span> <span style="color:#a78bfa">prediction</span> > <span style="color:#fbbf24">0.5</span> <span style="color:#60a5fa">else</span> <span style="color:#fbbf24">0</span>
+
+<span style="color:#94a3b8"># Practical: handling missing values</span>
+<span style="color:#a78bfa">value</span> = <span style="color:#a78bfa">data</span>.<span style="color:#60a5fa">get</span>(<span style="color:#34d399">"score"</span>) <span style="color:#60a5fa">if</span> <span style="color:#a78bfa">data</span> <span style="color:#60a5fa">else</span> <span style="color:#fbbf24">0</span>
+</code></pre>
+
+<h3>Common Patterns</h3>
+
+<div class="side-by-side">
+  <div style="background:#172554; border-radius:8px; padding:14px; border:1px solid #1e40af;">
+    <h3 style="color:#34d399; margin-top:0;">&#9989; Do This</h3>
+    <pre><code><span style="color:#94a3b8"># Check for None explicitly</span>
+<span style="color:#60a5fa">if</span> <span style="color:#a78bfa">value</span> <span style="color:#60a5fa">is</span> <span style="color:#60a5fa">None</span>:
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Missing!"</span>)
+
+<span style="color:#94a3b8"># Use 'in' for membership</span>
+<span style="color:#60a5fa">if</span> <span style="color:#a78bfa">ext</span> <span style="color:#60a5fa">in</span> [<span style="color:#34d399">".csv"</span>, <span style="color:#34d399">".xlsx"</span>]:
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Data file!"</span>)
+
+<span style="color:#94a3b8"># Chain comparisons</span>
+<span style="color:#60a5fa">if</span> <span style="color:#fbbf24">0</span> <= <span style="color:#a78bfa">prob</span> <= <span style="color:#fbbf24">1</span>:
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Valid"</span>)</code></pre>
+  </div>
+  <div style="background:#172554; border-radius:8px; padding:14px; border:1px solid #991b1b;">
+    <h3 style="color:#f87171; margin-top:0;">&#10060; Avoid This</h3>
+    <pre><code><span style="color:#94a3b8"># Don't use == for None</span>
+<span style="color:#60a5fa">if</span> <span style="color:#a78bfa">value</span> == <span style="color:#60a5fa">None</span>:   <span style="color:#94a3b8"># works but wrong</span>
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Missing!"</span>)
+
+<span style="color:#94a3b8"># Don't chain OR for each</span>
+<span style="color:#60a5fa">if</span> <span style="color:#a78bfa">ext</span>==<span style="color:#34d399">".csv"</span> <span style="color:#60a5fa">or</span> <span style="color:#a78bfa">ext</span>==<span style="color:#34d399">".xlsx"</span>:
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Data file!"</span>)
+
+<span style="color:#94a3b8"># Don't split comparisons</span>
+<span style="color:#60a5fa">if</span> <span style="color:#a78bfa">prob</span>>=<span style="color:#fbbf24">0</span> <span style="color:#60a5fa">and</span> <span style="color:#a78bfa">prob</span><=<span style="color:#fbbf24">1</span>:
+    <span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Valid"</span>)</code></pre>
+  </div>
+</div>
+
+<div class="key-point">
+  <div class="icon">&#128161;</div>
+  <p><strong>Why this matters for AI/ML:</strong> Control flow is everywhere in ML pipelines: choosing algorithms based on data size, handling missing values, implementing early stopping, routing data through different preprocessing paths. Every decision tree literally IS a nested if/elif/else structure.</p>
+</div>
+
+<div class="quiz">
+  <div class="quiz-title">&#128221; Knowledge Check: Control Flow</div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q11: What is the Pythonic way to check if a variable is None?</div>
+    <button class="quiz-option" onclick="checkQuiz('q7a', this, false)">A) <code>if x == None:</code></button>
+    <button class="quiz-option" onclick="checkQuiz('q7a', this, true)">B) <code>if x is None:</code></button>
+    <button class="quiz-option" onclick="checkQuiz('q7a', this, false)">C) <code>if x = None:</code></button>
+    <button class="quiz-option" onclick="checkQuiz('q7a', this, false)">D) <code>if not x:</code></button>
+    <div class="quiz-feedback" id="q7a-feedback"></div>
+  </div>
+  <div class="quiz-q">
+    <div class="quiz-q-text">Q12: What does <code>"Yes" if 10 > 5 else "No"</code> evaluate to?</div>
+    <button class="quiz-option" onclick="checkQuiz('q7b', this, true)">A) "Yes"</button>
+    <button class="quiz-option" onclick="checkQuiz('q7b', this, false)">B) "No"</button>
+    <button class="quiz-option" onclick="checkQuiz('q7b', this, false)">C) True</button>
+    <button class="quiz-option" onclick="checkQuiz('q7b', this, false)">D) Error &mdash; invalid syntax</button>
+    <div class="quiz-feedback" id="q7b-feedback"></div>
+  </div>
+</div>
+</div>
+
+  <!-- ==================== MISTAKES ==================== -->
+  <div class="section" id="mistakes">
+<h2>&#9888; Common Mistakes &amp; Misconceptions</h2>
+
+<h3>AI Landscape Mistakes</h3>
+
+<div class="mistake">
+  <div class="mistake-title">1. "AI and Machine Learning are the same thing"</div>
+  <div class="mistake-problem">Using AI and ML interchangeably in conversations and project proposals.</div>
+  <div class="mistake-fix">&#10003; AI is the broad field; ML is one approach within AI. Rule-based expert systems are AI but not ML. All ML is AI, but not all AI is ML. Be precise in your terminology.</div>
+</div>
+
+<div class="mistake">
+  <div class="mistake-title">2. "ChatGPT is AGI (General AI)"</div>
+  <div class="mistake-problem">Believing current language models have achieved general intelligence because they seem to "understand" everything.</div>
+  <div class="mistake-fix">&#10003; ChatGPT, Claude, etc. are Narrow AI &mdash; incredibly good at language tasks but cannot do physical tasks, truly reason about novel problems, or transfer to unrelated domains. Impressive does not equal general.</div>
+</div>
+
+<div class="mistake">
+  <div class="mistake-title">3. "AI will replace all jobs"</div>
+  <div class="mistake-problem">Assuming AI automates entire jobs rather than specific tasks within jobs.</div>
+  <div class="mistake-fix">&#10003; AI typically automates tasks, not jobs. A radiologist's image reading may be augmented by AI, but patient communication, treatment planning, and clinical judgment still require humans. Focus on how AI augments roles.</div>
+</div>
+
+<h3>Python Basics Mistakes</h3>
+
+<div class="mistake">
+  <div class="mistake-title">4. "Using = instead of == in comparisons"</div>
+  <div class="mistake-problem"><code>if x = 5:</code> &mdash; SyntaxError! Assignment (=) used where comparison (==) was intended.</div>
+  <div class="mistake-fix">&#10003; <code>=</code> assigns a value. <code>==</code> compares values. Always use <code>==</code> in conditions: <code>if x == 5:</code>. Python catches this as a SyntaxError, but it confuses beginners.</div>
+</div>
+
+<div class="mistake">
+  <div class="mistake-title">5. "Strings and numbers auto-convert"</div>
+  <div class="mistake-problem"><code>"5" + 3</code> &rarr; TypeError! Python doesn't auto-convert between strings and numbers like JavaScript.</div>
+  <div class="mistake-fix">&#10003; Explicitly convert: <code>int("5") + 3</code> = 8, or <code>"5" + str(3)</code> = "53". In data science, this is extremely common when loading CSV data where numbers arrive as strings.</div>
+</div>
+
+<div class="mistake">
+  <div class="mistake-title">6. "Modifying a list while iterating over it"</div>
+  <div class="mistake-problem"><code>for item in my_list: my_list.remove(item)</code> &mdash; skips elements and produces unexpected results.</div>
+  <div class="mistake-fix">&#10003; Create a new list instead: <code>new_list = [item for item in my_list if condition]</code>. Or iterate over a copy: <code>for item in my_list[:]:</code>. List comprehensions are both safer and more Pythonic.</div>
+</div>
+
+<div class="mistake">
+  <div class="mistake-title">7. "Using mutable default arguments"</div>
+  <div class="mistake-problem"><code>def add_item(item, lst=[]): lst.append(item); return lst</code> &mdash; the default list is shared across all calls!</div>
+  <div class="mistake-fix">&#10003; Use None as default: <code>def add_item(item, lst=None): if lst is None: lst = []; lst.append(item); return lst</code>. This is one of Python's most notorious gotchas.</div>
+</div>
+
+<div class="mistake">
+  <div class="mistake-title">8. "Confusing is and =="</div>
+  <div class="mistake-problem">Using <code>is</code> to compare values: <code>if x is 5:</code> may work for small integers but fails for larger ones.</div>
+  <div class="mistake-fix">&#10003; Use <code>==</code> for value comparison, <code>is</code> only for identity (same object). Exception: always use <code>is</code> for <code>None</code>: <code>if x is None:</code>. Python caches small integers (-5 to 256), which is why <code>is</code> sometimes works by accident.</div>
+</div>
+
+<div class="mistake">
+  <div class="mistake-title">9. "Forgetting Python is 0-indexed"</div>
+  <div class="mistake-problem">Expecting <code>my_list[1]</code> to return the first element.</div>
+  <div class="mistake-fix">&#10003; Python uses 0-based indexing. <code>my_list[0]</code> is the first element. <code>my_list[1]</code> is the second. This applies to lists, tuples, strings, and NumPy arrays. Off-by-one errors are the #1 bug in data processing.</div>
+</div>
+
+<div class="mistake">
+  <div class="mistake-title">10. "IndentationError: not understanding Python's whitespace rules"</div>
+  <div class="mistake-problem">Mixing tabs and spaces, or forgetting to indent after <code>if</code>, <code>for</code>, <code>def</code>, etc.</div>
+  <div class="mistake-fix">&#10003; Python uses indentation (not braces) to define code blocks. Use 4 spaces consistently (Colab does this automatically). Never mix tabs and spaces. Set your editor to convert tabs to spaces.</div>
+</div>
+
+<div class="key-point">
+  <div class="icon">&#128161;</div>
+  <p><strong>Golden Rule:</strong> The best way to learn Python is by writing Python. Don't just read examples &mdash; type them into Colab, modify them, break them, and fix them. Every error message is a learning opportunity. The Pre-Work is your foundation; invest time here and every subsequent module becomes easier.</p>
+</div>
+</div>
+
+</div> <!-- end container -->
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+  document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function checkQuiz(qId, el, isCorrect) {
+  var feedback = document.getElementById(qId + '-feedback');
+  if (isCorrect) {
+    el.classList.add('correct');
+    feedback.classList.add('correct', 'show');
+    feedback.textContent = '\u2705 Correct! ' + getExplanation(qId);
+  } else {
+    el.classList.add('wrong');
+    feedback.classList.add('wrong', 'show');
+    feedback.textContent = '\u274C Incorrect. Try again or review the concept.';
+  }
+}
+
+function getExplanation(qId) {
+  var explanations = {
+    'q1a': 'AI is the broadest field encompassing all approaches. ML is a subset that learns from data. DL is a subset of ML using multi-layer neural networks.',
+    'q1b': 'The 1956 Dartmouth Conference, organized by John McCarthy, is where the term "Artificial Intelligence" was officially coined and the field was formally established.',
+    'q2a': 'Despite its impressive capabilities, ChatGPT is Narrow AI. It excels at language tasks but cannot drive a car, perform surgery, or truly transfer knowledge to unrelated physical domains.',
+    'q2b': 'Clustering customers without predefined labels is unsupervised learning. The model discovers natural groupings in the data on its own.',
+    'q3a': 'Netflix reports that approximately 80% of content watched on the platform is discovered through its AI recommendation engine.',
+    'q4a': '3.0 has a decimal point, making it a float. Even though the value is mathematically a whole number, the decimal point makes Python treat it as float.',
+    'q4b': 'Empty collections ([], {}, set(), "") are all falsy in Python. Any non-empty collection is truthy. This is fundamental to Pythonic conditional checks.',
+    'q5a': 'Slicing with [6:] starts at index 6 and goes to the end. "Hello World" has "W" at index 6, so you get "World".',
+    'q6a': 'Dictionaries provide key-value pairs, making them perfect for configuration settings where each setting has a name (key) and a value.',
+    'q6b': 'Sets automatically eliminate duplicates. {1, 2, 2, 3, 3, 3} becomes {1, 2, 3}. This is one of the most useful properties of sets for data cleaning.',
+    'q7a': 'Use "is" for None comparison because None is a singleton object. "==" checks value equality and can be overridden by custom __eq__ methods, making it less reliable for None checks.',
+    'q7b': '10 > 5 is True, so the ternary expression returns "Yes". The syntax is: value_if_true if condition else value_if_false.'
+  };
+  return explanations[qId] || '';
+}
+
+function toggleTheme(e) {
+  if (e) { e.preventDefault(); e.stopPropagation(); }
+  var scrollPos = window.scrollY || window.pageYOffset;
+  var body = document.body;
+  var btn = document.querySelector('.theme-toggle');
+  if (body.classList.contains('light')) {
+    body.classList.remove('light');
+    btn.textContent = '\uD83C\uDF19';
+  } else {
+    body.classList.add('light');
+    btn.textContent = '\u2600\uFE0F';
+  }
+  requestAnimationFrame(function() {
+    window.scrollTo(0, scrollPos);
+  });
+}
+
+window.addEventListener('load', function() {
+  document.body.classList.remove('light');
+  document.querySelector('.theme-toggle').textContent = '\uD83C\uDF19';
+  localStorage.removeItem('theme');
+});
+</script>
+</body>
+</html>
