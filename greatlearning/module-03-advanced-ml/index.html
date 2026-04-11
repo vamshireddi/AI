@@ -3,27 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advanced ML - Complete Visual Study Guide | Vamshi Krishna Reddy Bandaru</title>
-<meta name="description" content="Comprehensive visual study guide for Advanced Machine Learning — PGP AI&ML, UT Austin. Covering ensemble methods, boosting, stacking, hyperparameter tuning, and more.">
-<meta name="author" content="Vamshi Krishna Reddy Bandaru">
-
-<!-- Open Graph / Social Sharing -->
-<meta property="og:type" content="article">
-<meta property="og:title" content="Advanced ML — Complete Visual Study Guide | Module 03">
-<meta property="og:description" content="Comprehensive visual guide covering ensemble methods, boosting, stacking, hyperparameter tuning & more. PGP AI&ML, UT Austin.">
-<meta property="og:image" content="https://vamshireddi.com/og-image.jpg?v=4">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://vamshireddi.com/AI/greatlearning/module-03-advanced-ml/">
-<meta property="og:site_name" content="Vamshi Krishna Reddy Bandaru — AI Learning Journey">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Advanced ML — Complete Visual Study Guide | Module 03">
-<meta name="twitter:description" content="Comprehensive visual guide covering ensemble methods, boosting, stacking, hyperparameter tuning & more. PGP AI&ML, UT Austin.">
-<meta name="twitter:image" content="https://vamshireddi.com/og-image.jpg?v=4">
-
-<link rel="canonical" href="https://vamshireddi.com/AI/greatlearning/module-03-advanced-ml/">
+<title>Advanced ML - Complete Visual Study Guide</title>
 <style>
   /* CSS Custom Properties - Dark Mode (default) */
   :root {
@@ -457,20 +437,6 @@
 </style>
 </head>
 <body>
-<nav style="
-  position: sticky; top: 0; z-index: 1000;
-  background: var(--bg-surface); border-bottom: 1px solid var(--border);
-  padding: 10px 24px; font-size: 0.9rem;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  display: flex; align-items: center; gap: 0;
-">
-  <a href="../../../" style="color: var(--accent); text-decoration: none;">AI Journey</a>
-  <span style="color: var(--text-muted); margin: 0 8px;">/</span>
-  <a href="../../" style="color: var(--accent); text-decoration: none;">GreatLearning</a>
-  <span style="color: var(--text-muted); margin: 0 8px;">/</span>
-  <span style="color: var(--text-muted);">Module 03: Advanced ML</span>
-</nav>
 <button class="theme-toggle" onclick="toggleTheme(event)" type="button">🌙</button>
 <div class="container">
   <h1>Advanced Machine Learning: Complete Visual Guide</h1>
@@ -1714,6 +1680,33 @@ function updateProgress() {
         document.getElementById('progress-text').innerText = percentage + '% Completed';
     }
 }
+
+// --- Auto Dictionary Tooltips Globally ---
+document.addEventListener('DOMContentLoaded', () => {
+    const glossary = {
+        'Bagging': 'Bootstrap Aggregating - building parallel models on random data subsets',
+        'Boosting': 'Sequential ensemble where each model fixes the errors of the previous',
+        'Meta-Learner': 'Level-1 model in Stacking that learns to combine base model predictions',
+        'K-Fold CV': 'Splits data into K parts to train/test repeatedly for a robust average score',
+        'SMOTE': 'Synthetic Minority Over-sampling Technique (Creates fake data for rare classes)',
+        'Data Leakage': 'Accidentally exposing the model to test/future data during training',
+        'SHAP Values': 'Explains black-box models by showing exact feature impacts',
+        'Target Encoding': 'Replaces text categories with probability of the target',
+        'MICE': 'Iterative Imputer - treats missing values as learning targets'
+    };
+
+    const contentAreas = document.querySelectorAll('p, li');
+    contentAreas.forEach(node => {
+        if(node.closest('.mistake') || node.closest('.card') || node.closest('.section > p')) {
+            let html = node.innerHTML;
+            Object.keys(glossary).forEach(term => {
+                const regex = new RegExp(`\\b(${term})\\b(?![^<]*>)`, 'g');
+                html = html.replace(regex, `<span class="tooltip">$1<span class="tooltiptext">${glossary[term]}</span></span>`);
+            });
+            node.innerHTML = html;
+        }
+    });
+});
 </script>
 
   <!-- ==================== 3.1 CROSS VALIDATION ==================== -->
@@ -2028,11 +2021,11 @@ function updateProgress() {
         <div class="diagram-title">The MLOps Lifecycle</div>
         <div class="flow" style="display:flex; flex-wrap:wrap; justify-content:center; gap: 10px; padding-bottom: 5px;">
             <div class="flow-box data" style="width:140px; text-align:center;">1. Train Pipeline<br><small>(Jupyter Notebook)</small></div>
-            <div style="font-size:24px; align-content:center;">➡️</div>
+            <div style="font-size:24px; align-self:center; color:#64748b;">&#8594;</div>
             <div class="flow-box model" style="width:140px; text-align:center;">2. .pkl File<br><small>(Serialized Model)</small></div>
-            <div style="font-size:24px; align-content:center;">➡️</div>
+            <div style="font-size:24px; align-self:center; color:#64748b;">&#8594;</div>
             <div class="flow-box combine" style="width:140px; text-align:center;">3. FastAPI API<br><small>(Web Server)</small></div>
-            <div style="font-size:24px; align-content:center;">➡️</div>
+            <div style="font-size:24px; align-self:center; color:#64748b;">&#8594;</div>
             <div class="flow-box result" style="width:140px; text-align:center;">4. JSON Response<br><small>{"fraud": true}</small></div>
         </div>
       </div>
@@ -2142,8 +2135,40 @@ joblib.<span style="color:#60a5fa">dump</span>(<span style="color:#a78bfa">secur
                 <div class="mistake-fix">✓ Stacking helps only if base models are diverse and reasonably strong. If all base models make same mistakes, meta-learner can't fix them. Typical gain: 0.5-2%, only worth it if accuracy critical.</div>
             </div>
 
+            <h3>Week 3 & Capstone: Tuning, Imbalance & Pipelines</h3>
+
+            <div class="mistake">
+                <div class="mistake-title">12. "Applying SMOTE to the Test Data"</div>
+                <div class="mistake-problem">Synthesizing fake records to balance your holdout test set.</div>
+                <div class="mistake-fix">✓ <strong>CRITICAL FAILURE.</strong> The test set must perfectly reflect reality, imbalances and all. If you SMOTE the test set, you are testing your model on a fake universe. Only `fit_resample` the training data!</div>
+            </div>
+
+            <div class="mistake">
+                <div class="mistake-title">13. "Standardizing Data before Cross-Validation"</div>
+                <div class="mistake-problem">Running StandardScaler on `X_train` and then throwing that into `cross_val_score`.</div>
+                <div class="mistake-fix">✓ <strong>Data Leakage!</strong> The Scaler calculates the mean using the internal validation folds. Fix this by putting the Scaler and Model inside a Scikit-Learn `Pipeline`.</div>
+            </div>
+
+            <div class="mistake">
+                <div class="mistake-title">14. "Blindly Optimizing GridSearch for Accuracy"</div>
+                <div class="mistake-problem">Leaving `scoring='accuracy'` when detecting cancer or fraud (imbalanced classes).</div>
+                <div class="mistake-fix">✓ You will get a model that predicts "No Cancer" 99% of the time. You must set `scoring='recall'` or `scoring='f1'` inside GridSearch/Optuna.</div>
+            </div>
+
+            <div class="mistake">
+                <div class="mistake-title">15. "Running GridSearch on thousands of combinations"</div>
+                <div class="mistake-problem">Setting 5 lists of hyperparameters and letting it run exhaustively.</div>
+                <div class="mistake-fix">✓ The "Curse of Dimensionality" applies to time. 5 depth options × 5 estimators × 5 learning_rates = 125 runs × 5-Fold CV = 625 models trained. Use <strong>Bayesian Optimization (Optuna)</strong> or `RandomizedSearchCV` to save hours of computation.</div>
+            </div>
+
+            <div class="mistake">
+                <div class="mistake-title">16. "Creating dummy variables for Zip Codes"</div>
+                <div class="mistake-problem">Using `pd.get_dummies()` on a high-cardinality categorical column.</div>
+                <div class="mistake-fix">✓ You just expanded your dataset by 40,000 sparse columns, crashing your RAM. Drop the column, or use <strong>Target Encoding</strong> to mathematically condense it.</div>
+            </div>
+
             <div class="key-point">
-                <strong>Golden Rule:</strong> Start simple (single model), then add complexity (ensemble, boosting, stacking) only if needed. Most real-world problems are solved by Random Forest or XGBoost + tuning. Fancy ensembles often add code complexity without proportional accuracy gains.
+                <strong>Golden Rule:</strong> Start simple (single model), then add complexity (ensemble, boosting, Stacking, Optuna) only if needed. Most real-world problems are solved cleanly by XGBoost inside a Python Pipeline. Fancy algorithms often add technical debt without proportional accuracy gains.
             </div>
 </div>
 </body>
