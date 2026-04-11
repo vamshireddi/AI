@@ -465,6 +465,8 @@
     <div class="nav-tab" onclick="showSection('searches')">🔠 3.7-3.8 Searches</div>
     <div class="nav-tab" onclick="showSection('elite')">👑 Elite Concepts</div>
     <div class="nav-tab" onclick="showSection('deployment')">🚀 Industry Deployment</div>
+    <div class="nav-tab" onclick="showSection('masterpipeline')">💻 Master Pipeline</div>
+    <div class="nav-tab" onclick="showSection('expert')">👨‍💼 Meet The Expert</div>
     <div class="nav-tab" onclick="showSection('mistakes')">⚠️ Mistakes</div>
   </div>
 
@@ -570,44 +572,55 @@
 <div class="section" id="concept">
 <h2>🗺️ Concept Map</h2>
 
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">How all ensemble methods relate to each other:</p>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">End-to-End Enterprise Machine Learning Architecture:</p>
 
             <div class="diagram">
-                <div class="flow">
+                <div class="flow" style="font-size: 0.9em;">
                     <div class="flow-row">
-                        <div class="flow-box" style="min-width: 150px;">Supervised Learning Problem</div>
+                        <div class="flow-box data" style="min-width: 200px; background:#1e293b; border-color:#475569;">1. Raw Imbalanced Data</div>
                     </div>
-                    <div class="arrow-down">↓</div>
+                    <div class="arrow-down">&#8595;</div>
                     <div class="flow-row">
-                        <div class="flow-box" style="min-width: 150px;">Ensemble Methods</div>
+                        <div class="flow-box combine" style="min-width: 250px; background:#4c1d95; color:#ddd; border-color:#8b5cf6;">2. Train-Test Split (Holdout)</div>
                     </div>
-                    <div class="arrow-down">↓</div>
+                    <div class="arrow-down">&#8595;</div>
                     <div class="flow-row">
-                        <div class="flow-box data" style="min-width: 140px;">Bagging Family</div>
-                        <span style="color: var(--accent); font-weight: 700; align-self: center; margin: 0 1rem;">vs</span>
-                        <div class="flow-box model" style="min-width: 140px;">Boosting Family</div>
-                        <span style="color: var(--accent); font-weight: 700; align-self: center; margin: 0 1rem;">vs</span>
-                        <div class="flow-box result" style="min-width: 140px;">Stacking</div>
-                    </div>
-                    <div class="arrow-down">↓</div>
-                    <div class="flow-row">
-                        <div style="text-align: left; color: var(--text); flex: 1;">
-                            <strong style="color: var(--accent);">Bagging Branch:</strong><br>
-                            • Bootstrap Aggregating<br>
-                            • Random Forest (add feature randomness)<br>
-                            • Extra Trees
+                        <div class="flow-box model" style="min-width: 300px; background:#1e3a8a; border-color:#3b82f6;">
+                            3. Scikit-Learn Pipeline Context<br>
+                            <span style="font-size:0.8em; color:#93c5fd;">(Prevents Data Leakage)</span>
                         </div>
-                        <div style="text-align: left; color: var(--text); flex: 1;">
-                            <strong style="color: var(--accent);">Boosting Branch:</strong><br>
-                            • AdaBoost (reweight samples)<br>
-                            • Gradient Boosting (fit residuals)<br>
-                            • XGBoost, LightGBM (production)
+                    </div>
+                    <div class="arrow-down">&#8595;</div>
+                    <div class="flow-row" style="gap: 15px;">
+                        <div class="flow-box" style="flex:1; padding:10px; background:#064e3b; border:1px solid #10b981;">
+                            <strong>A. Imputation &amp; Encoding</strong><br><small>MICE / Target Encoding</small>
                         </div>
-                        <div style="text-align: left; color: var(--text); flex: 1;">
-                            <strong style="color: var(--success);">Stacking:</strong><br>
-                            • Level 0: diverse models<br>
-                            • Level 1: meta-learner<br>
-                            • Avoid data leakage
+                        <div class="flow-box" style="flex:1; padding:10px; background:#701a75; border:1px solid #d946ef;">
+                            <strong>B. Class Balancing</strong><br><small>SMOTE</small>
+                        </div>
+                    </div>
+                    <div class="arrow-down">&#8595;</div>
+                    <div class="flow-row">
+                        <div class="flow-box model" style="width: 100%; background:#7c2d12; border-color:#f97316;">
+                            4. Core Estimator Selection<br>
+                            <div style="display:flex; justify-content:space-around; margin-top:10px; font-size:0.85em; color:#fdba74;">
+                                <span>Bagging (Random Forest)</span>
+                                <span>Boosting (XGBoost)</span>
+                                <span>Stacking (Meta-Learner)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arrow-down">&#8595;</div>
+                    <div class="flow-row">
+                        <div class="flow-box combine" style="min-width: 250px; background:#065f46; border-color:#34d399;">
+                            5. Bayesian Tuning (Optuna) + K-Fold CV<br>
+                            <small>Finding the optimal hyperparameter combo</small>
+                        </div>
+                    </div>
+                    <div class="arrow-down">&#8595;</div>
+                    <div class="flow-row">
+                        <div class="flow-box result" style="min-width: 250px; background:#831843; border-color:#f43f5e;">
+                            6. FastAPI Deployment &amp; Drift Monitoring
                         </div>
                     </div>
                 </div>
@@ -1453,6 +1466,21 @@ importances = rf_model.feature_importances_</code></pre>
         <div class="def-meaning">Although trees are built sequentially (tree 2 depends on tree 1's results), XGBoost parallelizes the <em>within-tree</em> computation. When deciding the best split for a node, it evaluates all features simultaneously across multiple CPU cores.</div>
       </div>
     </div>
+
+    <!-- THE BIG 3 TITANS -->
+    <div class="card card-green" style="margin-top: 25px;">
+      <h3>🏆 The Big 3: XGBoost vs LightGBM vs CatBoost</h3>
+      <p>While XGBoost started the revolution, two other algorithms have joined the "Big 3" of structured data:</p>
+      
+      <table class="comp-table">
+        <thead><tr><th>Algorithm</th><th>Creator</th><th>Superpower</th><th>When to use it?</th></tr></thead>
+        <tbody>
+          <tr><td><strong>XGBoost</strong></td><td>Tianqi Chen</td><td>Versatile, mathematically stable, highly adopted.</td><td>The universal baseline. Almost always works well.</td></tr>
+          <tr><td><strong>LightGBM</strong></td><td>Microsoft</td><td>Uses "Leaf-wise" tree growth instead of "Level-wise". <strong>Blazing fast.</strong> Uses much less memory.</td><td>When you have massive datasets (millions of rows) or need very fast training.</td></tr>
+          <tr><td><strong>CatBoost</strong></td><td>Yandex</td><td>Built-in mastery of <strong>categorical variables</strong>. Symmetric tree growth prevents overfitting.</td><td>When your data has lots of text/category columns (e.g., zip codes, brands, job titles). You don't even need to pre-encode them!</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <!-- ==================== 2.7 STACKING ==================== -->
@@ -1792,6 +1820,40 @@ document.addEventListener('DOMContentLoaded', () => {
       <p><span class="highlight">Synthetic Minority Over-sampling Technique.</span> Instead of simply copying existing rows, SMOTE creates <strong>brand new, synthetic records</strong> by blending together similar minority-class neighbors.</p>
     </div>
 
+    <div class="diagram" style="margin-top: 25px;">
+      <div class="diagram-title">How SMOTE Synthesizes Data</div>
+      <div class="flow" style="display: flex; justify-content: center; padding: 20px;">
+        <div style="display: flex; gap: 30px; align-items: center; flex-wrap: wrap; justify-content: center;">
+          <div style="text-align: center;">
+            <div style="width: 150px; height: 100px; border: 2px dashed #4b5563; border-radius: 8px; position: relative;">
+               <div style="position:absolute; top:20px; left:20px; color:#ef4444; font-size:24px;">●</div>
+               <div style="position:absolute; top:50px; left:60px; color:#ef4444; font-size:24px;">●</div>
+            </div>
+            <div style="color: #94a3b8; font-size: 0.9em; margin-top: 10px;">1. Identify Minority Dots</div>
+          </div>
+          <div style="color: #64748b; font-size: 24px;">&#8594;</div>
+          <div style="text-align: center;">
+            <div style="width: 150px; height: 100px; border: 2px dashed #4b5563; border-radius: 8px; position: relative;">
+               <div style="position:absolute; top:20px; left:20px; color:#ef4444; font-size:24px;">●</div>
+               <div style="position:absolute; top:50px; left:60px; color:#ef4444; font-size:24px;">●</div>
+               <div style="position:absolute; top:42px; left:30px; border-top: 2px solid #ef4444; width: 45px; transform: rotate(35deg);"></div>
+            </div>
+            <div style="color: #94a3b8; font-size: 0.9em; margin-top: 10px;">2. Draw Lines Between Them</div>
+          </div>
+          <div style="color: #64748b; font-size: 24px;">&#8594;</div>
+          <div style="text-align: center;">
+            <div style="width: 150px; height: 100px; border: 2px solid #10b981; border-radius: 8px; position: relative; background: rgba(16,185,129,0.05);">
+               <div style="position:absolute; top:20px; left:20px; color:#ef4444; font-size:24px;">●</div>
+               <div style="position:absolute; top:50px; left:60px; color:#ef4444; font-size:24px;">●</div>
+               <div style="position:absolute; top:42px; left:30px; border-top: 2px solid #10b981; width: 45px; transform: rotate(35deg);"></div>
+               <div style="position:absolute; top:25px; left:32px; color:#10b981; font-size:20px;">★</div>
+            </div>
+            <div style="color: #10b981; font-weight: bold; font-size: 0.9em; margin-top: 10px;">3. Generate NEW Data on Line</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="card card-purple" style="margin-top: 25px;">
       <h3>💻 3.4 Hands-On: Applying SMOTE in Python</h3>
       <p>We use the <code>imbalanced-learn</code> (imblearn) library to balance our data before training:</p>
@@ -1850,6 +1912,36 @@ document.addEventListener('DOMContentLoaded', () => {
         <strong style="color: var(--success);">RandomizedSearchCV</strong>
         <p>Tests a <strong>random subset</strong> of combinations. Much faster, and usually finds a near-optimal solution.</p>
         <div class="formula">20 random combinations chosen from thousands</div>
+      </div>
+    </div>
+
+    <div class="diagram" style="margin-top: 25px;">
+      <div class="diagram-title">Visualizing the Search Spaces</div>
+      <div class="side-by-side" style="margin-top: 0; padding: 20px 0;">
+        <div style="text-align: center;">
+          <strong style="color: #38bdf8;">GridSearch (Exhaustive)</strong>
+          <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 15px; width: 150px; margin-left: auto; margin-right: auto; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
+             <!-- A 5x5 grid -->
+             <div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div>
+             <div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div>
+             <div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#e11d48; border-radius:50%; box-shadow: 0 0 10px #e11d48;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div>
+             <div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div>
+             <div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div><div style="width:15px; height:15px; background:#38bdf8; border-radius:50%;"></div>
+          </div>
+          <p style="font-size: 0.85em; color: #94a3b8; margin-top: 15px;">Tests every dot.<br>Finds the red "best" zone, but takes hours.</p>
+        </div>
+        <div style="text-align: center;">
+          <strong style="color: #10b981;">RandomizedSearch</strong>
+          <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 15px; width: 150px; margin-left: auto; margin-right: auto; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
+             <!-- Scattered green dots matching the grid -->
+             <div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div><div style="width:15px; height:15px; background:#10b981; border-radius:50%;"></div><div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div><div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div><div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div>
+             <div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div><div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div><div style="width:15px; height:15px; background:#10b981; border-radius:50%;"></div><div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div><div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div>
+             <div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div><div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div><div style="width:15px; height:15px; background:#e11d48; border-radius:50%; box-shadow: 0 0 10px #e11d48;"></div><div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div><div style="width:15px; height:15px; background:#10b981; border-radius:50%;"></div>
+             <div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div><div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div><div style="width:15px; height:15px; background:#10b981; border-radius:50%;"></div><div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div><div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div>
+             <div style="width:15px; height:15px; background:#10b981; border-radius:50%;"></div><div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div><div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div><div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div><div style="width:15px; height:15px; background:#1e293b; border-radius:50%;"></div>
+          </div>
+          <p style="font-size: 0.85em; color: #94a3b8; margin-top: 15px;">Tests a random subgroup.<br>Usually finds the "best" zone in 1/5th the time.</p>
+        </div>
       </div>
     </div>
 
@@ -2060,6 +2152,21 @@ joblib.<span style="color:#60a5fa">dump</span>(<span style="color:#a78bfa">secur
         <p><strong>The Final Engineering Target:</strong> When a software engineer at a bank is building an iOS mobile app, they do not know Python or XGBoost. By wrapping your model in a FastAPI endpoint <code>@app.post("/predict")</code>, you have created a universal bridge. The software engineer simply sends a JSON packet of the user's transaction over the internet, and your server responds with "Yes" or "No". Your mathematical model is now an operational software product.</p>
       </div>
     </div>
+
+    <!-- Data Drift -->
+    <div class="card card-purple" style="margin-top: 25px;">
+      <h3>4. Model Decay & Data Drift</h3>
+      <p>A deployed model does not live in a vacuum. Over time, the statistical properties of the incoming data will change (e.g., a recession hits, changing the definition of a "high income" from $100k to $150k). This is called data drift and concept drift.</p>
+      
+      <div class="analogy">
+        <p><strong>The Weather Analogy:</strong> A model trained to predict ice cream sales based on summer data will fail catastrophically when winter arrives. The model didn't break; the <em>environment</em> drifted.</p>
+      </div>
+      
+      <div class="key-point">
+        <div class="icon">📈</div>
+        <p><strong>Industry Solution:</strong> You must set up automated monitoring (using tools like <em>Evidently.ai</em> or <em>AWS SageMaker Model Monitor</em>) to instantly alert you when the incoming feature distributions diverge from your training data, triggering an automatic model retraining pipeline.</p>
+      </div>
+    </div>
   </div>
 
 <div class="section" id="mistakes">
@@ -2171,5 +2278,70 @@ joblib.<span style="color:#60a5fa">dump</span>(<span style="color:#a78bfa">secur
                 <strong>Golden Rule:</strong> Start simple (single model), then add complexity (ensemble, boosting, Stacking, Optuna) only if needed. Most real-world problems are solved cleanly by XGBoost inside a Python Pipeline. Fancy algorithms often add technical debt without proportional accuracy gains.
             </div>
 </div>
+
+<div class="section" id="masterpipeline">
+    <span class="week-badge" style="background:#059669; color:#d1fae5;">CAPSTONE CODE</span>
+    <h2>💻 The Ultimate Master Pipeline</h2>
+    <p>This single block of code proves your status as an elite ML Architect. It combines **Imblearn pipelines** (leak-proof SMOTE), **XGBoost**, and **Optuna** Bayesian optimization into a single, production-ready execution script. Memorize this pattern.</p>
+
+    <div class="card card-green">
+<pre><code><span style="color:#f87171">import</span> optuna
+<span style="color:#f87171">from</span> imblearn.pipeline <span style="color:#f87171">import</span> Pipeline <span style="color:#94a3b8"># Using imblearn.pipeline ensures SMOTE runs ONLY on training folds</span>
+<span style="color:#f87171">from</span> imblearn.over_sampling <span style="color:#f87171">import</span> SMOTE
+<span style="color:#f87171">from</span> xgboost <span style="color:#f87171">import</span> XGBClassifier
+<span style="color:#f87171">from</span> sklearn.model_selection <span style="color:#f87171">import</span> cross_val_score, StratifiedKFold
+
+<span style="color:#f87171">def</span> <span style="color:#60a5fa">objective</span>(<span style="color:#a78bfa">trial</span>):
+    <span style="color:#94a3b8"># 1. Optuna intelligently queries the hyperparameter space</span>
+    <span style="color:#a78bfa">params</span> = {
+        <span style="color:#34d399">'n_estimators'</span>: <span style="color:#a78bfa">trial</span>.<span style="color:#60a5fa">suggest_int</span>(<span style="color:#34d399">'n_estimators'</span>, <span style="color:#fbbf24">100</span>, <span style="color:#fbbf24">1000</span>),
+        <span style="color:#34d399">'learning_rate'</span>: <span style="color:#a78bfa">trial</span>.<span style="color:#60a5fa">suggest_float</span>(<span style="color:#34d399">'learning_rate'</span>, <span style="color:#fbbf24">1e-3</span>, <span style="color:#fbbf24">0.3</span>, log=<span style="color:#fbbf24">True</span>),
+        <span style="color:#34d399">'max_depth'</span>: <span style="color:#a78bfa">trial</span>.<span style="color:#60a5fa">suggest_int</span>(<span style="color:#34d399">'max_depth'</span>, <span style="color:#fbbf24">3</span>, <span style="color:#fbbf24">9</span>)
+    }
+    
+    <span style="color:#94a3b8"># 2. Build the Leak-Proof Architecture using an Imblearn Pipeline</span>
+    <span style="color:#94a3b8"># The pipeline guarantees SMOTE is NEVER applied to validation sets during cross-validation!</span>
+    <span style="color:#a78bfa">pipeline</span> = Pipeline([
+        (<span style="color:#34d399">'balancer'</span>, SMOTE(random_state=<span style="color:#fbbf24">42</span>)),
+        (<span style="color:#34d399">'classifier'</span>, XGBClassifier(**<span style="color:#a78bfa">params</span>, eval_metric=<span style="color:#34d399">"logloss"</span>))
+    ])
+    
+    <span style="color:#94a3b8"># 3. Use Stratified 5-Fold Cross Validation to protect imbalanced class distributions</span>
+    <span style="color:#a78bfa">cv</span> = StratifiedKFold(n_splits=<span style="color:#fbbf24">5</span>, shuffle=<span style="color:#fbbf24">True</span>, random_state=<span style="color:#fbbf24">42</span>)
+    
+    <span style="color:#94a3b8"># 4. Evaluate using Recall or F1 (Never just Accuracy for Imbalanced Data!)</span>
+    <span style="color:#a78bfa">score</span> = cross_val_score(<span style="color:#a78bfa">pipeline</span>, <span style="color:#a78bfa">X_train</span>, <span style="color:#a78bfa">y_train</span>, cv=<span style="color:#a78bfa">cv</span>, scoring=<span style="color:#34d399">'f1'</span>).<span style="color:#60a5fa">mean</span>()
+    <span style="color:#f87171">return</span> <span style="color:#a78bfa">score</span>
+
+<span style="color:#94a3b8"># 5. Let Optuna hunt down the global maximum metric across 50 intelligent trials</span>
+<span style="color:#a78bfa">study</span> = optuna.<span style="color:#60a5fa">create_study</span>(direction=<span style="color:#34d399">"maximize"</span>)
+<span style="color:#a78bfa">study</span>.<span style="color:#60a5fa">optimize</span>(<span style="color:#a78bfa">objective</span>, n_trials=<span style="color:#fbbf24">50</span>)
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Absolute Best Production Parameters:"</span>, <span style="color:#a78bfa">study</span>.<span style="color:#a78bfa">best_params</span>)</code></pre>
+    </div>
+</div>
+
+<div class="section" id="expert">
+    <h2>👨‍💼 Meet The Expert</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 20px; align-items: start;">
+        <div style="flex: 1; min-width: 300px;">
+            <p style="font-size: 1.1em; color: var(--text); line-height: 1.8;">This guide was architected by <strong>Vamshi Krishan Reddy Bandaru</strong>, an experienced Enterprise Data Leader who bridges the chaotic gap between complex Machine Learning mathematics and high-stakes P&amp;L outcomes. </p>
+            <p style="font-size: 1em; color: var(--text-secondary); line-height: 1.6; margin-top: 15px;">Whether steering multi-million dollar deliveries out of crisis or engineering zero-leakage ML pipelines, Vamshi specializes in treating AI not as experimental science, but as an operational, value-driving product.</p>
+            <div style="background: rgba(123, 47, 247, 0.1); border-left: 4px solid var(--accent); padding: 15px; margin-top: 20px; border-radius: 4px;">
+                <p style="margin: 0; color: var(--accent); font-weight: bold; font-style: italic;">"Master the math, but relentlessly protect the business."</p>
+            </div>
+            <a href="https://www.linkedin.com/in/vamshireddi/" target="_blank" style="display: inline-block; margin-top: 25px; padding: 10px 20px; background: var(--accent); color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">Connect on LinkedIn</a>
+        </div>
+        <div style="flex: 1; min-width: 300px; background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);">
+            <h3 style="margin-top: 0; color: var(--success); font-size: 1.2em;">Core MLOps Competencies</h3>
+            <ul style="list-style-type: none; padding-left: 0; margin-top: 15px;">
+                <li style="margin-bottom: 15px; display: flex; align-items: center;"><span style="font-size: 1.5em; margin-right: 15px;">🛡️</span> <div><strong>Leak-Proof Architecture</strong><br><small style="color: var(--text-muted);">Imblearn Pipelines, Cross-Validation</small></div></li>
+                <li style="margin-bottom: 15px; display: flex; align-items: center;"><span style="font-size: 1.5em; margin-right: 15px;">🌳</span> <div><strong>Gradient Boosting Mastery</strong><br><small style="color: var(--text-muted);">XGBoost, LightGBM, CatBoost</small></div></li>
+                <li style="margin-bottom: 15px; display: flex; align-items: center;"><span style="font-size: 1.5em; margin-right: 15px;">🤖</span> <div><strong>Intelligent Optimization</strong><br><small style="color: var(--text-muted);">Bayesian Optuna, MICE, SMOTE</small></div></li>
+                <li style="margin-bottom: 0; display: flex; align-items: center;"><span style="font-size: 1.5em; margin-right: 15px;">🚀</span> <div><strong>Enterprise Deployment</strong><br><small style="color: var(--text-muted);">FastAPI, Serialization, Drift Guarding</small></div></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
