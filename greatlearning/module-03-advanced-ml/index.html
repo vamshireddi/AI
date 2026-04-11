@@ -60,6 +60,7 @@
   .week-badge { display: inline-block; padding: 4px 16px; border-radius: 20px; font-size: 0.8em; font-weight: 700; margin-bottom: 8px; }
   .week1 { background: #1e40af; color: #bfdbfe; }
   .week2 { background: #7c3aed; color: #ddd6fe; }
+  .week3 { background: #065f46; color: #a7f3d0; }
 
   /* Nav */
   .nav-tabs { display: flex; justify-content: center; gap: 8px; margin: 20px 0 30px; flex-wrap: wrap; }
@@ -380,6 +381,7 @@
   body.light .cell-gray { background: #e2e8f0; color: #475569; border-color: #94a3b8; }
   body.light .week-badge.week1 { background: #dbeafe; color: #1e3a8a; }
   body.light .week-badge.week2 { background: #ede9fe; color: #4c1d95; }
+  body.light .week-badge.week3 { background: #d1fae5; color: #064e3b; }
   body.light .theme-toggle { background: #ffffff; border-color: #3b82f6; color: #1e293b; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
   body.light strong { color: #0f172a; }
   body.light p, body.light li { color: #334155; }
@@ -420,6 +422,38 @@
   body.light pre [style*="color:#e2e8f0"] { color: #e2e8f0 !important; }
   body.light pre [style*="color:#7dd3fc"] { color: #7dd3fc !important; }
   body.light pre span { color: inherit; }
+
+  /* Tooltips */
+  .tooltip { position: relative; cursor: help; border-bottom: 1px dotted var(--accent); color: var(--accent); font-weight: 600; }
+  .tooltip .tooltiptext { visibility: hidden; width: 280px; background-color: #1e293b; color: #e2e8f0; text-align: left; border-radius: 6px; padding: 10px 14px; position: absolute; z-index: 1000; bottom: 125%; left: 50%; transform: translateX(-50%); border: 1px solid #334155; box-shadow: 0 4px 15px rgba(0,0,0,0.5); font-size: 0.85em; font-weight: 400; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+  .tooltip .tooltiptext::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: #1e293b transparent transparent transparent; }
+  .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; pointer-events: auto; }
+  body.light .tooltip .tooltiptext { background-color: #ffffff; color: #1e293b; border-color: #cbd5e1; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+  body.light .tooltip .tooltiptext::after { border-color: #ffffff transparent transparent transparent; }
+  
+  /* Business Card */
+  .card-business { background: linear-gradient(145deg, #1e293b, #0f172a); border: 2px solid #f59e0b; position: relative; margin: 18px 0; border-radius: 8px; padding: 22px; padding-top: 35px; }
+  .card-business::before { content: "💼 BUSINESS IMPACT"; position: absolute; top: 0; left: 0; background: #f59e0b; color: #000; font-size: 0.8em; font-weight: 800; padding: 5px 12px; border-bottom-right-radius: 8px; }
+  body.light .card-business { background: linear-gradient(145deg, #fffbeb, #ffffff); border-color: #d97706; }
+  body.light .card-business::before { background: #d97706; color: #fff; }
+
+  /* Copy Button */
+  pre { position: relative; }
+  .copy-btn { position: absolute; top: 8px; right: 8px; background: #334155; color: #e2e8f0; border: none; border-radius: 4px; padding: 4px 8px; font-size: 0.75em; cursor: pointer; transition: all 0.2s; opacity: 0.6; }
+  .copy-btn:hover { opacity: 1; background: #3b82f6; color: #fff; }
+  body.light .copy-btn { background: #cbd5e1; color: #1e293b; }
+  body.light .copy-btn:hover { background: #2563eb; color: #fff; }
+
+  /* Progress Tracker */
+  .progress-container { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 15px; margin: 20px 0; }
+  .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-weight: 700; color: #60a5fa; }
+  .progress-bar-bg { width: 100%; height: 8px; background: #0f172a; border-radius: 4px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: #3b82f6; width: 0%; transition: width 0.5s ease; }
+  .progress-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 15px; }
+  .progress-item { display: flex; align-items: center; gap: 8px; font-size: 0.85em; }
+  .progress-item input[type="checkbox"] { cursor: pointer; width: 16px; height: 16px; accent-color: #3b82f6; }
+  body.light .progress-container { background: #ffffff; border-color: #cbd5e1; }
+  body.light .progress-bar-bg { background: #e2e8f0; }
 </style>
 </head>
 <body>
@@ -459,7 +493,25 @@
     <div class="nav-tab" onclick="showSection('xgboost')">⚡ 2.5 XGBoost</div>
     <div class="nav-tab" onclick="showSection('handson2')">💻 2.6 Hands-On</div>
     <div class="nav-tab" onclick="showSection('stacking')">🏗️ 2.7 Stacking</div>
+    <div class="nav-tab" onclick="showSection('cv')">🔄 3.1-3.2 CV</div>
+    <div class="nav-tab" onclick="showSection('imbalance')">⚖️ 3.3-3.4 Imbalance</div>
+    <div class="nav-tab" onclick="showSection('tuning')">⚙️ 3.5 Tuning</div>
+    <div class="nav-tab" onclick="showSection('searches')">🔠 3.7-3.8 Searches</div>
+    <div class="nav-tab" onclick="showSection('elite')">👑 Elite Concepts</div>
+    <div class="nav-tab" onclick="showSection('deployment')">🚀 Industry Deployment</div>
     <div class="nav-tab" onclick="showSection('mistakes')">⚠️ Mistakes</div>
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-header"><span>🏆 Syllabus Mastery Tracker</span> <span id="progress-text">0% Completed</span></div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill"></div></div>
+    <div class="progress-list">
+      <label class="progress-item"><input type="checkbox" class="track-cb" value="w1" onchange="updateProgress()"> Week 1: Ensemble & Bagging</label>
+      <label class="progress-item"><input type="checkbox" class="track-cb" value="w2" onchange="updateProgress()"> Week 2: Boosting & XGBoost</label>
+      <label class="progress-item"><input type="checkbox" class="track-cb" value="w3_cv" onchange="updateProgress()"> Week 3: CV & Imbalance</label>
+      <label class="progress-item"><input type="checkbox" class="track-cb" value="w3_tune" onchange="updateProgress()"> Week 3: Tuning & GridSearch</label>
+      <label class="progress-item"><input type="checkbox" class="track-cb" value="w4_prod" onchange="updateProgress()"> Capstone: Production MLOps</label>
+    </div>
   </div>
 
   <!-- ==================== CHEAT SHEET ==================== -->
@@ -490,6 +542,17 @@
                     <tr><td><strong>Shrinkage</strong></td><td>Multiply each tree's contribution by η (0.01-0.1)</td><td>GBM regularization</td></tr>
                     <tr><td><strong>Residual</strong></td><td>Actual value - Predicted value</td><td>GBM target in each round</td></tr>
                     <tr><td><strong>Meta-Learner</strong></td><td>Final model trained on base model outputs</td><td>Stacking Level 1</td></tr>
+                    <tr><td><strong>K-Fold CV</strong></td><td>Split data into K parts, train on K-1, test on 1</td><td>Robust Evaluation</td></tr>
+                    <tr><td><strong>SMOTE</strong></td><td>Generate synthetic data for minority class</td><td>Imbalanced Data</td></tr>
+                    <tr><td><strong>Hyperparameters</strong></td><td>Settings chosen before training (e.g. depth)</td><td>Model Tuning</td></tr>
+                    <tr><td><strong>GridSearch</strong></td><td>Exhaustively tests all hyperparameter combinations</td><td>Optimization</td></tr>
+                    <tr><td><strong>Bayesian Optimization</strong></td><td>Uses probability from past trials to intelligently guess next best parameters</td><td>Optuna / Smart Tuning</td></tr>
+                    <tr><td><strong>Data Leakage</strong></td><td>Accidentally exposing the model to test/future data during the training phase</td><td>Pipeline Creation</td></tr>
+                    <tr><td><strong>SHAP Values</strong></td><td>Reverse-engineers predictions to measure exactly how much one feature swayed the result</td><td>Explainable AI</td></tr>
+                    <tr><td><strong>Serialization (.pkl)</strong></td><td>Packaging and saving a highly-complex trained model into a single physical file</td><td>Model Deployment</td></tr>
+                    <tr><td><strong>API Endpoint</strong></td><td>A web URL on a server that receives JSON data, predicts, and returns an answer</td><td>FastAPI / Software Bridge</td></tr>
+                    <tr><td><strong>Curse of Dimensionality</strong></td><td>When creating too many columns (e.g. via dummy variables) destroys mathematical space</td><td>Data Pre-Processing</td></tr>
+                    <tr><td><strong>Target Encoding</strong></td><td>Replacing text classes (like Zipcodes) with the mathematical probability of the target</td><td>High-Cardinality Data</td></tr>
                 </tbody>
             </table>
 
@@ -1599,7 +1662,412 @@ window.addEventListener('load', function() {
   document.querySelector('.theme-toggle').textContent = '🌙';
   localStorage.removeItem('theme');
 });
+
+// --- Copy to Clipboard Logic & Progress Tracker Init ---
+document.addEventListener('DOMContentLoaded', () => {
+    // Inject Copy Buttons
+    const preBlocks = document.querySelectorAll('pre');
+    preBlocks.forEach(pre => {
+        const btn = document.createElement('button');
+        btn.innerHTML = '📋 Copy';
+        btn.className = 'copy-btn';
+        pre.appendChild(btn);
+        
+        btn.addEventListener('click', () => {
+            const codeText = pre.querySelector('code').innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                btn.innerHTML = '✅ Copied!';
+                setTimeout(() => { btn.innerHTML = '📋 Copy'; }, 2000);
+            }).catch(err => {
+                console.error("Clipboard failed", err);
+            });
+        });
+    });
+    
+    // Load progress state
+    const checkboxes = document.querySelectorAll('.track-cb');
+    checkboxes.forEach(cb => {
+        if(localStorage.getItem('mlProgress_' + cb.value) === 'true') {
+            cb.checked = true;
+        }
+    });
+    // Need to wait slightly for standard check to complete
+    setTimeout(updateProgress, 100);
+});
+
+// --- Progress Tracker Update Logic ---
+function updateProgress() {
+    const checkboxes = document.querySelectorAll('.track-cb');
+    let checkedCount = 0;
+    checkboxes.forEach(cb => {
+        if(cb.checked) {
+            checkedCount++;
+            localStorage.setItem('mlProgress_' + cb.value, 'true');
+        } else {
+            localStorage.setItem('mlProgress_' + cb.value, 'false');
+        }
+    });
+    
+    if(checkboxes.length > 0) {
+        const percentage = Math.round((checkedCount / checkboxes.length) * 100);
+        document.getElementById('progress-fill').style.width = percentage + '%';
+        document.getElementById('progress-text').innerText = percentage + '% Completed';
+    }
+}
 </script>
+
+  <!-- ==================== 3.1 CROSS VALIDATION ==================== -->
+  <div class="section" id="cv">
+    <span class="week-badge week3">WEEK 3</span>
+    <h2>3.1-3.2 Cross-Validation (K-Fold)</h2>
+    
+    <div class="card card-blue">
+      <h3>What is K-Fold Cross Validation?</h3>
+      <p>Instead of splitting data just once (train/test split), we split the data into <span class="highlight">K equally sized parts (folds)</span>. We train the model K times, each time using a different fold as the test set and the remaining K-1 folds as the training set.</p>
+    </div>
+
+    <div class="analogy">
+      <p><strong>The Final Exam Analogy:</strong> A simple Train-Test split is like taking one single practice test. If you get lucky with easy questions, you think you're ready. K-fold CV is like taking 5 different practice tests, covering the entire textbook, and averaging your scores. It gives a far more robust prediction of how you'll perform on the real final exam.</p>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-title">5-Fold Cross Validation Example</div>
+      <div class="flow">
+        <div class="flow-row">
+          <div class="flow-box data" style="width:110px;">Fold 1 (Test)</div>
+          <div class="flow-box model" style="width:110px;">Fold 2 (Train)</div>
+          <div class="flow-box model" style="width:110px;">Fold 3 (Train)</div>
+          <div class="flow-box model" style="width:110px;">Fold 4 (Train)</div>
+          <div class="flow-box model" style="width:110px;">Fold 5 (Train)</div>
+          <div class="flow-box result">Score 1</div>
+        </div>
+        <div class="flow-row">
+          <div class="flow-box model" style="width:110px;">Fold 1 (Train)</div>
+          <div class="flow-box data" style="width:110px;">Fold 2 (Test)</div>
+          <div class="flow-box model" style="width:110px;">Fold 3 (Train)</div>
+          <div class="flow-box model" style="width:110px;">Fold 4 (Train)</div>
+          <div class="flow-box model" style="width:110px;">Fold 5 (Train)</div>
+          <div class="flow-box result">Score 2</div>
+        </div>
+        <div class="arrow-down">... Repeated for all 5 folds ...</div>
+        <div class="flow-box combine">Final Evaluation = Average of all 5 scores</div>
+      </div>
+    </div>
+
+    <div class="card card-blue" style="margin-top: 25px;">
+      <h3>💻 3.2 Hands-On: K-Fold in Python</h3>
+      <p>Using scikit-learn, implementing K-Fold Cross Validation is just a few lines of code:</p>
+<pre><code><span style="color:#94a3b8"># Import the library</span>
+<span style="color:#f87171">from</span> sklearn.model_selection <span style="color:#f87171">import</span> cross_val_score
+<span style="color:#f87171">from</span> sklearn.ensemble <span style="color:#f87171">import</span> RandomForestClassifier
+
+<span style="color:#a78bfa">model</span> = RandomForestClassifier(random_state=<span style="color:#fbbf24">1</span>)
+
+<span style="color:#94a3b8"># Perform 5-fold cross validation</span>
+<span style="color:#94a3b8"># cv=5 means 5 folds. scoring='accuracy' tells it what metric to average</span>
+<span style="color:#a78bfa">scores</span> = cross_val_score(<span style="color:#a78bfa">model</span>, <span style="color:#a78bfa">X_train</span>, <span style="color:#a78bfa">y_train</span>, cv=<span style="color:#fbbf24">5</span>, scoring=<span style="color:#34d399">'accuracy'</span>)
+
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">"All 5 scores:"</span>, <span style="color:#a78bfa">scores</span>)
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Average Accuracy:"</span>, <span style="color:#a78bfa">scores</span>.<span style="color:#60a5fa">mean</span>())</code></pre>
+    </div>
+  </div>
+
+  <!-- ==================== 3.3 IMBALANCE ==================== -->
+  <div class="section" id="imbalance">
+    <span class="week-badge week3">WEEK 3</span>
+    <h2>3.3-3.4 Imbalanced Data & SMOTE</h2>
+
+    <div class="def">
+      <div class="def-term">Imbalanced Dataset</div>
+      <div class="def-meaning">When one class vastly outnumbers the other (e.g., 99% legitimate transactions, 1% fraud).</div>
+      <div class="def-example">A model predicting fraud on 99% normal data can just predict "Not Fraud" every time and be 99% accurate — but completely useless (The Accuracy Paradox).</div>
+    </div>
+
+    <div class="side-by-side">
+      <div>
+        <strong style="color: var(--accent3);">Random Undersampling</strong>
+        <p>Drop random rows from the majority class to match the minority. <br><strong>Risk:</strong> Throwing away useful data/patterns.</p>
+      </div>
+      <div>
+        <strong style="color: var(--success);">Random Oversampling</strong>
+        <p>Duplicate random rows in the minority class to match the majority. <br><strong>Risk:</strong> Overfitting to those specific repeated cases.</p>
+      </div>
+    </div>
+
+    <div class="card card-purple">
+      <h3>The Solution: SMOTE</h3>
+      <p><span class="highlight">Synthetic Minority Over-sampling Technique.</span> Instead of simply copying existing rows, SMOTE creates <strong>brand new, synthetic records</strong> by blending together similar minority-class neighbors.</p>
+    </div>
+
+    <div class="card card-purple" style="margin-top: 25px;">
+      <h3>💻 3.4 Hands-On: Applying SMOTE in Python</h3>
+      <p>We use the <code>imbalanced-learn</code> (imblearn) library to balance our data before training:</p>
+<pre><code><span style="color:#f87171">from</span> imblearn.over_sampling <span style="color:#f87171">import</span> SMOTE
+
+<span style="color:#94a3b8"># Check original class distribution (e.g., highly imbalanced: 990 vs 10)</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Original distribution:"</span>, <span style="color:#a78bfa">y_train</span>.value_counts())
+
+<span style="color:#94a3b8"># Initialize SMOTE with a fixed random_state for consistency</span>
+<span style="color:#a78bfa">smote</span> = SMOTE(random_state=<span style="color:#fbbf24">42</span>)
+
+<span style="color:#94a3b8"># Fit and apply the transformation to training data ONLY</span>
+<span style="color:#a78bfa">X_train_smote</span>, <span style="color:#a78bfa">y_train_smote</span> = <span style="color:#a78bfa">smote</span>.<span style="color:#60a5fa">fit_resample</span>(<span style="color:#a78bfa">X_train</span>, <span style="color:#a78bfa">y_train</span>)
+
+<span style="color:#94a3b8"># The new dataset now has equal numbers of both classes (e.g., 990 vs 990)</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Balanced distribution:"</span>, <span style="color:#a78bfa">y_train_smote</span>.value_counts())</code></pre>
+      <div class="key-point"><span class="icon">⚠️</span><div><strong>CRITICAL MISTAKE TO AVOID:</strong> Never apply SMOTE to your Test data! The test set must perfectly reflect reality, imbalances and all. Only balance the Training data.</div></div>
+    </div>
+
+    <div class="card-business">
+      <p><strong>Why CEOs care about SMOTE:</strong> A model predicting credit card fraud on a dataset with 99% normal transactions can easily achieve 99% accuracy just by blindly guessing "No Fraud" every time. This looks amazing on an engineering report, but causes <strong>millions in chargeback losses</strong>. By synthetically balancing the data with SMOTE, we train the model to actually identify the complex patterns of the 1% that drains revenue, optimizing for <em>Recall</em> rather than deceptive Accuracy.</p>
+    </div>
+  </div>
+
+  <!-- ==================== 3.5 TUNING ==================== -->
+  <div class="section" id="tuning">
+    <span class="week-badge week3">WEEK 3</span>
+    <h2>3.5-3.6 Model Tuning</h2>
+
+    <table class="comp-table">
+      <thead><tr><th>Parameters</th><th>Hyperparameters</th></tr></thead>
+      <tbody>
+        <tr><td>Learned automatically by the model during training</td><td>Set manually by YOU before training starts</td></tr>
+        <tr><td>Coefficients, intercepts, leaf node splits</td><td>max_depth, learning_rate, n_estimators</td></tr>
+        <tr><td>Internal variables</td><td>External settings</td></tr>
+      </tbody>
+    </table>
+
+    <div class="analogy">
+      <p><strong>The Stereo Analogy:</strong> A model learning information (Parameters) is like the stereo downloading a song automatically. The volume, bass, and treble dials (Hyperparameters) are set by YOU to optimize how the music sounds.</p>
+    </div>
+  </div>
+
+  <!-- ==================== 3.7 SEARCHES ==================== -->
+  <div class="section" id="searches">
+    <span class="week-badge week3">WEEK 3</span>
+    <h2>3.7-3.8 GridSearch vs RandomizedSearch</h2>
+
+    <div class="side-by-side">
+      <div>
+        <strong style="color: var(--accent);">GridSearchCV</strong>
+        <p>Tests <strong>EVERY single combination</strong> of <span class="tooltip">hyperparameters<span class="tooltiptext">Settings that are manually defined before training (e.g. tree depth) to control the learning process.</span></span> you provide. Very thorough, but extremely slow computationally.</p>
+        <div class="formula">3 depths × 4 estimators = 12 total runs</div>
+      </div>
+      <div>
+        <strong style="color: var(--success);">RandomizedSearchCV</strong>
+        <p>Tests a <strong>random subset</strong> of combinations. Much faster, and usually finds a near-optimal solution.</p>
+        <div class="formula">20 random combinations chosen from thousands</div>
+      </div>
+    </div>
+
+    <div class="card card-green" style="margin-top: 25px;">
+      <h3>💻 3.9 Hands-On: GridSearchCV in Python</h3>
+      <p>Pass your model, the dictionary of hyperparameters to test, and let scikit-learn do the heavy lifting of testing every combination.</p>
+<pre><code><span style="color:#f87171">from</span> sklearn.model_selection <span style="color:#f87171">import</span> GridSearchCV
+<span style="color:#f87171">from</span> sklearn.ensemble <span style="color:#f87171">import</span> RandomForestClassifier
+
+<span style="color:#94a3b8"># 1. Define the baseline model</span>
+<span style="color:#a78bfa">rf_model</span> = RandomForestClassifier(random_state=<span style="color:#fbbf24">1</span>)
+
+<span style="color:#94a3b8"># 2. Define the Hyperparameter Grid (the combinations to try)</span>
+<span style="color:#a78bfa">param_grid</span> = {
+    <span style="color:#34d399">'n_estimators'</span>: [<span style="color:#fbbf24">50</span>, <span style="color:#fbbf24">100</span>, <span style="color:#fbbf24">150</span>],    <span style="color:#94a3b8"># Number of trees</span>
+    <span style="color:#34d399">'max_depth'</span>: [<span style="color:#fbbf24">3</span>, <span style="color:#fbbf24">5</span>, <span style="color:#fbbf24">7</span>]             <span style="color:#94a3b8"># Depth of trees</span>
+} <span style="color:#94a3b8"># 3 options × 3 options = 9 total combinations to test</span>
+
+<span style="color:#94a3b8"># 3. Setup GridSearchCV using 5-fold CV internally</span>
+<span style="color:#a78bfa">grid_search</span> = GridSearchCV(estimator=<span style="color:#a78bfa">rf_model</span>, param_grid=<span style="color:#a78bfa">param_grid</span>, cv=<span style="color:#fbbf24">5</span>, scoring=<span style="color:#34d399">'accuracy'</span>)
+
+<span style="color:#94a3b8"># 4. Fit it to the data (this runs 9 combinations × 5 folds = 45 models!)</span>
+<span style="color:#a78bfa">grid_search</span>.<span style="color:#60a5fa">fit</span>(<span style="color:#a78bfa">X_train</span>, <span style="color:#a78bfa">y_train</span>)
+
+<span style="color:#94a3b8"># 5. Extract the winner</span>
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Best Parameters Selected:"</span>, <span style="color:#a78bfa">grid_search</span>.<span style="color:#a78bfa">best_params_</span>)
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Best CV Accuracy Score:"</span>, <span style="color:#a78bfa">grid_search</span>.<span style="color:#a78bfa">best_score_</span>)
+
+<span style="color:#94a3b8"># The grid_search object can now naturally predict using the best model!</span>
+<span style="color:#a78bfa">y_pred</span> = <span style="color:#a78bfa">grid_search</span>.<span style="color:#60a5fa">predict</span>(<span style="color:#a78bfa">X_test</span>)</code></pre>
+    </div>
+
+    <div class="quiz" style="margin-top: 35px;">
+      <div class="quiz-title">Test Your Understanding</div>
+      <div class="quiz-q">
+        <div class="quiz-q-text">Which technique creates synthetic data rather than duplicating existing records?</div>
+        <!-- Using standard checkQuiz logic inferred from existing HTML -->
+        <button class="quiz-option" onclick="checkQuiz('qW3', this, true)">A) SMOTE</button>
+        <button class="quiz-option" onclick="checkQuiz('qW3', this, false)">B) Random Oversampling</button>
+        <button class="quiz-option" onclick="checkQuiz('qW3', this, false)">C) K-Fold CV</button>
+        <div class="quiz-feedback" id="qW3-feedback"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ELITE CONCEPTS ==================== -->
+  <div class="section" id="elite">
+    <span class="week-badge" style="background:#f59e0b; color:#fff;">REAL-WORLD GAPS</span>
+    <h2>👑 Elite Concepts: Bridging Academia & Industry</h2>
+    <p>These advanced concepts are often skipped in standard module curriculums but are <strong>tested heavily</strong> in Senior ML Engineering interviews. Mastering these separates textbook knowledge from elite architecture.</p>
+
+    <!-- 1. SHAP -->
+    <div class="card card-purple">
+      <h3>1. Explainable AI: The "Black Box" Solution (SHAP)</h3>
+      <p>When you deploy an XGBoost model in a business, and it denies a user a loan, you legally cannot say "I don't know why, the mathematical forest decided it." You need Explainability.</p>
+      <div class="side-by-side" style="margin-top:15px;">
+        <div>
+          <strong style="color: var(--accent);">Feature Importance (Basic)</strong>
+          <p>Tells you that "Income" was generally an important factor to the whole model.</p>
+        </div>
+        <div>
+          <strong style="color: var(--success);">SHAP Values (Elite)</strong>
+          <p>Tells you exactly how much "Income" pushed <em>this specific user's</em> loan score down by exactly -12%.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Pipelines -->
+    <div class="card card-blue" style="margin-top: 25px;">
+      <h3>2. Preventing Data Leakage with Pipelines</h3>
+      <p>If you use <code>StandardScaler</code> on your entire dataset <em>before</em> running Cross-Validation, the Scaler mathematically "learns" the mean of the test data. You have just leaked future information into your training phase!</p>
+      <div class="key-point"><span class="icon">🛡️</span><div><strong>The Fix:</strong> Use Scikit-Learn <code>Pipeline</code>. It physically ensures data is only scaled <em>inside</em> the CV loops using only the training folds.</div></div>
+<pre><code><span style="color:#f87171">from</span> sklearn.pipeline <span style="color:#f87171">import</span> Pipeline
+<span style="color:#f87171">from</span> sklearn.preprocessing <span style="color:#f87171">import</span> StandardScaler
+
+<span style="color:#94a3b8"># This safely bundles the scaling rules AND the model predictor together!</span>
+<span style="color:#a78bfa">secure_model</span> = Pipeline([
+    (<span style="color:#34d399">'scaler'</span>, StandardScaler()),
+    (<span style="color:#34d399">'rf'</span>, RandomForestClassifier())
+])
+<span style="color:#94a3b8"># Now it is completely safe to pass `secure_model` into cross_val_score!</span></code></pre>
+    </div>
+
+    <!-- 3. The Metric Matrix -->
+    <div class="card" style="margin-top: 25px; border-left: 4px solid var(--accent3);">
+      <h3>3. The Execution Metric Matrix</h3>
+      <p>Never optimize GridSearch for "accuracy" blindly. Choose your metric based entirely on the <strong>business cost of being wrong</strong>.</p>
+      <table class="comp-table">
+        <thead><tr><th>Metric</th><th>When to optimize for this?</th><th>Real-World Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Precision</strong></td><td>When False Positives are expensive</td><td><strong>Email Spam:</strong> Putting a real email in the spam folder is a disaster.</td></tr>
+          <tr><td><strong>Recall</strong></td><td>When False Negatives are deadly</td><td><strong>Cancer Detection:</strong> Missing a tumor is much worse than a false alarm.</td></tr>
+          <tr><td><strong>Accuracy</strong></td><td>When classes are perfectly balanced</td><td><strong>Cat vs Dog:</strong> Evenly split dataset where both errors cost the exact same.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 4. Bias Variance -->
+    <div class="card card-green" style="margin-top: 25px;">
+      <h3>4. The Bias-Variance Tradeoff (The Dartboard)</h3>
+      <p>Tuning hyperparameters is simply a balancing act between Bias (Underfitting) and Variance (Overfitting).</p>
+      <div class="side-by-side" style="margin-top:15px; text-align:center;">
+        <div style="background:#0f172a; padding:15px; border-radius:8px;">
+          <strong style="color:var(--accent3);">🎯 High Bias (Underfitting)</strong>
+          <p style="font-size:0.9em; margin-top:8px;">Model is too simple. Darts are clustered tightly, but completely miss the bullseye.</p>
+        </div>
+        <div style="background:#0f172a; padding:15px; border-radius:8px;">
+          <strong style="color:#fbbf24;">🎯 High Variance (Overfitting)</strong>
+          <p style="font-size:0.9em; margin-top:8px;">Model memorized the training noise. Darts hit the bullseye sometimes, but are scattered wildly everywhere else.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== INDUSTRY DEPLOYMENT ==================== -->
+  <div class="section" id="deployment">
+    <span class="week-badge" style="background:#e11d48; color:#ffe4e6;">PRODUCTION MLOPS</span>
+    <h2>🚀 Industry Production: The Capstone</h2>
+    <p>This is where academia ends and a lucrative career begins. A high-accuracy model sitting in a Jupyter Notebook provides absolutely zero value to a business. This section teaches you the modern industry standard: Advanced Pre-Processing, Intelligent Tuning, and API Deployment.</p>
+
+    <!-- Optuna -->
+    <div class="card card-purple">
+      <h3>1. Bayesian Optimization (Optuna) vs. GridSearch</h3>
+      <p>GridSearch exhaustively tests every combination (extremely slow). RandomizedSearch picks blindly (risky). <strong>Bayesian Optimization</strong> uses probability to mathematically "learn" from its past mistakes, honing in entirely on the parameter zones that yield higher scores.</p>
+      
+      <div class="analogy">
+        <p><strong>The "Hot & Cold" Analogy:</strong> GridSearch is like looking for your lost keys by checking every single square inch of your house systematically. Bayesian Search is like someone playing Hot & Cold with you—if you step in the living room and they say "Colder", you instantly stop looking in the living room and run toward the kitchen.</p>
+      </div>
+
+<pre><code><span style="color:#f87171">import</span> optuna
+
+<span style="color:#94a3b8"># 1. Define an objective function that returns the Accuracy we want to maximize</span>
+<span style="color:#f87171">def</span> <span style="color:#60a5fa">objective</span>(<span style="color:#a78bfa">trial</span>):
+    <span style="color:#94a3b8"># Let Optuna smartly suggest values based on past trials!</span>
+    <span style="color:#a78bfa">n_estimators</span> = <span style="color:#a78bfa">trial</span>.<span style="color:#60a5fa">suggest_int</span>(<span style="color:#34d399">'n_estimators'</span>, <span style="color:#fbbf24">50</span>, <span style="color:#fbbf24">300</span>)
+    <span style="color:#a78bfa">max_depth</span> = <span style="color:#a78bfa">trial</span>.<span style="color:#60a5fa">suggest_int</span>(<span style="color:#34d399">'max_depth'</span>, <span style="color:#fbbf24">3</span>, <span style="color:#fbbf24">15</span>)
+    
+    <span style="color:#a78bfa">model</span> = RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth)
+    <span style="color:#a78bfa">score</span> = cross_val_score(<span style="color:#a78bfa">model</span>, <span style="color:#a78bfa">X_train</span>, <span style="color:#a78bfa">y_train</span>, cv=<span style="color:#fbbf24">3</span>).<span style="color:#60a5fa">mean</span>()
+    <span style="color:#f87171">return</span> <span style="color:#a78bfa">score</span>
+
+<span style="color:#94a3b8"># 2. Tell Optuna to run 50 intelligent trials and find the maximum score</span>
+<span style="color:#a78bfa">study</span> = optuna.<span style="color:#60a5fa">create_study</span>(direction=<span style="color:#34d399">"maximize"</span>)
+<span style="color:#a78bfa">study</span>.<span style="color:#60a5fa">optimize</span>(<span style="color:#a78bfa">objective</span>, n_trials=<span style="color:#fbbf24">50</span>)
+
+<span style="color:#60a5fa">print</span>(<span style="color:#34d399">"Optuna's Best Parameters:"</span>, <span style="color:#a78bfa">study</span>.<span style="color:#a78bfa">best_params</span>)</code></pre>
+    </div>
+
+    <!-- Pre-Processing -->
+    <div class="card card-blue" style="margin-top: 25px;">
+      <h3>2. Elite Pre-Processing: MICE & Target Encoding</h3>
+      <p>Basic <code>.fillna(mean)</code> destroys data variance. Basic <code>get_dummies()</code> on a US State column creates 50 useless sparse columns, causing the "Curse of Dimensionality".</p>
+      
+      <table class="comp-table">
+        <thead><tr><th>Technique</th><th>What it does</th><th>When to use it in Real Life?</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Iterative Imputer (MICE)</strong></td><td>Treats every missing value as its own Machine Learning target, predicting what the blank cell <em>should</em> be based on surrounding columns.</td><td>When medical records have huge random gaps, and statically dropping them or filling with "mean" would ruin the distribution.</td></tr>
+          <tr><td><strong>Target Encoding</strong></td><td>Instead of creating 50 dummy columns, it replaces the category text with the <em>mathematical probability</em> of the target occurring for that category.</td><td>High Cardinality data (Zip Codes, IP Addresses, Categorical IDs).</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- MLOps & Deployment -->
+    <div class="card card-green" style="margin-top: 25px;">
+      <h3>3. The "Last Mile": API Deployment Framework</h3>
+      <p>A Web Application (like Netflix or a Banking App) cannot execute code inside your Jupyter Notebook. You must package your model and put it behind a lightweight web server (<strong>FastAPI</strong>) so the App can request predictions over the internet.</p>
+      
+      <div class="diagram" style="overflow-x: auto;">
+        <div class="diagram-title">The MLOps Lifecycle</div>
+        <div class="flow" style="display:flex; flex-wrap:wrap; justify-content:center; gap: 10px; padding-bottom: 5px;">
+            <div class="flow-box data" style="width:140px; text-align:center;">1. Train Pipeline<br><small>(Jupyter Notebook)</small></div>
+            <div style="font-size:24px; align-content:center;">➡️</div>
+            <div class="flow-box model" style="width:140px; text-align:center;">2. .pkl File<br><small>(Serialized Model)</small></div>
+            <div style="font-size:24px; align-content:center;">➡️</div>
+            <div class="flow-box combine" style="width:140px; text-align:center;">3. FastAPI API<br><small>(Web Server)</small></div>
+            <div style="font-size:24px; align-content:center;">➡️</div>
+            <div class="flow-box result" style="width:140px; text-align:center;">4. JSON Response<br><small>{"fraud": true}</small></div>
+        </div>
+      </div>
+
+<pre><code><span style="color:#94a3b8"># --- STEP 1: In your Jupyter Notebook (Save the Model) ---</span>
+<span style="color:#f87171">import</span> joblib
+<span style="color:#94a3b8"># Save your finished, trained Scikit-Learn pipeline to a physical file</span>
+joblib.<span style="color:#60a5fa">dump</span>(<span style="color:#a78bfa">secure_model_pipeline</span>, <span style="color:#34d399">'fraud_model.pkl'</span>)
+
+
+<span style="color:#94a3b8"># --- STEP 2: In a new file called app.py (The Web Server) ---</span>
+<span style="color:#f87171">from</span> fastapi <span style="color:#f87171">import</span> FastAPI
+<span style="color:#f87171">import</span> joblib
+
+<span style="color:#a78bfa">app</span> = FastAPI()
+
+<span style="color:#94a3b8"># Load the serialized model back into the server's memory</span>
+<span style="color:#a78bfa">model</span> = joblib.<span style="color:#60a5fa">load</span>(<span style="color:#34d399">'fraud_model.pkl'</span>)
+
+<span style="color:#a78bfa">@app.post</span>(<span style="color:#34d399">"/predict"</span>)
+<span style="color:#f87171">def</span> <span style="color:#60a5fa">predict_fraud</span>(<span style="color:#a78bfa">transaction_amount</span>: <span style="color:#fbbf24">float</span>, <span style="color:#a78bfa">user_age</span>: <span style="color:#fbbf24">int</span>):
+    <span style="color:#94a3b8"># 1. Take incoming JSON data from the mobile/web app</span>
+    <span style="color:#a78bfa">incoming_data</span> = [[<span style="color:#a78bfa">transaction_amount</span>, <span style="color:#a78bfa">user_age</span>]]
+    
+    <span style="color:#94a3b8"># 2. Run it through the loaded model pipeline</span>
+    <span style="color:#a78bfa">prediction</span> = <span style="color:#a78bfa">model</span>.<span style="color:#60a5fa">predict</span>(<span style="color:#a78bfa">incoming_data</span>)
+    
+    <span style="color:#94a3b8"># 3. Send the verdict back to the web application across the internet!</span>
+    <span style="color:#f87171">return</span> {<span style="color:#34d399">"is_fraud"</span>: <span style="color:#fbbf24">bool</span>(<span style="color:#a78bfa">prediction</span>[<span style="color:#fbbf24">0</span>])}
+</code></pre>
+      <div class="card-business">
+        <p><strong>The Final Engineering Target:</strong> When a software engineer at a bank is building an iOS mobile app, they do not know Python or XGBoost. By wrapping your model in a FastAPI endpoint <code>@app.post("/predict")</code>, you have created a universal bridge. The software engineer simply sends a JSON packet of the user's transaction over the internet, and your server responds with "Yes" or "No". Your mathematical model is now an operational software product.</p>
+      </div>
+    </div>
+  </div>
 
 <div class="section" id="mistakes">
 <h2>⚠️ Common Mistakes & Misconceptions</h2>
